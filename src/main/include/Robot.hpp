@@ -7,12 +7,16 @@
 #include <frc/Filesystem.h>
 #include <frc/trajectory/TrajectoryUtil.h>
 #include <wpi/fs.h>
+#include "Vision.h"
 
 // more libraries more better
 #include <frc/smartdashboard/SendableChooser.h>
 #include "frc/smartdashboard/SmartDashboard.h"
 #include <frc/trajectory/TrajectoryGenerator.h>
 #include "Buttons.hpp"
+#include "Dash.h"
+
+
 #define m_deadband 0.15
 
 class Robot : public frc::TimedRobot
@@ -39,7 +43,11 @@ public:
     void TestInit() override;
     void TestPeriodic() override;
 
+
+
 private:
+  Vision m_camera;
+
     frc::Trajectory m_trajectory;
 
     frc::SendableChooser<std::string> m_chooser;
