@@ -14,13 +14,11 @@ Vision::Vision()
      *Use the position from a known apriltag to get position.
      *Return a Pose2d object
      **/
-    if (nt::NetworkTableInstance::GetDefault().
-        GetTable("limelight")->GetNumber("tv",0.0))
-      {
-        return nt::NetworkTableInstance::GetDefault().
-          GetTable("limelight")->GetNumber("botpose",0.0);
+    //if (m_table>GetNumber("tv",0.0))
+      //{
+        return m_table->GetNumber("botpose",0.0);
 
-      }
+      //}
   }
 
 
