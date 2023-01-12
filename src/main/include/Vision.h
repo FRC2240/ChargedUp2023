@@ -9,14 +9,17 @@
 #include <units/angle.h>
 #include <units/length.h>
 #include "Constants.h"
+//#include "frc/smartdashboard/Smartdashboard.h"
+#include "networktables/NetworkTable.h"
+#include "networktables/NetworkTableEntry.h"
+#include "networktables/NetworkTableValue.h"
+//#include "wpi/span.h"
 
 class Vision
 {
 private:
 
-  std::shared_ptr<nt::NetworkTable> m_table =
-    nt::NetworkTableInstance::GetDefault().GetTable("limelight-brute");
-
+std::shared_ptr<nt::NetworkTable> m_table = nt::NetworkTableInstance::GetDefault().GetTable("limelight-brute");
 public:
 Vision(/* args */);
 ~Vision();
