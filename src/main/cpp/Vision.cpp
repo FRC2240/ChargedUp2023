@@ -3,26 +3,24 @@
 Vision::Vision()
 {
   m_table->PutNumber("ledMode", 1); // Disable lights on boot
+  int i;
 }
 
 
-/*frc::Pose2d */ double Vision::get_field_pos_by_tag()
+std::vector<double> Vision::get_field_pos_by_tag()
   {
     /*
      *Gets the position of the robot on the field.
      *Used to reset odometry and for auto placement.
      *Use the position from a known apriltag to get position.
-     *Return a Pose2d object
+     *Returns a vector of doubles
      **/
-    //if (m_table>GetNumber("tv",0.0))
-      //{
-        return m_table->GetNumber("botpose",0.0);
-
-      //}
+    std::vector<double> bot_pose = m_table->GetNumberArray("botpose", m_zero_vector);
+    return bot_pose;
   }
 
 
-std::vector<double> get_xy_offset()
+std::vector<double> Vision::get_xy_offset()
   {
     /*
      * Gets the offset of the robot from the taget
@@ -33,7 +31,7 @@ std::vector<double> get_xy_offset()
 
   }
 
-units::degrees get_rotation_by_tag()
+units::degrees Vision::get_rotation_by_tag()
   {
     /* Gets the orientation of the robot based on the tag
      * Use the proper tag and not the offset one
