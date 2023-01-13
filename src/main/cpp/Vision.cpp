@@ -3,7 +3,6 @@
 Vision::Vision()
 {
   m_table->PutNumber("ledMode", 1); // Disable lights on boot
-  int i;
 }
 
 

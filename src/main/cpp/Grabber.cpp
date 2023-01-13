@@ -3,7 +3,6 @@
 #include <frc/Solenoid.h>
 
 
-Grabber::Grabber(){
+Grabber::Grabber(){}
 
-
-};
+Grabber::~Grabber(){}
