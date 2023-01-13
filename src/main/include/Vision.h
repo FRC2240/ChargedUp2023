@@ -18,16 +18,18 @@
 class Vision
 {
 private:
+  std::vector<double> m_zero_vector = {0,0,0,0}; //QUESTION: is it a better idea to set this to zero or null?
 
 std::shared_ptr<nt::NetworkTable> m_table = nt::NetworkTableInstance::GetDefault().GetTable("limelight-brute");
+
 public:
-Vision(/* args */);
-~Vision();
+  Vision(/* args */);
+  ~Vision();
 
 
-/*frc::Pose2d */ double get_field_pos_by_tag();
-std::vector<double> get_xy_offset();
-units::degrees get_rotation_by_tag();
+  std::vector<double> get_field_pos_by_tag();
+  std::vector<double> get_xy_offset();
+  units::degrees get_rotation_by_tag();
 
 };
 #endif
