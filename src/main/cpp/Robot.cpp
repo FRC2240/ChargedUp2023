@@ -24,6 +24,8 @@ static frc::SendableChooser<std::function<void()>> traj_selector;
 
 static auto field_centric = true;
 
+
+
 /******************************************************************/
 /*                        Public Variables                        */
 /******************************************************************/
@@ -199,6 +201,7 @@ Robot::Robot()
   m_chooser.AddOption(Robot::NON_HOLONOMIC, Robot::NON_HOLONOMIC);
 
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+
 }
 
 void Robot::RobotInit()
@@ -259,7 +262,18 @@ void Robot::TeleopInit()
 
 void Robot::TeleopPeriodic()
 {
+  //DASHBOARD::update_botpose(m_camera.get_field_pos_by_tag());
   //Drivetrain::print_angle();
+  std::vector<double> limelight_pos = m_camera.get_field_pos_by_tag();
+  int i;
+
+    for(i=0; i<=CONSTANTS::VISION::ARRAY_SIZE; i++)
+      // DELETE ME WHEN DONE
+      {
+        std::cout << limelight_pos[i] << " | ";
+      }
+    std::cout << "\n";
+
   buttonManager();
 
   swerveDrive(field_centric);

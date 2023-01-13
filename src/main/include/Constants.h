@@ -1,4 +1,4 @@
-#ifndef CONSTANTS_H_ 
+#ifndef CONSTANTS_H_
 #define CONSTANTS_H_
 
 namespace CONSTANTS 
@@ -16,11 +16,9 @@ namespace CONSTANTS
         
     }
 
-    namespace DRIVE
-    {
-
-
-    }
-
+  namespace VISION {
+    constexpr int APRILTAG_PIPE = 1; //CHANGEME
+    constexpr int ARRAY_SIZE = 100; //CHANGEME
+  }
 }
-#endif
+#endif // CONSTANTS_H_
