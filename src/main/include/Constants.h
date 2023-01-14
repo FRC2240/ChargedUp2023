@@ -12,7 +12,8 @@ namespace CONSTANTS
 
     namespace ARM
     {
-
+      constexpr int RIGHT_ARM_MOTOR_ID = 2;
+      constexpr int LEFT_ARM_MOTOR_ID = 3;
         
     }
 
