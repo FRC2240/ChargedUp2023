@@ -13,7 +13,7 @@
 #include <frc/smartdashboard/SendableChooser.h>
 #include "frc/smartdashboard/SmartDashboard.h"
 #include <frc/trajectory/TrajectoryGenerator.h>
-#include "Buttons.hpp"
+#include "Buttons.h"
 #include "Dash.h"
 
 

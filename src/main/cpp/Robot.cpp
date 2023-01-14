@@ -47,91 +47,35 @@ void monitorTemps()
 
 void buttonManager()
 {
-    if (BUTTON::DRIVETRAIN::ROTATION_MODE.getRawButtonPressed())
-      {
-      std::cout << "MODE: FC" << "\n";
-      rotation_joystick = !rotation_joystick;
-      }
-
-    if (BUTTON::DRIVETRAIN::FIELD_CENTRIC.getRawButtonPressed())
+    if (BUTTON::DRIVETRAIN::FIELD_CENTRIC())
       {
       std::cout << "MODE: RT" << "\n";
       field_centric = !field_centric;
       }
 }
 
-void tankDrive()
-{
-  auto const l_speed = -frc::ApplyDeadband(BUTTON::PS5.GetY(), m_deadband);
-  auto const r_speed = -frc::ApplyDeadband(BUTTON::PS5.GetTwist(), m_deadband);
+void tankDrive(){}
 
-  Drivetrain::tankDrive(l_speed, r_speed);
-}
+void tunePID(){}
 
-void tunePID()
-{
-  if (BUTTON::DRIVETRAIN::TURN_45)
-  {
-    Drivetrain::tuneTurner(45_deg);
-  }
-  else if (BUTTON::DRIVETRAIN::TURN_neg45)
-  {
-    Drivetrain::tuneTurner(-45_deg);
-  }
-  else if (BUTTON::DRIVETRAIN::TURN_90)
-  {
-    Drivetrain::tuneTurner(90_deg);
-  }
-  else if (BUTTON::DRIVETRAIN::TURN_neg90)
-  {
-    Drivetrain::tuneTurner(-90_deg);
-  }
-  else
-  {
-    Drivetrain::tuneTurner(0_deg);
-  }
-}
 
-void tuneFF()
-{
-  if (BUTTON::DRIVETRAIN::TURN_45)
-    Drivetrain::manualVelocity(7500);
-  else if (BUTTON::DRIVETRAIN::TURN_90)
-    Drivetrain::manualVelocity(10000);
-  else if (BUTTON::DRIVETRAIN::TURN_neg45)
-    Drivetrain::manualVelocity(2500);
-  else if (BUTTON::DRIVETRAIN::TURN_neg90)
-    Drivetrain::manualVelocity(5000);
-  else
-    Drivetrain::manualVelocity(0);
-}
+void tuneFF(){}
+
 
 void swerveDrive(bool const &field_relative)
 {
-  auto const left_right = -frc::ApplyDeadband(BUTTON::PS5.GetX(), m_deadband) * Drivetrain::TELEOP_MAX_SPEED;
-  auto const front_back = -frc::ApplyDeadband(BUTTON::PS5.GetY(), m_deadband) * Drivetrain::TELEOP_MAX_SPEED;
+  auto const left_right = -frc::ApplyDeadband(BUTTON::DRIVETRAIN::LX(), m_deadband) *
+    Drivetrain::TELEOP_MAX_SPEED;
+
+  auto const front_back = -frc::ApplyDeadband(BUTTON::DRIVETRAIN::LY(), m_deadband) *
+    Drivetrain::TELEOP_MAX_SPEED;
   //std::cout << "left_right = " << BUTTON::PS5.GetX() << "front_back = " << BUTTON::PS5.GetY() << std::endl;
   
-  if (BUTTON::DRIVETRAIN::ROTATE_FRONT)
-    {
-    Drivetrain::faceDirection(front_back, left_right, 0_deg, field_relative);
-    std::cout << "rot front" << "\n";
-    }
-  else if (BUTTON::DRIVETRAIN::ROTATE_BACK)
-    {
-    Drivetrain::faceDirection(front_back, left_right, 180_deg, field_relative);
-    std::cout << "rot back" << "\n";
-    }
-  else if (BUTTON::DRIVETRAIN::ROTATE_TO_CLOSEST)
-    {
-    Drivetrain::faceClosest(front_back, left_right, field_relative);
-    std::cout << "rot close" << "\n";
-    }
-  else if (rotation_joystick)
+  if (rotation_joystick)
   {
     // Multiplied by 10 to avoid rounding to 0 by the atan2() method
-    double const rotate_joy_x = BUTTON::PS5.GetZ() * 10;
-    double const rotate_joy_y = -BUTTON::PS5.GetTwist() * 10;
+    double const rotate_joy_x = BUTTON::DRIVETRAIN::RX() * 10;
+    double const rotate_joy_y = -BUTTON::DRIVETRAIN::RY() * 10;
 
     // If we aren't actually pressing the joystick, leave rotation at previous
     if (std::abs(rotate_joy_x) > 0.1 || std::abs(rotate_joy_y) > 0.1)
@@ -182,7 +126,9 @@ Robot::Robot()
 
   // Call the inits for all subsystems here
   Drivetrain::init();
+  std::cout << "Drivtrain started \n";
   Odometry::putField2d();
+  std::cout << "Odometry putfield done \n";
 
   /* legacy
   frc::SmartDashboard::PutData("Traj Selector", &traj_selector);
@@ -202,11 +148,12 @@ Robot::Robot()
 
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
+std::cout << "robot object created \n";
 }
 
 void Robot::RobotInit()
 {
-  fmt::print("init is connected: {}\n", BUTTON::PS5.IsConnected());
+  fmt::print("init is connected: {}\n", BUTTON::m_stick.IsConnected());
 
   Odometry::putField2d();
 }

@@ -18,7 +18,7 @@ namespace CONSTANTS
 
   namespace VISION {
     constexpr int APRILTAG_PIPE = 1; //CHANGEME
-    constexpr int ARRAY_SIZE = 100; //CHANGEME
+    constexpr int ARRAY_SIZE = 5; 
   }
 }
 #endif // CONSTANTS_H_
