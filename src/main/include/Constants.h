@@ -22,5 +22,9 @@ namespace CONSTANTS
         constexpr double MAX_STD_DEV = 1; //CHANGEME
 
   }
+
+  namespace CANDLE {
+    constexpr int CANDLE_ID = 5;
+  }
 }
 #endif // CONSTANTS_H_
