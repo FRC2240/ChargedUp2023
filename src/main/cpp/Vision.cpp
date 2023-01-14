@@ -18,15 +18,55 @@ void Vision::update_pose(std::vector<double> bot_pose)
     // TODO: update pose
 }
 
-double Vision::standard_dev(std::vector<double> a,
-                            std::vector<double> b,
-                            std::vector<double> c,
-                            std::vector<double> d,
-                            std::vector<double> e)
+double Vision::standard_dev(double a,
+                            double b,
+                            double c,
+                            double d,
+                            double e)
 {
-  // Calculates the standard deviation of the inputs
-  //
+  /**
+   * Calculates the standard deviation of the inputs.
+   * Variables are constantly overwritten as values don't need to be kept
+   * longer than their used.
+  **/
+  // Calculate distance from mean
+  double main_op = (a + b + c + d + e) /5;
+  a = a - main_op;
+  b = b - main_op;
+  c = c - main_op;
+  d = d - main_op;
+  e = e - main_op;
+ // Square all values
+  a = a * a;
+  b = b * b;
+  c = c * c;
+  d = d * d;
+  e = e * e;
+
+  // Take average of inputs
+  main_op = a + b + c + d + e;
+  main_op = main_op / 5;
+
+  // take root of new mean
+  return std::sqrt(main_op);
 }
+
+std::vector<double> Vision::five_vector_avg(
+                                            std::vector<double> a,
+                                            std::vector<double> b,
+                                            std::vector<double> c,
+                                            std::vector<double> d,
+                                            std::vector<double> e
+                                            )
+  {
+    std::vector<double> avg;
+
+    for (int i = 0; i < 5; i++)
+      {
+        avg = (a[i] + b[i] + c[i] + d[i] + e[i])/5;
+      }
+    return avg;
+  }
 
 std::vector<double> Vision::get_raw_data()
   {
@@ -74,9 +114,28 @@ int Vision::pose_loop(int i /* = 0*/)
           break;
 
         case 5:
-          if (Vision::standard_dev(m_result_0, m_result_1, m_result_2, m_result_3, m_result_4) < CONSTANTS::VISION::MAX_STD_DEV)
+          double total_std_dev = 0;
+          for (int std_dev_i = 0; std_dev_i < 5; std_dev_i++)
             {
-              // Update Pose
+              total_std_dev = total_std_dev +
+                Vision::standard_dev(
+                                     m_result_0[std_dev_i],
+                                     m_result_1[std_dev_i],
+                                     m_result_2[std_dev_i],
+                                     m_result_3[std_dev_i],
+                                     m_result_4[std_dev_i]);
+            }
+
+          if (total_std_dev < CONSTANTS::VISION::MAX_STD_DEV)
+            {
+              Vision::update_pose(
+              Vision::five_vector_avg(
+                                      m_result_0,
+                                      m_result_1,
+                                      m_result_2,
+                                      m_result_3,
+                                      m_result_4)
+                                  );
               return 0;
             }
           else
