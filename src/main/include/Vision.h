@@ -24,7 +24,15 @@ private:
 
 std::shared_ptr<nt::NetworkTable> m_table = nt::NetworkTableInstance::GetDefault().GetTable("limelight-brute");
 
-double standard_dev(std::vector<double> a, b, c, d);
+void update_pose(std::vector<double> bot_pose);
+
+double standard_dev(std::vector<double> a, 
+                    std::vector<double> b,
+                    std::vector<double> c,
+                    std::vector<double> d,
+                    std::vector<double> e
+                    );
+
 std::vector<double> m_result_0;
 std::vector<double> m_result_1;
 std::vector<double> m_result_2;

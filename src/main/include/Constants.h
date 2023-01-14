@@ -13,12 +13,14 @@ namespace CONSTANTS
     namespace ARM
     {
 
-        
+
     }
 
-  namespace VISION {
-    constexpr int APRILTAG_PIPE = 1; //CHANGEME
-    constexpr int ARRAY_SIZE = 5; 
+    namespace VISION {
+        constexpr int APRILTAG_PIPE = 1; //CHANGEME
+        constexpr int ARRAY_SIZE = 5;
+        constexpr double MAX_STD_DEV = 1; //CHANGEME
+
   }
 }
 #endif // CONSTANTS_H_

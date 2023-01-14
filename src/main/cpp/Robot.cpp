@@ -211,16 +211,7 @@ void Robot::TeleopPeriodic()
 {
   //DASHBOARD::update_botpose(m_camera.get_field_pos_by_tag());
   //Drivetrain::print_angle();
-  std::vector<double> limelight_pos = m_camera.get_field_pos_by_tag();
-  int i;
-
-    for(i=0; i<=CONSTANTS::VISION::ARRAY_SIZE; i++)
-      // DELETE ME WHEN DONE
-      {
-        std::cout << limelight_pos[i] << " | ";
-      }
-    std::cout << "\n";
-
+  m_cam_counter = m_camera.pose_loop(m_cam_counter) ;
   buttonManager();
 
   swerveDrive(field_centric);

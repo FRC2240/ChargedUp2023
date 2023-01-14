@@ -46,7 +46,9 @@ public:
 
 
 private:
-  Vision m_camera;
+    Vision m_camera;
+
+    int m_cam_counter = 0;
 
     frc::Trajectory m_trajectory;
 
