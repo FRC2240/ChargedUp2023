@@ -13,7 +13,7 @@
 #include <frc/smartdashboard/SendableChooser.h>
 #include "frc/smartdashboard/SmartDashboard.h"
 #include <frc/trajectory/TrajectoryGenerator.h>
-#include "Buttons.hpp"
+#include "Buttons.h"
 #include "Dash.h"
 
 
@@ -46,7 +46,9 @@ public:
 
 
 private:
-  Vision m_camera;
+    Vision m_camera;
+
+    int m_cam_counter = 0;
 
     frc::Trajectory m_trajectory;
 

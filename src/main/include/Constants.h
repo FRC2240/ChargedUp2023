@@ -14,12 +14,13 @@ namespace CONSTANTS
     {
       constexpr int RIGHT_ARM_MOTOR_ID = 2;
       constexpr int LEFT_ARM_MOTOR_ID = 3;
-        
     }
 
-  namespace VISION {
-    constexpr int APRILTAG_PIPE = 1; //CHANGEME
-    constexpr int ARRAY_SIZE = 100; //CHANGEME
+    namespace VISION {
+        constexpr int APRILTAG_PIPE = 1; //CHANGEME
+        constexpr int ARRAY_SIZE = 5;
+        constexpr double MAX_STD_DEV = 1; //CHANGEME
+
   }
 }
 #endif // CONSTANTS_H_
