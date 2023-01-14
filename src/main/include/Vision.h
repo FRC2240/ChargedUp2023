@@ -5,9 +5,11 @@
 #include <networktables/NetworkTableInstance.h>
 #include <frc/smartdashboard/Field2d.h>
 #include <frc/geometry/Rotation2d.h>
+#include <frc/geometry/Pose2d.h>
 #include <vector>
 #include <units/angle.h>
 #include <units/length.h>
+#include <cmath>
 #include "Constants.h"
 //#include "frc/smartdashboard/Smartdashboard.h"
 #include "networktables/NetworkTable.h"
@@ -22,12 +24,20 @@ private:
 
 std::shared_ptr<nt::NetworkTable> m_table = nt::NetworkTableInstance::GetDefault().GetTable("limelight-brute");
 
+double standard_dev(std::vector<double> a, b, c, d);
+std::vector<double> m_result_0;
+std::vector<double> m_result_1;
+std::vector<double> m_result_2;
+std::vector<double> m_result_3;
+std::vector<double> m_result_4;
+
 public:
   Vision(/* args */);
   ~Vision();
 
 
-  std::vector<double> get_field_pos_by_tag();
+  std::vector<double> get_raw_data();
+  int pose_loop(int i = 0);
   std::vector<double> get_xy_offset();
   units::degrees get_rotation_by_tag();
 
