@@ -1,25 +1,12 @@
-#include <Grippad.h>
+#include "Grippad.h"
 
 
-Grippad::Grippad()
+void Grippad::deploy()
 {
 
 }
 
-Grippad::STATES Grippad::Logic
-(
-    bool Deployed_button,
-    bool Stored_button,
-
-)
-{}
-
-Grippad::Deployed()
-{
-
-}
-
-Grippad::Stored()
+void Grippad::retract()
 {
 
 }
