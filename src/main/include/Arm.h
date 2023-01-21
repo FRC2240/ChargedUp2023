@@ -31,6 +31,9 @@ class Arm
         double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
     };
 
-  pidCoeff m_Arm_RightCoeff{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    pidCoeff m_Arm_RightCoeff{CONSTANTS::ARM::PID::kP, CONSTANTS::ARM::PID::kI, 
+                              CONSTANTS::ARM::PID::kD, CONSTANTS::ARM::PID::kIz, 
+                              CONSTANTS::ARM::PID::kFF, CONSTANTS::ARM::PID::kMaxOutput, 
+                              CONSTANTS::ARM::PID::kMinOutput};
 };
 #endif //ARM_H_
