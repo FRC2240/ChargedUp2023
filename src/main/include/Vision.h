@@ -66,8 +66,5 @@ public:
 
   std::vector<double> get_raw_data();
   int pose_loop(int i = 0);
-  std::vector<double> get_xy_offset();
-  units::degrees get_rotation_by_tag();
-
 };
 #endif
