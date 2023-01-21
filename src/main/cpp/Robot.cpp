@@ -1,9 +1,7 @@
 #include "Robot.hpp"
 #include "Drivetrain.hpp"
-#include "Buttons.hpp"
 #include "RobotState.hpp"
 #include "ngr.hpp"
-#include "TempMonitoring.hpp"
 #include "Odometry.hpp"
 #include "Trajectory.hpp"
 
@@ -38,12 +36,6 @@ static auto field_centric = true;
 // Needed to flash on/off temp warnings on SmartDashboard/ShuffleBoard
 //static bool drivers_flashing_red = false;
 //static bool turners_flashing_red = false;
-
-void monitorTemps()
-{
-  //TempMonitoring::monitorTemps(Drivetrain::getDriverTemps(), 70, "Driver Temps", "Drivers Overheating", drivers_flashing_red);
-  //TempMonitoring::monitorTemps(Drivetrain::getTurnerTemps(), 60, "Turner Temps", "Turners Overheating", turners_flashing_red);
-}
 
 void buttonManager()
 {
@@ -88,7 +80,7 @@ void swerveDrive(bool const &field_relative)
   }
   else
   {
-    auto const rot = frc::ApplyDeadband(BUTTON::PS5.GetZ(), m_deadband) * Drivetrain::TELEOP_MAX_ANGULAR_SPEED;
+    auto const rot = frc::ApplyDeadband(BUTTON::DRIVETRAIN::LX(), m_deadband) * Drivetrain::TELEOP_MAX_ANGULAR_SPEED;
 
     Drivetrain::drive(front_back, -left_right, rot, field_relative);
   }
@@ -100,7 +92,6 @@ void swerveDrive(bool const &field_relative)
 
 Robot::Robot()
 {
-  fmt::print("ctr is connected: {}\n", BUTTON::PS5.IsConnected());
 
   // setup RobotStates
   RobotState::IsEnabled = [this]()
@@ -135,11 +126,6 @@ Robot::Robot()
   frc::SmartDashboard::PutBoolean("Traj Reversed", Trajectory::reverse_trajectory);
   */
 
-  // This is the second joystick's Y axis
-  BUTTON::PS5.SetTwistChannel(5);
-
-  // Erik
-  BUTTON::PS5.SetZChannel(4);
 
   // Auto paths
   m_chooser.AddOption(Robot::CIRCLE, Robot::CIRCLE);
@@ -153,7 +139,6 @@ std::cout << "robot object created \n";
 
 void Robot::RobotInit()
 {
-  fmt::print("init is connected: {}\n", BUTTON::m_stick.IsConnected());
 
   Odometry::putField2d();
 }
@@ -161,7 +146,6 @@ void Robot::RobotInit()
 void Robot::RobotPeriodic()
 {
   Trajectory::reverse_trajectory = frc::SmartDashboard::GetBoolean("Traj Reversed", Trajectory::reverse_trajectory);
-  monitorTemps();
 }
 
 void Robot::AutonomousInit()
