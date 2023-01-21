@@ -16,6 +16,7 @@
 #include "networktables/NetworkTableEntry.h"
 #include "networktables/NetworkTableValue.h"
 //#include "wpi/span.h"
+#include "Odometry.hpp"
 
 class Vision
 {
@@ -26,7 +27,7 @@ private:
   std::shared_ptr<nt::NetworkTable> m_table =
     nt::NetworkTableInstance::GetDefault().GetTable("limelight-brute");
 
-  void update_pose(std::vector<double> bot_pose);
+  frc::Pose2d update_pose(std::vector<double> bot_pose);
 
   double standard_dev( double a,
                        double b,

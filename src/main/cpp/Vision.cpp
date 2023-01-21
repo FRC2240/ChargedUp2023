@@ -6,16 +6,16 @@ Vision::Vision()
 }
 
 
-void Vision::update_pose(std::vector<double> bot_pose)
+frc::Pose2d Vision::update_pose(std::vector<double> bot_pose)
 {
-    units::meter_t trans_x(bot_pose[0]);
-    units::meter_t trans_y(bot_pose[1]);
-    units::meter_t trans_z(bot_pose[2]);
-    //Rotation is X,Y,Z, I don't know why we need this much data.
-    units::meter_t rot_x(bot_pose[3]);
-    units::meter_t rot_y(bot_pose[4]);
-    units::meter_t rot_z(bot_pose[5]);
-    // TODO: update pose
+  // Note: 3d data is dropped
+  units::meter_t trans_x{bot_pose[0]};
+  units::meter_t trans_y{bot_pose[1]};
+  frc::Rotation2d rot{units::degree_t(bot_pose[3])};
+  // units::meter_t x, y, Rotation::2d theta
+  frc::Pose2d pose{trans_x, trans_y, rot};
+  Odometry::reset_position_from_vision(pose);
+
 }
 
 double Vision::standard_dev(double a,
@@ -63,7 +63,8 @@ std::vector<double> Vision::five_vector_avg(
 
     for (int i = 0; i < 5; i++)
       {
-        avg = (a[i] + b[i] + c[i] + d[i] + e[i])/5;
+        avg[i] = a[i] + b[i] + c[i] + d[i] + e[i];
+        avg[i] = avg[i] / 5;
       }
     return avg;
   }
@@ -134,8 +135,8 @@ int Vision::pose_loop(int i /* = 0*/)
                                       m_result_1,
                                       m_result_2,
                                       m_result_3,
-                                      m_result_4)
-                                  );
+                                      m_result_4
+                                      ));
               return 0;
             }
           else
