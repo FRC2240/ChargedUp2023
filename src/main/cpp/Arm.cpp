@@ -3,25 +3,19 @@
 Arm::Arm()
 {
     m_arm_motor_left.Follow(m_arm_motor_right);
-    Arm::ArmPIDInit();
-    Arm::ArmDashInit();
+    Arm::arm_pid_init();
+    Arm::arm_dash_init();
 }
 
-void Arm::Up()
+void Arm::move()
 {
 
 
 }
 
-void Arm::Down()
+void Arm::arm_pid_init()
 {
-
-
-}
-
-void Arm::ArmPIDInit()
-{
-    Arm::ArmDashRead();
+    Arm::arm_dash_read();
  
   m_arm_motor_right.ConfigFactoryDefault();
 
@@ -42,7 +36,7 @@ void Arm::ArmPIDInit()
   m_arm_motor_right.Config_kD(CONSTANTS::ARM::PID::slotIdx, m_Arm_RightCoeff.kD, 0);
 }
 
-void Arm::ArmDashInit()
+void Arm::arm_dash_init()
 {
     frc::SmartDashboard::PutNumber("Right Arm P Gain", m_Arm_RightCoeff.kP);
     frc::SmartDashboard::PutNumber("Right Arm I Gain", m_Arm_RightCoeff.kI);
@@ -53,7 +47,7 @@ void Arm::ArmDashInit()
 
 }
 
-void Arm::ArmDashRead()
+void Arm::arm_dash_read()
 {
     m_Arm_RightCoeff.kP = frc::SmartDashboard::GetNumber("Right Arm P Gain", 0.0);
     m_Arm_RightCoeff.kI = frc::SmartDashboard::GetNumber("Right Arm I Gain", 0.0);

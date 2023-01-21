@@ -8,18 +8,20 @@
 
 class Arm
 {
- public:
+  private:
+   enum STATES {A, B };
+
+  public:
   Arm();
   ~Arm();
-  void Up();
-  void Down();
-  void ArmPIDInit();
-  void ArmDashInit();
-  void ArmDashRead();
-
-//Arm PID
+  Arm::STATES arm_logic();
+  void move();
+  void arm_pid_init();
+  void arm_dash_init();
+  void arm_dash_read();
 
  private:
+  enum POSITIONS { STOWED, GROUND, MID, HP_STATION, HIGH};
 
     WPI_TalonFX m_arm_motor_right {CONSTANTS::ARM::RIGHT_ARM_MOTOR_ID};
     WPI_TalonFX m_arm_motor_left {CONSTANTS::ARM::LEFT_ARM_MOTOR_ID};
