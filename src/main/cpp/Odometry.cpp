@@ -70,9 +70,17 @@ frc::ChassisSpeeds const Odometry::getFieldRelativeSpeeds()
     return frc::ChassisSpeeds{X, Y, rot};
 }
 
-void Odometry::resetPosition(const frc::Pose2d &pose, const frc::Rotation2d &gyro_angle)
+void Odometry::reset_position_from_vision(const frc::Pose2d &bot_pose)
 {
-    odometry.ResetPosition(gyro_angle, Drivetrain::getModulePositions(), pose);
+    odometry.ResetPosition(Drivetrain::getCCWHeading(),
+                           Drivetrain::getModulePositions(),
+                           bot_pose
+                           );
+}
+
+void Odometry::resetPosition(const frc::Pose2d &bot_pose, const frc::Rotation2d &gyro_angle)
+{
+    odometry.ResetPosition(gyro_angle, Drivetrain::getModulePositions(), bot_pose);
 }
 
 frc::FieldObject2d *Odometry::getField2dObject(std::string_view name)
