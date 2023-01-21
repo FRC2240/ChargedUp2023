@@ -120,7 +120,7 @@ std::vector<double> Vision::get_raw_data()
 
 int Vision::pose_loop(int i /* = 0*/)
 {
-  if(m_alpha_table->GetBoolean("tv", false) &&
+  if(m_alpha_table->GetBoolean("tv", false) ||
      m_beta_table->GetBoolean("tv", false ))
     {
 
@@ -149,6 +149,7 @@ int Vision::pose_loop(int i /* = 0*/)
         case 4:
           m_result_4 = Vision::get_raw_data();
           return i++;
+          
           break;
 
         case 5:

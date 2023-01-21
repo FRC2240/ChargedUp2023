@@ -40,6 +40,88 @@ void Trajectory::printRobotRelativeSpeeds()
     frc::SmartDashboard::PutNumber("Estimated Omega Speed", units::degrees_per_second_t{robot_relative.omega}.value() / 720);
 }
 
+PathPlannerTrajectory Trajectory::generate_live_traj(units::meter_t current_x,
+                                                     units::meter_t current_y,
+                                                     units::degree_t current_head,
+                                                     units::degree_t current_rot,
+                                                     units::meter_t desired_x,
+                                                     units::meter_t desired_y,
+                                                     units::degree_t desired_head,
+                                                     units::degree_t desired_rot
+                                                     )
+{
+        PathPlannerTrajectory ret_val =
+            PathPlanner::generatePath(
+
+                                      PathConstraints(Drivetrain::TRAJ_MAX_SPEED,
+                                                      Drivetrain::TRAJ_MAX_ACCELERATION),
+
+                                      PathPoint(frc::Translation2d(current_x,
+                                                                   current_y),
+                                                frc::Rotation2d(current_head),
+                                                frc::Rotation2d(current_rot)
+                                                ),
+                                      PathPoint(frc::Translation2d(desired_x,
+                                                                   desired_y),
+                                                frc::Rotation2d(desired_head),
+                                                frc::Rotation2d(desired_rot)
+                                                )
+                                      );
+        return ret_val;
+
+}
+
+void Trajectory::follow_live_traj(PathPlannerTrajectory traj)
+{
+    auto const inital_state = traj.getInitialState();
+    auto const inital_pose = inital_state.pose;
+
+    // It is necessary to take the frc::Pose2d object from the state, extract its X & Y components, and then take the holonomicRotation
+    // to construct a new Pose2d as the original Pose2d's Z (rotation) value uses non-holonomic math
+    Odometry::resetPosition({inital_pose.Translation(), inital_state.holonomicRotation}, Drivetrain::getCCWHeading());
+
+    frc::Timer trajTimer;
+    trajTimer.Start();
+
+    if constexpr (debugging)
+    {
+        // If needed, we can disable the "error correction" for x & y
+        controller.SetEnabled(true);
+
+        frc::SmartDashboard::PutString("Inital State: ", fmt::format("X: {}, Y: {}, Z: {}, Holonomic: {}\n", inital_pose.X().value(), inital_pose.Y().value(), inital_pose.Rotation().Degrees().value(), inital_state.holonomicRotation.Degrees().value()));
+    }
+
+    while (RobotState::IsAutonomousEnabled() && (trajTimer.Get() <= traj.getTotalTime() + 0.1_s))
+    {
+        auto current_time = trajTimer.Get();
+
+        auto sample = traj.sample(current_time);
+
+        Odometry::getField2dObject("Traj")->SetPose({sample.pose.X(), sample.pose.Y(), sample.holonomicRotation});
+
+        driveToState(sample);
+        Odometry::update();
+
+        if (periodic)
+            periodic(current_time);
+
+        if constexpr (debugging)
+        {
+            static int trajectory_samples{};
+            frc::SmartDashboard::PutString("Sample:", fmt::format(
+                                                          "Current trajectory sample value: {}, Pose X: {}, Pose Y: {}, Pose Z: {}\nHolonomic Rotation: {}, Timer: {}\n",
+                                                          ++trajectory_samples, sample.pose.X().value(), sample.pose.Y().value(), sample.pose.Rotation().Degrees().value(),
+                                                          sample.holonomicRotation.Degrees().value(), trajTimer.Get().value()));
+            printRobotRelativeSpeeds();
+            printFieldRelativeSpeeds();
+        }
+
+        using namespace std::chrono_literals;
+        // This is the refresh rate of the HolonomicDriveController's PID controllers (can be tweaked if needed)
+    }
+    Drivetrain::stop();
+}
+
 void Trajectory::printFieldRelativeSpeeds()
 {
     frc::ChassisSpeeds const real_speeds = Odometry::getFieldRelativeSpeeds();

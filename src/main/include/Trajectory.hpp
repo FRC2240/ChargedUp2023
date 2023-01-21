@@ -2,8 +2,13 @@
 
 #include "Drivetrain.hpp"
 
+#include <units/acceleration.h>
+#include <units/angle.h>
+#include <units/length.h>
 #include <pathplanner/lib/PathPlanner.h>
-
+#include <pathplanner/lib/PathPlannerTrajectory.h>
+#include <pathplanner/lib/PathPoint.h>
+#include <frc/geometry/Pose2d.h>
 #include <frc/kinematics/ChassisSpeeds.h>
 
 #include <functional>
@@ -15,6 +20,18 @@ namespace Trajectory
     /******************************************************************/
     /*                  Public Function Declarations                  */
     /******************************************************************/
+    PathPlannerTrajectory generate_live_traj(units::meter_t current_x,
+                                             units::meter_t current_y,
+                                             units::degree_t current_head,
+                                             units::degree_t current_rot,
+                                             units::meter_t desired_x,
+                                             units::meter_t desired_y,
+                                             units::degree_t desired_head,
+                                             units::degree_t desired_rot
+                                             );
+
+
+    void follow_live_traj(PathPlannerTrajectory traj);
 
     void printRobotRelativeSpeeds();
 
