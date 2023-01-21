@@ -24,10 +24,14 @@ private:
   std::vector<double> m_zero_vector = {0,0,0,0,0,0};
   //QUESTION: is it a better idea to set this to zero or null?
 
-  std::shared_ptr<nt::NetworkTable> m_table =
-    nt::NetworkTableInstance::GetDefault().GetTable("limelight-brute");
+  std::shared_ptr<nt::NetworkTable> m_alpha_table =
+    nt::NetworkTableInstance::GetDefault().GetTable("limelight-alpha");
 
-  frc::Pose2d update_pose(std::vector<double> bot_pose);
+  std::shared_ptr<nt::NetworkTable> m_beta_table =
+    nt::NetworkTableInstance::GetDefault().GetTable("limelight-beta");
+
+
+  void update_pose(std::vector<double> bot_pose);
 
   double standard_dev( double a,
                        double b,
@@ -41,6 +45,11 @@ private:
   std::vector<double> m_result_2;
   std::vector<double> m_result_3;
   std::vector<double> m_result_4;
+
+  std::vector<double> two_vector_avg(
+                                     std::vector<double> a,
+                                     std::vector<double> b
+                                     );
 
   std::vector<double> five_vector_avg(
                                       std::vector<double> a,

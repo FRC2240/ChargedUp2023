@@ -2,11 +2,12 @@
 
 Vision::Vision()
 {
-  m_table->PutNumber("ledMode", 1); // Disable lights on boot
+  m_alpha_table->PutNumber("ledMode", 1); // Disable lights on boot
+  m_beta_table->PutNumber("ledMode", 1);
 }
 
 
-frc::Pose2d Vision::update_pose(std::vector<double> bot_pose)
+void Vision::update_pose(std::vector<double> bot_pose)
 {
   // Note: 3d data is dropped
   units::meter_t trans_x{bot_pose[0]};
@@ -51,6 +52,21 @@ double Vision::standard_dev(double a,
   return std::sqrt(main_op);
 }
 
+std::vector<double> Vision::two_vector_avg(
+                                           std::vector<double> a,
+                                           std::vector<double> b
+                                           )
+  {
+    std::vector<double> avg;
+
+    for (int i = 0; i < 5; i++)
+      {
+        avg[i] = a[i] + b[i];
+        avg[i] = avg[i] / 2;
+      }
+    return avg;
+
+  }
 std::vector<double> Vision::five_vector_avg(
                                             std::vector<double> a,
                                             std::vector<double> b,
@@ -77,14 +93,35 @@ std::vector<double> Vision::get_raw_data()
      *Use the position from a known apriltag to get position.
      *Returns a vector of doubles
      **/
-    std::vector<double> bot_pose = m_table->GetNumberArray("botpose", m_zero_vector);
 
-    return bot_pose;
+    std::vector<double> bot_pose;
+
+    if (m_alpha_table->GetBoolean("tv", false) &&
+        m_beta_table->GetBoolean("tv", false))
+      {
+        return two_vector_avg(
+                              m_alpha_table->GetNumberArray("botpose", m_zero_vector),
+                              m_beta_table->GetNumberArray("botpose", m_zero_vector)
+                              );
+      }
+    else
+      {
+        if (m_alpha_table->GetBoolean("tv", false))
+          {
+            return m_alpha_table->GetNumberArray("botpose", m_zero_vector);
+          }
+        else if (m_beta_table->GetBoolean("tv", false))
+          {
+            return m_beta_table->GetNumberArray("botpose", m_zero_vector);
+          }
+      }
+    return m_zero_vector;
   }
 
 int Vision::pose_loop(int i /* = 0*/)
 {
-  if(m_table->GetBoolean("tv", false))
+  if(m_alpha_table->GetBoolean("tv", false) &&
+     m_beta_table->GetBoolean("tv", false ))
     {
 
       switch (i)
