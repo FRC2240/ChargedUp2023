@@ -20,6 +20,7 @@ public:
         void ReadEncoders();
         
         rev::SparkMaxPIDController m_wrist_PIDController = m_wrist_motor.GetPIDController();
+        rev::SparkMaxRelativeEncoder m_encoder = m_wrist_motor.GetEncoder();
 
 private:
         

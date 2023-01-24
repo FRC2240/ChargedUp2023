@@ -6,18 +6,19 @@
 
 Wrist::Wrist(){
 
-        WristPIDInit();
-        WristDashInit();
-        WristDashRead();
-        
-  m_wrist_Encoder.SetInverted(false);
-  m_wrist_PIDController.SetFeedbackDevice(m_wrist_Encoder);
+    WristPIDInit();
+    WristDashInit();
+    WristDashRead();
+
+    m_wrist_Encoder.SetInverted(false);
+    m_wrist_PIDController.SetFeedbackDevice(m_wrist_Encoder);
 
 }
 
 Wrist::~Wrist(){}
 
-void Wrist::WristPIDInit() {
+void Wrist::WristPIDInit()
+{
  
     Wrist::WristDashInit();
  

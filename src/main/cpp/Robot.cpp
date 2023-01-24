@@ -240,7 +240,7 @@ void Robot::TestPeriodic()
 {
 }
 
-#ifndef RUNNING_FRC_TESTS
+#ifndef RUNNNG_FRC_TESTS
 int main()
 {
   return frc::StartRobot<Robot>();
