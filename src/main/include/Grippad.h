@@ -21,13 +21,13 @@ class Grippad
 
  private:
         //Grippad has four pistons
-         frc::Solenoid m_grippad_piston_alpha{frc::PneumaticsModuleType::CTREPCM,
+         frc::Solenoid m_grippad_piston_front_right{frc::PneumaticsModuleType::CTREPCM,
              CONSTANTS::GRIPPAD::ALPHA_CHANNEL};
-         frc::Solenoid m_grippad_piston_beta{frc::PneumaticsModuleType::CTREPCM,
+         frc::Solenoid m_grippad_piston_front_left{frc::PneumaticsModuleType::CTREPCM,
          CONSTANTS::GRIPPAD::BETA_CHANNEL};
-         frc::Solenoid m_grippad_piston_gamma{frc::PneumaticsModuleType::CTREPCM,
+         frc::Solenoid m_grippad_piston_back_right{frc::PneumaticsModuleType::CTREPCM,
          CONSTANTS::GRIPPAD::GAMMA_CHANNEL};
-         frc::Solenoid m_grippad_piston_delta{frc::PneumaticsModuleType::CTREPCM,
+         frc::Solenoid m_grippad_piston_back_left{frc::PneumaticsModuleType::CTREPCM,
          CONSTANTS::GRIPPAD::DELTA_CHANNEL};
 };
 #endif // GRIPAD_H_
