@@ -11,7 +11,7 @@ namespace CONSTANTS
     constexpr int DELTA_CHANNEL = 3;
   }
 
-  namespace GRABBER
+  namespace WRIST
   {
     constexpr int WRIST_MOTOR_ID = 1;
 
@@ -45,6 +45,12 @@ namespace CONSTANTS
 
   namespace CANDLE {
     constexpr int CANDLE_ID = 5;
+  }
+
+  namespace GRABBER{
+    constexpr int GRABBER_MOTOR_ID = 6;
+    constexpr int GRABBER_PISTON_ID = 8;
+
   }
 }
 #endif // CONSTANTS_H_

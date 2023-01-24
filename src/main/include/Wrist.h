@@ -17,10 +17,11 @@ public:
         void WristDashRead();
         
         rev::SparkMaxPIDController m_wrist_PIDController = m_wrist_motor.GetPIDController();
+        rev::SparkMaxRelativeEncoder m_encoder = m_wrist_motor.GetEncoder();
 
 private:
         
-       rev::CANSparkMax m_wrist_motor{CONSTANTS::GRABBER::WRIST_MOTOR_ID, rev::CANSparkMax::MotorType::kBrushless};
+       rev::CANSparkMax m_wrist_motor{CONSTANTS::WRIST::WRIST_MOTOR_ID, rev::CANSparkMax::MotorType::kBrushless};
 
 
        struct pidCoeff
