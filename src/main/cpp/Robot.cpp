@@ -141,11 +141,13 @@ void Robot::RobotInit()
 {
 
   Odometry::putField2d();
+  std::cout << "RobotInit done \n";
 }
 
 void Robot::RobotPeriodic()
 {
   Trajectory::reverse_trajectory = frc::SmartDashboard::GetBoolean("Traj Reversed", Trajectory::reverse_trajectory);
+  //std::cout << "Robot Periodic \n";
 }
 
 void Robot::AutonomousInit()
@@ -153,6 +155,7 @@ void Robot::AutonomousInit()
   // Start aiming
 
   m_autoSelected = m_chooser.GetSelected();
+  std::cout << "auto selected \n";
 
   fs::path deployDirectory = frc::filesystem::GetDeployDirectory();
   if (m_autoSelected == CIRCLE)
@@ -170,8 +173,12 @@ void Robot::AutonomousInit()
       deployDirectory = "Straight Line";
    }
 
+   std::cout << "auto chooser\n";
+
  Trajectory::follow(deployDirectory);
+ std::cout << "directory deployed \n";
  Drivetrain::stop();
+ std::cout << "drivetrian stop \n";
 
   // If driving after "stop" is called is a problem, I will add a "stop" method
   //  which runs a few times to ensure all modules are stopped
@@ -189,15 +196,16 @@ void Robot::AutonomousPeriodic()
 
 void Robot::TeleopInit()
 {
+  std::cout << "TeleopInit";
 }
 
 void Robot::TeleopPeriodic()
 {
   //DASHBOARD::update_botpose(m_camera.get_field_pos_by_tag());
   //Drivetrain::print_angle();
-  //m_cam_counter = m_camera.pose_loop(m_cam_counter);
+  //m_camera.pose_loop();
   buttonManager();
-
+  //buttonManager();
   swerveDrive(field_centric);
 
   //Odometry::update();
@@ -208,13 +216,16 @@ void Robot::TeleopPeriodic()
     Trajectory::printFieldRelativeSpeeds();
   }
 
-  if (m_grabber.grabberToggle = false && BUTTON::GRABBER::GRABBER_TOGGLE){
-    m_grabber.In();
-    m_grabber.grabberToggle = true;
-  } else if (m_grabber.grabberToggle = true && BUTTON::GRABBER::GRABBER_TOGGLE){
-    m_grabber.Out();
-    m_grabber.grabberToggle = true; 
-  }
+  if (m_grabber.grabberToggle = false && BUTTON::GRABBER::GRABBER_TOGGLE)
+    {
+      m_grabber.In();
+      m_grabber.grabberToggle = true;
+    }
+  else if (m_grabber.grabberToggle = true && BUTTON::GRABBER::GRABBER_TOGGLE)
+    {
+      m_grabber.Out();
+      m_grabber.grabberToggle = true;
+    }
 
 }
 

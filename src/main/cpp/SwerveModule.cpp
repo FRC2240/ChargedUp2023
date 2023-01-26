@@ -45,6 +45,7 @@ SwerveModule::SwerveModule(int const &driver_adr, int const &turner_adr, int con
       cancoder{cancoder_adr, CAN_BUS_NAME},
       magnet_offset{magnet_offset}
 {
+    std::cout << "Swerve constuctor start \n";
     turner_addr = turner_adr;
     // Configure CANCoder
     CANCoderConfiguration cancoder_config{};
@@ -83,6 +84,7 @@ SwerveModule::SwerveModule(int const &driver_adr, int const &turner_adr, int con
     turner_config.closedloopRamp = .000;
     turner.ConfigAllSettings(turner_config);
     turner.SetInverted(false);
+    std::cout << "Swerve constuctor end \n";
 }
 
 frc::SwerveModuleState SwerveModule::getState()
