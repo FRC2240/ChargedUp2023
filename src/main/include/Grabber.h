@@ -6,7 +6,7 @@
 #include <frc/DoubleSolenoid.h>
 
 class Grabber {
-private:  enum STATES {STOWED, INTAKING,EXTAKING};
+private:  enum STATES {STOWED, INTAKING, EXTAKING};
 
 public:
 
@@ -17,7 +17,7 @@ public:
   void Out();
   
 
-  STATES Logic(bool intake_button, bool extake_button);
+  STATES Logic(bool intake_button, bool extake_button, bool stow_button);
 
 private:
 
