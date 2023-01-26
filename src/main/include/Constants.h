@@ -21,6 +21,7 @@ namespace CONSTANTS
   {
     constexpr int RIGHT_ARM_MOTOR_ID = 2;
     constexpr int LEFT_ARM_MOTOR_ID = 3;
+    
     namespace PID
     {
       constexpr int kP = 0.0;

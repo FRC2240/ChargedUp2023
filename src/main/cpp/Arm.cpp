@@ -1,4 +1,5 @@
 #include "Arm.h"
+#include <iostream>
 
 Arm::Arm()
 {
@@ -7,7 +8,7 @@ Arm::Arm()
     Arm::arm_dash_init();
 }
 
-void Arm::move()
+void Arm::move(TARGETS pos)
 {
 
 
@@ -56,6 +57,30 @@ void Arm::arm_dash_read()
     m_Arm_RightCoeff.kMinOutput = frc::SmartDashboard::GetNumber("Right Arm Min Output", -1.0);
     m_Arm_RightCoeff.kMaxOutput = frc::SmartDashboard::GetNumber("Right Arm Max Output", 1.0);
 
+}
+
+Arm::STATES Arm::arm_logic(TARGETS desired_pos,
+                            bool stored_button,
+                            bool ground_button,
+                            bool mid_button,
+                            bool hp_button,
+                            bool high_button)
+{
+    switch(state)
+    {
+        case STORED:
+        
+        break;
+
+        case MOVING:
+
+        break;
+
+        case MOVED:
+
+        break;
+
+    }
 }
 
 
