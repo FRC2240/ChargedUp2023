@@ -204,15 +204,15 @@ void Robot::TeleopPeriodic()
   //DASHBOARD::update_botpose(m_camera.get_field_pos_by_tag());
   //Drivetrain::print_angle();
 
+  //m_cam_counter = m_camera.pose_loop(m_cam_counter);
   buttonManager();
   m_camera.pose_loop();
-  //m_cam_counter = m_camera.pose_loop(m_cam_counter);
-  //buttonManager();
-
   swerveDrive(field_centric);
 //  Odometry::update();
  
 
+  // Odometry::update();
+ 
   if constexpr (debugging)
   {
     Trajectory::printRobotRelativeSpeeds();
