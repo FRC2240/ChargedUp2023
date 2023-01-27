@@ -76,11 +76,11 @@ void swerveDrive(bool const &field_relative)
       Drivetrain::faceDirection(front_back, left_right, -units::radian_t{atan2(rotate_joy_y, rotate_joy_x)} + 90_deg, field_relative);
     }
     else
-      Drivetrain::drive(front_back, left_right, units::radians_per_second_t{0}, field_relative);
+      Drivetrain::drive(front_back, -left_right, units::radians_per_second_t{0}, field_relative);
   }
   else
   {
-    auto const rot = frc::ApplyDeadband(BUTTON::DRIVETRAIN::LX(), m_deadband) * Drivetrain::TELEOP_MAX_ANGULAR_SPEED;
+    auto const rot = frc::ApplyDeadband(BUTTON::DRIVETRAIN::RX(), m_deadband) * Drivetrain::TELEOP_MAX_ANGULAR_SPEED;
 
     Drivetrain::drive(front_back, -left_right, rot, field_relative);
   }
@@ -203,18 +203,14 @@ void Robot::TeleopPeriodic()
 {
   //DASHBOARD::update_botpose(m_camera.get_field_pos_by_tag());
   //Drivetrain::print_angle();
-  //m_camera.pose_loop();
   buttonManager();
-  //buttonManager();
   swerveDrive(field_centric);
-
   //Odometry::update();
-
   if constexpr (debugging)
-  {
-    Trajectory::printRobotRelativeSpeeds();
-    Trajectory::printFieldRelativeSpeeds();
-  }
+    {
+      Trajectory::printRobotRelativeSpeeds();
+      Trajectory::printFieldRelativeSpeeds();
+    }
 
   if (m_grabber.grabberToggle = false && BUTTON::GRABBER::GRABBER_TOGGLE)
     {
@@ -226,7 +222,6 @@ void Robot::TeleopPeriodic()
       m_grabber.Out();
       m_grabber.grabberToggle = true;
     }
-
 }
 
 void Robot::TestInit()
