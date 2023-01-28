@@ -8,9 +8,8 @@ Arm::Arm()
     Arm::arm_dash_init();
 }
 
-void Arm::move(TARGETS pos)
+void Arm::move()
 {
-
 
 }
 
@@ -59,24 +58,149 @@ void Arm::arm_dash_read()
 
 }
 
-Arm::STATES Arm::arm_logic(TARGETS desired_pos,
-                            bool stored_button,
-                            bool ground_button,
-                            bool mid_button,
-                            bool hp_button,
-                            bool high_button)
+Arm::STATES Arm::arm_logic(bool store_button, bool low_button, 
+                           bool med_button, bool hp_button,
+                           bool high_button)
 {
     switch(state)
     {
         case STORED:
+            if(low_button)
+            {
+                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
+                move();
+                state = LOW;
+            }
+            else if(med_button)
+            {
+                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
+                move(); 
+                state = MED;
+            }
+            else if(hp_button)
+            {
+                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
+                move();
+                state = HUMANPLAYER;
+            }
+            else if(high_button)
+            {
+                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
+                move();
+                state = HIGH;
+            }
+        break;
+
+        case LOW:
+            if(store_button)
+            {
+                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
+                move();
+                state = STORED;
+            }
+            else if(med_button)
+            {
+                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
+                move(); 
+                state = MED;
+            }
+            else if(hp_button)
+            {
+                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
+                move();
+                state = HUMANPLAYER;
+            }
+            else if(high_button)
+            {
+                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
+                move();
+                state = HIGH;
+            }
+
+        break;
+
+        case MED:
+            if(store_button)
+            {
+                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
+                move();
+                state = STORED;
+            }
+            else if(low_button)
+            {
+                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
+                move(); 
+                state = LOW;
+            }
+            else if(hp_button)
+            {
+                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
+                move();
+                state = HUMANPLAYER;
+            }
+            else if(high_button)
+            {
+                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
+                move();
+                state = HIGH;
+            }
+            
+
+        break;
+
+        case HUMANPLAYER:
+            if(store_button)
+            {
+                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
+                move();
+                state = STORED;
+            }
+            else if(low_button)
+            {
+                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
+                move(); 
+                state = LOW;
+            }
+            else if(med_button)
+            {
+                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
+                move();
+                state = MED;
+            }
+            else if(high_button)
+            {
+                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
+                move();
+                state = HIGH;
+            }
         
         break;
 
-        case MOVING:
-
-        break;
-
-        case MOVED:
+        case HIGH:
+            if(store_button)
+            {
+                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
+                move();
+                state = STORED;
+            }
+            else if(low_button)
+            {
+                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
+                move(); 
+                state = LOW;
+            }
+            else if(med_button)
+            {
+                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
+                move();
+                state = MED;
+            }
+            else if(hp_button)
+            {
+                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
+                move();
+                state = HUMANPLAYER;
+            }
 
         break;
 

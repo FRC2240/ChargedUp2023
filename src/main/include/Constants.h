@@ -35,6 +35,15 @@ namespace CONSTANTS
       constexpr int pidIdx = 0;
 
     }
+
+    namespace MOTORPOSITIONS
+    {
+      constexpr int STORED = 0.0;
+      constexpr int LOW = 0.0;
+      constexpr int MED = 0.0;
+      constexpr int HP = 0.0;
+      constexpr int HIGH = 0.0;
+    }
   }
 
   namespace VISION {

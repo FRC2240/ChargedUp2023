@@ -10,26 +10,20 @@ class Arm
 {
 
   public:
-  enum TARGETS {LOW, MED, HUMANPLAYER, HI};
-
   Arm();
   ~Arm();
-  enum STATES { STORED, MOVING, MOVED};
+  enum STATES { STORED, LOW, MED, HUMANPLAYER, HIGH};
 
-  STATES arm_logic(TARGETS desired_pos,
-                   bool stored_button,
-                   bool ground_button,
-                   bool mid_button,
-                   bool hp_button,
+  STATES arm_logic(bool store_button, bool low_button, 
+                   bool med_button, bool hp_button,
                    bool high_button);
-  void move(TARGETS pos);
+  void move();
   void arm_pid_init();
   void arm_dash_init();
   void arm_dash_read();
   double desired_position;
 
  private:
-  enum POSITIONS { STOWED, GROUND, MID, HP_STATION, HIGH};
 
   STATES state = STORED;
 
