@@ -2,9 +2,11 @@
 #include "frc/DigitalInput.h"
 #include <frc/Timer.h>
 #include "frc/smartdashboard/SmartDashboard.h"
+#include <Constants.h>
+#include <frc/DoubleSolenoid.h>
 
 class Grabber {
-private:  enum STATES {STOWED, INTAKING, INTAKE_WAIT, INTAKE_STOP, EXTAKING, OVERIDE_WAIT};
+private:  enum STATES {STOWED, INTAKING, EXTAKING};
 
 public:
 
@@ -15,7 +17,13 @@ public:
   void Out();
   
 
-  STATES Logic(bool intake_button, bool extake_button, bool store_button, bool ignore_button);
+  STATES Logic(bool intake_button, bool extake_button, bool stow_button);
 
 private:
+
+  STATES state = STOWED;
+
+  rev::CANSparkMax m_motor_Grabber{CONSTANTS::GRABBER::GRABBER_MOTOR_ID,rev::CANSparkMax::MotorType::kBrushless};
+  frc::DoubleSolenoid m_grabberPiston{frc::PneumaticsModuleType::CTREPCM,CONSTANTS::GRABBER::GRABBER_PISTON_ID,CONSTANTS::GRABBER::GRABBER_PISTON_ID};
+
 };

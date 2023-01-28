@@ -8,6 +8,8 @@ Wrist::Wrist(){
         WristPIDInit();
         WristDashInit();
          WristDashRead();
+         m_encoder.SetPosition(0.0);
+         m_encoder.GetPosition();
 }
 
 Wrist::~Wrist(){}
