@@ -8,20 +8,24 @@
 
 class Arm
 {
-  private:
-   enum STATES {A, B };
 
   public:
   Arm();
   ~Arm();
-  Arm::STATES arm_logic();
+  enum STATES { STORED, LOW, MED, HUMANPLAYER, HIGH};
+
+  STATES arm_logic(bool store_button, bool low_button, 
+                   bool med_button, bool hp_button,
+                   bool high_button);
   void move();
   void arm_pid_init();
   void arm_dash_init();
   void arm_dash_read();
+  double desired_position;
 
  private:
-  enum POSITIONS { STOWED, GROUND, MID, HP_STATION, HIGH};
+
+  STATES state = STORED;
 
     WPI_TalonFX m_arm_motor_right {CONSTANTS::ARM::RIGHT_ARM_MOTOR_ID};
     WPI_TalonFX m_arm_motor_left {CONSTANTS::ARM::LEFT_ARM_MOTOR_ID};

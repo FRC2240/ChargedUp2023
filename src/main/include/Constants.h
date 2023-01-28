@@ -21,6 +21,7 @@ namespace CONSTANTS
   {
     constexpr int RIGHT_ARM_MOTOR_ID = 2;
     constexpr int LEFT_ARM_MOTOR_ID = 3;
+    
     namespace PID
     {
       constexpr int kP = 0.0;
@@ -33,6 +34,15 @@ namespace CONSTANTS
       constexpr int slotIdx = 0;
       constexpr int pidIdx = 0;
 
+    }
+
+    namespace MOTORPOSITIONS
+    {
+      constexpr int STORED = 0.0;
+      constexpr int LOW = 0.0;
+      constexpr int MED = 0.0;
+      constexpr int HP = 0.0;
+      constexpr int HIGH = 0.0;
     }
   }
 
