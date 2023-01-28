@@ -195,12 +195,12 @@ void Robot::TeleopPeriodic()
 {
   //DASHBOARD::update_botpose(m_camera.get_field_pos_by_tag());
   //Drivetrain::print_angle();
-  m_cam_counter = m_camera.pose_loop(m_cam_counter);
+  //m_cam_counter = m_camera.pose_loop(m_cam_counter);
   buttonManager();
 
   swerveDrive(field_centric);
 
-  Odometry::update();
+  //Odometry::update();
 
   if constexpr (debugging)
   {
@@ -215,6 +215,17 @@ void Robot::TestInit()
 
 void Robot::TestPeriodic()
 {
+
+std::cout << BUTTON::GRIPPADS::GRIPPADS_DEPLOY() << std::endl;
+std::cout << BUTTON::GRIPPADS::GRIPPADS_RETRACT() << std::endl;
+
+  if (BUTTON::GRIPPADS::GRIPPADS_DEPLOY()){
+    m_grippad.deploy();
+  }
+
+  else if (BUTTON::GRIPPADS::GRIPPADS_RETRACT()){
+    m_grippad.retract();
+  }
 }
 
 #ifndef RUNNING_FRC_TESTS
