@@ -212,7 +212,7 @@ void Robot::TeleopPeriodic()
  
 
   // Odometry::update();
- 
+
   if constexpr (debugging)
   {
     Trajectory::printRobotRelativeSpeeds();
