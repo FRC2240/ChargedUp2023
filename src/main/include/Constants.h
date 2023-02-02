@@ -5,10 +5,7 @@ namespace CONSTANTS
 {
   namespace GRIPPAD
   {
-    constexpr int FRONT_RIGHT_CHANNEL = 0;
-    constexpr int FRONT_LEFT_CHANNEL = 1;
-    constexpr int BACK_RIGHT_CHANNEL = 2;
-    constexpr int BACK_LEFT_CHANNEL = 3;
+    constexpr int GRIPPAD_CHANNEL = 0;
   }
 
   namespace GRABBER

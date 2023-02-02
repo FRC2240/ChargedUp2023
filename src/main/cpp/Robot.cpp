@@ -215,17 +215,6 @@ void Robot::TestInit()
 
 void Robot::TestPeriodic()
 {
-
-std::cout << BUTTON::GRIPPADS::GRIPPADS_DEPLOY() << std::endl;
-std::cout << BUTTON::GRIPPADS::GRIPPADS_RETRACT() << std::endl;
-
-  if (BUTTON::GRIPPADS::GRIPPADS_DEPLOY()){
-    m_grippad.deploy();
-  }
-
-  else if (BUTTON::GRIPPADS::GRIPPADS_RETRACT()){
-    m_grippad.retract();
-  }
 }
 
 #ifndef RUNNING_FRC_TESTS
