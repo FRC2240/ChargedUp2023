@@ -1,7 +1,7 @@
 #include "Grippad.h"
 
 
-// frc::Compressor enableCompressorDigital();
+frc::Compressor enableCompressorDigital();
 
 void Grippad::deploy()
 {
