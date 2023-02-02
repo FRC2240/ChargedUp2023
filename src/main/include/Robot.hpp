@@ -15,6 +15,7 @@
 #include <frc/trajectory/TrajectoryGenerator.h>
 #include "Buttons.h"
 #include "Dash.h"
+#include "Grabber.h"
 
 
 
@@ -59,4 +60,5 @@ private:
     const std::string NON_HOLONOMIC = "Non holonomic";
 
     std::string m_autoSelected;
+    Grabber m_grabber;
 };
