@@ -15,8 +15,10 @@
 #include <frc/trajectory/TrajectoryGenerator.h>
 #include "Buttons.h"
 #include "Dash.h"
+#include "Grabber.h"
 #include "Grippad.h"
 #include "CANdle.h"
+
 
 
 
@@ -62,6 +64,7 @@ private:
 
     std::string m_autoSelected;
 
+    Grabber m_grabber;
     Grippad m_grippad;
     CANdle m_candle;
 };

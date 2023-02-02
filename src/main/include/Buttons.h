@@ -1,6 +1,7 @@
 #ifndef BUTTONS_H_
 #define BUTTONS_H_
 
+
 #include <frc/XboxController.h>
 
 namespace BUTTON
@@ -30,8 +31,9 @@ namespace BUTTON
 
   namespace GRABBER
   {
-    inline bool GRABBER_OPEN() {return BUTTON::m_stick.GetLeftBumperReleased();}
-    inline bool GRABBER_CLOSE() {return BUTTON::m_stick.GetRightBumperReleased();}
+    inline bool GRABBER_TOGGLE() {return BUTTON::m_stick.GetRightBumperReleased();}
+    inline bool GRABBER_STORE() {return BUTTON::m_stick.GetLeftBumperReleased();}
+    
   }
 
   namespace GRIPPADS
