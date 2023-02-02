@@ -48,6 +48,17 @@ namespace BUTTON
       {
       return false;
       }
+    }
+inline bool GRIPPADS_RETRACT() 
+    {
+      if (BUTTON::m_stick.GetPOV() == 0)
+      {
+        return true;
+      }
+    else
+      {
+      return false;
+      }
 
     }
   }
