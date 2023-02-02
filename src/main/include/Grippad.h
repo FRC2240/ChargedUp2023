@@ -10,9 +10,9 @@ class Grippad
 
  public:
 
-         Grippad();
+         Grippad(){};
 
-         ~Grippad();
+         ~Grippad(){};
 
          void deploy();
 
@@ -20,14 +20,14 @@ class Grippad
 
 
  private:
-        //Grippad has four pistons
-         frc::Solenoid m_grippad_piston_front_right{frc::PneumaticsModuleType::CTREPCM,
-             CONSTANTS::GRIPPAD::FRONT_RIGHT_CHANNEL};
-         frc::Solenoid m_grippad_piston_front_left{frc::PneumaticsModuleType::CTREPCM,
-         CONSTANTS::GRIPPAD::FRONT_LEFT_CHANNEL};
-         frc::Solenoid m_grippad_piston_back_right{frc::PneumaticsModuleType::CTREPCM,
-         CONSTANTS::GRIPPAD::BACK_RIGHT_CHANNEL};
-         frc::Solenoid m_grippad_piston_back_left{frc::PneumaticsModuleType::CTREPCM,
-         CONSTANTS::GRIPPAD::BACK_LEFT_CHANNEL};
+
+        frc::Compressor phCompressor{1, frc::PneumaticsModuleType::REVPH};
+
+        //Grippad has four pistons operating on one solenoid
+         frc::Solenoid m_grippad_pistons{frc::PneumaticsModuleType::REVPH,
+             CONSTANTS::GRIPPAD::GRIPPAD_CHANNEL};
+
+        
+
 };
 #endif // GRIPAD_H_

@@ -5,7 +5,7 @@
 #include <units/angular_velocity.h>
 #include <iostream>
 #include <fmt/format.h>
-#define CAN_BUS_NAME "rio"
+#define CAN_BUS_NAME "canivore"
 
 /******************************************************************/
 /*                       Private Constants                        */
