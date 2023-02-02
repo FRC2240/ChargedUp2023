@@ -51,10 +51,10 @@ void Drivetrain::init()
   navx = std::make_unique<AHRS>(frc::SPI::Port::kMXP);
 
   using namespace Module;
-  front_left  = std::make_unique<SwerveModule>(60, 61, 14, 20.0);
-  front_right = std::make_unique<SwerveModule>(50, 51, 13, -255.0);
-  back_left   = std::make_unique<SwerveModule>(30, 31, 11, 32.0);
-  back_right  = std::make_unique<SwerveModule>(40, 41, 12, 520.0);
+  front_left  = std::make_unique<SwerveModule>(60, 61, 14, 2.256);
+  front_right = std::make_unique<SwerveModule>(50, 51, 13, -609.561);
+  back_left   = std::make_unique<SwerveModule>(30, 31, 11, 14.121);
+  back_right  = std::make_unique<SwerveModule>(40, 41, 12, 153.715);
 }
 
 // Returns values with 0 being front and positive angles going CW

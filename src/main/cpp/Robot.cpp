@@ -209,7 +209,7 @@ void Robot::TeleopPeriodic()
 
   swerveDrive(field_centric);
  
-  Odometry::update();
+//  Odometry::update();
  
   if constexpr (debugging)
   {
