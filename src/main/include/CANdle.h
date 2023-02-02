@@ -16,7 +16,7 @@ class CANdle{
     void Off();
 
     private:
-    ctre::phoenix::led::CANdle m_candle {CONSTANTS::CANDLE::CANDLE_ID, ""};
+    ctre::phoenix::led::CANdle m_candle {CONSTANTS::CANDLE::CANDLE_ID, "canivore"};
     ctre::phoenix::led::RainbowAnimation rainbow{0.5, 0.5, -1};
 
 };

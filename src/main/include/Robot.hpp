@@ -16,6 +16,7 @@
 #include "Buttons.h"
 #include "Dash.h"
 #include "Grippad.h"
+#include "CANdle.h"
 
 
 
@@ -62,4 +63,5 @@ private:
     std::string m_autoSelected;
 
     Grippad m_grippad;
+    CANdle m_candle;
 };
