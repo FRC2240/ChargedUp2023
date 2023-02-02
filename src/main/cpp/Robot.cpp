@@ -206,6 +206,7 @@ void Robot::TeleopPeriodic()
   buttonManager();
   swerveDrive(field_centric);
   //Odometry::update();
+
   if constexpr (debugging)
     {
       Trajectory::printRobotRelativeSpeeds();
