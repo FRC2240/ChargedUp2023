@@ -1,15 +1,18 @@
 #include <iostream>
 #include <Wrist.h>
-
+#include <fmt/core.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 
 Wrist::Wrist(){
 
         WristPIDInit();
         WristDashInit();
-         WristDashRead();
-         m_encoder.SetPosition(0.0);
-         m_encoder.GetPosition();
+        WristDashRead();
+        
+  m_wrist_Encoder.SetInverted(false);
+  m_wrist_PIDController.SetFeedbackDevice(m_wrist_Encoder);
+
 }
 
 Wrist::~Wrist(){}
@@ -24,7 +27,8 @@ void Wrist::WristPIDInit() {
     m_wrist_PIDController.SetIZone(m_wrist_coeff.kIz);
     m_wrist_PIDController.SetFF(m_wrist_coeff.kFF);
     m_wrist_PIDController.SetOutputRange(m_wrist_coeff.kMinOutput, m_wrist_coeff.kMaxOutput);
- 
+    
+
 }
 
 void Wrist::WristDashInit()

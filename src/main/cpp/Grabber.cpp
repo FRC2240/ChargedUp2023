@@ -3,7 +3,7 @@
 
 
 Grabber::Grabber(){
-  
+  m_encoder.SetPosition(0.0);
 }
  
 Grabber::STATES Grabber::Logic(
