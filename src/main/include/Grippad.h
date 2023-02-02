@@ -21,7 +21,7 @@ class Grippad
 
  private:
 
-        frc::Compressor phCompressor{1, frc::PneumaticsModuleType::REVPH};
+        // frc::Compressor phCompressor{1, frc::PneumaticsModuleType::REVPH};
 
         //Grippad has four pistons operating on one solenoid
          frc::Solenoid m_grippad_pistons{frc::PneumaticsModuleType::REVPH,
