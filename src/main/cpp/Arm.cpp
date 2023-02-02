@@ -214,6 +214,11 @@ Arm::STATES Arm::arm_logic(bool store_button, bool low_button,
     }
 }
 
+void Arm::test()
+{
+    std::cout << "encoder: " << arm_cancoder.GetAbsolutePosition() << "\n";
+}
+
 
 
 Arm::~Arm(){}

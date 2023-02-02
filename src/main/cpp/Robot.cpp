@@ -253,6 +253,7 @@ void Robot::TestInit()
 
 void Robot::TestPeriodic()
 {
+  m_arm.test();
 }
 
 #ifndef RUNNING_FRC_TESTS
