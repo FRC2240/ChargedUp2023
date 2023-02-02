@@ -205,20 +205,19 @@ void Robot::TeleopPeriodic()
   //Drivetrain::print_angle();
 
   buttonManager();
+  m_camera.pose_loop();
+  //m_cam_counter = m_camera.pose_loop(m_cam_counter);
+  //buttonManager();
 
   swerveDrive(field_centric);
 //  Odometry::update();
  
-
-
-
 
   if constexpr (debugging)
   {
     Trajectory::printRobotRelativeSpeeds();
     Trajectory::printFieldRelativeSpeeds();
   }
-
   if (m_grabber.grabberToggle = false && BUTTON::GRABBER::GRABBER_TOGGLE)
     {
       m_grabber.In();

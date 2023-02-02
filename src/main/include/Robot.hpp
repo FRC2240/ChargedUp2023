@@ -19,8 +19,6 @@
 #include "Grippad.h"
 #include "CANdle.h"
 
-
-
 #define m_deadband 0.15
 
 class Robot : public frc::TimedRobot
@@ -53,6 +51,10 @@ private:
     //Vision m_camera;
 
     int m_cam_counter = 0;
+
+    Vision m_camera;
+
+    //Vision m_camera;
 
     frc::Trajectory m_trajectory;
 
