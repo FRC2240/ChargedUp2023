@@ -213,12 +213,12 @@ void Robot::TeleopPeriodic()
       Trajectory::printFieldRelativeSpeeds();
     }
 
-  if (m_grabber.grabberToggle = false && BUTTON::GRABBER::GRABBER_TOGGLE)
+  if (m_grabber.grabberToggle == false && BUTTON::GRABBER::GRABBER_TOGGLE())
     {
       m_grabber.In();
       m_grabber.grabberToggle = true;
     }
-  else if (m_grabber.grabberToggle = true && BUTTON::GRABBER::GRABBER_TOGGLE)
+  else if (m_grabber.grabberToggle == true && BUTTON::GRABBER::GRABBER_TOGGLE())
     {
       m_grabber.Out();
       m_grabber.grabberToggle = true;
