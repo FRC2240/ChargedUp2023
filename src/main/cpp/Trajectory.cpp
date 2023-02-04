@@ -39,6 +39,35 @@ void Trajectory::printRobotRelativeSpeeds()
     frc::SmartDashboard::PutNumber("Estimated VY Speed", robot_relative.vy.value());
     frc::SmartDashboard::PutNumber("Estimated Omega Speed", units::degrees_per_second_t{robot_relative.omega}.value() / 720);
 }
+    PathPlannerTrajectory Trajectory::generate_live_traj(units::meter_t current_x,
+                                                         units::meter_t current_y,
+                                                         frc::Rotation2d current_head,
+                                                         frc::Rotation2d current_rot,
+                                                         units::meter_t desired_x,
+                                                         units::meter_t desired_y,
+                                                         frc::Rotation2d desired_head,
+                                                         frc::Rotation2d desired_rot
+                                                         )
+    {
+        PathPlannerTrajectory ret_val =
+            PathPlanner::generatePath(
+                                      PathConstraints(Drivetrain::TRAJ_MAX_SPEED,
+                                                      Drivetrain::TRAJ_MAX_ACCELERATION),
+
+                                      PathPoint(frc::Translation2d(current_x,
+                                                                   current_y),
+                                                current_head,
+                                                current_rot
+                                                ),
+                                      PathPoint(frc::Translation2d(desired_x,
+                                                                   desired_y),
+                                                desired_head,
+                                                desired_rot
+                                                )
+                                      );
+        return ret_val;
+}
+
 
 PathPlannerTrajectory Trajectory::generate_live_traj(units::meter_t current_x,
                                                      units::meter_t current_y,
@@ -68,10 +97,12 @@ PathPlannerTrajectory Trajectory::generate_live_traj(units::meter_t current_x,
                                                 )
                                       );
         return ret_val;
-
 }
 
-void Trajectory::follow_live_traj(PathPlannerTrajectory traj)
+void Trajectory::follow_live_traj(PathPlannerTrajectory traj,
+                                  std::function<void(units::second_t time)> const &periodic,
+                                  units::meters_per_second_t const &max_vel,
+                                  units::meters_per_second_squared_t const &max_accl)
 {
     auto const inital_state = traj.getInitialState();
     auto const inital_pose = inital_state.pose;
@@ -83,7 +114,7 @@ void Trajectory::follow_live_traj(PathPlannerTrajectory traj)
     frc::Timer trajTimer;
     trajTimer.Start();
 
-    if constexpr (debugging)
+    if constexpr (CONSTANTS::DEBUGGING)
     {
         // If needed, we can disable the "error correction" for x & y
         controller.SetEnabled(true);
