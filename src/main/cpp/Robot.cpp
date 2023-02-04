@@ -221,7 +221,7 @@ void Robot::TeleopPeriodic()
   else if (m_grabber.grabberToggle == true && BUTTON::GRABBER::GRABBER_TOGGLE())
     {
       m_grabber.Out();
-      m_grabber.grabberToggle = true;
+      m_grabber.grabberToggle = false;
     }
 }
 

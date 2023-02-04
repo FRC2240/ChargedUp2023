@@ -56,7 +56,8 @@ namespace CONSTANTS
 
   namespace GRABBER{
     constexpr int GRABBER_MOTOR_ID = 6;
-    constexpr int GRABBER_PISTON_ID = 8;
+    constexpr int GRABBER_PISTON_ID1 = 1;
+    constexpr int GRABBER_PISTON_ID2 = 2;
 
   }
 }
