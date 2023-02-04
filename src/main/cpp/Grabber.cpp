@@ -2,10 +2,7 @@
 #include "Grabber.h"
 
 
-Grabber::Grabber()
-{
-  m_encoder.SetPosition(0.0);
-}
+Grabber::Grabber(){}
 
 //FIXME
 // Only handles one case
