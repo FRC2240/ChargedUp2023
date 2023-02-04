@@ -49,7 +49,7 @@ namespace BUTTON
       return false;
       }
     }
-inline bool GRIPPADS_RETRACT() 
+  inline bool GRIPPADS_RETRACT() 
     {
       if (BUTTON::m_stick.GetPOV() == 0)
       {
@@ -62,5 +62,12 @@ inline bool GRIPPADS_RETRACT()
 
     }
   }
+  
+  namespace WRIST
+  {
+    inline bool WRIST_UP() {return BUTTON::m_stick.GetAButton();}
+    inline bool WRIST_DOWN() {return BUTTON::m_stick.GetYButton();}
+  }
 }
+
 #endif //BUTTONS_H_

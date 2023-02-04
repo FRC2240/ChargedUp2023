@@ -18,6 +18,9 @@ public:
         void WristDashRead();
         void InitializeEncoders();
         void ReadEncoders();
+        void Up();
+        void Down();
+        void Stop();
         
         rev::SparkMaxPIDController m_wrist_PIDController = m_wrist_motor.GetPIDController();
 

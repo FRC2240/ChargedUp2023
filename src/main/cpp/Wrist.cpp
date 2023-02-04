@@ -52,3 +52,18 @@ void Wrist::WristDashRead()
     m_wrist_coeff.kMaxOutput = frc::SmartDashboard::GetNumber("Wrist Min Output", 1.0);
  
 }
+
+void Wrist::Down()
+{
+    m_wrist_motor.Set(0.1);
+}
+
+void Wrist::Up()
+{
+    m_wrist_motor.Set(-0.1);
+}
+
+void Wrist::Stop()
+{
+    m_wrist_motor.Set(0.0);
+}

@@ -18,6 +18,7 @@
 #include "Grabber.h"
 #include "Grippad.h"
 #include "CANdle.h"
+#include "Wrist.h"
 
 
 
@@ -67,4 +68,5 @@ private:
     Grabber m_grabber;
     Grippad m_grippad;
     CANdle m_candle;
+    Wrist m_wrist;
 };
