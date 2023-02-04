@@ -67,3 +67,13 @@ void Wrist::Stop()
 {
     m_wrist_motor.Set(0.0);
 }
+
+void Wrist::Follow(double arm_pos)
+{
+    m_wrist_PIDController.SetReference(-arm_pos + CONSTANTS::WRIST::WRIST_ENCODER_OFFSET, rev::ControlType::kPosition);
+}
+
+void Wrist::Follow_Flare(double arm_pos)
+{
+    m_wrist_PIDController.SetReference(-arm_pos + CONSTANTS::WRIST::WRIST_ENCODER_OFFSET + CONSTANTS::WRIST::WRIST_FLARE_OFFSET, rev::ControlType::kPosition);
+}

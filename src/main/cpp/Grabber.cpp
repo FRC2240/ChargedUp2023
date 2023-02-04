@@ -8,35 +8,7 @@ Grabber::Grabber(){}
 // Only handles one case
 // functions not used
 // Other issues
-// DO NOT IGNORE WARNINGS FROM THIS FUNCTION
-Grabber::STATES Grabber::Logic(
-                               bool intake_button,
-                               bool extake_button,
-                               bool stow_button
-                               )
-{
-  if (stow_button)
-    {
-      state = STOWED;
-    }
-  switch (state)
-    {
-    case STOWED:
-      Grabber::Stop();
-
-      if (intake_button)
-        {
-          Grabber::In();
-        }
-      else if (extake_button)
-        {
-          Grabber::Out();
-        }
-
-      break;
-    }
-}
- 
+// DO NOT IGNORE WARNINGS FROM THIS FUNCTION 
  
 void Grabber::In()
 {

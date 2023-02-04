@@ -3,10 +3,10 @@
 #include "Buttons.h"
 #include "ctre/phoenix/led/RainbowAnimation.h"
 
-class CANdle{
+class Candle{
     public:
 
-    CANdle();
+    Candle();
 
     void Purple();
     void Yellow();

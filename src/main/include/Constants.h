@@ -11,13 +11,17 @@ namespace CONSTANTS
   namespace WRIST
   {
     constexpr int WRIST_MOTOR_ID = 1;
-
+    constexpr double WRIST_ENCODER_OFFSET = 0.0;
+    constexpr double WRIST_FLARE_OFFSET = 10.0;
   }
 
   namespace ARM
   {
     constexpr int RIGHT_ARM_MOTOR_ID = 2;
     constexpr int LEFT_ARM_MOTOR_ID = 3;
+    constexpr double ARM_ENCODER_OFFSET = 0.0;
+    constexpr double ARM_FLARE_HIGH = -60;
+    constexpr double ARM_FLARE_LOW = -70;
     
     namespace PID
     {

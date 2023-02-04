@@ -6,11 +6,13 @@ Arm::Arm()
     m_arm_motor_left.Follow(m_arm_motor_right);
     Arm::arm_pid_init();
     Arm::arm_dash_init();
+    ARM_FLARE_HIGH = CONSTANTS::ARM::ARM_FLARE_HIGH;
+    ARM_FLARE_LOW = CONSTANTS::ARM::ARM_FLARE_LOW;
 }
 
 void Arm::move()
 {
-
+  m_arm_motor_right.SetSelectedSensorPosition(desired_position);
 }
 
 void Arm::arm_pid_init()
@@ -56,6 +58,11 @@ void Arm::arm_dash_read()
     m_Arm_RightCoeff.kMinOutput = frc::SmartDashboard::GetNumber("Right Arm Min Output", -1.0);
     m_Arm_RightCoeff.kMaxOutput = frc::SmartDashboard::GetNumber("Right Arm Max Output", 1.0);
 
+}
+
+void Arm::Read_Position()
+{
+    position = m_arm_motor_right.GetSelectedSensorPosition() + CONSTANTS::ARM::ARM_ENCODER_OFFSET;
 }
 
 Arm::STATES Arm::arm_logic(bool store_button, bool low_button, 

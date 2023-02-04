@@ -21,7 +21,13 @@ class Arm
   void arm_pid_init();
   void arm_dash_init();
   void arm_dash_read();
+  void Read_Position();
+
   double desired_position;
+
+  double position;
+  double ARM_FLARE_HIGH;
+  double ARM_FLARE_LOW;
 
  private:
 

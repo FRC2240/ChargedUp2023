@@ -148,6 +148,14 @@ void Robot::RobotPeriodic()
 {
   Trajectory::reverse_trajectory = frc::SmartDashboard::GetBoolean("Traj Reversed", Trajectory::reverse_trajectory);
   //std::cout << "Robot Periodic \n";
+
+  if (m_arm.position > m_arm.ARM_FLARE_LOW && m_arm.position < m_arm.ARM_FLARE_HIGH){
+    m_wrist.Follow_Flare(m_arm.position);
+  }
+  else {
+    m_wrist.Follow(m_arm.position);
+  }
+
 }
 
 void Robot::AutonomousInit()

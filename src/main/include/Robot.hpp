@@ -17,8 +17,9 @@
 #include "Dash.h"
 #include "Grabber.h"
 #include "Grippad.h"
-#include "CANdle.h"
+#include "Candle.h"
 #include "Wrist.h"
+#include "Arm.h"
 
 
 
@@ -67,6 +68,7 @@ private:
 
     Grabber m_grabber;
     Grippad m_grippad;
-    CANdle m_candle;
+    Candle m_candle;
     Wrist m_wrist;
+    Arm m_arm;
 };

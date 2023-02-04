@@ -1,6 +1,6 @@
-#include "CANdle.h"
+#include "Candle.h"
 
-CANdle::CANdle(){
+Candle::Candle(){
 
     ctre::phoenix::led::CANdleConfiguration config;
     config.stripType = ctre::phoenix::led::LEDStripType::RGB; 
@@ -11,26 +11,26 @@ CANdle::CANdle(){
 
 }
 
-void CANdle::Purple() {
+void Candle::Purple() {
     m_candle.SetLEDs(82, 28, 200);
 }
 
-void CANdle::Yellow() {
+void Candle::Yellow() {
     m_candle.SetLEDs(254, 162, 1);
 }
 
-void CANdle::Red() {
+void Candle::Red() {
     m_candle.SetLEDs(255, 0, 0);
 }
 
-void CANdle::Blue(){
+void Candle::Blue(){
     m_candle.SetLEDs(0, 0, 255);
 }
 
-void CANdle::Rainbow(){
+void Candle::Rainbow(){
     m_candle.Animate(rainbow);
 }
 
-void CANdle::Off(){
+void Candle::Off(){
     m_candle.SetLEDs(0,0,0);
 }
