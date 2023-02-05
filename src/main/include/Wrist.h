@@ -23,6 +23,7 @@ public:
         void Stop();
         void Follow(double arm_pos);
         void Follow_Flare(double arm_pos);
+        void Test();
         
         rev::SparkMaxPIDController m_wrist_PIDController = m_wrist_motor.GetPIDController();
 

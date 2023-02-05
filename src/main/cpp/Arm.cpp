@@ -5,37 +5,53 @@ Arm::Arm()
 {
     m_arm_motor_left.Follow(m_arm_motor_right);
     Arm::arm_pid_init();
-    Arm::arm_dash_init();
+    //Arm::arm_dash_init();
+
+    CANCoderConfiguration arm_cancoder_config{};
+    //cancoder_config.initializationStrategy = SensorInitializationStrategy::BootToAbsolutePosition;
+    arm_cancoder_config.sensorDirection = true;
+    arm_cancoder.ConfigAllSettings(arm_cancoder_config);
+    TalonFXConfiguration arm_turner_config{};
+    arm_turner_config.remoteFilter0.remoteSensorSource = RemoteSensorSource::RemoteSensorSource_CANCoder;
+    arm_turner_config.primaryPID.selectedFeedbackSensor = FeedbackDevice::RemoteSensor0;
+    m_arm_motor_right.ConfigAllSettings(arm_turner_config);
+
     ARM_FLARE_HIGH = CONSTANTS::ARM::ARM_FLARE_HIGH;
     ARM_FLARE_LOW = CONSTANTS::ARM::ARM_FLARE_LOW;
 }
 
 void Arm::move()
 {
-  m_arm_motor_right.SetSelectedSensorPosition(desired_position);
+    m_arm_motor_right.SetSelectedSensorPosition(desired_position);
 }
 
 void Arm::arm_pid_init()
 {
-    Arm::arm_dash_read();
- 
-  m_arm_motor_right.ConfigFactoryDefault();
+    //Arm::arm_dash_read();
 
-  m_arm_motor_right.ConfigSelectedFeedbackSensor(FeedbackDevice::IntegratedSensor, CONSTANTS::ARM::PID::pidIdx, 0);
+    m_arm_motor_right.ConfigFactoryDefault();
 
-  m_arm_motor_right.SetStatusFramePeriod(StatusFrameEnhanced::Status_13_Base_PIDF0, 0, 0);
-  m_arm_motor_right.SetStatusFramePeriod(StatusFrameEnhanced::Status_10_MotionMagic, 0, 0);
+    TalonFXConfiguration arm_config{};
 
-  m_arm_motor_right.ConfigNominalOutputForward(0, 0);
-  m_arm_motor_right.ConfigNominalOutputReverse(0, 0);
-  m_arm_motor_right.ConfigPeakOutputForward(m_Arm_RightCoeff.kMaxOutput, 0);
-  m_arm_motor_right.ConfigPeakOutputReverse(m_Arm_RightCoeff.kMinOutput, 0);
+    arm_config.remoteFilter0.remoteSensorDeviceID = CONSTANTS::ARM::ARM_CANCODER_ID;
+    arm_config.remoteFilter0.remoteSensorSource = RemoteSensorSource::RemoteSensorSource_CANCoder;
+    arm_config.primaryPID.selectedFeedbackSensor = FeedbackDevice::RemoteSensor0;
 
-  m_arm_motor_right.SelectProfileSlot(CONSTANTS::ARM::PID::slotIdx, CONSTANTS::ARM::PID::pidIdx);
-  m_arm_motor_right.Config_kF(CONSTANTS::ARM::PID::slotIdx, m_Arm_RightCoeff.kFF, 0);
-  m_arm_motor_right.Config_kP(CONSTANTS::ARM::PID::slotIdx, m_Arm_RightCoeff.kP, 0);
-  m_arm_motor_right.Config_kI(CONSTANTS::ARM::PID::slotIdx, m_Arm_RightCoeff.kI, 0);
-  m_arm_motor_right.Config_kD(CONSTANTS::ARM::PID::slotIdx, m_Arm_RightCoeff.kD, 0);
+    m_arm_motor_right.ConfigAllSettings(arm_config);
+
+    m_arm_motor_right.SetStatusFramePeriod(StatusFrameEnhanced::Status_13_Base_PIDF0, 0, 0);
+    m_arm_motor_right.SetStatusFramePeriod(StatusFrameEnhanced::Status_10_MotionMagic, 0, 0);
+
+    m_arm_motor_right.ConfigNominalOutputForward(0, 0);
+    m_arm_motor_right.ConfigNominalOutputReverse(0, 0);
+    m_arm_motor_right.ConfigPeakOutputForward(1.0, 0);
+    m_arm_motor_right.ConfigPeakOutputReverse(-1.0, 0);
+
+    m_arm_motor_right.SelectProfileSlot(CONSTANTS::ARM::PID::slotIdx, CONSTANTS::ARM::PID::pidIdx);
+    m_arm_motor_right.Config_kF(CONSTANTS::ARM::PID::slotIdx, m_Arm_RightCoeff.kFF, 0);
+    m_arm_motor_right.Config_kP(CONSTANTS::ARM::PID::slotIdx, 0.4, 0);
+    m_arm_motor_right.Config_kI(CONSTANTS::ARM::PID::slotIdx, m_Arm_RightCoeff.kI, 0);
+    m_arm_motor_right.Config_kD(CONSTANTS::ARM::PID::slotIdx, m_Arm_RightCoeff.kD, 0);
 }
 
 void Arm::arm_dash_init()
@@ -62,7 +78,24 @@ void Arm::arm_dash_read()
 
 void Arm::Read_Position()
 {
-    position = m_arm_motor_right.GetSelectedSensorPosition() + CONSTANTS::ARM::ARM_ENCODER_OFFSET;
+    position = arm_cancoder.GetAbsolutePosition() + CONSTANTS::ARM::ARM_ENCODER_OFFSET;
+}
+
+void Arm::Up(){
+    // m_arm_motor_right.Set(0.25);
+    // m_arm_motor_left.Set(0.25);
+    std::cout << "Arm up wahoo\n";
+    m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::Position, 158.0);
+}
+
+void Arm::Down(){
+    m_arm_motor_right.Set(-0.25);
+    //m_arm_motor_left.Set(-0.25);
+}
+
+void Arm::Stop(){
+    m_arm_motor_left.Set(0.0);
+    m_arm_motor_right.Set(0.0);
 }
 
 Arm::STATES Arm::arm_logic(bool store_button, bool low_button, 
@@ -212,6 +245,10 @@ Arm::STATES Arm::arm_logic(bool store_button, bool low_button,
         break;
 
     }
+}
+
+void Arm::Test(){
+    std::cout << "arm encoder with offset: " << position << std::endl;
 }
 
 

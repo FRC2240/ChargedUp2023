@@ -22,6 +22,10 @@ class Arm
   void arm_dash_init();
   void arm_dash_read();
   void Read_Position();
+  void Up();
+  void Down();
+  void Stop();
+  void Test();
 
   double desired_position;
 
@@ -35,6 +39,8 @@ class Arm
 
     WPI_TalonFX m_arm_motor_right {CONSTANTS::ARM::RIGHT_ARM_MOTOR_ID};
     WPI_TalonFX m_arm_motor_left {CONSTANTS::ARM::LEFT_ARM_MOTOR_ID};
+    WPI_CANCoder arm_cancoder{CONSTANTS::ARM::ARM_CANCODER_ID};
+
 
     TalonFXSensorCollection m_Arm_RightEncoder = m_arm_motor_right.GetSensorCollection();
 

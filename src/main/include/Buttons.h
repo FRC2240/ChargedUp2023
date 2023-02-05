@@ -27,6 +27,8 @@ namespace BUTTON
     inline bool ARM_MID() {return BUTTON::m_stick.GetYButtonReleased();}
     inline bool ARM_HIGH() {return BUTTON::m_stick.GetBButtonReleased();}
     inline bool ARM_HP() {return BUTTON::m_stick.GetLeftStickButtonReleased();}
+    inline bool ARM_UP() {return BUTTON::m_stick.GetPOV() == 0;}
+    inline bool ARM_DOWN() {return BUTTON::m_stick.GetPOV() <= 225 && BUTTON::m_stick.GetPOV() >= 135;}
   }
 
   namespace GRABBER
