@@ -1,10 +1,9 @@
 #ifndef CONSTANTS_H_
 #define CONSTANTS_H_
-
-
+#include <units/length.h>
+#include <units/angle.h>
 namespace CONSTANTS 
 {
-  #warning "MINOR: Disable debug before comp."
   constexpr bool DEBUGGING = true; //DO NOT USE IN COMP. 
   //SLOWS DOWN EVERYTHING & MAY CAUSE WATCHDOG EXEPTIONS.
   namespace COLORS

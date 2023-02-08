@@ -20,6 +20,35 @@ namespace Trajectory
     /******************************************************************/
     /*                  Public Function Declarations                  */
     /******************************************************************/
+    enum HEIGHT {HIGH, MED, GROUND};
+    enum LCR {LEFT, CENTER, /*"co-op"*/ RIGHT};
+    enum PIECE {CONE, CUBE}; //"cube"
+
+    struct Target
+    {
+        HEIGHT height;
+        LCR grid;
+        LCR node;
+        PIECE piece;
+    };
+
+    struct TrajDepends
+    {
+        units::meter_t current_x;
+        units::meter_t current_y;
+        units::degree_t current_head;
+        units::degree_t current_rot;
+        units::meter_t desired_x;
+        units::meter_t desired_y;
+        units::degree_t desired_head;
+        units::degree_t desired_rot;
+    };
+
+    TrajDepends determine_desired_traj(Target tgt);
+
+    PathPlannerTrajectory generate_live_traj(TrajDepends t);
+
+
     PathPlannerTrajectory generate_live_traj(units::meter_t current_x,
                                              units::meter_t current_y,
                                              frc::Rotation2d current_head,

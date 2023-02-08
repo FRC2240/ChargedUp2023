@@ -30,7 +30,66 @@ static frc::HolonomicDriveController controller{
 /******************************************************************/
 /*                   Public Function Definitions                  */
 /******************************************************************/
+Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::Target tgt)
+{
+    Trajectory::TrajDepends ret;
+    switch (tgt.height)
+        {
+        case HIGH:
+            ret.desired_x = CONSTANTS::TRAJECTORY::HIGH_X;
+            break;
+         case MED:
+            ret.desired_x = CONSTANTS::TRAJECTORY::MID_X;
+            break;
+         case GROUND:
+            ret.desired_x = CONSTANTS::TRAJECTORY::GROUND_X;
+            break;
+        }
+    switch (tgt.grid)
+        {
+        case LEFT:
+            ret.desired_y = CONSTANTS::TRAJECTORY::L_GRID_LEFTMOST;
+            break;
+        case CENTER:
+            ret.desired_y = CONSTANTS::TRAJECTORY::C_GRID_LEFTMOST;
+            break;
+        case RIGHT:
+            ret.desired_y = CONSTANTS::TRAJECTORY::R_GRID_LEFTMOST;
+            break;
+        }
 
+    switch (tgt.node)
+        {
+        case LEFT:
+            // Do nothing, already alligned
+            break;
+        case CENTER:
+            ret.desired_y += CONSTANTS::TRAJECTORY::C_NODE_OFFSET;
+            break;
+        case RIGHT:
+            ret.desired_y += CONSTANTS::TRAJECTORY::R_NODE_OFFSET;
+            break;
+        }
+    if (tgt.grid == LEFT && tgt.node == LEFT)
+        {
+            ret.desired_y = CONSTANTS::TRAJECTORY::FAR_L_Y_OVERIDE;
+        }
+
+    if (tgt.grid == RIGHT && tgt.node == RIGHT)
+        {
+
+            ret.desired_y = CONSTANTS::TRAJECTORY::FAR_R_Y_OVERIDE;
+        }
+    frc::Pose2d current_pose = Odometry::getPose();
+    ret.desired_head = 0_deg;
+    ret.desired_rot = 0_deg;
+    ret.current_rot = Drivetrain::getAngle();
+    ret.current_head = ret.current_rot;
+    ret.current_x = current_pose.X();
+    ret.current_y = current_pose.Y();
+
+    return ret;
+}
 void Trajectory::printRobotRelativeSpeeds()
 {
     frc::ChassisSpeeds const robot_relative = Drivetrain::getRobotRelativeSpeeds();
@@ -39,33 +98,56 @@ void Trajectory::printRobotRelativeSpeeds()
     frc::SmartDashboard::PutNumber("Estimated VY Speed", robot_relative.vy.value());
     frc::SmartDashboard::PutNumber("Estimated Omega Speed", units::degrees_per_second_t{robot_relative.omega}.value() / 720);
 }
-    PathPlannerTrajectory Trajectory::generate_live_traj(units::meter_t current_x,
-                                                         units::meter_t current_y,
-                                                         frc::Rotation2d current_head,
-                                                         frc::Rotation2d current_rot,
-                                                         units::meter_t desired_x,
-                                                         units::meter_t desired_y,
-                                                         frc::Rotation2d desired_head,
-                                                         frc::Rotation2d desired_rot
-                                                         )
-    {
-        PathPlannerTrajectory ret_val =
-            PathPlanner::generatePath(
-                                      PathConstraints(Drivetrain::TRAJ_MAX_SPEED,
-                                                      Drivetrain::TRAJ_MAX_ACCELERATION),
+PathPlannerTrajectory Trajectory::generate_live_traj(TrajDepends t)
+{
+    return
+        PathPlanner::generatePath(
 
-                                      PathPoint(frc::Translation2d(current_x,
-                                                                   current_y),
-                                                current_head,
-                                                current_rot
-                                                ),
-                                      PathPoint(frc::Translation2d(desired_x,
-                                                                   desired_y),
-                                                desired_head,
-                                                desired_rot
-                                                )
-                                      );
-        return ret_val;
+                                  PathConstraints(Drivetrain::TRAJ_MAX_SPEED,
+                                                  Drivetrain::TRAJ_MAX_ACCELERATION),
+
+                                  PathPoint(frc::Translation2d(t.current_x,
+                                                               t.current_y),
+                                            frc::Rotation2d(t.current_head),
+                                            frc::Rotation2d(t.current_rot)
+                                            ),
+                                  PathPoint(frc::Translation2d(t.desired_x,
+                                                               t.desired_y),
+                                            frc::Rotation2d(t.desired_head),
+                                            frc::Rotation2d(t.desired_rot)
+                                            )
+                                  );
+
+}
+
+
+PathPlannerTrajectory Trajectory::generate_live_traj(units::meter_t current_x,
+                                                     units::meter_t current_y,
+                                                     frc::Rotation2d current_head,
+                                                     frc::Rotation2d current_rot,
+                                                     units::meter_t desired_x,
+                                                     units::meter_t desired_y,
+                                                     frc::Rotation2d desired_head,
+                                                     frc::Rotation2d desired_rot
+                                                     )
+{
+    PathPlannerTrajectory ret_val =
+        PathPlanner::generatePath(
+                                  PathConstraints(Drivetrain::TRAJ_MAX_SPEED,
+                                                  Drivetrain::TRAJ_MAX_ACCELERATION),
+
+                                  PathPoint(frc::Translation2d(current_x,
+                                                               current_y),
+                                            current_head,
+                                            current_rot
+                                            ),
+                                  PathPoint(frc::Translation2d(desired_x,
+                                                               desired_y),
+                                            desired_head,
+                                            desired_rot
+                                            )
+                                  );
+    return ret_val;
 }
 
 
