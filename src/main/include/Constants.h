@@ -3,6 +3,7 @@
 
 namespace CONSTANTS 
 {
+  constexpr bool DEBUGGING = true;
   namespace GRIPPAD
   {
     constexpr int GRIPPAD_CHANNEL = 0;

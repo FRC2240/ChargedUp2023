@@ -233,6 +233,20 @@ void Robot::TeleopPeriodic()
     }
 }
 
+void Robot::make_test_path()
+{
+  frc::Pose2d current_pose = Odometry::getPose();
+  Trajectory::follow_live_traj(
+  Trajectory::generate_live_traj(current_pose.X(),
+                                 current_pose.Y(),
+                                 frc::Rotation2d(Drivetrain::getCCWHeading()),
+                                 frc::Rotation2d(Drivetrain::getCCWHeading()),
+                                 current_pose.X() + 1_m,
+                                 current_pose.Y() + 1_m,
+                                 -frc::Rotation2d(Drivetrain::getCCWHeading()),
+                                 -frc::Rotation2d(Drivetrain::getCCWHeading())
+                                 ));
+}
 void Robot::TestInit()
 {
 }

@@ -1,7 +1,9 @@
 #pragma once
 
 #include <frc/TimedRobot.h>
-
+#include <units/velocity.h>
+#include <units/length.h>
+#include <units/angle.h>
 #include <wpi/sendable/Sendable.h>
 #include <wpi/sendable/SendableHelper.h>
 #include <frc/Filesystem.h>
@@ -49,6 +51,8 @@ public:
 
     void TestInit() override;
     void TestPeriodic() override;
+
+    void make_test_path();
 
 
 
