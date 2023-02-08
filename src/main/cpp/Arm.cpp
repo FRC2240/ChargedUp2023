@@ -6,6 +6,17 @@ Arm::Arm()
     m_arm_motor_left.Follow(m_arm_motor_right);
     Arm::arm_pid_init();
     Arm::arm_dash_init();
+
+    CANCoderConfiguration arm_cancoder_config{};
+    //cancoder_config.initializationStrategy = SensorInitializationStrategy::BootToAbsolutePosition;
+    arm_cancoder_config.sensorDirection = true;
+    arm_cancoder.ConfigAllSettings(arm_cancoder_config);
+
+    TalonFXConfiguration arm_turner_config{};
+    arm_turner_config.remoteFilter0.remoteSensorSource = RemoteSensorSource::RemoteSensorSource_CANCoder;
+    arm_turner_config.primaryPID.selectedFeedbackSensor = FeedbackDevice::RemoteSensor0;
+
+    m_arm_motor_right.ConfigAllSettings(arm_turner_config);
     ARM_FLARE_HIGH = CONSTANTS::ARM::ARM_FLARE_HIGH;
     ARM_FLARE_LOW = CONSTANTS::ARM::ARM_FLARE_LOW;
 }
@@ -212,6 +223,11 @@ Arm::STATES Arm::arm_logic(bool store_button, bool low_button,
         break;
 
     }
+}
+
+void Arm::test()
+{
+    std::cout << "encoder: " << arm_cancoder.GetAbsolutePosition() << "\n";
 }
 
 

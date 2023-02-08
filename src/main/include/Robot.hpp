@@ -59,6 +59,7 @@ public:
 private:
     //Vision m_camera;
 
+    Arm m_arm;
     int m_cam_counter = 0;
 
     frc::Trajectory m_trajectory;
@@ -74,5 +75,5 @@ private:
     Grippad m_grippad;
     Candle m_candle;
     Wrist m_wrist;
-    Arm m_arm;
+    
 };
