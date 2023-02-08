@@ -75,5 +75,5 @@ private:
     Grippad m_grippad;
     Candle m_candle;
     Wrist m_wrist;
-    Arm m_arm;
+    
 };
