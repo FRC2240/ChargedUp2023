@@ -92,7 +92,6 @@ void swerveDrive(bool const &field_relative)
 
 Robot::Robot()
 {
-
   // setup RobotStates
   RobotState::IsEnabled = [this]()
   { return IsEnabled(); };

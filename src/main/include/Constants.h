@@ -1,7 +1,11 @@
 #ifndef CONSTANTS_H_
 #define CONSTANTS_H_
+#pragma once
 #include <units/length.h>
 #include <units/angle.h>
+#include <frc/DriverStation.h>
+#include <iostream>
+
 namespace CONSTANTS 
 {
   constexpr bool DEBUGGING = true; //DO NOT USE IN COMP. 
