@@ -1,0 +1,6043 @@
+[
+    {
+        "messageType": 2,
+        "timestamp": 8.763916015625,
+        "seqNumber": 17485,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.76416015625,
+        "seqNumber": 17486,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7650146484375,
+        "seqNumber": 17487,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7652587890625,
+        "seqNumber": 17488,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7655029296875,
+        "seqNumber": 17489,
+        "line": "raw x: (l/r)-1.67818e-53/-1.67818e-53"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7659912109375,
+        "seqNumber": 17490,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.766357421875,
+        "seqNumber": 17491,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7664794921875,
+        "seqNumber": 17492,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7667236328125,
+        "seqNumber": 17493,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7677001953125,
+        "seqNumber": 17494,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7684326171875,
+        "seqNumber": 17495,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.768798828125,
+        "seqNumber": 17496,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.769287109375,
+        "seqNumber": 17497,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7696533203125,
+        "seqNumber": 17498,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7698974609375,
+        "seqNumber": 17499,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7711181640625,
+        "seqNumber": 17500,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.78125,
+        "seqNumber": 17501,
+        "line": "loop number: 13"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7818603515625,
+        "seqNumber": 17502,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7823486328125,
+        "seqNumber": 17503,
+        "line": "I/C:V:B_S: 1/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.78271484375,
+        "seqNumber": 17504,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7830810546875,
+        "seqNumber": 17505,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7833251953125,
+        "seqNumber": 17506,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7835693359375,
+        "seqNumber": 17507,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7843017578125,
+        "seqNumber": 17508,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.78466796875,
+        "seqNumber": 17509,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.784912109375,
+        "seqNumber": 17510,
+        "line": "raw x: (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7852783203125,
+        "seqNumber": 17511,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7861328125,
+        "seqNumber": 17512,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.787109375,
+        "seqNumber": 17513,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.78759765625,
+        "seqNumber": 17514,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.787841796875,
+        "seqNumber": 17515,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7879638671875,
+        "seqNumber": 17516,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.788330078125,
+        "seqNumber": 17517,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.788818359375,
+        "seqNumber": 17518,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.789306640625,
+        "seqNumber": 17519,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7896728515625,
+        "seqNumber": 17520,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.7899169921875,
+        "seqNumber": 17521,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.800048828125,
+        "seqNumber": 17522,
+        "line": "loop number: 14"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8011474609375,
+        "seqNumber": 17523,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8016357421875,
+        "seqNumber": 17524,
+        "line": "I/C:V:B_S: 0/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.80224609375,
+        "seqNumber": 17525,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8031005859375,
+        "seqNumber": 17526,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8040771484375,
+        "seqNumber": 17527,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8045654296875,
+        "seqNumber": 17528,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8050537109375,
+        "seqNumber": 17529,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8052978515625,
+        "seqNumber": 17530,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.805419921875,
+        "seqNumber": 17531,
+        "line": "raw x: (l/r)-1.67818e-53/-1.67818e-53"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.806640625,
+        "seqNumber": 17532,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8072509765625,
+        "seqNumber": 17533,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8074951171875,
+        "seqNumber": 17534,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.807861328125,
+        "seqNumber": 17535,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.808349609375,
+        "seqNumber": 17536,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8089599609375,
+        "seqNumber": 17537,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8101806640625,
+        "seqNumber": 17538,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.81103515625,
+        "seqNumber": 17539,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8121337890625,
+        "seqNumber": 17540,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.813232421875,
+        "seqNumber": 17541,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8134765625,
+        "seqNumber": 17542,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8204345703125,
+        "seqNumber": 17543,
+        "line": "loop number: 15"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.821533203125,
+        "seqNumber": 17544,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8223876953125,
+        "seqNumber": 17545,
+        "line": "I/C:V:B_S: 1/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.822998046875,
+        "seqNumber": 17546,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8232421875,
+        "seqNumber": 17547,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.823486328125,
+        "seqNumber": 17548,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.823974609375,
+        "seqNumber": 17549,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.82421875,
+        "seqNumber": 17550,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.824462890625,
+        "seqNumber": 17551,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.824951171875,
+        "seqNumber": 17552,
+        "line": "raw x: (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8251953125,
+        "seqNumber": 17553,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.82568359375,
+        "seqNumber": 17554,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8260498046875,
+        "seqNumber": 17555,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.82666015625,
+        "seqNumber": 17556,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8270263671875,
+        "seqNumber": 17557,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8275146484375,
+        "seqNumber": 17558,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8277587890625,
+        "seqNumber": 17559,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8282470703125,
+        "seqNumber": 17560,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.828857421875,
+        "seqNumber": 17561,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.829345703125,
+        "seqNumber": 17562,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8299560546875,
+        "seqNumber": 17563,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8402099609375,
+        "seqNumber": 17564,
+        "line": "loop number: 16"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8409423828125,
+        "seqNumber": 17565,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.841552734375,
+        "seqNumber": 17566,
+        "line": "I/C:V:B_S: 0/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8419189453125,
+        "seqNumber": 17567,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8427734375,
+        "seqNumber": 17568,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8433837890625,
+        "seqNumber": 17569,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.843994140625,
+        "seqNumber": 17570,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.84423828125,
+        "seqNumber": 17571,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8450927734375,
+        "seqNumber": 17572,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8453369140625,
+        "seqNumber": 17573,
+        "line": "raw x: (l/r)-1.67818e-53/-1.67818e-53"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.845703125,
+        "seqNumber": 17574,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8465576171875,
+        "seqNumber": 17575,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.84814453125,
+        "seqNumber": 17576,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.848388671875,
+        "seqNumber": 17577,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8486328125,
+        "seqNumber": 17578,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.84912109375,
+        "seqNumber": 17579,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.849609375,
+        "seqNumber": 17580,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.85009765625,
+        "seqNumber": 17581,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.85107421875,
+        "seqNumber": 17582,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.851318359375,
+        "seqNumber": 17583,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8516845703125,
+        "seqNumber": 17584,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8609619140625,
+        "seqNumber": 17585,
+        "line": "loop number: 17"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8619384765625,
+        "seqNumber": 17586,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.86279296875,
+        "seqNumber": 17587,
+        "line": "I/C:V:B_S: 1/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8631591796875,
+        "seqNumber": 17588,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.863525390625,
+        "seqNumber": 17589,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8641357421875,
+        "seqNumber": 17590,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8646240234375,
+        "seqNumber": 17591,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8651123046875,
+        "seqNumber": 17592,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8656005859375,
+        "seqNumber": 17593,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.865966796875,
+        "seqNumber": 17594,
+        "line": "raw x: (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8660888671875,
+        "seqNumber": 17595,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8665771484375,
+        "seqNumber": 17596,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8668212890625,
+        "seqNumber": 17597,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.867431640625,
+        "seqNumber": 17598,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.867919921875,
+        "seqNumber": 17599,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8682861328125,
+        "seqNumber": 17600,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8685302734375,
+        "seqNumber": 17601,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.869384765625,
+        "seqNumber": 17602,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8701171875,
+        "seqNumber": 17603,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.87060546875,
+        "seqNumber": 17604,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8709716796875,
+        "seqNumber": 17605,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8802490234375,
+        "seqNumber": 17606,
+        "line": "loop number: 18"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8814697265625,
+        "seqNumber": 17607,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.882080078125,
+        "seqNumber": 17608,
+        "line": "I/C:V:B_S: 0/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8826904296875,
+        "seqNumber": 17609,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.88330078125,
+        "seqNumber": 17610,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8839111328125,
+        "seqNumber": 17611,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8846435546875,
+        "seqNumber": 17612,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.886474609375,
+        "seqNumber": 17613,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8876953125,
+        "seqNumber": 17614,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.888427734375,
+        "seqNumber": 17615,
+        "line": "raw x: (l/r)-1.67818e-53/-1.67818e-53"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.88916015625,
+        "seqNumber": 17616,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8895263671875,
+        "seqNumber": 17617,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.889892578125,
+        "seqNumber": 17618,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8902587890625,
+        "seqNumber": 17619,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8905029296875,
+        "seqNumber": 17620,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.891357421875,
+        "seqNumber": 17621,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8916015625,
+        "seqNumber": 17622,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8919677734375,
+        "seqNumber": 17623,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8927001953125,
+        "seqNumber": 17624,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.8931884765625,
+        "seqNumber": 17625,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.893310546875,
+        "seqNumber": 17626,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.900146484375,
+        "seqNumber": 17627,
+        "line": "loop number: 19"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.900634765625,
+        "seqNumber": 17628,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.90087890625,
+        "seqNumber": 17629,
+        "line": "I/C:V:B_S: 1/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.90234375,
+        "seqNumber": 17630,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.902587890625,
+        "seqNumber": 17631,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.903564453125,
+        "seqNumber": 17632,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.904296875,
+        "seqNumber": 17633,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.904541015625,
+        "seqNumber": 17634,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.905029296875,
+        "seqNumber": 17635,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9052734375,
+        "seqNumber": 17636,
+        "line": "raw x: (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.905517578125,
+        "seqNumber": 17637,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.906005859375,
+        "seqNumber": 17638,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.906494140625,
+        "seqNumber": 17639,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9066162109375,
+        "seqNumber": 17640,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9073486328125,
+        "seqNumber": 17641,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9078369140625,
+        "seqNumber": 17642,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9080810546875,
+        "seqNumber": 17643,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9090576171875,
+        "seqNumber": 17644,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.90966796875,
+        "seqNumber": 17645,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9100341796875,
+        "seqNumber": 17646,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9102783203125,
+        "seqNumber": 17647,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9202880859375,
+        "seqNumber": 17648,
+        "line": "loop number: 20"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.921142578125,
+        "seqNumber": 17649,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9219970703125,
+        "seqNumber": 17650,
+        "line": "I/C:V:B_S: 0/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9224853515625,
+        "seqNumber": 17651,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.92333984375,
+        "seqNumber": 17652,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.924072265625,
+        "seqNumber": 17653,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9249267578125,
+        "seqNumber": 17654,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9251708984375,
+        "seqNumber": 17655,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9256591796875,
+        "seqNumber": 17656,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.92626953125,
+        "seqNumber": 17657,
+        "line": "raw x: (l/r)-1.67818e-53/-1.67818e-53"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9273681640625,
+        "seqNumber": 17658,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.927978515625,
+        "seqNumber": 17659,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9285888671875,
+        "seqNumber": 17660,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.929443359375,
+        "seqNumber": 17661,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.93017578125,
+        "seqNumber": 17662,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9305419921875,
+        "seqNumber": 17663,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9306640625,
+        "seqNumber": 17664,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9312744140625,
+        "seqNumber": 17665,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.931640625,
+        "seqNumber": 17666,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9322509765625,
+        "seqNumber": 17667,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.93310546875,
+        "seqNumber": 17668,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.940185546875,
+        "seqNumber": 17669,
+        "line": "loop number: 21"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.941650390625,
+        "seqNumber": 17670,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9422607421875,
+        "seqNumber": 17671,
+        "line": "I/C:V:B_S: 1/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9442138671875,
+        "seqNumber": 17672,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9454345703125,
+        "seqNumber": 17673,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9459228515625,
+        "seqNumber": 17674,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9468994140625,
+        "seqNumber": 17675,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9471435546875,
+        "seqNumber": 17676,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9473876953125,
+        "seqNumber": 17677,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9483642578125,
+        "seqNumber": 17678,
+        "line": "raw x: (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9490966796875,
+        "seqNumber": 17679,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.949462890625,
+        "seqNumber": 17680,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.94970703125,
+        "seqNumber": 17681,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.949951171875,
+        "seqNumber": 17682,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.950439453125,
+        "seqNumber": 17683,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.951171875,
+        "seqNumber": 17684,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9515380859375,
+        "seqNumber": 17685,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.95166015625,
+        "seqNumber": 17686,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9527587890625,
+        "seqNumber": 17687,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9541015625,
+        "seqNumber": 17688,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.95458984375,
+        "seqNumber": 17689,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9603271484375,
+        "seqNumber": 17690,
+        "line": "loop number: 22"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9609375,
+        "seqNumber": 17691,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9615478515625,
+        "seqNumber": 17692,
+        "line": "I/C:V:B_S: 0/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9620361328125,
+        "seqNumber": 17693,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.96240234375,
+        "seqNumber": 17694,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9627685546875,
+        "seqNumber": 17695,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9632568359375,
+        "seqNumber": 17696,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9658203125,
+        "seqNumber": 17697,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.967041015625,
+        "seqNumber": 17698,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9676513671875,
+        "seqNumber": 17699,
+        "line": "raw x: (l/r)-1.67818e-53/-1.67818e-53"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.968017578125,
+        "seqNumber": 17700,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9683837890625,
+        "seqNumber": 17701,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9688720703125,
+        "seqNumber": 17702,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.96923828125,
+        "seqNumber": 17703,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.969482421875,
+        "seqNumber": 17704,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.97021484375,
+        "seqNumber": 17705,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.97119140625,
+        "seqNumber": 17706,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9718017578125,
+        "seqNumber": 17707,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9720458984375,
+        "seqNumber": 17708,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9722900390625,
+        "seqNumber": 17709,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9735107421875,
+        "seqNumber": 17710,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.98046875,
+        "seqNumber": 17711,
+        "line": "loop number: 23"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9815673828125,
+        "seqNumber": 17712,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.982177734375,
+        "seqNumber": 17713,
+        "line": "I/C:V:B_S: 1/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9825439453125,
+        "seqNumber": 17714,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9833984375,
+        "seqNumber": 17715,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.98388671875,
+        "seqNumber": 17716,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.985107421875,
+        "seqNumber": 17717,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.985595703125,
+        "seqNumber": 17718,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9862060546875,
+        "seqNumber": 17719,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9873046875,
+        "seqNumber": 17720,
+        "line": "raw x: (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9888916015625,
+        "seqNumber": 17721,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.98974609375,
+        "seqNumber": 17722,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.990234375,
+        "seqNumber": 17723,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9906005859375,
+        "seqNumber": 17724,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.99169921875,
+        "seqNumber": 17725,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9921875,
+        "seqNumber": 17726,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.992431640625,
+        "seqNumber": 17727,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9927978515625,
+        "seqNumber": 17728,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.9932861328125,
+        "seqNumber": 17729,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.99365234375,
+        "seqNumber": 17730,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 8.994140625,
+        "seqNumber": 17731,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.000244140625,
+        "seqNumber": 17732,
+        "line": "loop number: 24"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.000732421875,
+        "seqNumber": 17733,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.00146484375,
+        "seqNumber": 17734,
+        "line": "I/C:V:B_S: 0/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.001953125,
+        "seqNumber": 17735,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0023193359375,
+        "seqNumber": 17736,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.003173828125,
+        "seqNumber": 17737,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.00341796875,
+        "seqNumber": 17738,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.003662109375,
+        "seqNumber": 17739,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0045166015625,
+        "seqNumber": 17740,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0048828125,
+        "seqNumber": 17741,
+        "line": "raw x: (l/r)-1.67818e-53/-1.67818e-53"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.005615234375,
+        "seqNumber": 17742,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0059814453125,
+        "seqNumber": 17743,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0062255859375,
+        "seqNumber": 17744,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0064697265625,
+        "seqNumber": 17745,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0067138671875,
+        "seqNumber": 17746,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.008056640625,
+        "seqNumber": 17747,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.00830078125,
+        "seqNumber": 17748,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.008544921875,
+        "seqNumber": 17749,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.009521484375,
+        "seqNumber": 17750,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.01123046875,
+        "seqNumber": 17751,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0128173828125,
+        "seqNumber": 17752,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.019775390625,
+        "seqNumber": 17753,
+        "line": "loop number: 25"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0208740234375,
+        "seqNumber": 17754,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0216064453125,
+        "seqNumber": 17755,
+        "line": "I/C:V:B_S: 1/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0224609375,
+        "seqNumber": 17756,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0228271484375,
+        "seqNumber": 17757,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0240478515625,
+        "seqNumber": 17758,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0242919921875,
+        "seqNumber": 17759,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0247802734375,
+        "seqNumber": 17760,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0252685546875,
+        "seqNumber": 17761,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0263671875,
+        "seqNumber": 17762,
+        "line": "raw x: (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.026611328125,
+        "seqNumber": 17763,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.027099609375,
+        "seqNumber": 17764,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.027587890625,
+        "seqNumber": 17765,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.02783203125,
+        "seqNumber": 17766,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0281982421875,
+        "seqNumber": 17767,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.028564453125,
+        "seqNumber": 17768,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0286865234375,
+        "seqNumber": 17769,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0303955078125,
+        "seqNumber": 17770,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.031005859375,
+        "seqNumber": 17771,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.03173828125,
+        "seqNumber": 17772,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0321044921875,
+        "seqNumber": 17773,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.041259765625,
+        "seqNumber": 17774,
+        "line": "loop number: 26"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0423583984375,
+        "seqNumber": 17775,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.04296875,
+        "seqNumber": 17776,
+        "line": "I/C:V:B_S: 0/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.04345703125,
+        "seqNumber": 17777,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0439453125,
+        "seqNumber": 17778,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.04443359375,
+        "seqNumber": 17779,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0445556640625,
+        "seqNumber": 17780,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0450439453125,
+        "seqNumber": 17781,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0452880859375,
+        "seqNumber": 17782,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0455322265625,
+        "seqNumber": 17783,
+        "line": "raw x: (l/r)-1.67818e-53/-1.67818e-53"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0457763671875,
+        "seqNumber": 17784,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.04638671875,
+        "seqNumber": 17785,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0479736328125,
+        "seqNumber": 17786,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0487060546875,
+        "seqNumber": 17787,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0491943359375,
+        "seqNumber": 17788,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0506591796875,
+        "seqNumber": 17789,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.052001953125,
+        "seqNumber": 17790,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.05224609375,
+        "seqNumber": 17791,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.052490234375,
+        "seqNumber": 17792,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.05322265625,
+        "seqNumber": 17793,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0535888671875,
+        "seqNumber": 17794,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.060302734375,
+        "seqNumber": 17795,
+        "line": "loop number: 27"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.060791015625,
+        "seqNumber": 17796,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.061767578125,
+        "seqNumber": 17797,
+        "line": "I/C:V:B_S: 1/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0633544921875,
+        "seqNumber": 17798,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.063720703125,
+        "seqNumber": 17799,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.064453125,
+        "seqNumber": 17800,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.064697265625,
+        "seqNumber": 17801,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.06494140625,
+        "seqNumber": 17802,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0653076171875,
+        "seqNumber": 17803,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0655517578125,
+        "seqNumber": 17804,
+        "line": "raw x: (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.066162109375,
+        "seqNumber": 17805,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0665283203125,
+        "seqNumber": 17806,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.066650390625,
+        "seqNumber": 17807,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.06787109375,
+        "seqNumber": 17808,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0682373046875,
+        "seqNumber": 17809,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0687255859375,
+        "seqNumber": 17810,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.070068359375,
+        "seqNumber": 17811,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0712890625,
+        "seqNumber": 17812,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0718994140625,
+        "seqNumber": 17813,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0723876953125,
+        "seqNumber": 17814,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0726318359375,
+        "seqNumber": 17815,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.08056640625,
+        "seqNumber": 17816,
+        "line": "loop number: 28"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.081298828125,
+        "seqNumber": 17817,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0823974609375,
+        "seqNumber": 17818,
+        "line": "I/C:V:B_S: 0/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0838623046875,
+        "seqNumber": 17819,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0841064453125,
+        "seqNumber": 17820,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0845947265625,
+        "seqNumber": 17821,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0850830078125,
+        "seqNumber": 17822,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.08544921875,
+        "seqNumber": 17823,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0867919921875,
+        "seqNumber": 17824,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0872802734375,
+        "seqNumber": 17825,
+        "line": "raw x: (l/r)-1.67818e-53/-1.67818e-53"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0875244140625,
+        "seqNumber": 17826,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.08837890625,
+        "seqNumber": 17827,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0887451171875,
+        "seqNumber": 17828,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.08984375,
+        "seqNumber": 17829,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.090576171875,
+        "seqNumber": 17830,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.092041015625,
+        "seqNumber": 17831,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0926513671875,
+        "seqNumber": 17832,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0933837890625,
+        "seqNumber": 17833,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.093994140625,
+        "seqNumber": 17834,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.095458984375,
+        "seqNumber": 17835,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.0958251953125,
+        "seqNumber": 17836,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.099853515625,
+        "seqNumber": 17837,
+        "line": "loop number: 29"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1005859375,
+        "seqNumber": 17838,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1011962890625,
+        "seqNumber": 17839,
+        "line": "I/C:V:B_S: 1/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1015625,
+        "seqNumber": 17840,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1024169921875,
+        "seqNumber": 17841,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.103271484375,
+        "seqNumber": 17842,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1036376953125,
+        "seqNumber": 17843,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1041259765625,
+        "seqNumber": 17844,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1043701171875,
+        "seqNumber": 17845,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.105224609375,
+        "seqNumber": 17846,
+        "line": "raw x: (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1055908203125,
+        "seqNumber": 17847,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1077880859375,
+        "seqNumber": 17848,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.108154296875,
+        "seqNumber": 17849,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1092529296875,
+        "seqNumber": 17850,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1099853515625,
+        "seqNumber": 17851,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1104736328125,
+        "seqNumber": 17852,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.111083984375,
+        "seqNumber": 17853,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1114501953125,
+        "seqNumber": 17854,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.111572265625,
+        "seqNumber": 17855,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.112060546875,
+        "seqNumber": 17856,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1124267578125,
+        "seqNumber": 17857,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1204833984375,
+        "seqNumber": 17858,
+        "line": "loop number: 30"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.12109375,
+        "seqNumber": 17859,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1220703125,
+        "seqNumber": 17860,
+        "line": "I/C:V:B_S: 0/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.122314453125,
+        "seqNumber": 17861,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.12255859375,
+        "seqNumber": 17862,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.123046875,
+        "seqNumber": 17863,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1236572265625,
+        "seqNumber": 17864,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1241455078125,
+        "seqNumber": 17865,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1243896484375,
+        "seqNumber": 17866,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1251220703125,
+        "seqNumber": 17867,
+        "line": "raw x: (l/r)-1.67818e-53/-1.67818e-53"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1253662109375,
+        "seqNumber": 17868,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.125732421875,
+        "seqNumber": 17869,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1263427734375,
+        "seqNumber": 17870,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.126708984375,
+        "seqNumber": 17871,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.12744140625,
+        "seqNumber": 17872,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1280517578125,
+        "seqNumber": 17873,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.12890625,
+        "seqNumber": 17874,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.130126953125,
+        "seqNumber": 17875,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1312255859375,
+        "seqNumber": 17876,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1318359375,
+        "seqNumber": 17877,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1326904296875,
+        "seqNumber": 17878,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1400146484375,
+        "seqNumber": 17879,
+        "line": "loop number: 31"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.141845703125,
+        "seqNumber": 17880,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1422119140625,
+        "seqNumber": 17881,
+        "line": "I/C:V:B_S: 1/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.142578125,
+        "seqNumber": 17882,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.143310546875,
+        "seqNumber": 17883,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1436767578125,
+        "seqNumber": 17884,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.14404296875,
+        "seqNumber": 17885,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1466064453125,
+        "seqNumber": 17886,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1468505859375,
+        "seqNumber": 17887,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1473388671875,
+        "seqNumber": 17888,
+        "line": "raw x: (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.14794921875,
+        "seqNumber": 17889,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1553955078125,
+        "seqNumber": 17890,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.15625,
+        "seqNumber": 17891,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1571044921875,
+        "seqNumber": 17892,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.157470703125,
+        "seqNumber": 17893,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1588134765625,
+        "seqNumber": 17894,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.161376953125,
+        "seqNumber": 17895,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.162841796875,
+        "seqNumber": 17896,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1639404296875,
+        "seqNumber": 17897,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1650390625,
+        "seqNumber": 17898,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1654052734375,
+        "seqNumber": 17899,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1661376953125,
+        "seqNumber": 17900,
+        "line": "loop number: 32"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.16650390625,
+        "seqNumber": 17901,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.166748046875,
+        "seqNumber": 17902,
+        "line": "I/C:V:B_S: 0/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1671142578125,
+        "seqNumber": 17903,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.16748046875,
+        "seqNumber": 17904,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1678466796875,
+        "seqNumber": 17905,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1683349609375,
+        "seqNumber": 17906,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.168701171875,
+        "seqNumber": 17907,
+        "line": "left buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.169189453125,
+        "seqNumber": 17908,
+        "line": "right buffer: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1695556640625,
+        "seqNumber": 17909,
+        "line": "raw x: (l/r)-1.67818e-53/-1.67818e-53"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1700439453125,
+        "seqNumber": 17910,
+        "line": "raw y (l/r)0/0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1705322265625,
+        "seqNumber": 17911,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1712646484375,
+        "seqNumber": 17912,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.171630859375,
+        "seqNumber": 17913,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.172119140625,
+        "seqNumber": 17914,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1756591796875,
+        "seqNumber": 17915,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.176513671875,
+        "seqNumber": 17916,
+        "line": "Good frames: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1767578125,
+        "seqNumber": 17917,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1771240234375,
+        "seqNumber": 17918,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.1773681640625,
+        "seqNumber": 17919,
+        "line": "stdev: nan"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.177490234375,
+        "seqNumber": 17920,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.3125,
+        "seqNumber": 17921,
+        "line": "navX-Sensor startup initialization and startup calibration complete."
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.3153076171875,
+        "seqNumber": 17922,
+        "line": "navX-Sensor onboard startup calibration complete."
+    },
+    {
+        "messageType": 2,
+        "timestamp": 9.31640625,
+        "seqNumber": 17923,
+        "line": "navX-Sensor Yaw angle auto-reset to 0.0 due to startup calibration."
+    },
+    {
+        "messageType": 2,
+        "timestamp": 0,
+        "seqNumber": 17924,
+        "line": "terminate called after throwing an instance of 'std::system_error'"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 0.00146484375,
+        "seqNumber": 17925,
+        "line": "  what():  Invalid argument"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.17529296875,
+        "seqNumber": 17926,
+        "line": ""
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.17626953125,
+        "seqNumber": 17927,
+        "line": "********** Robot program starting **********"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.182861328125,
+        "seqNumber": 17928,
+        "line": "NT: could not open persistent file '/home/lvuser/networktables.json': No such file or directory"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.1846923828125,
+        "seqNumber": 17929,
+        "line": "NT: Listening on NT3 port 1735, NT4 port 5810"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.2783203125,
+        "seqNumber": 17930,
+        "line": "Instantiating navX-Sensor on SPI Port 4."
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.279296875,
+        "seqNumber": 17931,
+        "line": "navX-Sensor C++ library for FRC"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.2838134765625,
+        "seqNumber": 17932,
+        "line": "Swerve constuctor start "
+    },
+    {
+        "timestamp": 6.2857666015625,
+        "seqNumber": 17933,
+        "numOccur": 1,
+        "errorCode": 1,
+        "flags": 0,
+        "details": "Analog module sample rate is too high: SetMSBFirst not supported by roboRIO 4",
+        "location": "SetMSBFirst",
+        "callStack": "\tat frc::ReportErrorV(int, char const*, int, char const*, fmt::v9::basic_string_view<char>, fmt::v9::basic_format_args<fmt::v9::basic_format_context<fmt::v9::appender, char> >) + 0x178 [0xb69d60cc]\n\tat frc::SPI::SetMSBFirst() + 0x70 [0xb698304c]\n\tat RegisterIO_SPI::Init() + 0x18 [0x7b0dc]\n\tat RegisterIO::Run() + 0x1c [0x7bf24]\n\tat AHRS::ThreadFunc(IIOProvider*) + 0x10 [0x75820]\n\tat  + 0xae2b8 [0xb50702b8]\n",
+        "messageType": 1
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.286376953125,
+        "seqNumber": 17934,
+        "line": "Warning at SetMSBFirst: Analog module sample rate is too high: SetMSBFirst not supported by roboRIO 4"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.287109375,
+        "seqNumber": 17935,
+        "line": "\tat frc::ReportErrorV(int, char const*, int, char const*, fmt::v9::basic_string_view<char>, fmt::v9::basic_format_args<fmt::v9::basic_format_context<fmt::v9::appender, char> >) + 0x178 [0xb69d60cc]"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.2884521484375,
+        "seqNumber": 17936,
+        "line": "\tat frc::SPI::SetMSBFirst() + 0x70 [0xb698304c]"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.288818359375,
+        "seqNumber": 17937,
+        "line": "\tat RegisterIO_SPI::Init() + 0x18 [0x7b0dc]"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.2891845703125,
+        "seqNumber": 17938,
+        "line": "\tat RegisterIO::Run() + 0x1c [0x7bf24]"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.2894287109375,
+        "seqNumber": 17939,
+        "line": "\tat AHRS::ThreadFunc(IIOProvider*) + 0x10 [0x75820]"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.2896728515625,
+        "seqNumber": 17940,
+        "line": "\tat  + 0xae2b8 [0xb50702b8]"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.2901611328125,
+        "seqNumber": 17941,
+        "line": ""
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.2984619140625,
+        "seqNumber": 17942,
+        "line": "navX-Sensor Connected."
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.2989501953125,
+        "seqNumber": 17943,
+        "line": "navX-Sensor Board Type 50 (navX2-MXP (Gen 2))"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.2994384765625,
+        "seqNumber": 17944,
+        "line": "navX-Sensor firmware version 4.0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.2999267578125,
+        "seqNumber": 17945,
+        "line": "navX-Sensor startup initialization and startup calibration complete."
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.3004150390625,
+        "seqNumber": 17946,
+        "line": "navX-Sensor onboard startup calibration complete."
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.3018798828125,
+        "seqNumber": 17947,
+        "line": "navX-Sensor Yaw angle auto-reset to 0.0 due to startup calibration."
+    },
+    {
+        "timestamp": 6.329833984375,
+        "seqNumber": 17948,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "[phoenix] CANbus Connected: canivore (can0, 313088493353385320202034133703FF)",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "timestamp": 6.330322265625,
+        "seqNumber": 17949,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "[phoenix] CANbus Network Up: canivore (can0, 313088493353385320202034133703FF)",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.36083984375,
+        "seqNumber": 17950,
+        "line": "NT: Got a NT4 connection from 10.22.40.234 port 59762"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.3646240234375,
+        "seqNumber": 17951,
+        "line": "NT: CONNECTED NT4 client 'Dashboard' (from 10.22.40.234:59762)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.36962890625,
+        "seqNumber": 17952,
+        "line": "Swerve constuctor end "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.37158203125,
+        "seqNumber": 17953,
+        "line": "Swerve constuctor start "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.4373779296875,
+        "seqNumber": 17954,
+        "line": "Swerve constuctor end "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.439697265625,
+        "seqNumber": 17955,
+        "line": "Swerve constuctor start "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.50341796875,
+        "seqNumber": 17956,
+        "line": "Swerve constuctor end "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.5045166015625,
+        "seqNumber": 17957,
+        "line": "Swerve constuctor start "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.5738525390625,
+        "seqNumber": 17958,
+        "line": "Swerve constuctor end "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.574462890625,
+        "seqNumber": 17959,
+        "line": "Drivtrain started "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.5755615234375,
+        "seqNumber": 17960,
+        "line": "Odometry putfield done "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.5792236328125,
+        "seqNumber": 17961,
+        "line": "robot object created "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.580078125,
+        "seqNumber": 17962,
+        "line": "go get em tiger"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.58056640625,
+        "seqNumber": 17963,
+        "line": "Robot init"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.5811767578125,
+        "seqNumber": 17964,
+        "line": "RobotInit done "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.5816650390625,
+        "seqNumber": 17965,
+        "line": ""
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.58203125,
+        "seqNumber": 17966,
+        "line": "********** Robot program startup complete **********"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 6.5888671875,
+        "seqNumber": 17967,
+        "line": "Default DisabledPeriodic() method... Override me!"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 7.09228515625,
+        "seqNumber": 17968,
+        "line": "NT: Got a NT3 connection from 10.22.40.11 port 37216"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 7.094482421875,
+        "seqNumber": 17969,
+        "line": "NT: CONNECTED NT3 client 'NT3@10.22.40.11:37216' (from 10.22.40.11:37216)"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 7.11962890625,
+        "seqNumber": 17970,
+        "line": "NT: Got a NT3 connection from 10.22.40.12 port 45824"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 7.1226806640625,
+        "seqNumber": 17971,
+        "line": "NT: CONNECTED NT3 client 'NT3@10.22.40.12:45824' (from 10.22.40.12:45824)"
+    },
+    {
+        "timestamp": 7.82958984375,
+        "seqNumber": 17972,
+        "numOccur": 1,
+        "errorCode": 4,
+        "flags": 1,
+        "details": "[CAN SPARK MAX] IDs: 6, WPILib or External HAL Error: CAN: Message not found",
+        "location": "",
+        "callStack": "",
+        "messageType": 0
+    },
+    {
+        "timestamp": 7.8299560546875,
+        "seqNumber": 17973,
+        "numOccur": 1,
+        "errorCode": 5,
+        "flags": 1,
+        "details": "[CAN SPARK MAX] IDs: 6, Unable to retrieve SPARK MAX firmware version. Please verify the deviceID field matches the configured CAN ID of the controller, and that the controller is connected to the CAN Bus. ",
+        "location": "",
+        "callStack": "",
+        "messageType": 0
+    },
+    {
+        "timestamp": 9.2083740234375,
+        "seqNumber": 17974,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "[phoenix] Library initialization is complete.",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "timestamp": 10.8824462890625,
+        "seqNumber": 17975,
+        "numOccur": 1,
+        "errorCode": 0,
+        "flags": 0,
+        "details": "[phoenix-diagnostics] Server 2023.0.1 (Jan 26 2023, 19:27:56) running on port: 1250",
+        "location": "",
+        "callStack": "",
+        "messageType": 1
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.123779296875,
+        "seqNumber": 17976,
+        "line": "Test Init "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.124755859375,
+        "seqNumber": 17977,
+        "line": "bingle. "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.125,
+        "seqNumber": 17978,
+        "line": "1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.125732421875,
+        "seqNumber": 17979,
+        "line": "loop number: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1260986328125,
+        "seqNumber": 17980,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1265869140625,
+        "seqNumber": 17981,
+        "line": "I/C:V:B_S: 0/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.127197265625,
+        "seqNumber": 17982,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.12744140625,
+        "seqNumber": 17983,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1279296875,
+        "seqNumber": 17984,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1307373046875,
+        "seqNumber": 17985,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1322021484375,
+        "seqNumber": 17986,
+        "line": "here1 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.133056640625,
+        "seqNumber": 17987,
+        "line": "here2 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1341552734375,
+        "seqNumber": 17988,
+        "line": "left buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.134521484375,
+        "seqNumber": 17989,
+        "line": "right buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1348876953125,
+        "seqNumber": 17990,
+        "line": "raw x: (l/r)5.34244/5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.13525390625,
+        "seqNumber": 17991,
+        "line": "raw y (l/r)-0.212996/-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.135498046875,
+        "seqNumber": 17992,
+        "line": "Good frames: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1357421875,
+        "seqNumber": 17993,
+        "line": "buffer contents :5.34244"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1365966796875,
+        "seqNumber": 17994,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1368408203125,
+        "seqNumber": 17995,
+        "line": "buffer contents :-0.212996"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1370849609375,
+        "seqNumber": 17996,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1373291015625,
+        "seqNumber": 17997,
+        "line": "buffer contents :-2.58803"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1376953125,
+        "seqNumber": 17998,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.138427734375,
+        "seqNumber": 17999,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1385498046875,
+        "seqNumber": 18000,
+        "line": "Good frames: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1390380859375,
+        "seqNumber": 18001,
+        "line": "buffer contents :5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1396484375,
+        "seqNumber": 18002,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.139892578125,
+        "seqNumber": 18003,
+        "line": "buffer contents :-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.140625,
+        "seqNumber": 18004,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1409912109375,
+        "seqNumber": 18005,
+        "line": "buffer contents :1.26345"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.141357421875,
+        "seqNumber": 18006,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1419677734375,
+        "seqNumber": 18007,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.142333984375,
+        "seqNumber": 18008,
+        "line": "loop number: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.142578125,
+        "seqNumber": 18009,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1427001953125,
+        "seqNumber": 18010,
+        "line": "I/C:V:B_S: 1/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.143310546875,
+        "seqNumber": 18011,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.144287109375,
+        "seqNumber": 18012,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1463623046875,
+        "seqNumber": 18013,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1466064453125,
+        "seqNumber": 18014,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.14697265625,
+        "seqNumber": 18015,
+        "line": "here1 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.148193359375,
+        "seqNumber": 18016,
+        "line": "here2 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1492919921875,
+        "seqNumber": 18017,
+        "line": "left buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.14990234375,
+        "seqNumber": 18018,
+        "line": "right buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1513671875,
+        "seqNumber": 18019,
+        "line": "raw x: (l/r)5.34244/5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.15185546875,
+        "seqNumber": 18020,
+        "line": "raw y (l/r)-0.212996/-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1522216796875,
+        "seqNumber": 18021,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1524658203125,
+        "seqNumber": 18022,
+        "line": "buffer contents :5.34244"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1536865234375,
+        "seqNumber": 18023,
+        "line": "buffer contents :5.34244"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.154296875,
+        "seqNumber": 18024,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1546630859375,
+        "seqNumber": 18025,
+        "line": "buffer contents :-0.212996"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.155029296875,
+        "seqNumber": 18026,
+        "line": "buffer contents :-0.212996"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1553955078125,
+        "seqNumber": 18027,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.156494140625,
+        "seqNumber": 18028,
+        "line": "buffer contents :-2.58803"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1571044921875,
+        "seqNumber": 18029,
+        "line": "buffer contents :-2.58803"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.158447265625,
+        "seqNumber": 18030,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1593017578125,
+        "seqNumber": 18031,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1611328125,
+        "seqNumber": 18032,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1632080078125,
+        "seqNumber": 18033,
+        "line": "buffer contents :5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.16357421875,
+        "seqNumber": 18034,
+        "line": "buffer contents :5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1646728515625,
+        "seqNumber": 18035,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1651611328125,
+        "seqNumber": 18036,
+        "line": "buffer contents :-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1654052734375,
+        "seqNumber": 18037,
+        "line": "buffer contents :-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.166015625,
+        "seqNumber": 18038,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.16650390625,
+        "seqNumber": 18039,
+        "line": "buffer contents :1.26345"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1673583984375,
+        "seqNumber": 18040,
+        "line": "buffer contents :1.26345"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1676025390625,
+        "seqNumber": 18041,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.167724609375,
+        "seqNumber": 18042,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.16796875,
+        "seqNumber": 18043,
+        "line": "loop number: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.168701171875,
+        "seqNumber": 18044,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1689453125,
+        "seqNumber": 18045,
+        "line": "I/C:V:B_S: 0/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1700439453125,
+        "seqNumber": 18046,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1710205078125,
+        "seqNumber": 18047,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.171875,
+        "seqNumber": 18048,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1727294921875,
+        "seqNumber": 18049,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.17333984375,
+        "seqNumber": 18050,
+        "line": "here1 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1754150390625,
+        "seqNumber": 18051,
+        "line": "here2 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1766357421875,
+        "seqNumber": 18052,
+        "line": "left buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1778564453125,
+        "seqNumber": 18053,
+        "line": "right buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.17822265625,
+        "seqNumber": 18054,
+        "line": "raw x: (l/r)5.34244/5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1788330078125,
+        "seqNumber": 18055,
+        "line": "raw y (l/r)-0.212996/-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.179443359375,
+        "seqNumber": 18056,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1817626953125,
+        "seqNumber": 18057,
+        "line": "buffer contents :5.34244"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1820068359375,
+        "seqNumber": 18058,
+        "line": "buffer contents :5.34244"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.18310546875,
+        "seqNumber": 18059,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.183349609375,
+        "seqNumber": 18060,
+        "line": "buffer contents :-0.212996"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1845703125,
+        "seqNumber": 18061,
+        "line": "buffer contents :-0.212996"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1849365234375,
+        "seqNumber": 18062,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.18505859375,
+        "seqNumber": 18063,
+        "line": "buffer contents :-2.58803"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.185302734375,
+        "seqNumber": 18064,
+        "line": "buffer contents :-2.58803"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.186279296875,
+        "seqNumber": 18065,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1864013671875,
+        "seqNumber": 18066,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1878662109375,
+        "seqNumber": 18067,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1885986328125,
+        "seqNumber": 18068,
+        "line": "buffer contents :5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.18896484375,
+        "seqNumber": 18069,
+        "line": "buffer contents :5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.189453125,
+        "seqNumber": 18070,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.189697265625,
+        "seqNumber": 18071,
+        "line": "buffer contents :-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.190673828125,
+        "seqNumber": 18072,
+        "line": "buffer contents :-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.191650390625,
+        "seqNumber": 18073,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.19189453125,
+        "seqNumber": 18074,
+        "line": "buffer contents :1.26345"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1920166015625,
+        "seqNumber": 18075,
+        "line": "buffer contents :1.26345"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1922607421875,
+        "seqNumber": 18076,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1968994140625,
+        "seqNumber": 18077,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1978759765625,
+        "seqNumber": 18078,
+        "line": "loop number: 3"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1983642578125,
+        "seqNumber": 18079,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.1986083984375,
+        "seqNumber": 18080,
+        "line": "I/C:V:B_S: 1/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.198974609375,
+        "seqNumber": 18081,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.19970703125,
+        "seqNumber": 18082,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2001953125,
+        "seqNumber": 18083,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.200439453125,
+        "seqNumber": 18084,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2047119140625,
+        "seqNumber": 18085,
+        "line": "here1 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.205078125,
+        "seqNumber": 18086,
+        "line": "here2 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2052001953125,
+        "seqNumber": 18087,
+        "line": "left buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2054443359375,
+        "seqNumber": 18088,
+        "line": "right buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2056884765625,
+        "seqNumber": 18089,
+        "line": "raw x: (l/r)5.34244/5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2059326171875,
+        "seqNumber": 18090,
+        "line": "raw y (l/r)-0.212996/-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.20654296875,
+        "seqNumber": 18091,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2073974609375,
+        "seqNumber": 18092,
+        "line": "buffer contents :5.34244"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2076416015625,
+        "seqNumber": 18093,
+        "line": "buffer contents :5.34244"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2091064453125,
+        "seqNumber": 18094,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.210693359375,
+        "seqNumber": 18095,
+        "line": "buffer contents :-0.212996"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2110595703125,
+        "seqNumber": 18096,
+        "line": "buffer contents :-0.212996"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.21142578125,
+        "seqNumber": 18097,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2119140625,
+        "seqNumber": 18098,
+        "line": "buffer contents :-2.58803"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2122802734375,
+        "seqNumber": 18099,
+        "line": "buffer contents :-2.58803"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2125244140625,
+        "seqNumber": 18100,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2186279296875,
+        "seqNumber": 18101,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2191162109375,
+        "seqNumber": 18102,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2193603515625,
+        "seqNumber": 18103,
+        "line": "buffer contents :5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.221435546875,
+        "seqNumber": 18104,
+        "line": "buffer contents :5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2216796875,
+        "seqNumber": 18105,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.224853515625,
+        "seqNumber": 18106,
+        "line": "buffer contents :-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2252197265625,
+        "seqNumber": 18107,
+        "line": "buffer contents :-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2254638671875,
+        "seqNumber": 18108,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2257080078125,
+        "seqNumber": 18109,
+        "line": "buffer contents :1.26345"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.22607421875,
+        "seqNumber": 18110,
+        "line": "buffer contents :1.26345"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.226806640625,
+        "seqNumber": 18111,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.227294921875,
+        "seqNumber": 18112,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2275390625,
+        "seqNumber": 18113,
+        "line": "loop number: 4"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2276611328125,
+        "seqNumber": 18114,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2279052734375,
+        "seqNumber": 18115,
+        "line": "I/C:V:B_S: 0/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.228515625,
+        "seqNumber": 18116,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.228759765625,
+        "seqNumber": 18117,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2288818359375,
+        "seqNumber": 18118,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2294921875,
+        "seqNumber": 18119,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2298583984375,
+        "seqNumber": 18120,
+        "line": "here1 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.230224609375,
+        "seqNumber": 18121,
+        "line": "here2 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.23046875,
+        "seqNumber": 18122,
+        "line": "left buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2369384765625,
+        "seqNumber": 18123,
+        "line": "right buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2374267578125,
+        "seqNumber": 18124,
+        "line": "raw x: (l/r)5.34244/5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.238525390625,
+        "seqNumber": 18125,
+        "line": "raw y (l/r)-0.212996/-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.23876953125,
+        "seqNumber": 18126,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.239013671875,
+        "seqNumber": 18127,
+        "line": "buffer contents :5.34244"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2393798828125,
+        "seqNumber": 18128,
+        "line": "buffer contents :5.34244"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.23974609375,
+        "seqNumber": 18129,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.240478515625,
+        "seqNumber": 18130,
+        "line": "buffer contents :-0.212996"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.24072265625,
+        "seqNumber": 18131,
+        "line": "buffer contents :-0.212996"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2425537109375,
+        "seqNumber": 18132,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2457275390625,
+        "seqNumber": 18133,
+        "line": "buffer contents :-2.58803"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.24609375,
+        "seqNumber": 18134,
+        "line": "buffer contents :-2.58803"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2464599609375,
+        "seqNumber": 18135,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2470703125,
+        "seqNumber": 18136,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.247314453125,
+        "seqNumber": 18137,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2474365234375,
+        "seqNumber": 18138,
+        "line": "buffer contents :5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.248291015625,
+        "seqNumber": 18139,
+        "line": "buffer contents :5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2491455078125,
+        "seqNumber": 18140,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.249755859375,
+        "seqNumber": 18141,
+        "line": "buffer contents :-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.25,
+        "seqNumber": 18142,
+        "line": "buffer contents :-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2501220703125,
+        "seqNumber": 18143,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2510986328125,
+        "seqNumber": 18144,
+        "line": "buffer contents :1.26345"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2515869140625,
+        "seqNumber": 18145,
+        "line": "buffer contents :1.26345"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.251708984375,
+        "seqNumber": 18146,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.251953125,
+        "seqNumber": 18147,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2579345703125,
+        "seqNumber": 18148,
+        "line": "loop number: 5"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.259765625,
+        "seqNumber": 18149,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.26025390625,
+        "seqNumber": 18150,
+        "line": "I/C:V:B_S: 1/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2606201171875,
+        "seqNumber": 18151,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2611083984375,
+        "seqNumber": 18152,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.26123046875,
+        "seqNumber": 18153,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.26171875,
+        "seqNumber": 18154,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.26416015625,
+        "seqNumber": 18155,
+        "line": "here1 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.264404296875,
+        "seqNumber": 18156,
+        "line": "here2 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2645263671875,
+        "seqNumber": 18157,
+        "line": "left buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2647705078125,
+        "seqNumber": 18158,
+        "line": "right buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2677001953125,
+        "seqNumber": 18159,
+        "line": "raw x: (l/r)5.34244/5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2679443359375,
+        "seqNumber": 18160,
+        "line": "raw y (l/r)-0.212996/-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2685546875,
+        "seqNumber": 18161,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2689208984375,
+        "seqNumber": 18162,
+        "line": "buffer contents :5.34244"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.269287109375,
+        "seqNumber": 18163,
+        "line": "buffer contents :5.34244"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.26953125,
+        "seqNumber": 18164,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.269775390625,
+        "seqNumber": 18165,
+        "line": "buffer contents :-0.212996"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2711181640625,
+        "seqNumber": 18166,
+        "line": "buffer contents :-0.212996"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.271728515625,
+        "seqNumber": 18167,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.27197265625,
+        "seqNumber": 18168,
+        "line": "buffer contents :-2.58803"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2723388671875,
+        "seqNumber": 18169,
+        "line": "buffer contents :-2.58803"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2789306640625,
+        "seqNumber": 18170,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.279296875,
+        "seqNumber": 18171,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.279541015625,
+        "seqNumber": 18172,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2799072265625,
+        "seqNumber": 18173,
+        "line": "buffer contents :5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2802734375,
+        "seqNumber": 18174,
+        "line": "buffer contents :5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.280517578125,
+        "seqNumber": 18175,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.281494140625,
+        "seqNumber": 18176,
+        "line": "buffer contents :-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.28173828125,
+        "seqNumber": 18177,
+        "line": "buffer contents :-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2818603515625,
+        "seqNumber": 18178,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2825927734375,
+        "seqNumber": 18179,
+        "line": "buffer contents :1.26345"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2828369140625,
+        "seqNumber": 18180,
+        "line": "buffer contents :1.26345"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.28564453125,
+        "seqNumber": 18181,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.285888671875,
+        "seqNumber": 18182,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.28759765625,
+        "seqNumber": 18183,
+        "line": "loop number: 6"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2900390625,
+        "seqNumber": 18184,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.29052734375,
+        "seqNumber": 18185,
+        "line": "I/C:V:B_S: 0/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.290771484375,
+        "seqNumber": 18186,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2913818359375,
+        "seqNumber": 18187,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2916259765625,
+        "seqNumber": 18188,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2918701171875,
+        "seqNumber": 18189,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2923583984375,
+        "seqNumber": 18190,
+        "line": "here1 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.2955322265625,
+        "seqNumber": 18191,
+        "line": "here2 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.296875,
+        "seqNumber": 18192,
+        "line": "left buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.297607421875,
+        "seqNumber": 18193,
+        "line": "right buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.298095703125,
+        "seqNumber": 18194,
+        "line": "raw x: (l/r)5.34244/5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.298583984375,
+        "seqNumber": 18195,
+        "line": "raw y (l/r)-0.212996/-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.30126953125,
+        "seqNumber": 18196,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3016357421875,
+        "seqNumber": 18197,
+        "line": "buffer contents :5.34244"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.30322265625,
+        "seqNumber": 18198,
+        "line": "buffer contents :5.34244"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.303955078125,
+        "seqNumber": 18199,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3046875,
+        "seqNumber": 18200,
+        "line": "buffer contents :-0.212996"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3050537109375,
+        "seqNumber": 18201,
+        "line": "buffer contents :-0.212996"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3052978515625,
+        "seqNumber": 18202,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.305419921875,
+        "seqNumber": 18203,
+        "line": "buffer contents :-2.58803"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.305908203125,
+        "seqNumber": 18204,
+        "line": "buffer contents :-2.58803"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3072509765625,
+        "seqNumber": 18205,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3076171875,
+        "seqNumber": 18206,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3077392578125,
+        "seqNumber": 18207,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3084716796875,
+        "seqNumber": 18208,
+        "line": "buffer contents :5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3087158203125,
+        "seqNumber": 18209,
+        "line": "buffer contents :5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3089599609375,
+        "seqNumber": 18210,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.309814453125,
+        "seqNumber": 18211,
+        "line": "buffer contents :-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.311767578125,
+        "seqNumber": 18212,
+        "line": "buffer contents :-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3121337890625,
+        "seqNumber": 18213,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.314208984375,
+        "seqNumber": 18214,
+        "line": "buffer contents :1.26345"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.315673828125,
+        "seqNumber": 18215,
+        "line": "buffer contents :1.26345"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.31640625,
+        "seqNumber": 18216,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.316650390625,
+        "seqNumber": 18217,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.31689453125,
+        "seqNumber": 18218,
+        "line": "loop number: 7"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3172607421875,
+        "seqNumber": 18219,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3173828125,
+        "seqNumber": 18220,
+        "line": "I/C:V:B_S: 1/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3175048828125,
+        "seqNumber": 18221,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3184814453125,
+        "seqNumber": 18222,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3187255859375,
+        "seqNumber": 18223,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3189697265625,
+        "seqNumber": 18224,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3192138671875,
+        "seqNumber": 18225,
+        "line": "here1 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3199462890625,
+        "seqNumber": 18226,
+        "line": "here2 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.320068359375,
+        "seqNumber": 18227,
+        "line": "left buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3204345703125,
+        "seqNumber": 18228,
+        "line": "right buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.32177734375,
+        "seqNumber": 18229,
+        "line": "raw x: (l/r)5.34244/5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.322021484375,
+        "seqNumber": 18230,
+        "line": "raw y (l/r)-0.212996/-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3245849609375,
+        "seqNumber": 18231,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3248291015625,
+        "seqNumber": 18232,
+        "line": "buffer contents :5.34244"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3250732421875,
+        "seqNumber": 18233,
+        "line": "buffer contents :5.34244"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3251953125,
+        "seqNumber": 18234,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3253173828125,
+        "seqNumber": 18235,
+        "line": "buffer contents :-0.212996"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3258056640625,
+        "seqNumber": 18236,
+        "line": "buffer contents :-0.212996"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3262939453125,
+        "seqNumber": 18237,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3265380859375,
+        "seqNumber": 18238,
+        "line": "buffer contents :-2.58803"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3282470703125,
+        "seqNumber": 18239,
+        "line": "buffer contents :-2.58803"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3284912109375,
+        "seqNumber": 18240,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.32861328125,
+        "seqNumber": 18241,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3292236328125,
+        "seqNumber": 18242,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3294677734375,
+        "seqNumber": 18243,
+        "line": "buffer contents :5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3309326171875,
+        "seqNumber": 18244,
+        "line": "buffer contents :5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.33203125,
+        "seqNumber": 18245,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.33544921875,
+        "seqNumber": 18246,
+        "line": "buffer contents :-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3360595703125,
+        "seqNumber": 18247,
+        "line": "buffer contents :-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3370361328125,
+        "seqNumber": 18248,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3382568359375,
+        "seqNumber": 18249,
+        "line": "buffer contents :1.26345"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3389892578125,
+        "seqNumber": 18250,
+        "line": "buffer contents :1.26345"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3399658203125,
+        "seqNumber": 18251,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.34033203125,
+        "seqNumber": 18252,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3404541015625,
+        "seqNumber": 18253,
+        "line": "loop number: 8"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3406982421875,
+        "seqNumber": 18254,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.341796875,
+        "seqNumber": 18255,
+        "line": "I/C:V:B_S: 0/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3419189453125,
+        "seqNumber": 18256,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3421630859375,
+        "seqNumber": 18257,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.342529296875,
+        "seqNumber": 18258,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3436279296875,
+        "seqNumber": 18259,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.344482421875,
+        "seqNumber": 18260,
+        "line": "here1 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.345947265625,
+        "seqNumber": 18261,
+        "line": "here2 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.34619140625,
+        "seqNumber": 18262,
+        "line": "left buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3466796875,
+        "seqNumber": 18263,
+        "line": "right buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.347412109375,
+        "seqNumber": 18264,
+        "line": "raw x: (l/r)5.32883/5.39985"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.34765625,
+        "seqNumber": 18265,
+        "line": "raw y (l/r)-0.200569/-0.398608"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3482666015625,
+        "seqNumber": 18266,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3487548828125,
+        "seqNumber": 18267,
+        "line": "buffer contents :5.32883"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3514404296875,
+        "seqNumber": 18268,
+        "line": "buffer contents :5.34244"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3516845703125,
+        "seqNumber": 18269,
+        "line": "stdev: 0.00680601"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3519287109375,
+        "seqNumber": 18270,
+        "line": "buffer contents :-0.200569"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3531494140625,
+        "seqNumber": 18271,
+        "line": "buffer contents :-0.212996"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.354248046875,
+        "seqNumber": 18272,
+        "line": "stdev: 0.00621345"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.357421875,
+        "seqNumber": 18273,
+        "line": "buffer contents :-3.01524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3577880859375,
+        "seqNumber": 18274,
+        "line": "buffer contents :-2.58803"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3580322265625,
+        "seqNumber": 18275,
+        "line": "stdev: 0.213605"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3582763671875,
+        "seqNumber": 18276,
+        "line": "Std deviation good "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3592529296875,
+        "seqNumber": 18277,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3597412109375,
+        "seqNumber": 18278,
+        "line": "buffer contents :5.39985"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.361572265625,
+        "seqNumber": 18279,
+        "line": "buffer contents :5.40949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.363037109375,
+        "seqNumber": 18280,
+        "line": "stdev: 0.00482346"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.36328125,
+        "seqNumber": 18281,
+        "line": "buffer contents :-0.398608"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.363525390625,
+        "seqNumber": 18282,
+        "line": "buffer contents :-0.391524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.364013671875,
+        "seqNumber": 18283,
+        "line": "stdev: 0.00354163"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3642578125,
+        "seqNumber": 18284,
+        "line": "buffer contents :1.50582"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3643798828125,
+        "seqNumber": 18285,
+        "line": "buffer contents :1.26345"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3646240234375,
+        "seqNumber": 18286,
+        "line": "stdev: 0.121183"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3648681640625,
+        "seqNumber": 18287,
+        "line": "Std deviation good "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3651123046875,
+        "seqNumber": 18288,
+        "line": "X_MEAN: 5.37015"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.365966796875,
+        "seqNumber": 18289,
+        "line": "Y_MEAN: -0.300924"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.366455078125,
+        "seqNumber": 18290,
+        "line": "ROT_MEAN: -0.7085"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.366943359375,
+        "seqNumber": 18291,
+        "line": "navX-Sensor Software Yaw Reset completed."
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3673095703125,
+        "seqNumber": 18292,
+        "line": "Position reset"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.36767578125,
+        "seqNumber": 18293,
+        "line": "ESC[48;5;{196}mPose updated to (x/y/z): 5.37015 / -0.300924 / -0.7085"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3697509765625,
+        "seqNumber": 18294,
+        "line": "loop number: 9"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3699951171875,
+        "seqNumber": 18295,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.370361328125,
+        "seqNumber": 18296,
+        "line": "I/C:V:B_S: 1/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3704833984375,
+        "seqNumber": 18297,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.373291015625,
+        "seqNumber": 18298,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.37451171875,
+        "seqNumber": 18299,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.377685546875,
+        "seqNumber": 18300,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3779296875,
+        "seqNumber": 18301,
+        "line": "here1 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3782958984375,
+        "seqNumber": 18302,
+        "line": "here2 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.38037109375,
+        "seqNumber": 18303,
+        "line": "left buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3804931640625,
+        "seqNumber": 18304,
+        "line": "right buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3807373046875,
+        "seqNumber": 18305,
+        "line": "raw x: (l/r)5.32883/5.39985"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3829345703125,
+        "seqNumber": 18306,
+        "line": "raw y (l/r)-0.200569/-0.398608"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3834228515625,
+        "seqNumber": 18307,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3837890625,
+        "seqNumber": 18308,
+        "line": "buffer contents :5.32883"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3839111328125,
+        "seqNumber": 18309,
+        "line": "buffer contents :5.32883"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.385009765625,
+        "seqNumber": 18310,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.385498046875,
+        "seqNumber": 18311,
+        "line": "buffer contents :-0.200569"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3856201171875,
+        "seqNumber": 18312,
+        "line": "buffer contents :-0.200569"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.38623046875,
+        "seqNumber": 18313,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.386474609375,
+        "seqNumber": 18314,
+        "line": "buffer contents :-3.01524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3865966796875,
+        "seqNumber": 18315,
+        "line": "buffer contents :-3.01524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.386962890625,
+        "seqNumber": 18316,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3875732421875,
+        "seqNumber": 18317,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3883056640625,
+        "seqNumber": 18318,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3887939453125,
+        "seqNumber": 18319,
+        "line": "buffer contents :5.39985"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.388916015625,
+        "seqNumber": 18320,
+        "line": "buffer contents :5.39985"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3902587890625,
+        "seqNumber": 18321,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3905029296875,
+        "seqNumber": 18322,
+        "line": "buffer contents :-0.398608"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3909912109375,
+        "seqNumber": 18323,
+        "line": "buffer contents :-0.398608"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3922119140625,
+        "seqNumber": 18324,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3955078125,
+        "seqNumber": 18325,
+        "line": "buffer contents :1.50582"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.39599609375,
+        "seqNumber": 18326,
+        "line": "buffer contents :1.50582"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.39697265625,
+        "seqNumber": 18327,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3973388671875,
+        "seqNumber": 18328,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3975830078125,
+        "seqNumber": 18329,
+        "line": "loop number: 10"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.3984375,
+        "seqNumber": 18330,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4024658203125,
+        "seqNumber": 18331,
+        "line": "I/C:V:B_S: 0/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.40283203125,
+        "seqNumber": 18332,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.404296875,
+        "seqNumber": 18333,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.404541015625,
+        "seqNumber": 18334,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.40478515625,
+        "seqNumber": 18335,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.405029296875,
+        "seqNumber": 18336,
+        "line": "here1 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4061279296875,
+        "seqNumber": 18337,
+        "line": "here2 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4071044921875,
+        "seqNumber": 18338,
+        "line": "left buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4073486328125,
+        "seqNumber": 18339,
+        "line": "right buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4075927734375,
+        "seqNumber": 18340,
+        "line": "raw x: (l/r)5.34965/5.40833"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4080810546875,
+        "seqNumber": 18341,
+        "line": "raw y (l/r)-0.228659/-0.393542"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.408447265625,
+        "seqNumber": 18342,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.40869140625,
+        "seqNumber": 18343,
+        "line": "buffer contents :5.34965"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4088134765625,
+        "seqNumber": 18344,
+        "line": "buffer contents :5.32883"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4090576171875,
+        "seqNumber": 18345,
+        "line": "stdev: 0.0104109"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.409912109375,
+        "seqNumber": 18346,
+        "line": "buffer contents :-0.228659"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.41162109375,
+        "seqNumber": 18347,
+        "line": "buffer contents :-0.200569"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4119873046875,
+        "seqNumber": 18348,
+        "line": "stdev: 0.0140452"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.412353515625,
+        "seqNumber": 18349,
+        "line": "buffer contents :-2.12377"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4134521484375,
+        "seqNumber": 18350,
+        "line": "buffer contents :-3.01524"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.413818359375,
+        "seqNumber": 18351,
+        "line": "stdev: 0.445738"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4144287109375,
+        "seqNumber": 18352,
+        "line": "Std deviation good "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.41455078125,
+        "seqNumber": 18353,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.41796875,
+        "seqNumber": 18354,
+        "line": "buffer contents :5.40833"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4183349609375,
+        "seqNumber": 18355,
+        "line": "buffer contents :5.39985"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4185791015625,
+        "seqNumber": 18356,
+        "line": "stdev: 0.00423907"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4188232421875,
+        "seqNumber": 18357,
+        "line": "buffer contents :-0.393542"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4189453125,
+        "seqNumber": 18358,
+        "line": "buffer contents :-0.398608"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.419677734375,
+        "seqNumber": 18359,
+        "line": "stdev: 0.00253302"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.419921875,
+        "seqNumber": 18360,
+        "line": "buffer contents :1.30032"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4208984375,
+        "seqNumber": 18361,
+        "line": "buffer contents :1.50582"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4215087890625,
+        "seqNumber": 18362,
+        "line": "stdev: 0.102752"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4246826171875,
+        "seqNumber": 18363,
+        "line": "Std deviation good "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.425048828125,
+        "seqNumber": 18364,
+        "line": "X_MEAN: 5.37166"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4251708984375,
+        "seqNumber": 18365,
+        "line": "Y_MEAN: -0.305344"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4254150390625,
+        "seqNumber": 18366,
+        "line": "ROT_MEAN: -0.583219"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4256591796875,
+        "seqNumber": 18367,
+        "line": "Position reset"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.426513671875,
+        "seqNumber": 18368,
+        "line": "ESC[48;5;{196}mPose updated to (x/y/z): 5.37166 / -0.305344 / -0.583219"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4285888671875,
+        "seqNumber": 18369,
+        "line": "loop number: 11"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4293212890625,
+        "seqNumber": 18370,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4298095703125,
+        "seqNumber": 18371,
+        "line": "I/C:V:B_S: 1/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.430419921875,
+        "seqNumber": 18372,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4306640625,
+        "seqNumber": 18373,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.430908203125,
+        "seqNumber": 18374,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4312744140625,
+        "seqNumber": 18375,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.432373046875,
+        "seqNumber": 18376,
+        "line": "here1 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4342041015625,
+        "seqNumber": 18377,
+        "line": "here2 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4344482421875,
+        "seqNumber": 18378,
+        "line": "left buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4346923828125,
+        "seqNumber": 18379,
+        "line": "right buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.43505859375,
+        "seqNumber": 18380,
+        "line": "raw x: (l/r)5.36859/5.40802"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4354248046875,
+        "seqNumber": 18381,
+        "line": "raw y (l/r)-0.262613/-0.393475"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4356689453125,
+        "seqNumber": 18382,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.435791015625,
+        "seqNumber": 18383,
+        "line": "buffer contents :5.34965"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.436767578125,
+        "seqNumber": 18384,
+        "line": "buffer contents :5.36859"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.43701171875,
+        "seqNumber": 18385,
+        "line": "stdev: 0.00947097"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.437255859375,
+        "seqNumber": 18386,
+        "line": "buffer contents :-0.228659"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4373779296875,
+        "seqNumber": 18387,
+        "line": "buffer contents :-0.262613"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.438232421875,
+        "seqNumber": 18388,
+        "line": "stdev: 0.0169771"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4384765625,
+        "seqNumber": 18389,
+        "line": "buffer contents :-2.12377"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4385986328125,
+        "seqNumber": 18390,
+        "line": "buffer contents :-1.00936"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4405517578125,
+        "seqNumber": 18391,
+        "line": "stdev: 0.557202"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.442626953125,
+        "seqNumber": 18392,
+        "line": "Std deviation good "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.44287109375,
+        "seqNumber": 18393,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.443359375,
+        "seqNumber": 18394,
+        "line": "buffer contents :5.40833"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.444580078125,
+        "seqNumber": 18395,
+        "line": "buffer contents :5.40802"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.445068359375,
+        "seqNumber": 18396,
+        "line": "stdev: 0.0001513"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4453125,
+        "seqNumber": 18397,
+        "line": "buffer contents :-0.393542"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4454345703125,
+        "seqNumber": 18398,
+        "line": "buffer contents :-0.393475"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.44580078125,
+        "seqNumber": 18399,
+        "line": "stdev: 3.3281e-05"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4482421875,
+        "seqNumber": 18400,
+        "line": "buffer contents :1.30032"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4486083984375,
+        "seqNumber": 18401,
+        "line": "buffer contents :1.30351"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4500732421875,
+        "seqNumber": 18402,
+        "line": "stdev: 0.00159744"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4520263671875,
+        "seqNumber": 18403,
+        "line": "Std deviation good "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.454833984375,
+        "seqNumber": 18404,
+        "line": "X_MEAN: 5.38365"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.455078125,
+        "seqNumber": 18405,
+        "line": "Y_MEAN: -0.319572"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.455322265625,
+        "seqNumber": 18406,
+        "line": "ROT_MEAN: -0.132326"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.45556640625,
+        "seqNumber": 18407,
+        "line": "Position reset"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.455810546875,
+        "seqNumber": 18408,
+        "line": "ESC[48;5;{196}mPose updated to (x/y/z): 5.38365 / -0.319572 / -0.132326"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4566650390625,
+        "seqNumber": 18409,
+        "line": "loop number: 12"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.45751953125,
+        "seqNumber": 18410,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4578857421875,
+        "seqNumber": 18411,
+        "line": "I/C:V:B_S: 0/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4580078125,
+        "seqNumber": 18412,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.45849609375,
+        "seqNumber": 18413,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.458740234375,
+        "seqNumber": 18414,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.458984375,
+        "seqNumber": 18415,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4593505859375,
+        "seqNumber": 18416,
+        "line": "here1 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4600830078125,
+        "seqNumber": 18417,
+        "line": "here2 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4608154296875,
+        "seqNumber": 18418,
+        "line": "left buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4639892578125,
+        "seqNumber": 18419,
+        "line": "right buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4644775390625,
+        "seqNumber": 18420,
+        "line": "raw x: (l/r)5.36859/5.39697"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4647216796875,
+        "seqNumber": 18421,
+        "line": "raw y (l/r)-0.262613/-0.408244"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4658203125,
+        "seqNumber": 18422,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4674072265625,
+        "seqNumber": 18423,
+        "line": "buffer contents :5.36859"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4678955078125,
+        "seqNumber": 18424,
+        "line": "buffer contents :5.36859"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4686279296875,
+        "seqNumber": 18425,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4688720703125,
+        "seqNumber": 18426,
+        "line": "buffer contents :-0.262613"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4693603515625,
+        "seqNumber": 18427,
+        "line": "buffer contents :-0.262613"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4720458984375,
+        "seqNumber": 18428,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4755859375,
+        "seqNumber": 18429,
+        "line": "buffer contents :-1.00936"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4759521484375,
+        "seqNumber": 18430,
+        "line": "buffer contents :-1.00936"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4765625,
+        "seqNumber": 18431,
+        "line": "stdev: 0"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.476806640625,
+        "seqNumber": 18432,
+        "line": "std dev bad"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.47705078125,
+        "seqNumber": 18433,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.477294921875,
+        "seqNumber": 18434,
+        "line": "buffer contents :5.39697"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.478271484375,
+        "seqNumber": 18435,
+        "line": "buffer contents :5.40802"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4783935546875,
+        "seqNumber": 18436,
+        "line": "stdev: 0.00552684"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.47900390625,
+        "seqNumber": 18437,
+        "line": "buffer contents :-0.408244"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4793701171875,
+        "seqNumber": 18438,
+        "line": "buffer contents :-0.393475"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4796142578125,
+        "seqNumber": 18439,
+        "line": "stdev: 0.00738449"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4798583984375,
+        "seqNumber": 18440,
+        "line": "buffer contents :1.74913"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4803466796875,
+        "seqNumber": 18441,
+        "line": "buffer contents :1.30351"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4805908203125,
+        "seqNumber": 18442,
+        "line": "stdev: 0.222808"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4810791015625,
+        "seqNumber": 18443,
+        "line": "Std deviation good "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.48193359375,
+        "seqNumber": 18444,
+        "line": "Position reset"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4833984375,
+        "seqNumber": 18445,
+        "line": "ESC[48;5;{196}mPose updated to (x/y/z): 5.4025 / -0.400859 / 1.52632"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.483642578125,
+        "seqNumber": 18446,
+        "line": "loop number: 13"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.48388671875,
+        "seqNumber": 18447,
+        "line": "pose loop "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.484375,
+        "seqNumber": 18448,
+        "line": "I/C:V:B_S: 1/2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.484619140625,
+        "seqNumber": 18449,
+        "line": "rtv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4847412109375,
+        "seqNumber": 18450,
+        "line": "ltv: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4852294921875,
+        "seqNumber": 18451,
+        "line": "here0 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.485595703125,
+        "seqNumber": 18452,
+        "line": "here"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4869384765625,
+        "seqNumber": 18453,
+        "line": "here1 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4871826171875,
+        "seqNumber": 18454,
+        "line": "here2 "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4873046875,
+        "seqNumber": 18455,
+        "line": "left buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.489990234375,
+        "seqNumber": 18456,
+        "line": "right buffer: 1"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4906005859375,
+        "seqNumber": 18457,
+        "line": "raw x: (l/r)5.22634/5.41243"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4910888671875,
+        "seqNumber": 18458,
+        "line": "raw y (l/r)0.411949/-0.396895"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.491943359375,
+        "seqNumber": 18459,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4947509765625,
+        "seqNumber": 18460,
+        "line": "buffer contents :5.36859"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.49658203125,
+        "seqNumber": 18461,
+        "line": "buffer contents :5.22634"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.4970703125,
+        "seqNumber": 18462,
+        "line": "stdev: 0.071126"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.497314453125,
+        "seqNumber": 18463,
+        "line": "buffer contents :-0.262613"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.499267578125,
+        "seqNumber": 18464,
+        "line": "buffer contents :0.411949"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.49951171875,
+        "seqNumber": 18465,
+        "line": "stdev: 0.337281"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.499755859375,
+        "seqNumber": 18466,
+        "line": "buffer contents :-1.00936"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.500244140625,
+        "seqNumber": 18467,
+        "line": "buffer contents :-20.7688"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.50048828125,
+        "seqNumber": 18468,
+        "line": "stdev: 9.87973"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.5006103515625,
+        "seqNumber": 18469,
+        "line": "Std deviation good "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.5023193359375,
+        "seqNumber": 18470,
+        "line": "Good frames: 2"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.502685546875,
+        "seqNumber": 18471,
+        "line": "buffer contents :5.39697"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.503662109375,
+        "seqNumber": 18472,
+        "line": "buffer contents :5.41243"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.50390625,
+        "seqNumber": 18473,
+        "line": "stdev: 0.00772936"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.504150390625,
+        "seqNumber": 18474,
+        "line": "buffer contents :-0.408244"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.5045166015625,
+        "seqNumber": 18475,
+        "line": "buffer contents :-0.396895"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.5052490234375,
+        "seqNumber": 18476,
+        "line": "stdev: 0.00567435"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.505615234375,
+        "seqNumber": 18477,
+        "line": "buffer contents :1.74913"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.505859375,
+        "seqNumber": 18478,
+        "line": "buffer contents :1.39001"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.50634765625,
+        "seqNumber": 18479,
+        "line": "stdev: 0.179561"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.5067138671875,
+        "seqNumber": 18480,
+        "line": "Std deviation good "
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.5069580078125,
+        "seqNumber": 18481,
+        "line": "X_MEAN: 5.35108"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.507568359375,
+        "seqNumber": 18482,
+        "line": "Y_MEAN: -0.163951"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.5079345703125,
+        "seqNumber": 18483,
+        "line": "ROT_MEAN: -4.65977"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.5081787109375,
+        "seqNumber": 18484,
+        "line": "Position reset"
+    },
+    {
+        "messageType": 2,
+        "timestamp": 26.5091552734375,
+        "seqNumber": 18485,
+        "line": "ESC[48;5;{196}mPose updated to (x/y/z): 5.35108 / -0.163951 / -4.65977"
+    }
+]
