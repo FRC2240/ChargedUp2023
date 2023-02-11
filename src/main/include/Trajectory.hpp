@@ -21,14 +21,28 @@ namespace Trajectory
     /*                  Public Function Declarations                  */
     /******************************************************************/
     enum HEIGHT {HIGH, MED, GROUND};
+    enum BIG_TABLE
+        {
+            // Copyright Westly Miller, 2023.
+            LEFT_1,
+            LEFT_2,
+            LEFT_3,
+
+            CENTER_1,
+            CENTER_2,
+            CENTER_3,
+
+            RIGHT_1,
+            RIGHT_2,
+            RIGHT_3
+    };
     enum LCR {LEFT, CENTER, /*"co-op"*/ RIGHT};
     enum PIECE {CONE, CUBE}; //"cube"
 
     struct Target
     {
         HEIGHT height;
-        LCR grid;
-        LCR node;
+        BIG_TABLE table;
         PIECE piece;
     };
 

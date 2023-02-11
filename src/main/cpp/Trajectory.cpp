@@ -45,41 +45,46 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::Target tg
             ret.desired_x = CONSTANTS::TRAJECTORY::GROUND_X;
             break;
         }
-    switch (tgt.grid)
+
+    switch (tgt.table)
         {
-        case LEFT:
-            ret.desired_y = CONSTANTS::TRAJECTORY::L_GRID_LEFTMOST;
+        case LEFT_1:
+            ret.desired_y = CONSTANTS::TRAJECTORY::Y::L1;
             break;
-        case CENTER:
-            ret.desired_y = CONSTANTS::TRAJECTORY::C_GRID_LEFTMOST;
+
+        case LEFT_2:
+            ret.desired_y = CONSTANTS::TRAJECTORY::Y::L2;
             break;
-        case RIGHT:
-            ret.desired_y = CONSTANTS::TRAJECTORY::R_GRID_LEFTMOST;
+
+        case LEFT_3:
+            ret.desired_y = CONSTANTS::TRAJECTORY::Y::L3;
+            break;
+
+        case CENTER_1:
+            ret.desired_y = CONSTANTS::TRAJECTORY::Y::C1;
+            break;
+
+        case CENTER_2:
+            ret.desired_y = CONSTANTS::TRAJECTORY::Y::C2;
+            break;
+
+        case CENTER_3:
+            ret.desired_y = CONSTANTS::TRAJECTORY::Y::C3;
+            break;
+
+        case RIGHT_1:
+            ret.desired_y = CONSTANTS::TRAJECTORY::Y::R1;
+            break;
+
+        case RIGHT_2:
+            ret.desired_y = CONSTANTS::TRAJECTORY::Y::R2;
+            break;
+
+        case RIGHT_3:
+            ret.desired_y = CONSTANTS::TRAJECTORY::Y::R3;
             break;
         }
 
-    switch (tgt.node)
-        {
-        case LEFT:
-            // Do nothing, already alligned
-            break;
-        case CENTER:
-            ret.desired_y += CONSTANTS::TRAJECTORY::C_NODE_OFFSET;
-            break;
-        case RIGHT:
-            ret.desired_y += CONSTANTS::TRAJECTORY::R_NODE_OFFSET;
-            break;
-        }
-    if (tgt.grid == LEFT && tgt.node == LEFT)
-        {
-            ret.desired_y = CONSTANTS::TRAJECTORY::FAR_L_Y_OVERIDE;
-        }
-
-    if (tgt.grid == RIGHT && tgt.node == RIGHT)
-        {
-
-            ret.desired_y = CONSTANTS::TRAJECTORY::FAR_R_Y_OVERIDE;
-        }
     frc::Pose2d current_pose = Odometry::getPose();
     ret.desired_head = 0_deg;
     ret.desired_rot = 0_deg;

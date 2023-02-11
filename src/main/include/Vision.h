@@ -1,5 +1,4 @@
-#ifndef VISION_H_
-#define VISION_H_
+#pragma once
 
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableInstance.h>
@@ -82,4 +81,3 @@ private:
 
 
 };
-#endif

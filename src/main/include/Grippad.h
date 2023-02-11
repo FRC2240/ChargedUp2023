@@ -3,31 +3,28 @@
 
 #include <frc/Compressor.h>
 #include <frc/Solenoid.h>
-#include "Constants.h"
+//#include "Constants.h"
 
 class Grippad
 {
 
  public:
 
-         Grippad(){};
+  Grippad(){};
 
-         ~Grippad(){};
+  ~Grippad(){};
 
-         void deploy();
+  void deploy();
 
-         void retract();
+  void retract();
 
+private:
 
- private:
+  // frc::Compressor phCompressor{1, frc::PneumaticsModuleType::REVPH};
 
-        // frc::Compressor phCompressor{1, frc::PneumaticsModuleType::REVPH};
-
-        //Grippad has four pistons operating on one solenoid
-         frc::Solenoid m_grippad_pistons{frc::PneumaticsModuleType::REVPH,
-             CONSTANTS::GRIPPAD::GRIPPAD_CHANNEL};
-
-        
+  //Grippad has four pistons operating on one solenoid
+ // frc::Solenoid m_grippad_pistons{frc::PneumaticsModuleType::REVPH,
+   //   CONSTANTS::GRIPPAD::GRIPPAD_CHANNEL};
 
 };
 #endif // GRIPAD_H_

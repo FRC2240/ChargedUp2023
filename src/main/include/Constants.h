@@ -1,6 +1,5 @@
-#ifndef CONSTANTS_H_
-#define CONSTANTS_H_
 #pragma once
+
 #include <units/length.h>
 #include <units/angle.h>
 #include <frc/DriverStation.h>
@@ -12,12 +11,25 @@ namespace CONSTANTS
   //SLOWS DOWN EVERYTHING & MAY CAUSE WATCHDOG EXEPTIONS.
   namespace COLORS
   {
-    constexpr char GREEN[] = "ESC[48;5;{46}m";
-    constexpr char RED[] = "ESC[48;5;{196}m";
-    constexpr char YELLOW[] = "ESC[48;5;{226}m";
-    constexpr char PURPLE[] = "ESC[48;5;{129}m";
-    //TODO: Put ANSI escape codes here as std::string
-    
+
+    units::meter_t HIGH_X;
+    units::meter_t MID_X;
+    units::meter_t GROUND_X;
+
+    namespace Y
+    {
+      units::meter_t L1;
+      units::meter_t L2;
+      units::meter_t L3;
+
+      units::meter_t C1;
+      units::meter_t C2;
+      units::meter_t C3;
+
+      units::meter_t R1;
+      units::meter_t R2;
+      units::meter_t R3;
+    }
   }
   namespace GRIPPAD
   {
@@ -86,4 +98,3 @@ namespace CONSTANTS
 
   }
 }
-#endif // CONSTANTS_H_

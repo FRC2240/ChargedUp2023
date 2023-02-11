@@ -1,16 +1,5 @@
 #include "Robot.hpp"
-#include "Drivetrain.hpp"
-#include "RobotState.hpp"
-#include "ngr.hpp"
-#include "Odometry.hpp"
-#include "Trajectory.hpp"
 
-
-#include <frc/MathUtil.h>
-#include <iostream>
-#include <frc/smartdashboard/SmartDashboard.h>
-#include <frc/smartdashboard/SendableChooser.h>
-#include <fmt/format.h>
 
 /******************************************************************/
 /*                        Private Variables                       */
@@ -36,6 +25,33 @@ static auto field_centric = true;
 // Needed to flash on/off temp warnings on SmartDashboard/ShuffleBoard
 //static bool drivers_flashing_red = false;
 //static bool turners_flashing_red = false;
+
+void Robot::RobotInit()
+{
+    //https://www.w3schools.com/cpp/cpp_conditions_shorthand.asp
+    // Blue : Red
+    frc::DriverStation::Alliance alliance = frc::DriverStation::GetAlliance();
+    CONSTANTS::TRAJECTORY::HIGH_X = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
+    CONSTANTS::TRAJECTORY::MID_X = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
+    CONSTANTS::TRAJECTORY::GROUND_X = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
+
+    // TODO: POSITIONS
+    CONSTANTS::TRAJECTORY::Y::L1 = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
+    CONSTANTS::TRAJECTORY::Y::L2 = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
+    CONSTANTS::TRAJECTORY::Y::L3 = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
+
+    CONSTANTS::TRAJECTORY::Y::C1 = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
+    CONSTANTS::TRAJECTORY::Y::C2 = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
+    CONSTANTS::TRAJECTORY::Y::C3 = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
+
+    CONSTANTS::TRAJECTORY::Y::R1 = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
+    CONSTANTS::TRAJECTORY::Y::R2 = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
+    CONSTANTS::TRAJECTORY::Y::R3 = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
+
+  Odometry::putField2d();
+  std::cout << "RobotInit done \n";
+}
+
 
 void buttonManager()
 {

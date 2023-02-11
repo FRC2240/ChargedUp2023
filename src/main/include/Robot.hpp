@@ -1,5 +1,20 @@
 #pragma once
 
+#include "Vision.h"
+#include "Buttons.h"
+#include "Dash.h"
+#include "Grabber.h"
+#include "Grippad.h"
+#include "Candle.h"
+#include "Wrist.h"
+#include "Arm.h"
+#include "Constants.h"
+#include "Drivetrain.hpp"
+#include "RobotState.hpp"
+#include "ngr.hpp"
+#include "Odometry.hpp"
+#include "Trajectory.hpp"
+
 #include <frc/TimedRobot.h>
 #include <units/velocity.h>
 #include <units/length.h>
@@ -10,19 +25,13 @@
 #include <frc/Filesystem.h>
 #include <frc/trajectory/TrajectoryUtil.h>
 #include <wpi/fs.h>
-#include "Vision.h"
-
 // more libraries more better
 #include <frc/smartdashboard/SendableChooser.h>
 #include "frc/smartdashboard/SmartDashboard.h"
 #include <frc/trajectory/TrajectoryGenerator.h>
-#include "Buttons.h"
-#include "Dash.h"
-#include "Grabber.h"
-#include "Grippad.h"
-#include "Candle.h"
-#include "Wrist.h"
-#include "Arm.h"
+#include <frc/MathUtil.h>
+#include <iostream>
+#include <fmt/format.h>
 
 
 
