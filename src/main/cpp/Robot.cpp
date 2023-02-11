@@ -153,7 +153,8 @@ void Robot::RobotPeriodic()
   //   m_wrist.Follow_Flare(m_arm.position);
   // }
   // else {
-  //   m_wrist.Follow(m_arm.position);
+  //std::cout << m_arm.position << std::endl;
+  m_wrist.Follow(m_arm.position);
   // }
   m_arm.Read_Position();
 }
@@ -240,16 +241,19 @@ void Robot::TestInit()
 void Robot::TestPeriodic()
 {
 
-  if (BUTTON::ARM::ARM_UP()){
-    m_arm.Up();
-  }
-  else if (BUTTON::ARM::ARM_DOWN()){
-    m_arm.Down();
-  }
-  else {
-    m_arm.Stop();
-  }
+  m_arm.arm_logic(BUTTON::ARM::ARM_STORED(), BUTTON::ARM::ARM_LOW(), BUTTON::ARM::ARM_MID(), BUTTON::ARM::ARM_HP(), BUTTON::ARM::ARM_HIGH(), BUTTON::ARM::ARM_PICKUP());
 
+  if (m_grabber.grabberToggle == false && BUTTON::GRABBER::GRABBER_TOGGLE())
+    {
+      m_grabber.In();
+      m_grabber.grabberToggle = true;
+    }
+  else if (m_grabber.grabberToggle == true && BUTTON::GRABBER::GRABBER_TOGGLE())
+    {
+      m_grabber.Out();
+      m_grabber.grabberToggle = false;
+    }
+    
   m_arm.Test();
   m_wrist.Test();
 }

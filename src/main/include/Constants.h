@@ -11,15 +11,15 @@ namespace CONSTANTS
   namespace WRIST
   {
     constexpr int WRIST_MOTOR_ID = 1;
-    constexpr double WRIST_ENCODER_OFFSET = 0.709833;
+    constexpr double WRIST_ENCODER_OFFSET = 0.682;
     constexpr double WRIST_FLARE_OFFSET = 0.1;
   }
 
   namespace ARM
   {
-    constexpr int RIGHT_ARM_MOTOR_ID = 2;
-    constexpr int LEFT_ARM_MOTOR_ID = 3;
-    constexpr double ARM_ENCODER_OFFSET = 106.807;
+    constexpr int RIGHT_ARM_MOTOR_ID = 3;
+    constexpr int LEFT_ARM_MOTOR_ID = 2;
+    constexpr double ARM_ENCODER_OFFSET = -112.0;
     constexpr double ARM_FLARE_HIGH = -60;
     constexpr double ARM_FLARE_LOW = -70;
     constexpr int ARM_CANCODER_ID = 1;
@@ -40,11 +40,12 @@ namespace CONSTANTS
 
     namespace MOTORPOSITIONS
     {
-      constexpr int STORED = 0.0;
-      constexpr int LOW = 0.0;
-      constexpr int MED = 0.0;
+      constexpr int STORED = 15.0;
+      constexpr int LOW = 70.0;
+      constexpr int MED = 125.0;
       constexpr int HP = 0.0;
-      constexpr int HIGH = 0.0;
+      constexpr int HIGH = 141.0;
+      constexpr int PICKUP = 40;
     }
   }
 
