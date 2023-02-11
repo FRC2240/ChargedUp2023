@@ -251,14 +251,11 @@ void Robot::make_test_path()
 }
 void Robot::TestInit()
 {
-  std::cout << "Test Init \n";
-  std::cout << "bingle. \n";
-  test++;
-  std::cout << test << "\n";
 }
 
 void Robot::TestPeriodic()
 {
+  m_camera.pose_loop();
 }
 
 #ifndef RUNNING_FRC_TESTS
