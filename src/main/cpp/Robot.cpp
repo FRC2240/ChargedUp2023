@@ -255,6 +255,10 @@ void Robot::TestInit()
 
 void Robot::TestPeriodic()
 {
+  frc::Pose2d pose = Odometry::getPose();
+  std::cout << "pose x: " << pose.X().value() << std::endl << "pose y: " <<
+    pose.Y().value() << std::endl;
+
   m_camera.pose_loop();
 }
 
