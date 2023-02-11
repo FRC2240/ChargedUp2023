@@ -28,26 +28,6 @@ static auto field_centric = true;
 
 void Robot::RobotInit()
 {
-    //https://www.w3schools.com/cpp/cpp_conditions_shorthand.asp
-    // Blue : Red
-    frc::DriverStation::Alliance alliance = frc::DriverStation::GetAlliance();
-    CONSTANTS::TRAJECTORY::HIGH_X = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
-    CONSTANTS::TRAJECTORY::MID_X = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
-    CONSTANTS::TRAJECTORY::GROUND_X = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
-
-    // TODO: POSITIONS
-    CONSTANTS::TRAJECTORY::Y::L1 = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
-    CONSTANTS::TRAJECTORY::Y::L2 = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
-    CONSTANTS::TRAJECTORY::Y::L3 = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
-
-    CONSTANTS::TRAJECTORY::Y::C1 = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
-    CONSTANTS::TRAJECTORY::Y::C2 = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
-    CONSTANTS::TRAJECTORY::Y::C3 = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
-
-    CONSTANTS::TRAJECTORY::Y::R1 = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
-    CONSTANTS::TRAJECTORY::Y::R2 = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
-    CONSTANTS::TRAJECTORY::Y::R3 = (alliance == frc::DriverStation::Alliance::kBlue) ? 0_m : 1_m;
-
   Odometry::putField2d();
   std::cout << "RobotInit done \n";
 }
@@ -284,12 +264,12 @@ void Robot::TestInit()
 
 void Robot::TestPeriodic()
 {
-
-  frc::Pose2d pose = Odometry::getPose();
-  std::cout << "pose x: " << pose.X().value() << std::endl << "pose y: " <<
-    pose.Y().value() << std::endl;
-
-  m_camera.pose_loop();
+  Odometry::update();
+  std::cout << "Odometry updated \n";
+  if (BUTTON::ARM::ARM_GROUND())
+    {
+      make_test_path();
+    }
 }
 
 #ifndef RUNNING_FRC_TESTS

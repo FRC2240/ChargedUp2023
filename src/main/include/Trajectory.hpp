@@ -23,7 +23,6 @@ namespace Trajectory
     enum HEIGHT {HIGH, MED, GROUND};
     enum BIG_TABLE
         {
-            // Copyright Westly Miller, 2023.
             LEFT_1,
             LEFT_2,
             LEFT_3,
@@ -57,6 +56,8 @@ namespace Trajectory
         units::degree_t desired_head;
         units::degree_t desired_rot;
     };
+
+    units::meter_t determine_desired_y();
 
     TrajDepends determine_desired_traj(Target tgt);
 

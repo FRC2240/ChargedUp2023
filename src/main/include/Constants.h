@@ -4,31 +4,49 @@
 #include <units/angle.h>
 #include <frc/DriverStation.h>
 #include <iostream>
-
+#include <vector>
 namespace CONSTANTS 
 {
   constexpr bool DEBUGGING = true; //DO NOT USE IN COMP. 
   //SLOWS DOWN EVERYTHING & MAY CAUSE WATCHDOG EXEPTIONS.
   namespace COLORS
   {
-
-    units::meter_t HIGH_X;
-    units::meter_t MID_X;
-    units::meter_t GROUND_X;
-
-    namespace Y
+   const std::vector<double> Y_POS =
+      {
+        /*
+         * A list of all Y positions to score at.
+         * Ordered from the pipe farthest on the robot's left side of the
+         * red alliance grid to the rightmost.
+         *
+         * Since the field isn't mirrored, the lists are the same for the
+         * red alliance and the blue alliance.
+         *
+         *  Copyright Westly Miller, 2023.
+         */
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      };
+    namespace R
     {
-      units::meter_t L1;
-      units::meter_t L2;
-      units::meter_t L3;
+      //Red Team and blue team will use seperate data.
 
-      units::meter_t C1;
-      units::meter_t C2;
-      units::meter_t C3;
+      constexpr units::meter_t HIGH_X = 0_m;
+      constexpr units::meter_t MID_X = 0_m;
+      constexpr units::meter_t GROUND_X = 0_m;
+    }
 
-      units::meter_t R1;
-      units::meter_t R2;
-      units::meter_t R3;
+    namespace B
+    {
+      constexpr units::meter_t HIGH_X = 0_m;
+      constexpr units::meter_t MID_X = 0_m;
+      constexpr units::meter_t GROUND_X = 0_m;
     }
   }
   namespace GRIPPAD

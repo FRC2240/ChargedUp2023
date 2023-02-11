@@ -30,62 +30,55 @@ static frc::HolonomicDriveController controller{
 /******************************************************************/
 /*                   Public Function Definitions                  */
 /******************************************************************/
+
+units::meter_t Trajectory::determine_desired_y()
+    {
+        frc::Pose2d current_pose = Odometry::getPose();
+
+
+    }
 Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::Target tgt)
 {
-    Trajectory::TrajDepends ret;
-    switch (tgt.height)
-        {
-        case HIGH:
-            ret.desired_x = CONSTANTS::TRAJECTORY::HIGH_X;
-            break;
-         case MED:
-            ret.desired_x = CONSTANTS::TRAJECTORY::MID_X;
-            break;
-         case GROUND:
-            ret.desired_x = CONSTANTS::TRAJECTORY::GROUND_X;
-            break;
-        }
-
-    switch (tgt.table)
-        {
-        case LEFT_1:
-            ret.desired_y = CONSTANTS::TRAJECTORY::Y::L1;
-            break;
-
-        case LEFT_2:
-            ret.desired_y = CONSTANTS::TRAJECTORY::Y::L2;
-            break;
-
-        case LEFT_3:
-            ret.desired_y = CONSTANTS::TRAJECTORY::Y::L3;
-            break;
-
-        case CENTER_1:
-            ret.desired_y = CONSTANTS::TRAJECTORY::Y::C1;
-            break;
-
-        case CENTER_2:
-            ret.desired_y = CONSTANTS::TRAJECTORY::Y::C2;
-            break;
-
-        case CENTER_3:
-            ret.desired_y = CONSTANTS::TRAJECTORY::Y::C3;
-            break;
-
-        case RIGHT_1:
-            ret.desired_y = CONSTANTS::TRAJECTORY::Y::R1;
-            break;
-
-        case RIGHT_2:
-            ret.desired_y = CONSTANTS::TRAJECTORY::Y::R2;
-            break;
-
-        case RIGHT_3:
-            ret.desired_y = CONSTANTS::TRAJECTORY::Y::R3;
-            break;
-        }
-
+    /*
+     * Takes the known apriltag that will be scored at and converts
+     * it to a position.
+     *
+     */
     frc::Pose2d current_pose = Odometry::getPose();
+    Trajectory::TrajDepends ret;
+/*
+    if (current_pose.X() < 0)
+        // Blue alliance X positions
+        {
+            switch (tgt.height)
+                {
+                case HIGH:
+                    ret.desired_x = CONSTANTS::TRAJECTORY::B::HIGH_X;
+                    break;
+                case MED:
+                    ret.desired_x = CONSTANTS::TRAJECTORY::B::MID_X;
+                    break;
+                case GROUND:
+                    ret.desired_x = CONSTANTS::TRAJECTORY::B::GROUND_X;
+                    break;
+                }
+        }
+    else
+        {
+            switch (tgt.height)
+                {
+                case HIGH:
+                    ret.desired_x = CONSTANTS::TRAJECTORY::R::HIGH_X;
+                    break;
+                case MED:
+                    ret.desired_x = CONSTANTS::TRAJECTORY::R::MID_X;
+                    break;
+                case GROUND:
+                    ret.desired_x = CONSTANTS::TRAJECTORY::R::GROUND_X;
+                    break;
+                }
+        }
+
     ret.desired_head = 0_deg;
     ret.desired_rot = 0_deg;
     ret.current_rot = Drivetrain::getAngle();
@@ -94,6 +87,7 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::Target tg
     ret.current_y = current_pose.Y();
 
     return ret;
+    */
 }
 void Trajectory::printRobotRelativeSpeeds()
 {
@@ -152,6 +146,7 @@ PathPlannerTrajectory Trajectory::generate_live_traj(units::meter_t current_x,
                                             desired_rot
                                             )
                                   );
+                                  //    
     return ret_val;
 }
 
