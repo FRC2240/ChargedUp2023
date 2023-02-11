@@ -135,11 +135,12 @@ Robot::Robot()
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
 std::cout << "robot object created \n";
+std::cout << "go get em tiger" << std::endl;
 }
 
 void Robot::RobotInit()
 {
-
+  std::cout << "Robot init" << std::endl;
   Odometry::putField2d();
   std::cout << "RobotInit done \n";
 }
@@ -211,6 +212,7 @@ void Robot::TeleopPeriodic()
 {
   //DASHBOARD::update_botpose(m_camera.get_field_pos_by_tag());
   //Drivetrain::print_angle();
+ // m_camera.pose_loop();
   buttonManager();
   swerveDrive(field_centric);
   //Odometry::update();
@@ -253,7 +255,11 @@ void Robot::TestInit()
 
 void Robot::TestPeriodic()
 {
-  m_arm.test();
+  frc::Pose2d pose = Odometry::getPose();
+  std::cout << "pose x: " << pose.X().value() << std::endl << "pose y: " <<
+    pose.Y().value() << std::endl;
+
+  m_camera.pose_loop();
 }
 
 #ifndef RUNNING_FRC_TESTS

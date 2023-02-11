@@ -4,6 +4,7 @@
 #include <units/velocity.h>
 #include <units/length.h>
 #include <units/angle.h>
+#include <vector>
 #include <wpi/sendable/Sendable.h>
 #include <wpi/sendable/SendableHelper.h>
 #include <frc/Filesystem.h>
@@ -57,11 +58,11 @@ public:
 
 
 private:
-    //Vision m_camera;
+    std::vector<double> m_test_case = {1,2,3,4,5};
+    Vision m_camera;
+    int m_cycle = 0;
 
     Arm m_arm;
-    int m_cam_counter = 0;
-
     frc::Trajectory m_trajectory;
 
     frc::SendableChooser<std::string> m_chooser;
