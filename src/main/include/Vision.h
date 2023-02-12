@@ -16,55 +16,70 @@
 #include "networktables/NetworkTableEntry.h"
 #include "networktables/NetworkTableValue.h"
 //#include "wpi/span.h"
+
 #include "Odometry.hpp"
+#include <iostream>
+#include <chrono>
+#include <thread>
+#include <numeric>
 
 class Vision
 {
-private:
-  std::vector<double> m_zero_vector = {0,0,0,0,0,0};
-  //QUESTION: is it a better idea to set this to zero or null?
-
-  std::shared_ptr<nt::NetworkTable> m_alpha_table =
-    nt::NetworkTableInstance::GetDefault().GetTable("limelight-alpha");
-
-  std::shared_ptr<nt::NetworkTable> m_beta_table =
-    nt::NetworkTableInstance::GetDefault().GetTable("limelight-beta");
-
-
-  void update_pose(std::vector<double> bot_pose);
-
-  double standard_dev( double a,
-                       double b,
-                       double c,
-                       double d,
-                       double e
-                       );
-
-  std::vector<double> m_result_0;
-  std::vector<double> m_result_1;
-  std::vector<double> m_result_2;
-  std::vector<double> m_result_3;
-  std::vector<double> m_result_4;
-
-  std::vector<double> two_vector_avg(
-                                     std::vector<double> a,
-                                     std::vector<double> b
-                                     );
-
-  std::vector<double> five_vector_avg(
-                                      std::vector<double> a,
-                                      std::vector<double> b,
-                                      std::vector<double> c,
-                                      std::vector<double> d,
-                                      std::vector<double> e
-                                      );
-
-public:
+  public:
   Vision(/* args */);
   ~Vision();
 
+  int test = 10;
+  struct Data
+  {
+    double trans_x;
+    double trans_y;
+    double rot_x;
+    bool is_good; // Determine if data was written
 
-  std::vector<double> get_raw_data();
-  int pose_loop(int i = 0);
+    Data(){};
+    Data(std::vector<double> in_vec)
+    {
+      if (in_vec.size() >= 6)
+      {
+        trans_x = in_vec[0];
+        trans_y = in_vec[1];
+        rot_x = in_vec[5];
+      } 
+    };
+  };
+
+
+  void get_raw_data(int i);
+  void pose_loop();
+
+  // TODO: make private
+  std::vector<Vision::Data> m_left_buffer{CONSTANTS::VISION::BUFFER_SIZE};
+
+  std::vector<Vision::Data> m_right_buffer{CONSTANTS::VISION::BUFFER_SIZE};
+
+  double standard_dev(std::vector<double> v);
+private:
+  int m_index_pt = 0;
+  std::vector<double> m_zero_vector = {42.0, 42.0, 42.0, 92, 10, 22};
+
+  std::shared_ptr<nt::NetworkTable> m_left_table =
+    nt::NetworkTableInstance::GetDefault().GetTable("limelight-left");
+
+  std::shared_ptr<nt::NetworkTable> m_right_table =
+    nt::NetworkTableInstance::GetDefault().GetTable("limelight-right");
+
+  std::vector<double> collect(double Data::* f, std::vector<Data> const& v);
+
+  void update_pose(Data bot_pose);
+
+  bool check_std_dev(std::vector<Data> buffer);
+
+  int find_good_frames(std::vector<Data> data);
+
+  double average(std::vector<double> buffer_a, std::vector<double> buffer_b);
+  double average(std::vector<double> v);
+
+
 };
 #endif

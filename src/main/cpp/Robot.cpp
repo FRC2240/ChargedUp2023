@@ -135,11 +135,12 @@ Robot::Robot()
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
 std::cout << "robot object created \n";
+std::cout << "go get em tiger" << std::endl;
 }
 
 void Robot::RobotInit()
 {
-
+  std::cout << "Robot init" << std::endl;
   Odometry::putField2d();
   std::cout << "RobotInit done \n";
 }
@@ -212,6 +213,7 @@ void Robot::TeleopPeriodic()
 {
   //DASHBOARD::update_botpose(m_camera.get_field_pos_by_tag());
   //Drivetrain::print_angle();
+ // m_camera.pose_loop();
   buttonManager();
   swerveDrive(field_centric);
   //Odometry::update();
@@ -222,38 +224,49 @@ void Robot::TeleopPeriodic()
       Trajectory::printFieldRelativeSpeeds();
     }
 
+  if (breakbeam == false && m_grabber.m_BreakBeamSensor.Get() == true ){
+    breakbeam = true;
+  }
+
   if (m_grabber.grabberToggle == false && BUTTON::GRABBER::GRABBER_TOGGLE())
     {
       m_grabber.In();
       m_grabber.grabberToggle = true;
     }
-  else if (m_grabber.grabberToggle == true && BUTTON::GRABBER::GRABBER_TOGGLE())
+  else if ((m_grabber.grabberToggle == true && BUTTON::GRABBER::GRABBER_TOGGLE()) || (m_grabber.m_BreakBeamSensor.Get() == false && breakbeam == true))
     {
       m_grabber.Out();
-      m_grabber.grabberToggle = false;
+      m_grabber.grabberToggle = false; 
+      breakbeam = false;
     }
 }
 
+void Robot::make_test_path()
+{
+  frc::Pose2d current_pose = Odometry::getPose();
+  Trajectory::follow_live_traj(
+  Trajectory::generate_live_traj(current_pose.X(),
+                                 current_pose.Y(),
+                                 frc::Rotation2d(Drivetrain::getCCWHeading()),
+                                 frc::Rotation2d(Drivetrain::getCCWHeading()),
+                                 current_pose.X() + 1_m,
+                                 current_pose.Y() + 1_m,
+                                 -frc::Rotation2d(Drivetrain::getCCWHeading()),
+                                 -frc::Rotation2d(Drivetrain::getCCWHeading())
+                                 ));
+}
 void Robot::TestInit()
 {
 }
 
 void Robot::TestPeriodic()
 {
-  m_arm.arm_logic(BUTTON::ARM::ARM_STORED(), BUTTON::ARM::ARM_LOW(), BUTTON::ARM::ARM_MID(), BUTTON::ARM::ARM_HP(), BUTTON::ARM::ARM_HIGH(), BUTTON::ARM::ARM_PICKUP());
-  if (m_grabber.grabberToggle == false && BUTTON::GRABBER::GRABBER_TOGGLE())
-    {
-      m_grabber.In();
-      m_grabber.grabberToggle = true;
-    }
-  else if (m_grabber.grabberToggle == true && BUTTON::GRABBER::GRABBER_TOGGLE())
-    {
-      m_grabber.Out();
-      m_grabber.grabberToggle = false;
-    }
-    
-  m_arm.Test();
-  m_wrist.Test();
+
+  frc::Pose2d pose = Odometry::getPose();
+  std::cout << "pose x: " << pose.X().value() << std::endl << "pose y: " <<
+    pose.Y().value() << std::endl;
+
+  m_camera.pose_loop();
 }
 
 #ifndef RUNNING_FRC_TESTS

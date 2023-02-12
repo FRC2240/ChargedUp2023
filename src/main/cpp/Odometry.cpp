@@ -2,7 +2,8 @@
 #include "SwerveModule.hpp"
 #include "Drivetrain.hpp"
 #include "ngr.hpp"
-
+#include "Constants.h"
+#include <iostream>
 #include <frc/kinematics/SwerveDriveOdometry.h>
 #include <frc/kinematics/SwerveDriveKinematics.h>
 #include <frc/smartdashboard/SmartDashboard.h>
@@ -76,6 +77,10 @@ void Odometry::reset_position_from_vision(const frc::Pose2d &bot_pose)
                            Drivetrain::getModulePositions(),
                            bot_pose
                            );
+    if constexpr (CONSTANTS::DEBUGGING)
+        {
+            std::cout << "Position reset" << std::endl;
+        }
 }
 
 void Odometry::resetPosition(const frc::Pose2d &bot_pose, const frc::Rotation2d &gyro_angle)

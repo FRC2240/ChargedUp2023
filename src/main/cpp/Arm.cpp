@@ -341,6 +341,11 @@ void Arm::Test(){
     std::cout << "arm encoder with offset: " << position << std::endl;
 }
 
+void Arm::test()
+{
+    std::cout << "encoder: " << arm_cancoder.GetAbsolutePosition() << "\n";
+}
+
 
 
 Arm::~Arm(){}

@@ -18,6 +18,7 @@ public:
   
 
   STATES Logic(bool intake_button, bool extake_button, bool stow_button);
+  frc::DigitalInput  m_BreakBeamSensor{0};
 
 
 private:

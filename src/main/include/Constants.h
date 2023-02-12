@@ -1,8 +1,21 @@
 #ifndef CONSTANTS_H_
 #define CONSTANTS_H_
 
+
 namespace CONSTANTS 
 {
+  #warning "MINOR: Disable debug before comp."
+  constexpr bool DEBUGGING = true; //DO NOT USE IN COMP. 
+  //SLOWS DOWN EVERYTHING & MAY CAUSE WATCHDOG EXEPTIONS.
+  namespace COLORS
+  {
+    constexpr char GREEN[] = "ESC[48;5;{46}m";
+    constexpr char RED[] = "ESC[48;5;{196}m";
+    constexpr char YELLOW[] = "ESC[48;5;{226}m";
+    constexpr char PURPLE[] = "ESC[48;5;{129}m";
+    //TODO: Put ANSI escape codes here as std::string
+    
+  }
   namespace GRIPPAD
   {
     constexpr int GRIPPAD_CHANNEL = 0;
@@ -47,9 +60,15 @@ namespace CONSTANTS
   }
 
   namespace VISION {
-    constexpr int APRILTAG_PIPE = 1; //CHANGEME
-    constexpr int ARRAY_SIZE = 5;
-    constexpr double MAX_STD_DEV = 1; //CHANGEME
+    #warning "MINOR: Variables not defined properly"
+    //Remove above warning when values found
+    constexpr int APRILTAG_PIPE = 1; 
+    constexpr int BUFFER_SIZE = 5; 
+    constexpr int MIN_GOOD_FRAMES = 4;
+    constexpr double MAX_STD_DEV = 10; //CHANGEME
+    constexpr double MIN_STD_DEV = 1.0e-10; //CHANGEME
+    constexpr double MAX_STD_DEV_ROT = 10; //CHANGEME
+    constexpr double MIN_STD_DEV_ROT = 1.0e-5; //CHANGEME
 
   }
 

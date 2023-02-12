@@ -1,7 +1,10 @@
 #pragma once
 
 #include <frc/TimedRobot.h>
-
+#include <units/velocity.h>
+#include <units/length.h>
+#include <units/angle.h>
+#include <vector>
 #include <wpi/sendable/Sendable.h>
 #include <wpi/sendable/SendableHelper.h>
 #include <frc/Filesystem.h>
@@ -50,13 +53,16 @@ public:
     void TestInit() override;
     void TestPeriodic() override;
 
+    void make_test_path();
+
 
 
 private:
-    //Vision m_camera;
+    std::vector<double> m_test_case = {1,2,3,4,5};
+    Vision m_camera;
+    int m_cycle = 0;
 
-    int m_cam_counter = 0;
-
+    Arm m_arm;
     frc::Trajectory m_trajectory;
 
     frc::SendableChooser<std::string> m_chooser;
@@ -64,11 +70,13 @@ private:
     const std::string CIRCLE = "Circle";
     const std::string NON_HOLONOMIC = "Non holonomic";
 
+    bool breakbeam;
+
     std::string m_autoSelected;
 
     Grabber m_grabber;
     Grippad m_grippad;
     Candle m_candle;
     Wrist m_wrist;
-    Arm m_arm;
+    
 };
