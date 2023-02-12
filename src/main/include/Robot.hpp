@@ -69,6 +69,8 @@ private:
     const std::string CIRCLE = "Circle";
     const std::string NON_HOLONOMIC = "Non holonomic";
 
+    bool breakbeam;
+
     std::string m_autoSelected;
 
     Grabber m_grabber;
