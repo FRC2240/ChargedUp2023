@@ -223,15 +223,20 @@ void Robot::TeleopPeriodic()
       Trajectory::printFieldRelativeSpeeds();
     }
 
+  if (breakbeam == false && m_grabber.m_BreakBeamSensor.Get() == true ){
+    breakbeam = true;
+  }
+
   if (m_grabber.grabberToggle == false && BUTTON::GRABBER::GRABBER_TOGGLE())
     {
       m_grabber.In();
       m_grabber.grabberToggle = true;
     }
-  else if (m_grabber.grabberToggle == true && BUTTON::GRABBER::GRABBER_TOGGLE())
+  else if ((m_grabber.grabberToggle == true && BUTTON::GRABBER::GRABBER_TOGGLE()) || (m_grabber.m_BreakBeamSensor.Get() == false && breakbeam == true))
     {
       m_grabber.Out();
-      m_grabber.grabberToggle = false;
+      m_grabber.grabberToggle = false; 
+      breakbeam = false;
     }
 }
 
