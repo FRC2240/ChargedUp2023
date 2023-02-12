@@ -5,13 +5,15 @@
 #include <frc/DriverStation.h>
 #include <iostream>
 #include <vector>
+
+
 namespace CONSTANTS 
 {
   constexpr bool DEBUGGING = true; //DO NOT USE IN COMP. 
   //SLOWS DOWN EVERYTHING & MAY CAUSE WATCHDOG EXEPTIONS.
-  namespace COLORS
+  namespace TRAJECTORY
   {
-   const std::vector<double> Y_POS =
+   const std::vector<units::meter_t> Y_POS =
       {
         /*
          * A list of all Y positions to score at.
@@ -23,16 +25,16 @@ namespace CONSTANTS
          *
          *  Copyright Westly Miller, 2023.
          */
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      };
+        0_m,
+        0_m,
+        0_m,
+        0_m,
+        0_m,
+        0_m,
+        0_m,
+        0_m,
+        0_m
+     };
     namespace R
     {
       //Red Team and blue team will use seperate data.
@@ -97,7 +99,8 @@ namespace CONSTANTS
   namespace VISION {
     //Remove above warning when values found
     constexpr int APRILTAG_PIPE = 1; 
-    constexpr int BUFFER_SIZE = 5; 
+    //Remove above warning when values found
+    constexpr int BUFFER_SIZE = 5;
     constexpr int MIN_GOOD_FRAMES = 4;
     constexpr double MAX_STD_DEV = 10; //CHANGEME
     constexpr double MIN_STD_DEV = 1.0e-10; //CHANGEME

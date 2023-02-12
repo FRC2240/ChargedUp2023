@@ -133,13 +133,6 @@ std::cout << "robot object created \n";
 std::cout << "go get em tiger" << std::endl;
 }
 
-void Robot::RobotInit()
-{
-  std::cout << "Robot init" << std::endl;
-  Odometry::putField2d();
-  std::cout << "RobotInit done \n";
-}
-
 void Robot::RobotPeriodic()
 {
   Trajectory::reverse_trajectory = frc::SmartDashboard::GetBoolean("Traj Reversed", Trajectory::reverse_trajectory);

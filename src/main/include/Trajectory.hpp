@@ -12,6 +12,18 @@
 #include <frc/kinematics/ChassisSpeeds.h>
 #include "Constants.h"
 #include <functional>
+#include <cmath>
+#include "Drivetrain.hpp"
+#include "RobotState.hpp"
+#include "ngr.hpp"
+#include "Odometry.hpp"
+
+#include <frc/controller/HolonomicDriveController.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+
+#include <chrono>
+#include <thread>
+#include <frc/Timer.h>
 
 using namespace pathplanner; // PathPlanner keeps everything hidden behind 2 sets of namespaces so it's safe to remove the first layer
 
@@ -63,6 +75,7 @@ namespace Trajectory
 
     PathPlannerTrajectory generate_live_traj(TrajDepends t);
 
+    frc::Timer m_trajTimer;
 
     PathPlannerTrajectory generate_live_traj(units::meter_t current_x,
                                              units::meter_t current_y,
@@ -84,11 +97,15 @@ namespace Trajectory
                                              units::degree_t desired_rot
                                              );
 
+    void init_live_traj(PathPlannerTrajectory traj,
+                        std::function<void(units::second_t time)> const &periodic = nullptr,
+                        units::meters_per_second_t const &max_vel = Drivetrain::TRAJ_MAX_SPEED,
+                        units::meters_per_second_squared_t const &max_accl = Drivetrain::TRAJ_MAX_ACCELERATION);
 
-void follow_live_traj(PathPlannerTrajectory traj,
-                      std::function<void(units::second_t time)> const &periodic = nullptr,
-                      units::meters_per_second_t const &max_vel = Drivetrain::TRAJ_MAX_SPEED,
-                      units::meters_per_second_squared_t const &max_accl = Drivetrain::TRAJ_MAX_ACCELERATION);
+    void follow_live_traj(PathPlannerTrajectory traj,
+                          std::function<void(units::second_t time)> const &periodic = nullptr,
+                          units::meters_per_second_t const &max_vel = Drivetrain::TRAJ_MAX_SPEED,
+                          units::meters_per_second_squared_t const &max_accl = Drivetrain::TRAJ_MAX_ACCELERATION);
 
 
     void printRobotRelativeSpeeds();

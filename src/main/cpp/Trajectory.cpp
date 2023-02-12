@@ -1,15 +1,5 @@
 #include "Trajectory.hpp"
-#include "Drivetrain.hpp"
-#include "RobotState.hpp"
-#include "ngr.hpp"
-#include "Odometry.hpp"
 
-#include <frc/controller/HolonomicDriveController.h>
-#include <frc/smartdashboard/SmartDashboard.h>
-
-#include <chrono>
-#include <thread>
-#include <frc/Timer.h>
 
 
 /******************************************************************/
@@ -32,11 +22,38 @@ static frc::HolonomicDriveController controller{
 /******************************************************************/
 
 units::meter_t Trajectory::determine_desired_y()
-    {
-        frc::Pose2d current_pose = Odometry::getPose();
+{
+    /*
+     * A guess & check method to find the nearest Y position.
+     * Finds the point where the distance starts to increace.
+     * This works because the bottom of the distance curve (there can only be 1)
+     * will always be the shortest path to that distance.
+     *
+     */
 
+    frc::Pose2d current_pose = Odometry::getPose();
+    double temp = std::fabs(current_pose.Y().value() -
+                            CONSTANTS::TRAJECTORY::Y_POS[0].value());
 
-    }
+    for (unsigned int i = 0; i < CONSTANTS::TRAJECTORY::Y_POS.size(); i++)
+        {
+
+            if (temp > std::fabs( current_pose.Y().value() -
+                                  CONSTANTS::TRAJECTORY::Y_POS[i++].value()
+                                  )
+                )
+                {
+                    temp = std::fabs(current_pose.Y().value() -
+                                     CONSTANTS::TRAJECTORY::Y_POS[i++].value());
+                }
+            else
+                {
+                    return CONSTANTS::TRAJECTORY::Y_POS[i++];
+                }
+        }
+    return CONSTANTS::TRAJECTORY::Y_POS[CONSTANTS::TRAJECTORY::Y_POS.size()-1];
+}
+
 Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::Target tgt)
 {
     /*
@@ -46,8 +63,8 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::Target tg
      */
     frc::Pose2d current_pose = Odometry::getPose();
     Trajectory::TrajDepends ret;
-/*
-    if (current_pose.X() < 0)
+
+    if (current_pose.X().value() < 0)
         // Blue alliance X positions
         {
             switch (tgt.height)
@@ -86,9 +103,11 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::Target tg
     ret.current_x = current_pose.X();
     ret.current_y = current_pose.Y();
 
+    ret.desired_y = determine_desired_y();
+
     return ret;
-    */
 }
+
 void Trajectory::printRobotRelativeSpeeds()
 {
     frc::ChassisSpeeds const robot_relative = Drivetrain::getRobotRelativeSpeeds();
@@ -146,7 +165,6 @@ PathPlannerTrajectory Trajectory::generate_live_traj(units::meter_t current_x,
                                             desired_rot
                                             )
                                   );
-                                  //    
     return ret_val;
 }
 
@@ -180,11 +198,10 @@ PathPlannerTrajectory Trajectory::generate_live_traj(units::meter_t current_x,
                                       );
         return ret_val;
 }
-
-void Trajectory::follow_live_traj(PathPlannerTrajectory traj,
-                                  std::function<void(units::second_t time)> const &periodic,
-                                  units::meters_per_second_t const &max_vel,
-                                  units::meters_per_second_squared_t const &max_accl)
+void Trajectory::init_live_traj(PathPlannerTrajectory traj,
+                                std::function<void(units::second_t time)> const &periodic,
+                                units::meters_per_second_t const &max_vel,
+                                units::meters_per_second_squared_t const &max_accl)
 {
     auto const inital_state = traj.getInitialState();
     auto const inital_pose = inital_state.pose;
@@ -193,20 +210,28 @@ void Trajectory::follow_live_traj(PathPlannerTrajectory traj,
     // to construct a new Pose2d as the original Pose2d's Z (rotation) value uses non-holonomic math
     Odometry::resetPosition({inital_pose.Translation(), inital_state.holonomicRotation}, Drivetrain::getCCWHeading());
 
-    frc::Timer trajTimer;
-    trajTimer.Start();
+    m_trajTimer.Reset();
+    m_trajTimer.Start();
 
     if constexpr (CONSTANTS::DEBUGGING)
-    {
-        // If needed, we can disable the "error correction" for x & y
-        controller.SetEnabled(true);
+        {
+            // If needed, we can disable the "error correction" for x & y
+            controller.SetEnabled(true);
 
-        frc::SmartDashboard::PutString("Inital State: ", fmt::format("X: {}, Y: {}, Z: {}, Holonomic: {}\n", inital_pose.X().value(), inital_pose.Y().value(), inital_pose.Rotation().Degrees().value(), inital_state.holonomicRotation.Degrees().value()));
-    }
+            frc::SmartDashboard::PutString("Inital State: ", fmt::format("X: {}, Y: {}, Z: {}, Holonomic: {}\n", inital_pose.X().value(), inital_pose.Y().value(), inital_pose.Rotation().Degrees().value(), inital_state.holonomicRotation.Degrees().value()));
+        }
+}
 
-    while (RobotState::IsAutonomousEnabled() && (trajTimer.Get() <= traj.getTotalTime() + 0.1_s))
+
+void Trajectory::follow_live_traj(PathPlannerTrajectory traj,
+                                  std::function<void(units::second_t time)> const &periodic,
+                                  units::meters_per_second_t const &max_vel,
+                                  units::meters_per_second_squared_t const &max_accl)
+{
+
+    if ( (m_trajTimer.Get() <= traj.getTotalTime() + 0.1_s))
     {
-        auto current_time = trajTimer.Get();
+        auto current_time = m_trajTimer.Get();
 
         auto sample = traj.sample(current_time);
 
@@ -218,13 +243,13 @@ void Trajectory::follow_live_traj(PathPlannerTrajectory traj,
         if (periodic)
             periodic(current_time);
 
-        if constexpr (debugging)
+        if constexpr (CONSTANTS::DEBUGGING)
         {
             static int trajectory_samples{};
             frc::SmartDashboard::PutString("Sample:", fmt::format(
-                                                          "Current trajectory sample value: {}, Pose X: {}, Pose Y: {}, Pose Z: {}\nHolonomic Rotation: {}, Timer: {}\n",
-                                                          ++trajectory_samples, sample.pose.X().value(), sample.pose.Y().value(), sample.pose.Rotation().Degrees().value(),
-                                                          sample.holonomicRotation.Degrees().value(), trajTimer.Get().value()));
+                                                                  "Current trajectory sample value: {}, Pose X: {}, Pose Y: {}, Pose Z: {}\nHolonomic Rotation: {}, Timer: {}\n",
+                                                                  ++trajectory_samples, sample.pose.X().value(), sample.pose.Y().value(), sample.pose.Rotation().Degrees().value(),
+                                                                  sample.holonomicRotation.Degrees().value(), m_trajTimer.Get().value()));
             printRobotRelativeSpeeds();
             printFieldRelativeSpeeds();
         }
@@ -232,7 +257,10 @@ void Trajectory::follow_live_traj(PathPlannerTrajectory traj,
         using namespace std::chrono_literals;
         // This is the refresh rate of the HolonomicDriveController's PID controllers (can be tweaked if needed)
     }
-    Drivetrain::stop();
+    else
+        {
+            Drivetrain::stop();
+        }
 }
 
 void Trajectory::printFieldRelativeSpeeds()
