@@ -75,7 +75,7 @@ namespace Trajectory
 
     PathPlannerTrajectory generate_live_traj(TrajDepends t);
 
-    frc::Timer m_trajTimer;
+    //frc::Timer m_trajTimer;
 
     PathPlannerTrajectory generate_live_traj(units::meter_t current_x,
                                              units::meter_t current_y,
@@ -97,15 +97,9 @@ namespace Trajectory
                                              units::degree_t desired_rot
                                              );
 
-    void init_live_traj(PathPlannerTrajectory traj,
-                        std::function<void(units::second_t time)> const &periodic = nullptr,
-                        units::meters_per_second_t const &max_vel = Drivetrain::TRAJ_MAX_SPEED,
-                        units::meters_per_second_squared_t const &max_accl = Drivetrain::TRAJ_MAX_ACCELERATION);
+    void init_live_traj(PathPlannerTrajectory traj);
 
-    void follow_live_traj(PathPlannerTrajectory traj,
-                          std::function<void(units::second_t time)> const &periodic = nullptr,
-                          units::meters_per_second_t const &max_vel = Drivetrain::TRAJ_MAX_SPEED,
-                          units::meters_per_second_squared_t const &max_accl = Drivetrain::TRAJ_MAX_ACCELERATION);
+    void follow_live_traj(PathPlannerTrajectory traj);
 
 
     void printRobotRelativeSpeeds();

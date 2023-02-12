@@ -13,7 +13,6 @@
 #include "RobotState.hpp"
 #include "ngr.hpp"
 #include "Odometry.hpp"
-#include "Trajectory.hpp"
 
 #include <frc/TimedRobot.h>
 #include <units/velocity.h>
@@ -32,6 +31,8 @@
 #include <frc/MathUtil.h>
 #include <iostream>
 #include <fmt/format.h>
+#include <pathplanner/lib/PathPlannerTrajectory.h>
+
 
 
 
@@ -72,7 +73,7 @@ private:
     int m_cycle = 0;
 
     Arm m_arm;
-    frc::Trajectory m_trajectory;
+    //frc::Trajectory m_trajectory;
 
     frc::SendableChooser<std::string> m_chooser;
     const std::string LINE = "Line";
@@ -89,5 +90,6 @@ private:
     Grippad m_grippad;
     Candle m_candle;
     Wrist m_wrist;
+    pathplanner::PathPlannerTrajectory m_trajectory;
     
 };

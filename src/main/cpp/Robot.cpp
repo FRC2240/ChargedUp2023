@@ -1,4 +1,5 @@
 #include "Robot.hpp"
+#include "Trajectory.hpp"
 
 
 /******************************************************************/
@@ -240,8 +241,7 @@ void Robot::TeleopPeriodic()
 void Robot::make_test_path()
 {
   frc::Pose2d current_pose = Odometry::getPose();
-  Trajectory::follow_live_traj(
-  Trajectory::generate_live_traj(current_pose.X(),
+  m_trajectory = Trajectory::generate_live_traj(current_pose.X(),
                                  current_pose.Y(),
                                  frc::Rotation2d(Drivetrain::getCCWHeading()),
                                  frc::Rotation2d(Drivetrain::getCCWHeading()),
@@ -249,20 +249,18 @@ void Robot::make_test_path()
                                  current_pose.Y() + 1_m,
                                  -frc::Rotation2d(Drivetrain::getCCWHeading()),
                                  -frc::Rotation2d(Drivetrain::getCCWHeading())
-                                 ));
+                                 );
 }
 void Robot::TestInit()
 {
+  Odometry::update();
+  make_test_path();
+  Trajectory::init_live_traj(m_trajectory);
 }
 
 void Robot::TestPeriodic()
 {
-  Odometry::update();
-  std::cout << "Odometry updated \n";
-  if (BUTTON::ARM::ARM_GROUND())
-    {
-      make_test_path();
-    }
+  Trajectory::follow_live_traj(m_trajectory);
 }
 
 #ifndef RUNNING_FRC_TESTS

@@ -16,6 +16,7 @@ static frc::HolonomicDriveController controller{
             Drivetrain::TRAJ_MAX_ANGULAR_SPEED,
             Drivetrain::TRAJ_MAX_ANGULAR_ACCELERATION}}};
 
+frc::Timer m_trajTimer;
 
 /******************************************************************/
 /*                   Public Function Definitions                  */
@@ -198,10 +199,7 @@ PathPlannerTrajectory Trajectory::generate_live_traj(units::meter_t current_x,
                                       );
         return ret_val;
 }
-void Trajectory::init_live_traj(PathPlannerTrajectory traj,
-                                std::function<void(units::second_t time)> const &periodic,
-                                units::meters_per_second_t const &max_vel,
-                                units::meters_per_second_squared_t const &max_accl)
+void Trajectory::init_live_traj(PathPlannerTrajectory traj)
 {
     auto const inital_state = traj.getInitialState();
     auto const inital_pose = inital_state.pose;
@@ -223,10 +221,7 @@ void Trajectory::init_live_traj(PathPlannerTrajectory traj,
 }
 
 
-void Trajectory::follow_live_traj(PathPlannerTrajectory traj,
-                                  std::function<void(units::second_t time)> const &periodic,
-                                  units::meters_per_second_t const &max_vel,
-                                  units::meters_per_second_squared_t const &max_accl)
+void Trajectory::follow_live_traj(PathPlannerTrajectory traj)
 {
 
     if ( (m_trajTimer.Get() <= traj.getTotalTime() + 0.1_s))
@@ -240,8 +235,8 @@ void Trajectory::follow_live_traj(PathPlannerTrajectory traj,
         driveToState(sample);
         Odometry::update();
 
-        if (periodic)
-            periodic(current_time);
+        //if (periodic)
+        //    periodic(current_time);
 
         if constexpr (CONSTANTS::DEBUGGING)
         {
