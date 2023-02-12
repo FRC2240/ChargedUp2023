@@ -150,13 +150,14 @@ void Robot::RobotPeriodic()
   Trajectory::reverse_trajectory = frc::SmartDashboard::GetBoolean("Traj Reversed", Trajectory::reverse_trajectory);
   //std::cout << "Robot Periodic \n";
 
-  if (m_arm.position > m_arm.ARM_FLARE_LOW && m_arm.position < m_arm.ARM_FLARE_HIGH){
-    m_wrist.Follow_Flare(m_arm.position);
-  }
-  else {
-    m_wrist.Follow(m_arm.position);
-  }
-
+  // if (m_arm.position > m_arm.ARM_FLARE_LOW && m_arm.position < m_arm.ARM_FLARE_HIGH){
+  //   m_wrist.Follow_Flare(m_arm.position);
+  // }
+  // else {
+  //std::cout << m_arm.position << std::endl;
+  m_wrist.Follow(m_arm.position);
+  // }
+  m_arm.Read_Position();
 }
 
 void Robot::AutonomousInit()
@@ -260,6 +261,7 @@ void Robot::TestInit()
 
 void Robot::TestPeriodic()
 {
+
   frc::Pose2d pose = Odometry::getPose();
   std::cout << "pose x: " << pose.X().value() << std::endl << "pose y: " <<
     pose.Y().value() << std::endl;

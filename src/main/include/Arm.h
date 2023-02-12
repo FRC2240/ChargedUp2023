@@ -5,6 +5,7 @@
 #include <frc/Encoder.h>
 #include "Constants.h"
 #include "frc/smartdashboard/SmartDashboard.h"
+#include <cmath>
 
 class Arm
 {
@@ -12,17 +13,21 @@ class Arm
   public:
   Arm();
   ~Arm();
-  enum STATES { STORED, LOW, MED, HUMANPLAYER, HIGH};
+  enum STATES { STORED, LOW, MED, HUMANPLAYER, HIGH, PICKUP};
 
   STATES arm_logic(bool store_button, bool low_button, 
                    bool med_button, bool hp_button,
-                   bool high_button);
+                   bool high_button, bool pickup_button);
   void move();
   void arm_pid_init();
   void arm_dash_init();
   void arm_dash_read();
   void test();
   void Read_Position();
+  void Up();
+  void Down();
+  void Stop();
+  void Test();
 
   double desired_position;
 
@@ -36,9 +41,13 @@ class Arm
 
     WPI_TalonFX m_arm_motor_right {CONSTANTS::ARM::RIGHT_ARM_MOTOR_ID};
     WPI_TalonFX m_arm_motor_left {CONSTANTS::ARM::LEFT_ARM_MOTOR_ID};
-    WPI_CANCoder arm_cancoder{1};
+
+    WPI_CANCoder arm_cancoder{CONSTANTS::ARM::ARM_CANCODER_ID};
+
 
     TalonFXSensorCollection m_Arm_RightEncoder = m_arm_motor_right.GetSensorCollection();
+
+    int setPoint = 200;
 
     struct pidCoeff 
     {
