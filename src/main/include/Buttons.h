@@ -22,12 +22,12 @@ namespace BUTTON
 
   namespace ARM
   {
-    inline bool ARM_STORED() {return BUTTON::m_stick.GetLeftBumperReleased();}
+    inline bool ARM_STORED() {return BUTTON::m_stick.GetLeftBumper();}
     inline bool ARM_PICKUP() {return BUTTON::m_stick.GetPOV() == 270;}
-    inline bool ARM_LOW() {return BUTTON::m_stick.GetAButtonReleased();}
-    inline bool ARM_MID() {return BUTTON::m_stick.GetBButtonReleased();}
-    inline bool ARM_HIGH() {return BUTTON::m_stick.GetYButtonReleased();}
-    inline bool ARM_HP() {return BUTTON::m_stick.GetXButtonReleased();}
+    inline bool ARM_LOW() {return BUTTON::m_stick.GetAButton();}
+    inline bool ARM_MID() {return BUTTON::m_stick.GetBButton();}
+    inline bool ARM_HIGH() {return BUTTON::m_stick.GetYButton();}
+    inline bool ARM_HP() {return BUTTON::m_stick.GetXButton();}
   }
 
   namespace GRABBER

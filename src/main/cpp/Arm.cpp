@@ -33,9 +33,6 @@ Arm::Arm()
     
     //m_arm_motor_left.SetInverted(ctre::phoenix::motorcontrol::InvertType::OpposeMaster);
 
-    ARM_FLARE_HIGH = CONSTANTS::ARM::ARM_FLARE_HIGH;
-    ARM_FLARE_LOW = CONSTANTS::ARM::ARM_FLARE_LOW;
-
     //m_arm_motor_left.Follow(m_arm_motor_right);
 }
 
@@ -128,9 +125,11 @@ Arm::STATES Arm::arm_logic(bool store_button, bool low_button,
                            bool med_button, bool hp_button,
                            bool high_button, bool pickup_button)
 {
+
     switch(state)
     {
         case STORED:
+
             if(low_button)
             {
                 desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
@@ -332,13 +331,14 @@ Arm::STATES Arm::arm_logic(bool store_button, bool low_button,
                 move();
                 state = HUMANPLAYER;
             }
-            
+            break;
 
-    }
+     }
+    return state;    
 }
 
 void Arm::Test(){
-    std::cout << "arm encoder with offset: " << position<< std::endl;
+    std::cout << "arm encoder with offset: " << position << std::endl;
 }
 
 

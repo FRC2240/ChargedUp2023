@@ -91,10 +91,6 @@ void Wrist::Follow(double arm_pos)
     m_wrist_PIDController.SetReference(position, rev::CANSparkMax::ControlType::kPosition);
 }
 
-void Wrist::Follow_Flare(double arm_pos)
-{
-    m_wrist_PIDController.SetReference(arm_pos/360 + CONSTANTS::WRIST::WRIST_ENCODER_OFFSET + CONSTANTS::WRIST::WRIST_FLARE_OFFSET, rev::CANSparkMax::ControlType::kPosition);
-}
 
 void Wrist::Test(){
     std::cout << "wrist encoder: " << m_wrist_Encoder.GetPosition() << "\n";

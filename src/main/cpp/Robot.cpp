@@ -240,9 +240,7 @@ void Robot::TestInit()
 
 void Robot::TestPeriodic()
 {
-
   m_arm.arm_logic(BUTTON::ARM::ARM_STORED(), BUTTON::ARM::ARM_LOW(), BUTTON::ARM::ARM_MID(), BUTTON::ARM::ARM_HP(), BUTTON::ARM::ARM_HIGH(), BUTTON::ARM::ARM_PICKUP());
-
   if (m_grabber.grabberToggle == false && BUTTON::GRABBER::GRABBER_TOGGLE())
     {
       m_grabber.In();
