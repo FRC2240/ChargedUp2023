@@ -69,6 +69,7 @@ public:
 
 
 private:
+    bool m_is_auto = false;
     std::vector<double> m_test_case = {1,2,3,4,5};
     Vision m_camera;
     int m_cycle = 0;

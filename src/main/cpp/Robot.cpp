@@ -27,6 +27,53 @@ static auto field_centric = true;
 //static bool drivers_flashing_red = false;
 //static bool turners_flashing_red = false;
 
+Robot::Robot()
+{
+  // setup RobotStates
+  RobotState::IsEnabled = [this]()
+  { return IsEnabled(); };
+
+  RobotState::IsDisabled = [this]()
+  { return IsDisabled(); };
+
+  RobotState::IsAutonomous = [this]()
+  { return IsAutonomous(); };
+
+  RobotState::IsAutonomousEnabled = [this]()
+  { return IsAutonomousEnabled(); };
+
+  RobotState::IsTeleop = [this]()
+  { return IsTeleop(); };
+
+  RobotState::IsTeleopEnabled = [this]()
+  { return IsTeleopEnabled(); };
+
+  RobotState::IsTest = [this]()
+  { return IsTest(); };
+
+  // Call the inits for all subsystems here
+  Drivetrain::init();
+  std::cout << "Drivtrain started \n";
+  Odometry::putField2d();
+  std::cout << "Odometry putfield done \n";
+
+  /* legacy
+  frc::SmartDashboard::PutData("Traj Selector", &traj_selector);
+  frc::SmartDashboard::PutBoolean("Traj Reversed", Trajectory::reverse_trajectory);
+  */
+
+
+  // Auto paths
+  m_chooser.AddOption(Robot::CIRCLE, Robot::CIRCLE);
+  m_chooser.AddOption(Robot::LINE, Robot::LINE);
+  m_chooser.AddOption(Robot::NON_HOLONOMIC, Robot::NON_HOLONOMIC);
+
+  frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+
+std::cout << "robot object created \n";
+std::cout << "go get em tiger" << std::endl;
+}
+
 void Robot::RobotInit()
 {
   Odometry::putField2d();
@@ -86,54 +133,6 @@ void swerveDrive(bool const &field_relative)
 /******************************************************************/
 /*                   Public Function Definitions                  */
 /******************************************************************/
-
-Robot::Robot()
-{
-  // setup RobotStates
-  RobotState::IsEnabled = [this]()
-  { return IsEnabled(); };
-
-  RobotState::IsDisabled = [this]()
-  { return IsDisabled(); };
-
-  RobotState::IsAutonomous = [this]()
-  { return IsAutonomous(); };
-
-  RobotState::IsAutonomousEnabled = [this]()
-  { return IsAutonomousEnabled(); };
-
-  RobotState::IsTeleop = [this]()
-  { return IsTeleop(); };
-
-  RobotState::IsTeleopEnabled = [this]()
-  { return IsTeleopEnabled(); };
-
-  RobotState::IsTest = [this]()
-  { return IsTest(); };
-
-  // Call the inits for all subsystems here
-  Drivetrain::init();
-  std::cout << "Drivtrain started \n";
-  Odometry::putField2d();
-  std::cout << "Odometry putfield done \n";
-
-  /* legacy
-  frc::SmartDashboard::PutData("Traj Selector", &traj_selector);
-  frc::SmartDashboard::PutBoolean("Traj Reversed", Trajectory::reverse_trajectory);
-  */
-
-
-  // Auto paths
-  m_chooser.AddOption(Robot::CIRCLE, Robot::CIRCLE);
-  m_chooser.AddOption(Robot::LINE, Robot::LINE);
-  m_chooser.AddOption(Robot::NON_HOLONOMIC, Robot::NON_HOLONOMIC);
-
-  frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
-
-std::cout << "robot object created \n";
-std::cout << "go get em tiger" << std::endl;
-}
-
 void Robot::RobotPeriodic()
 {
   Trajectory::reverse_trajectory = frc::SmartDashboard::GetBoolean("Traj Reversed", Trajectory::reverse_trajectory);
@@ -241,8 +240,7 @@ void Robot::TeleopPeriodic()
 }
 
 void Robot::make_test_path()
-{//const bool fr = false;
-        //Drivetrain::drive(units::velocity::meters_per_second_t{1}, units::velocity::meters_per_second_t{0}, units::radians_per_second_t{0}, fr);
+{
   frc::Pose2d current_pose = Odometry::getPose();
 
   auto heading = (frc::Translation2d(1_m, 1_m) - current_pose.Translation()).Angle().Degrees();
@@ -274,7 +272,6 @@ void Robot::TestPeriodic()
     Trajectory::follow_live_traj(m_trajectory);
 
   //Drivetrain::faceDirection(0.0_mps, 0.0_mps, 0.0_deg, false, 0.1);
-
 }
 
 #ifndef RUNNING_FRC_TESTS
