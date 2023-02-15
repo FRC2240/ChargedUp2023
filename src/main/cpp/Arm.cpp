@@ -165,7 +165,7 @@ bool Arm::arm_moved(bool store_button_raw, bool low_button_raw,
         std::cout << "state: " << "pickup" << "\n";
         desired_position = CONSTANTS::ARM::MOTORPOSITIONS::PICKUP;
         move();
-        open_grabber = false;
+        arm_moved() = true;
     }
     else if(low_button)
     {
@@ -197,27 +197,13 @@ bool Arm::arm_moved(bool store_button_raw, bool low_button_raw,
         std::cout << "state: " << "store" << "\n";
         desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
         move();
-        open_grabber = false;
+        arm_moved() = true;
     }
-
-    if (((arm_cancoder.GetAbsolutePosition()/desired_position > CONSTANTS::ARM::MIN_THRESHOLD) &&
-    (arm_cancoder.GetAbsolutePosition()/desired_position < CONSTANTS::ARM::MAX_THRESHOLD) && desired_position != CONSTANTS::ARM::MOTORPOSITIONS::STORED))
+    else
     {
-        m_arm_timer.Start();
-        open_grabber = true;
-
-        if (m_arm_timer.Get() > units::time::second_t(2.0))
-        {
-            open_grabber = false;
-            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
-            move();
-            m_arm_timer.Stop();
-            m_arm_timer.Reset();
-        }
-    
-        open_grabber = true;
+        arm_moved() = false;
     }
-    open_grabber = false;
+
 }
 
 void Arm::test()
