@@ -121,224 +121,103 @@ void Arm::Stop(){
     m_arm_motor_right.Set(0.0);
 }
 
-Arm::STATES Arm::arm_logic(bool store_button, bool low_button, 
-                           bool med_button, bool hp_button,
-                           bool high_button, bool pickup_button)
+
+bool Arm::arm_moved(bool store_button_raw, bool low_button_raw, 
+                    bool med_button_raw, bool hp_button_raw,
+                    bool high_button_raw, bool pickup_button_raw)
 {
 
-    switch(state)
+    m_arm_motor_left.SetInverted(ctre::phoenix::motorcontrol::InvertType::FollowMaster);
+    m_arm_motor_left.Follow(m_arm_motor_right);
+
+    if (store_button_raw)
     {
-        case STORED:
+        store_button = !store_button;
+    }
 
-            if(low_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
-                move();
-                state = LOW;
-            }
-            else if(med_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
-                move(); 
-                state = MED;
-            }
-            else if(hp_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
-                move();
-                state = HUMANPLAYER;
-            }
-            else if(high_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
-                move();
-                state = HIGH;
-            }
-            else if(pickup_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::PICKUP;
-                move();
-                state = PICKUP;
-            }
-        break;
+    if (pickup_button_raw)
+    {
+        pickup_button = !pickup_button;
+    }
 
-        case LOW:
-            if(store_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
-                move();
-                state = STORED;
-            }
-            else if(med_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
-                move(); 
-                state = MED;
-            }
-            else if(hp_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
-                move();
-                state = HUMANPLAYER;
-            }
-            else if(high_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
-                move();
-                state = HIGH;
-            }
-            else if(pickup_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::PICKUP;
-                move();
-                state = PICKUP;
-            }
+    if (low_button_raw)
+    {
+        low_button = !low_button;
+    }
 
-        break;
+    if (med_button_raw)
+    {
+        med_button = !med_button;
+    }
 
-        case MED:
-            if(store_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
-                move();
-                state = STORED;
-            }
-            else if(low_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
-                move(); 
-                state = LOW;
-            }
-            else if(hp_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
-                move();
-                state = HUMANPLAYER;
-            }
-            else if(high_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
-                move();
-                state = HIGH;
-            }
-            else if(pickup_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::PICKUP;
-                move();
-                state = PICKUP;
-            }
-            
+    if (hp_button_raw)
+    {
+        hp_button = !hp_button;
+    }
 
-        break;
+    if (high_button_raw)
+    {
+        high_button = !high_button;
+    }
 
-        case HUMANPLAYER:
-            if(store_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
-                move();
-                state = STORED;
-            }
-            else if(low_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
-                move(); 
-                state = LOW;
-            }
-            else if(med_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
-                move();
-                state = MED;
-            }
-            else if(high_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
-                move();
-                state = HIGH;
-            }
-            else if(pickup_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::PICKUP;
-                move();
-                state = PICKUP;
-            }
-        
-        break;
+    if(pickup_button)
+    {
+        std::cout << "state: " << "pickup" << "\n";
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::PICKUP;
+        move();
+        open_grabber = false;
+    }
+    else if(low_button)
+    {
+        std::cout << "state: " << "low" << "\n";
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
+        move();
+    }
+    else if(med_button)
+    {
+        std::cout << "state: " << "med" << "\n";
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
+        move();
+    }
+    else if(hp_button)
+    {
+        std::cout << "state: " << "hp" << "\n";
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
+        move();
+        open_grabber = false;
+    }
+    else if(high_button)
+    {
+        std::cout << "state: " << "high" << "\n";
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
+        move();
+    }
+    else if(store_button)
+    {
+        std::cout << "state: " << "store" << "\n";
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
+        move();
+        open_grabber = false;
+    }
 
-        case HIGH:
-            if(store_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
-                move();
-                state = STORED;
-            }
-            else if(low_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
-                move(); 
-                state = LOW;
-            }
-            else if(med_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
-                move();
-                state = MED;
-            }
-            else if(hp_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
-                move();
-                state = HUMANPLAYER;
-            }
-            else if(pickup_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::PICKUP;
-                move();
-                state = PICKUP;
-            }
+    if (((arm_cancoder.GetAbsolutePosition()/desired_position > CONSTANTS::ARM::MIN_THRESHOLD) &&
+    (arm_cancoder.GetAbsolutePosition()/desired_position < CONSTANTS::ARM::MAX_THRESHOLD) && desired_position != CONSTANTS::ARM::MOTORPOSITIONS::STORED))
+    {
+        m_arm_timer.Start();
+        open_grabber = true;
 
-        break;
-
-        case PICKUP:
-
-            if(store_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
-                move();
-                state = STORED;
-            }
-            else if(low_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
-                move(); 
-                state = LOW;
-            }
-            else if(med_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
-                move();
-                state = MED;
-            }
-            else if(high_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
-                move();
-                state = HIGH;
-            }
-            else if(hp_button)
-            {
-                desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
-                move();
-                state = HUMANPLAYER;
-            }
-            break;
-
-     }
-    return state;    
-}
-
-void Arm::Test(){
-    std::cout << "arm encoder with offset: " << position << std::endl;
+        if (m_arm_timer.Get() > units::time::second_t(2.0))
+        {
+            open_grabber = false;
+            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
+            move();
+            m_arm_timer.Stop();
+            m_arm_timer.Reset();
+        }
+    
+        open_grabber = true;
+    }
+    open_grabber = false;
 }
 
 void Arm::test()

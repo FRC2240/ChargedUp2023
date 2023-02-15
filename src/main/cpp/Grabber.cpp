@@ -19,3 +19,8 @@ void Grabber::Out()
 {
   m_grabberPiston.Set(frc::DoubleSolenoid::Value::kReverse);
 }
+
+void Grabber::GrabberLogic(bool arm_bool)
+{
+
+}
