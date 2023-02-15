@@ -239,20 +239,24 @@ void Robot::TeleopPeriodic()
 }
 
 void Robot::make_test_path()
-{
+{const bool fr = false;
+        Drivetrain::drive(units::velocity::meters_per_second_t{1}, units::velocity::meters_per_second_t{0}, units::radians_per_second_t{0}, fr);
   frc::Pose2d current_pose = Odometry::getPose();
   m_trajectory = Trajectory::generate_live_traj(current_pose.X(),
                                  current_pose.Y(),
-                                 frc::Rotation2d(Drivetrain::getCCWHeading()),
-                                 frc::Rotation2d(Drivetrain::getCCWHeading()),
-                                 current_pose.X() + 1_m,
-                                 current_pose.Y() + 1_m,
-                                 -frc::Rotation2d(Drivetrain::getCCWHeading()),
-                                 -frc::Rotation2d(Drivetrain::getCCWHeading())
+                                frc::Rotation2d(current_pose.Rotation().Degrees()),
+                                 frc::Rotation2d(current_pose.Rotation().Degrees()),
+                                 current_pose.X() + 2_m,
+                                 current_pose.Y() + 2_m,
+                                 frc::Rotation2d(0_deg),
+                                 frc::Rotation2d(0_deg)
+                                 //frc::Rotation2d(Drivetrain::getCCWHeading()),
+                                 //frc::Rotation2d(Drivetrain::getCCWHeading())
                                  );
 }
 void Robot::TestInit()
 {
+  std::cout << "Test init \n";
   Odometry::update();
   make_test_path();
   Trajectory::init_live_traj(m_trajectory);
@@ -260,7 +264,9 @@ void Robot::TestInit()
 
 void Robot::TestPeriodic()
 {
-  Trajectory::follow_live_traj(m_trajectory);
+  auto pose = Odometry::getPose();
+  std::cout << "Navx " << Drivetrain::getAngle().value() << std::endl;
+    Trajectory::follow_live_traj(m_trajectory);
 }
 
 #ifndef RUNNING_FRC_TESTS
