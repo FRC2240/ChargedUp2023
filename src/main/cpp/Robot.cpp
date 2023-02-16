@@ -239,6 +239,14 @@ void Robot::TeleopPeriodic()
       m_grabber.grabberToggle = false; 
       breakbeam = false;
     }
+
+
+  m_arm.arm_moved(BUTTON::ARM::ARM_STORED(), BUTTON::ARM::ARM_LOW(), 
+                  BUTTON::ARM::ARM_MID(), BUTTON::ARM::ARM_HP(), 
+                  BUTTON::ARM::ARM_HIGH(), BUTTON::ARM::ARM_PICKUP());
+  arm_bool = m_arm.open_grabber;
+  m_grabber.GrabberLogic(arm_bool);
+
 }
 
 void Robot::make_test_path()

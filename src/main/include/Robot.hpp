@@ -72,6 +72,8 @@ private:
 
     bool breakbeam;
 
+    bool arm_bool;
+
     std::string m_autoSelected;
 
     Grabber m_grabber;

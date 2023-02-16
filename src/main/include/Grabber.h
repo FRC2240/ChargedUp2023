@@ -14,6 +14,9 @@ public:
 
   void In();
   void Out();
+
+  void GrabberLogic(bool arm_bool);
+
   bool grabberToggle = false;
   
 

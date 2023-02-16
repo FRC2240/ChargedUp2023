@@ -32,6 +32,8 @@ namespace CONSTANTS
     constexpr int LEFT_ARM_MOTOR_ID = 2;
     constexpr double ARM_ENCODER_OFFSET = -112.0;
     constexpr int ARM_CANCODER_ID = 1;
+    constexpr double MIN_THRESHOLD = 0.98;
+    constexpr double MAX_THRESHOLD = 1.02;
     
     namespace PID
     {
@@ -60,7 +62,6 @@ namespace CONSTANTS
   }
 
   namespace VISION {
-    #warning "MINOR: Variables not defined properly"
     //Remove above warning when values found
     constexpr int APRILTAG_PIPE = 1; 
     constexpr int BUFFER_SIZE = 5; 
