@@ -165,7 +165,7 @@ bool Arm::arm_moved(bool store_button_raw, bool low_button_raw,
         std::cout << "state: " << "pickup" << "\n";
         desired_position = CONSTANTS::ARM::MOTORPOSITIONS::PICKUP;
         move();
-        arm_moved() = true;
+        open_grabber = true;
     }
     else if(low_button)
     {
@@ -197,11 +197,11 @@ bool Arm::arm_moved(bool store_button_raw, bool low_button_raw,
         std::cout << "state: " << "store" << "\n";
         desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
         move();
-        arm_moved() = true;
+        open_grabber = true;
     }
     else
     {
-        arm_moved() = false;
+        open_grabber = false;
     }
 
 }
