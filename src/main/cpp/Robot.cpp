@@ -199,8 +199,6 @@ void Robot::TeleopInit()
 
 void Robot::TeleopPeriodic()
 {
-    std::cout << "Navx " << Drivetrain::getAngle().value() << std::endl;
-
   //DASHBOARD::update_botpose(m_camera.get_field_pos_by_tag());
   //Drivetrain::print_angle();
  // m_camera.pose_loop();
@@ -253,7 +251,7 @@ void Robot::make_test_path()
                                  current_pose.Y() + 0.5_m,
                                  frc::Rotation2d(heading),
                                  frc::Rotation2d(0.0_deg/*current_pose.Rotation().Degrees()*/)
-                                 //frc::Rotation2d(Drivetrain::getCCWHeading()),
+                                //frc::Rotation2d(Drivetrain::getCCWHeading()),
                                  //frc::Rotation2d(Drivetrain::getCCWHeading())
                                  );
 }
@@ -263,6 +261,7 @@ void Robot::TestInit()
   Odometry::update();
   make_test_path();
   Trajectory::init_live_traj(m_trajectory);
+  m_is_auto = false;
 }
 
 void Robot::TestPeriodic()
@@ -270,9 +269,8 @@ void Robot::TestPeriodic()
   //auto pose = Odometry::getPose();
   //std::cout << "Navx " << Drivetrain::getAngle().value() << std::endl;
     Trajectory::follow_live_traj(m_trajectory);
-
-  //Drivetrain::faceDirection(0.0_mps, 0.0_mps, 0.0_deg, false, 0.1);
 }
+
 
 #ifndef RUNNING_FRC_TESTS
 int main()
