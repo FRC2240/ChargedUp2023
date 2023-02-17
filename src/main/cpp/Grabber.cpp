@@ -4,23 +4,31 @@
 
 Grabber::Grabber(){}
 
-//FIXME
-// Only handles one case
-// functions not used
-// Other issues
-// DO NOT IGNORE WARNINGS FROM THIS FUNCTION 
- 
-void Grabber::In()
+void Grabber::close()
 {
   m_grabberPiston.Set(frc::DoubleSolenoid::Value::kForward);
 }
 
-void Grabber::Out()
+void Grabber::open()
 {
   m_grabberPiston.Set(frc::DoubleSolenoid::Value::kReverse);
 }
 
-void Grabber::GrabberLogic(bool arm_bool)
-{
+bool Grabber::break_beam(){return m_beam.Get();}
 
+void Grabber::GrabberLogic(bool arm_bool, bool toggle_raw)
+{
+  if (toggle_raw)
+    {
+      toggle = !toggle;
+    }
+
+  if (arm_bool || toggle)
+    {
+      open();
+    }
+  else
+    {
+      close();
+    }
 }

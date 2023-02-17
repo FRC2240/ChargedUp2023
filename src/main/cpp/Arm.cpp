@@ -121,10 +121,14 @@ void Arm::Stop(){
     m_arm_motor_right.Set(0.0);
 }
 
-
-bool Arm::arm_moved(bool store_button_raw, bool low_button_raw, 
-                    bool med_button_raw, bool hp_button_raw,
-                    bool high_button_raw, bool pickup_button_raw)
+bool Arm::arm_moved(
+                 bool store_button_raw,
+                 bool low_button_raw,
+                 bool med_button_raw,
+                 bool hp_button_raw,
+                 bool high_button_raw,
+                 bool pickup_button_raw,
+                 bool break_beam)
 {
 
     m_arm_motor_left.SetInverted(ctre::phoenix::motorcontrol::InvertType::FollowMaster);
@@ -160,12 +164,16 @@ bool Arm::arm_moved(bool store_button_raw, bool low_button_raw,
         high_button = !high_button;
     }
 
+    std::cout << "high: " << high_button << ", HP: " << hp_button << ", mid: " <<
+        med_button << ", low: " << low_button << ", pickup: " << pickup_button <<
+        ", store: " << store_button << ", break beam: " << break_beam <<
+        std::endl;
+
     if(pickup_button)
     {
         std::cout << "state: " << "pickup" << "\n";
         desired_position = CONSTANTS::ARM::MOTORPOSITIONS::PICKUP;
         move();
-        open_grabber = true;
     }
     else if(low_button)
     {
@@ -197,14 +205,39 @@ bool Arm::arm_moved(bool store_button_raw, bool low_button_raw,
         std::cout << "state: " << "store" << "\n";
         desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
         move();
-        open_grabber = true;
-    }
-    else
-    {
         open_grabber = false;
     }
 
+    if (arm_cancoder.GetAbsolutePosition()/desired_position > CONSTANTS::ARM::MIN_THRESHOLD &&
+        arm_cancoder.GetAbsolutePosition()/desired_position < CONSTANTS::ARM::MAX_THRESHOLD)
+        {
+            std::cout << "IN THRESHOLD \n";
+            open_grabber = true;
+            m_timer.Start();
+
+            if (m_timer.Get() > CONSTANTS::ARM::DELAY)
+                {
+                    std::cout << "TIMER EXPIRED\n";
+                    open_grabber = true;
+                    m_timer.Reset();
+                }
+            if (desired_position == CONSTANTS::ARM::MOTORPOSITIONS::HP ||
+                desired_position == CONSTANTS::ARM::MOTORPOSITIONS::PICKUP)
+                {
+                    if (break_beam)
+                        {
+                            open_grabber = false;
+                        }
+                    else
+                        {
+                            open_grabber = true;
+                        }
+                }
+        }
+    std::cout << "grabber status: " << open_grabber;
+    return open_grabber;
 }
+
 
 void Arm::test()
 {

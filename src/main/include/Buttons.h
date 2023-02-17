@@ -32,7 +32,7 @@ namespace BUTTON
 
   namespace GRABBER
   {
-    inline bool GRABBER_TOGGLE() {return BUTTON::m_stick.GetRightBumperReleased();}
+    inline bool TOGGLE() {return BUTTON::m_stick.GetRightBumperReleased();}
     //inline bool GRABBER_STORE() {return BUTTON::m_stick.GetLeftBumperReleased();}
     
   }

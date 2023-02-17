@@ -186,11 +186,9 @@ bool Vision::check_std_dev(std::vector<Data> buffer)
         {
          return true;
         }
-      else
-        {
-          return false;
-          }
+
     }
+  return false;
 }
 
 

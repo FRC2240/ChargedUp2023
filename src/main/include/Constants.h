@@ -5,11 +5,11 @@
 #include <frc/DriverStation.h>
 #include <iostream>
 #include <vector>
-
+#include <units/time.h>
 
 namespace CONSTANTS 
 {
-  constexpr bool DEBUGGING = true; //DO NOT USE IN COMP. 
+  constexpr bool DEBUGGING = true; //DO NOT USE IN COMP.
   //SLOWS DOWN EVERYTHING & MAY CAUSE WATCHDOG EXEPTIONS.
   namespace TRAJECTORY
   {
@@ -63,6 +63,7 @@ namespace CONSTANTS
 
   namespace ARM
   {
+    constexpr units::second_t DELAY = 2_s;
     constexpr int RIGHT_ARM_MOTOR_ID = 3;
     constexpr int LEFT_ARM_MOTOR_ID = 2;
     constexpr double ARM_ENCODER_OFFSET = -112.0;
