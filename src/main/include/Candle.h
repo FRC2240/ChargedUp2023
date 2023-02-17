@@ -2,22 +2,29 @@
 #include "ctre/phoenix/led/CANdle.h"
 #include "Buttons.h"
 #include "ctre/phoenix/led/RainbowAnimation.h"
+#include <frc/DriverStation.h>
 
 class Candle{
     public:
 
+    enum STATES { PURPLE_LEFT, PURPLE_RIGHT, YELLOW_LEFT, YELLOW_RIGHT, OFF};
+
+    STATES candle_logic(bool left_button, bool right_button, 
+                        bool yellow_button, bool purple_button);
+
     Candle();
 
-    void Purple();
-    void Yellow();
-    void Red();
-    void Blue();
-    void Rainbow();
+    void RainbowAnim();
     void Off();
 
     private:
-    ctre::phoenix::led::CANdle m_candle {CONSTANTS::CANDLE::CANDLE_ID, "canivore"};
-    ctre::phoenix::led::RainbowAnimation rainbow{0.5, 0.5, -1};
 
+    frc::DriverStation::Alliance m_alliance;
+
+    STATES state = OFF;
+    STATES previous_state;
+
+    ctre::phoenix::led::CANdle m_candle {CONSTANTS::CANDLE::CANDLE_ID, "canivore"};
+    ctre::phoenix::led::RainbowAnimation rainbow1{1.0, 0.5, -1, false, 8};
 };
 

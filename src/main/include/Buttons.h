@@ -38,35 +38,22 @@ namespace BUTTON
 
   namespace GRIPPADS
   {
-    inline bool GRIPPADS_DEPLOY() 
-    {
-      if (BUTTON::m_stick.GetPOV() <= 225 && BUTTON::m_stick.GetPOV() >= 135)
-      {
-        return true;
-      }
-    else
-      {
-      return false;
-      }
+    inline bool GRIPPADS_DEPLOY() {return BUTTON::m_stick.GetPOV() <= 225 && BUTTON::m_stick.GetPOV() >= 135;}
+    inline bool GRIPPADS_RETRACT() {return BUTTON::m_stick.GetPOV() == 0;}
     }
-  inline bool GRIPPADS_RETRACT() 
-    {
-      if (BUTTON::m_stick.GetPOV() == 0)
-      {
-        return true;
-      }
-    else
-      {
-      return false;
-      }
-
-    }
-  }
   
   namespace WRIST
   {
     inline bool WRIST_UP() {return BUTTON::m_stick.GetAButton();}
     inline bool WRIST_DOWN() {return BUTTON::m_stick.GetYButton();}
+  }
+
+  namespace CANDLE
+  {
+    inline bool CANDLE_LEFT() {return BUTTON::m_aux_stick.GetBButton();}
+    inline bool CANDLE_RIGHT() {return BUTTON::m_aux_stick.GetXButton();}
+    inline bool CANDLE_YELLOW() {return BUTTON::m_aux_stick.GetYButton();}
+    inline bool CANDLE_PURPLE() {return BUTTON::m_aux_stick.GetAButton();}
   }
 }
 
