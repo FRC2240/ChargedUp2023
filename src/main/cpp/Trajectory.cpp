@@ -118,6 +118,7 @@ void Trajectory::printRobotRelativeSpeeds()
     frc::SmartDashboard::PutNumber("Estimated VY Speed", robot_relative.vy.value());
     frc::SmartDashboard::PutNumber("Estimated Omega Speed", units::degrees_per_second_t{robot_relative.omega}.value() / 720);
 }
+/*
 PathPlannerTrajectory Trajectory::generate_live_traj(TrajDepends t)
 {
     return
@@ -138,7 +139,7 @@ PathPlannerTrajectory Trajectory::generate_live_traj(TrajDepends t)
                                             )
                                   );
 
-}
+}*/
 
 
 PathPlannerTrajectory Trajectory::generate_live_traj(units::meter_t current_x,
@@ -161,6 +162,7 @@ PathPlannerTrajectory Trajectory::generate_live_traj(units::meter_t current_x,
                                             current_head,
                                             current_rot
                                             ),
+
                                   PathPoint(frc::Translation2d(desired_x,
                                                                desired_y),
                                             desired_head,
@@ -170,7 +172,7 @@ PathPlannerTrajectory Trajectory::generate_live_traj(units::meter_t current_x,
     return ret_val;
 }
 
-
+/*
 PathPlannerTrajectory Trajectory::generate_live_traj(units::meter_t current_x,
                                                      units::meter_t current_y,
                                                      units::degree_t current_head,
@@ -200,6 +202,7 @@ PathPlannerTrajectory Trajectory::generate_live_traj(units::meter_t current_x,
                                       );
         return ret_val;
 }
+*/
 void Trajectory::init_live_traj(PathPlannerTrajectory traj)
 {
     auto const inital_state = traj.getInitialState();
@@ -225,11 +228,13 @@ void Trajectory::init_live_traj(PathPlannerTrajectory traj)
 void Trajectory::follow_live_traj(PathPlannerTrajectory traj)
 {
 
-    if ( (m_trajTimer.Get() <= traj.getTotalTime() + 0.1_s))
+    if ( (m_trajTimer.Get() <= traj.getTotalTime() /*+ 0.1_s*/))
     {
         auto current_time = m_trajTimer.Get();
 
         auto sample = traj.sample(current_time);
+
+        //std::cout << sample.pose.X().value() << " " <<  sample.pose.Y().value() << " " << sample.holonomicRotation.Degrees().value() << "\n";
 
         Odometry::getField2dObject("Traj")->SetPose({sample.pose.X(), sample.pose.Y(), sample.holonomicRotation});
 
@@ -246,6 +251,23 @@ void Trajectory::follow_live_traj(PathPlannerTrajectory traj)
                                                                   "Current trajectory sample value: {}, Pose X: {}, Pose Y: {}, Pose Z: {}\nHolonomic Rotation: {}, Timer: {}\n",
                                                                   ++trajectory_samples, sample.pose.X().value(), sample.pose.Y().value(), sample.pose.Rotation().Degrees().value(),
                                                                   sample.holonomicRotation.Degrees().value(), m_trajTimer.Get().value()));
+            
+                std::cout << "sample: "
+                //<< sample.pose.X().value() << "," 
+                //<< sample.pose.Y().value() << ","
+                << sample.pose.Rotation().Degrees().value() << ","
+                << sample.holonomicRotation.Degrees().value() << ","
+                << m_trajTimer.Get().value() << ","
+                << std::endl;
+
+            auto pose = Odometry::getPose();
+
+            std::cout << "robot: "
+                //<< pose.X().value() << "," 
+                //<< pose.Y().value() << ","
+                << pose.Rotation().Degrees().value() << ","
+                << std::endl;
+
             printRobotRelativeSpeeds();
             printFieldRelativeSpeeds();
         }

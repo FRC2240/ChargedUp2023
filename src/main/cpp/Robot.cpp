@@ -200,6 +200,8 @@ void Robot::TeleopInit()
 
 void Robot::TeleopPeriodic()
 {
+    std::cout << "Navx " << Drivetrain::getAngle().value() << std::endl;
+
   //DASHBOARD::update_botpose(m_camera.get_field_pos_by_tag());
   //Drivetrain::print_angle();
  // m_camera.pose_loop();
@@ -239,17 +241,20 @@ void Robot::TeleopPeriodic()
 }
 
 void Robot::make_test_path()
-{const bool fr = false;
-        Drivetrain::drive(units::velocity::meters_per_second_t{1}, units::velocity::meters_per_second_t{0}, units::radians_per_second_t{0}, fr);
+{//const bool fr = false;
+        //Drivetrain::drive(units::velocity::meters_per_second_t{1}, units::velocity::meters_per_second_t{0}, units::radians_per_second_t{0}, fr);
   frc::Pose2d current_pose = Odometry::getPose();
+
+  auto heading = (frc::Translation2d(1_m, 1_m) - current_pose.Translation()).Angle().Degrees();
+
   m_trajectory = Trajectory::generate_live_traj(current_pose.X(),
                                  current_pose.Y(),
-                                frc::Rotation2d(current_pose.Rotation().Degrees()),
+                                frc::Rotation2d(heading/*current_pose.Rotation().Degrees()*/),
                                  frc::Rotation2d(current_pose.Rotation().Degrees()),
-                                 current_pose.X() + 2_m,
-                                 current_pose.Y() + 2_m,
-                                 frc::Rotation2d(0_deg),
-                                 frc::Rotation2d(0_deg)
+                                 current_pose.X() + 0.25_m,
+                                 current_pose.Y() + 0.5_m,
+                                 frc::Rotation2d(heading),
+                                 frc::Rotation2d(0.0_deg/*current_pose.Rotation().Degrees()*/)
                                  //frc::Rotation2d(Drivetrain::getCCWHeading()),
                                  //frc::Rotation2d(Drivetrain::getCCWHeading())
                                  );
@@ -264,9 +269,12 @@ void Robot::TestInit()
 
 void Robot::TestPeriodic()
 {
-  auto pose = Odometry::getPose();
-  std::cout << "Navx " << Drivetrain::getAngle().value() << std::endl;
+  //auto pose = Odometry::getPose();
+  //std::cout << "Navx " << Drivetrain::getAngle().value() << std::endl;
     Trajectory::follow_live_traj(m_trajectory);
+
+  //Drivetrain::faceDirection(0.0_mps, 0.0_mps, 0.0_deg, false, 0.1);
+
 }
 
 #ifndef RUNNING_FRC_TESTS
