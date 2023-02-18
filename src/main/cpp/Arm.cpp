@@ -205,7 +205,7 @@ bool Arm::arm_moved(
         std::cout << "state: " << "store" << "\n";
         desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
         move();
-        open_grabber = false;
+        return false;
     }
 
     if (arm_cancoder.GetAbsolutePosition()/desired_position > CONSTANTS::ARM::MIN_THRESHOLD &&
@@ -218,13 +218,13 @@ bool Arm::arm_moved(
             if (m_timer.Get() > CONSTANTS::ARM::DELAY)
                 {
                     std::cout << "TIMER EXPIRED\n";
-                    open_grabber = true;
+                    desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
                     m_timer.Reset();
                 }
             if (desired_position == CONSTANTS::ARM::MOTORPOSITIONS::HP ||
                 desired_position == CONSTANTS::ARM::MOTORPOSITIONS::PICKUP)
                 {
-                    if (break_beam)
+                    if (!break_beam)
                         {
                             open_grabber = false;
                         }
