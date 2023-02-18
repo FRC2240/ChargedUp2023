@@ -19,6 +19,29 @@ static frc::HolonomicDriveController controller{
 
 frc::Timer m_trajTimer;
 
+Trajectory::TrajDepends Trajectory::fall_back()
+{
+    frc::Pose2d current_pose = Odometry::getPose();
+    Trajectory::TrajDepends ret;
+    auto heading = (frc::Translation2d(1_m, 1_m) - current_pose.Translation()).Angle().Degrees();
+
+    if (current_pose.X().value() < 0)
+        {
+            ret.desired_x = current_pose.X() + 1_m;
+        }
+    else
+        {
+            ret.desired_x = current_pose.X() - 1_m;
+        }
+    ret.desired_head = heading;
+    ret.desired_rot = 0_deg;
+    ret.current_rot = current_pose.Rotation().Degrees();
+    ret.current_head = heading;
+    ret.current_x = current_pose.X();
+    ret.current_y = current_pose.Y();
+    ret.desired_y = current_pose.Y();
+    return ret;
+}
 /******************************************************************/
 /*                   Public Function Definitions                  */
 /******************************************************************/
@@ -225,7 +248,7 @@ void Trajectory::init_live_traj(PathPlannerTrajectory traj)
 }
 
 
-void Trajectory::follow_live_traj(PathPlannerTrajectory traj)
+bool Trajectory::follow_live_traj(PathPlannerTrajectory traj)
 {
 
     if ( (m_trajTimer.Get() <= traj.getTotalTime() /*+ 0.1_s*/))
@@ -278,7 +301,9 @@ void Trajectory::follow_live_traj(PathPlannerTrajectory traj)
     else
         {
             Drivetrain::stop();
+            return true;
         }
+    return false;
 }
 
 void Trajectory::printFieldRelativeSpeeds()

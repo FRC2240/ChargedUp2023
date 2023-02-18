@@ -325,6 +325,22 @@ switch (state)
     }
 
 }
+void Robot::traj_fall_back()
+{
+  if (!fall_back_init)
+    {
+      m_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back());
+      Trajectory::init_live_traj(m_trajectory);
+      fall_back_init = true;
+    }
+  else
+    {
+      if (Trajectory::follow_live_traj(m_trajectory))
+        {
+         fall_back_init = false;
+        }
+    }
+}
 void Robot::drivebase_goto(Trajectory::HEIGHT h)
 {
   if (db_last_tgt != h)

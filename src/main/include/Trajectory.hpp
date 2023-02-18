@@ -69,6 +69,8 @@ namespace Trajectory
         units::degree_t desired_rot;
     };
 
+    TrajDepends fall_back();
+
     units::meter_t determine_desired_y();
 
     TrajDepends determine_desired_traj(HEIGHT h);
@@ -99,7 +101,7 @@ namespace Trajectory
 
     void init_live_traj(PathPlannerTrajectory traj);
 
-    void follow_live_traj(PathPlannerTrajectory traj);
+    bool follow_live_traj(PathPlannerTrajectory traj);
 
 
     void printRobotRelativeSpeeds();

@@ -68,12 +68,14 @@ public:
     void TestInit() override;
     void TestPeriodic() override;
 
+    void traj_fall_back();
     void drivebase_goto(Trajectory::HEIGHT h);
     void make_test_path();
 
 
 
 private:
+    bool fall_back_init = false;
     Trajectory::HEIGHT db_last_tgt = Trajectory::HEIGHT::GROUND;
     bool m_is_auto = false;
     std::vector<double> m_test_case = {1,2,3,4,5};
