@@ -7,7 +7,7 @@
 class Candle{
     public:
 
-    enum STATES { PURPLE_LEFT, PURPLE_RIGHT, YELLOW_LEFT, YELLOW_RIGHT, OFF};
+    enum STATES { PURPLE_LEFT, PURPLE_RIGHT, YELLOW_LEFT, YELLOW_RIGHT};
 
     STATES candle_logic(bool left_button, bool right_button, 
                         bool yellow_button, bool purple_button);
@@ -21,7 +21,7 @@ class Candle{
 
     frc::DriverStation::Alliance m_alliance;
 
-    STATES state = OFF;
+    STATES state = PURPLE_LEFT;
     STATES previous_state;
 
     ctre::phoenix::led::CANdle m_candle {CONSTANTS::CANDLE::CANDLE_ID, "canivore"};

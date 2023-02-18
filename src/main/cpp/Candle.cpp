@@ -17,9 +17,8 @@ Candle::STATES Candle::candle_logic(bool left_button, bool right_button,
 {
 
     previous_state = state;
+    m_candle.ClearAnimation();
     
-    m_candle.SetLEDs(82, 28, 200, 0, 63, 11);
-    m_candle.SetLEDs(82, 28, 200, 0, 74, 12);
 
     if (m_alliance == frc::DriverStation::Alliance::kRed){
         m_candle.SetLEDs(255, 0, 0, 0, 8, 54);
@@ -29,6 +28,7 @@ Candle::STATES Candle::candle_logic(bool left_button, bool right_button,
         m_candle.SetLEDs(0, 0, 255, 0, 8, 54);
         m_candle.SetLEDs(255, 0, 255, 0, 108, 100);
     }
+    
 
     if (left_button) {
         if (yellow_button){
@@ -61,11 +61,6 @@ Candle::STATES Candle::candle_logic(bool left_button, bool right_button,
 
     switch (state)
     {
-    case OFF:
-        m_candle.ClearAnimation(0);
-        m_candle.SetLEDs(0, 0, 0, 0);
-        break;
-
     case PURPLE_LEFT:
         m_candle.SetLEDs(82, 28, 200, 0, 63, 11);
         //m_candle.SetLEDs(82, 28, 200, 0);
@@ -79,14 +74,14 @@ Candle::STATES Candle::candle_logic(bool left_button, bool right_button,
         break;
 
     case YELLOW_LEFT:
-        m_candle.SetLEDs(82, 28, 200, 0);
-        m_candle.SetLEDs(82, 28, 200, 0);
+        m_candle.SetLEDs(82, 28, 200, 0, 63, 11);
+        //m_candle.SetLEDs(82, 28, 200, 0);
 
         break;
 
     case YELLOW_RIGHT:
-        m_candle.SetLEDs(82, 28, 200, 0);
-        m_candle.SetLEDs(82, 28, 200, 0);
+        m_candle.SetLEDs(82, 28, 200, 0, 74, 12);
+        //m_candle.SetLEDs(82, 28, 200, 0);
 
         break;
     
