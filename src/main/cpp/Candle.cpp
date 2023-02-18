@@ -79,6 +79,7 @@ void Candle::candle_logic(bool left_button, bool right_button,
         m_candle.SetLEDs(254, 162, 1, 0, 100, 11);
 
         break;
+    }
 }
 
 void Candle::RainbowAnim()
