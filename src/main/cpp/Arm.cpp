@@ -23,7 +23,7 @@ Arm::Arm()
     arm_right_config.remoteFilter0.remoteSensorDeviceID = arm_cancoder.GetDeviceNumber();
     arm_right_config.remoteFilter0.remoteSensorSource = RemoteSensorSource::RemoteSensorSource_CANCoder;
     arm_right_config.primaryPID.selectedFeedbackSensor = FeedbackDevice::RemoteSensor0;
-    arm_right_config.slot0.kP = 0.7;
+    arm_right_config.slot0.kP = 0.3;
     arm_right_config.slot0.kD = 0.0;
     arm_right_config.slot0.kI = 0.0008;
     m_arm_motor_right.ConfigAllSettings(arm_right_config);
@@ -121,121 +121,62 @@ void Arm::Stop(){
     m_arm_motor_right.Set(0.0);
 }
 
-bool Arm::arm_moved(
-                 bool store_button_raw,
-                 bool low_button_raw,
-                 bool med_button_raw,
-                 bool hp_button_raw,
-                 bool high_button_raw,
-                 bool pickup_button_raw,
-                 bool break_beam)
+bool Arm::arm_moved(CONSTANTS::STATES state)
 {
 
-    m_arm_motor_left.SetInverted(ctre::phoenix::motorcontrol::InvertType::FollowMaster);
-    m_arm_motor_left.Follow(m_arm_motor_right);
+    switch (state)
+    {
+        case CONSTANTS::STATES::STORED:
+            std::cout << "state: " << "store" << "\n";
+            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
+            move();
+            return false;
+            break;
 
-    if (store_button_raw)
-    {
-        store_button = !store_button;
-    }
+        case CONSTANTS::STATES::HUMANPLAYER:
+            std::cout << "state: " << "hp" << "\n";
+            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
+            move();
+            break;
 
-    if (pickup_button_raw)
-    {
-        pickup_button = !pickup_button;
-    }
+        case CONSTANTS::STATES::PICKUP:
+            std::cout << "state: " << "pickup" << "\n";
+            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::PICKUP;
+            move();
+            break;
 
-    if (low_button_raw)
-    {
-        low_button = !low_button;
-    }
+        case CONSTANTS::STATES::LOW:
+            std::cout << "state: " << "low" << "\n";
+            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
+            move();
+            break;
 
-    if (med_button_raw)
-    {
-        med_button = !med_button;
-    }
+        case CONSTANTS::STATES::MED:
+            std::cout << "state: " << "med" << "\n";
+            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
+            move();
+            break;
 
-    if (hp_button_raw)
-    {
-        hp_button = !hp_button;
-    }
-
-    if (high_button_raw)
-    {
-        high_button = !high_button;
-    }
-
-    std::cout << "high: " << high_button << ", HP: " << hp_button << ", mid: " <<
-        med_button << ", low: " << low_button << ", pickup: " << pickup_button <<
-        ", store: " << store_button << ", break beam: " << break_beam <<
-        std::endl;
-
-    if(pickup_button)
-    {
-        std::cout << "state: " << "pickup" << "\n";
-        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::PICKUP;
-        move();
-    }
-    else if(low_button)
-    {
-        std::cout << "state: " << "low" << "\n";
-        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
-        move();
-    }
-    else if(med_button)
-    {
-        std::cout << "state: " << "med" << "\n";
-        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
-        move();
-    }
-    else if(hp_button)
-    {
-        std::cout << "state: " << "hp" << "\n";
-        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
-        move();
-        open_grabber = false;
-    }
-    else if(high_button)
-    {
-        std::cout << "state: " << "high" << "\n";
-        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
-        move();
-    }
-    else if(store_button)
-    {
-        std::cout << "state: " << "store" << "\n";
-        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
-        move();
-        return false;
+        case CONSTANTS::STATES::HIGH:
+            std::cout << "state: " << "high" << "\n";
+            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
+            move();
+            break;
+        
     }
 
     if (arm_cancoder.GetAbsolutePosition()/desired_position > CONSTANTS::ARM::MIN_THRESHOLD &&
         arm_cancoder.GetAbsolutePosition()/desired_position < CONSTANTS::ARM::MAX_THRESHOLD)
-        {
-            std::cout << "IN THRESHOLD \n";
-            open_grabber = true;
-            m_timer.Start();
+    {
+        std::cout << "IN THRESHOLD \n";
+        return true;
+    } 
+    else
+    {
+        return false;
+    }
 
-            if (m_timer.Get() > CONSTANTS::ARM::DELAY)
-                {
-                    std::cout << "TIMER EXPIRED\n";
-                    desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
-                    m_timer.Reset();
-                }
-            if (desired_position == CONSTANTS::ARM::MOTORPOSITIONS::HP ||
-                desired_position == CONSTANTS::ARM::MOTORPOSITIONS::PICKUP)
-                {
-                    if (!break_beam)
-                        {
-                            open_grabber = false;
-                        }
-                    else
-                        {
-                            open_grabber = true;
-                        }
-                }
-        }
-    std::cout << "grabber status: " << open_grabber;
-    return open_grabber;
+    
 }
 
 

@@ -16,19 +16,3 @@ void Grabber::open()
 
 bool Grabber::break_beam(){return m_beam.Get();}
 
-void Grabber::GrabberLogic(bool arm_bool, bool toggle_raw)
-{
-  if (toggle_raw)
-    {
-      toggle = !toggle;
-    }
-
-  if (arm_bool || toggle)
-    {
-      open();
-    }
-  else
-    {
-      close();
-    }
-}

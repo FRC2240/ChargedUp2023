@@ -39,6 +39,7 @@
 #include <pathplanner/lib/PathPlannerTrajectory.h>
 
 
+#include "Constants.h"
 
 
 
@@ -73,6 +74,9 @@ public:
 
 
 private:
+    
+    CONSTANTS::STATES state = CONSTANTS::STATES::STORED;
+
     bool m_is_auto = false;
     std::vector<double> m_test_case = {1,2,3,4,5};
     Vision m_camera;

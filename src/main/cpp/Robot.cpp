@@ -219,25 +219,99 @@ void Robot::TeleopPeriodic()
  // m_camera.pose_loop();
   buttonManager();
   swerveDrive(field_centric);
-  Odometry::update();
+  //Odometry::update();
 
   if constexpr (debugging)
     {
       Trajectory::printRobotRelativeSpeeds();
       Trajectory::printFieldRelativeSpeeds();
     }
+                        
+if (BUTTON::ARM::ARM_STORED()){
+    state = CONSTANTS::STATES::STORED;
+}
+else if (BUTTON::ARM::ARM_HP()){
+    state = CONSTANTS::STATES::HUMANPLAYER;
+}
+else if (BUTTON::ARM::ARM_PICKUP()){
+    state = CONSTANTS::STATES::PICKUP;
+}
+else if (BUTTON::ARM::ARM_LOW()){
+    state = CONSTANTS::STATES::LOW;
+}
+else if (BUTTON::ARM::ARM_MID()){
+    state = CONSTANTS::STATES::MED;
+}
+else if (BUTTON::ARM::ARM_HIGH()){
+    state = CONSTANTS::STATES::HIGH;
+}
 
-  m_grabber.GrabberLogic(
-                         m_arm.arm_moved(BUTTON::ARM::ARM_STORED(),
-                                         BUTTON::ARM::ARM_LOW(),
-                                         BUTTON::ARM::ARM_MID(),
-                                         BUTTON::ARM::ARM_HP(),
-                                         BUTTON::ARM::ARM_HIGH(),
-                                         BUTTON::ARM::ARM_PICKUP(),
-                                         m_grabber.break_beam()
-                                         ),
-                         BUTTON::GRABBER::TOGGLE()
-                         );
+switch (state) 
+{
+  case CONSTANTS::STATES::STORED:
+        m_grabber.close();
+        m_arm.arm_moved(state);
+        break;
+
+    case CONSTANTS::STATES::HUMANPLAYER:
+        if(m_arm.arm_moved(state)){
+          m_grabber.open();
+          //move to the right distance
+          if (!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()){
+            m_grabber.close();
+            //Move away form place thing
+            m_arm.arm_moved(CONSTANTS::STATES::STORED);
+            state = CONSTANTS::STATES::STORED;
+          }
+        }
+        break;
+
+    case CONSTANTS::STATES::PICKUP:
+        if (m_arm.arm_moved(state)){
+          m_grabber.open();
+          if (!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()){
+            m_grabber.close();
+            m_arm.arm_moved(CONSTANTS::STATES::STORED);
+            state = CONSTANTS::STATES::STORED;
+          }
+        }
+        break;
+
+    case CONSTANTS::STATES::LOW:
+        if (m_arm.arm_moved(state)){
+          //move to correct distance from target
+          m_grabber.open();
+          //Move away
+          m_grabber.close();
+          m_arm.arm_moved(CONSTANTS::STATES::STORED);
+          state = CONSTANTS::STATES::STORED;
+        }
+        break;
+
+    case CONSTANTS::STATES::MED:
+        if (m_arm.arm_moved(state)){
+          //move to correct distance
+          m_grabber.open();
+          //Move away
+          m_grabber.close();
+          m_arm.arm_moved(CONSTANTS::STATES::STORED);
+          state = CONSTANTS::STATES::STORED;
+        }
+        break;
+
+    case CONSTANTS::STATES::HIGH:
+        if (m_arm.arm_moved(state)){
+          //move to correct distance
+          m_grabber.open();
+          //Move away
+          m_grabber.close();
+          m_arm.arm_moved(CONSTANTS::STATES::STORED);
+          state = CONSTANTS::STATES::STORED;
+        }
+        break;
+    
+    }
+
 }
 
 void Robot::make_test_path()
