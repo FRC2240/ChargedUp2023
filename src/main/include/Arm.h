@@ -47,6 +47,10 @@ class Arm
 
     frc::Timer m_timer;
 
+    double horizontalPoint = 244;
+
+    double maxAFF = 0.15;
+
     TalonFXSensorCollection m_Arm_RightEncoder = m_arm_motor_right.GetSensorCollection();
 
     int setPoint = 200;

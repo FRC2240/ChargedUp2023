@@ -13,7 +13,6 @@ namespace CONSTANTS
   //SLOWS DOWN EVERYTHING & MAY CAUSE WATCHDOG EXEPTIONS.
 
   enum STATES { STORED, LOW, MED, HUMANPLAYER, HIGH, PICKUP};
-  namespace TRAJECTORY
   {
    const std::vector<units::meter_t> Y_POS =
       {
@@ -70,8 +69,8 @@ namespace CONSTANTS
     constexpr int LEFT_ARM_MOTOR_ID = 2;
     constexpr double ARM_ENCODER_OFFSET = -112.0;
     constexpr int ARM_CANCODER_ID = 1;
-    constexpr double MIN_THRESHOLD = 0.98;
-    constexpr double MAX_THRESHOLD = 1.02;
+    constexpr double MIN_THRESHOLD = 0.95;
+    constexpr double MAX_THRESHOLD = 1.05;
     
     namespace PID
     {
@@ -93,7 +92,7 @@ namespace CONSTANTS
       constexpr double STORED = 134.0;
       constexpr double LOW = 189.0;
       constexpr double MED = 244.0;
-      constexpr double HP = 0.0;
+      constexpr double HP = 250.0;
       constexpr double HIGH = 260.0;
       constexpr double PICKUP = 159.0;
     }

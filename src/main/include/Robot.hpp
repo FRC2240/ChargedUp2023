@@ -92,6 +92,8 @@ private:
     const std::string TEST = "Test";
 
     bool arm_bool;
+    
+    frc::Timer m_robot_timer;
 
     std::string m_autoSelected;
     bool breakbeam;

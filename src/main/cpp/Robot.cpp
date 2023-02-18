@@ -254,22 +254,33 @@ switch (state)
         break;
 
     case CONSTANTS::STATES::HUMANPLAYER:
-        if(m_arm.arm_moved(state)){
+        if (m_arm.arm_moved(state)){
+          std::cout << "Within \n";
           m_grabber.open();
-          //move to the right distance
-          if (!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()){
+          m_robot_timer.Start();
+          std::cout << "Break Beam: " << m_grabber.break_beam() <<std::endl;
+          if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0)){
             m_grabber.close();
-            //Move away form place thing
-            m_arm.arm_moved(CONSTANTS::STATES::STORED);
-            state = CONSTANTS::STATES::STORED;
+            if (m_robot_timer.Get() > units::time::second_t(1.5)){
+              m_robot_timer.Stop();
+              m_robot_timer.Reset();
+              m_arm.arm_moved(CONSTANTS::STATES::STORED);
+              state = CONSTANTS::STATES::STORED;
+            }
           }
         }
         break;
 
     case CONSTANTS::STATES::PICKUP:
+        std::cout << "Robot state: Pickup \n";
         if (m_arm.arm_moved(state)){
+          std::cout << "Within \n";
           m_grabber.open();
-          if (!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()){
+          m_robot_timer.Start();
+          std::cout << "Break Beam: " << m_grabber.break_beam() <<std::endl;
+          if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0)){
+            m_robot_timer.Stop();
+            m_robot_timer.Reset();
             m_grabber.close();
             m_arm.arm_moved(CONSTANTS::STATES::STORED);
             state = CONSTANTS::STATES::STORED;
@@ -280,35 +291,37 @@ switch (state)
     case CONSTANTS::STATES::LOW:
         if (m_arm.arm_moved(state)){
           //move to correct distance from target
-          m_grabber.open();
-          //Move away
-          m_grabber.close();
-          m_arm.arm_moved(CONSTANTS::STATES::STORED);
-          state = CONSTANTS::STATES::STORED;
+          state = CONSTANTS::STATES::SCORE;
         }
         break;
 
     case CONSTANTS::STATES::MED:
         if (m_arm.arm_moved(state)){
           //move to correct distance
-          m_grabber.open();
-          //Move away
-          m_grabber.close();
-          m_arm.arm_moved(CONSTANTS::STATES::STORED);
-          state = CONSTANTS::STATES::STORED;
+          state = CONSTANTS::STATES::SCORE;
         }
         break;
 
     case CONSTANTS::STATES::HIGH:
         if (m_arm.arm_moved(state)){
           //move to correct distance
-          m_grabber.open();
-          //Move away
-          m_grabber.close();
-          m_arm.arm_moved(CONSTANTS::STATES::STORED);
-          state = CONSTANTS::STATES::STORED;
+          state = CONSTANTS::STATES::SCORE;
         }
         break;
+
+    case CONSTANTS::STATES::SCORE:
+        //Move away
+        m_robot_timer.Start();
+        if (m_robot_timer.Get() > units::time::second_t(1.0)){
+          m_grabber.open();
+          if (m_robot_timer.Get() > units::time::second_t(1.5)){
+            m_robot_timer.Stop();
+            m_robot_timer.Reset();
+            m_grabber.close();
+            m_arm.arm_moved(CONSTANTS::STATES::STORED);
+            state = CONSTANTS::STATES::STORED;
+          }
+        }
     
     }
 
