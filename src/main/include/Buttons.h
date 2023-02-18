@@ -50,10 +50,10 @@ namespace BUTTON
 
   namespace CANDLE
   {
-    inline bool CANDLE_LEFT() {return BUTTON::m_aux_stick.GetBButton();}
-    inline bool CANDLE_RIGHT() {return BUTTON::m_aux_stick.GetXButton();}
-    inline bool CANDLE_YELLOW() {return BUTTON::m_aux_stick.GetYButton();}
-    inline bool CANDLE_PURPLE() {return BUTTON::m_aux_stick.GetAButton();}
+    inline bool CANDLE_LEFT() {return BUTTON::m_stick.GetBButton();}
+    inline bool CANDLE_RIGHT() {return BUTTON::m_stick.GetXButton();}
+    inline bool CANDLE_YELLOW() {return BUTTON::m_stick.GetYButton();}
+    inline bool CANDLE_PURPLE() {return BUTTON::m_stick.GetAButton();}
   }
 }
 
