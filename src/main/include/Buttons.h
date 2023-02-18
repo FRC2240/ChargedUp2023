@@ -27,7 +27,7 @@ namespace BUTTON
     inline bool ARM_LOW() {return BUTTON::m_stick.GetAButton();}
     inline bool ARM_MID() {return BUTTON::m_stick.GetBButton();}
     inline bool ARM_HIGH() {return BUTTON::m_stick.GetYButton();}
-    inline bool ARM_HP() {return BUTTON::m_stick.GetXButton();}
+    inline bool ARM_HP() {return BUTTON::m_stick.GetXButtonPressed();}
   }
 
   namespace GRABBER

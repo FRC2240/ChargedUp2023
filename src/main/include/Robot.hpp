@@ -1,5 +1,19 @@
 #pragma once
 
+#include "Vision.h"
+#include "Buttons.h"
+#include "Dash.h"
+#include "Grabber.h"
+#include "Grippad.h"
+#include "Candle.h"
+#include "Wrist.h"
+#include "Arm.h"
+#include "Constants.h"
+#include "Drivetrain.hpp"
+#include "RobotState.hpp"
+#include "ngr.hpp"
+#include "Odometry.hpp"
+
 #include <frc/TimedRobot.h>
 #include <units/velocity.h>
 #include <units/length.h>
@@ -10,19 +24,16 @@
 #include <frc/Filesystem.h>
 #include <frc/trajectory/TrajectoryUtil.h>
 #include <wpi/fs.h>
-#include "Vision.h"
-
 // more libraries more better
 #include <frc/smartdashboard/SendableChooser.h>
 #include "frc/smartdashboard/SmartDashboard.h"
 #include <frc/trajectory/TrajectoryGenerator.h>
-#include "Buttons.h"
-#include "Dash.h"
-#include "Grabber.h"
-#include "Grippad.h"
-#include "Candle.h"
-#include "Wrist.h"
-#include "Arm.h"
+#include <frc/MathUtil.h>
+#include <iostream>
+#include <fmt/format.h>
+#include <pathplanner/lib/PathPlannerTrajectory.h>
+
+
 
 
 
@@ -58,12 +69,13 @@ public:
 
 
 private:
+    bool m_is_auto = false;
     std::vector<double> m_test_case = {1,2,3,4,5};
     Vision m_camera;
     int m_cycle = 0;
 
     Arm m_arm;
-    frc::Trajectory m_trajectory;
+    //frc::Trajectory m_trajectory;
 
     frc::SendableChooser<std::string> m_chooser;
     const std::string LINE = "Line";
@@ -80,5 +92,6 @@ private:
     Grippad m_grippad;
     Candle m_candle;
     Wrist m_wrist;
+    pathplanner::PathPlannerTrajectory m_trajectory;
     
 };

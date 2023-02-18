@@ -1,5 +1,4 @@
-#ifndef ARM_H_
-#define ARM_H_
+#pragma once
 
 #include "ctre/Phoenix.h"
 #include <frc/Encoder.h>
@@ -66,4 +65,3 @@ class Arm
                               CONSTANTS::ARM::PID::kFF, CONSTANTS::ARM::PID::kMaxOutput, 
                               CONSTANTS::ARM::PID::kMinOutput};
 };
-#endif //ARM_H_

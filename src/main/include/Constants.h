@@ -1,20 +1,55 @@
-#ifndef CONSTANTS_H_
-#define CONSTANTS_H_
+#pragma once
+
+#include <units/length.h>
+#include <units/angle.h>
+#include <frc/DriverStation.h>
+#include <iostream>
+#include <vector>
 
 
 namespace CONSTANTS 
 {
-  #warning "MINOR: Disable debug before comp."
   constexpr bool DEBUGGING = true; //DO NOT USE IN COMP. 
   //SLOWS DOWN EVERYTHING & MAY CAUSE WATCHDOG EXEPTIONS.
-  namespace COLORS
+  namespace TRAJECTORY
   {
-    constexpr char GREEN[] = "ESC[48;5;{46}m";
-    constexpr char RED[] = "ESC[48;5;{196}m";
-    constexpr char YELLOW[] = "ESC[48;5;{226}m";
-    constexpr char PURPLE[] = "ESC[48;5;{129}m";
-    //TODO: Put ANSI escape codes here as std::string
-    
+   const std::vector<units::meter_t> Y_POS =
+      {
+        /*
+         * A list of all Y positions to score at.
+         * Ordered from the pipe farthest on the robot's left side of the
+         * red alliance grid to the rightmost.
+         *
+         * Since the field isn't mirrored, the lists are the same for the
+         * red alliance and the blue alliance.
+         *
+         *  Copyright Westly Miller, 2023.
+         */
+        0_m,
+        0_m,
+        0_m,
+        0_m,
+        0_m,
+        0_m,
+        0_m,
+        0_m,
+        0_m
+     };
+    namespace R
+    {
+      //Red Team and blue team will use seperate data.
+
+      constexpr units::meter_t HIGH_X = 0_m;
+      constexpr units::meter_t MID_X = 0_m;
+      constexpr units::meter_t GROUND_X = 0_m;
+    }
+
+    namespace B
+    {
+      constexpr units::meter_t HIGH_X = 0_m;
+      constexpr units::meter_t MID_X = 0_m;
+      constexpr units::meter_t GROUND_X = 0_m;
+    }
   }
   namespace GRIPPAD
   {
@@ -64,7 +99,8 @@ namespace CONSTANTS
   namespace VISION {
     //Remove above warning when values found
     constexpr int APRILTAG_PIPE = 1; 
-    constexpr int BUFFER_SIZE = 5; 
+    //Remove above warning when values found
+    constexpr int BUFFER_SIZE = 5;
     constexpr int MIN_GOOD_FRAMES = 4;
     constexpr double MAX_STD_DEV = 10; //CHANGEME
     constexpr double MIN_STD_DEV = 1.0e-10; //CHANGEME
@@ -83,4 +119,3 @@ namespace CONSTANTS
 
   }
 }
-#endif // CONSTANTS_H_
