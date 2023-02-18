@@ -11,8 +11,9 @@ namespace CONSTANTS
 {
   constexpr bool DEBUGGING = true; //DO NOT USE IN COMP.
   //SLOWS DOWN EVERYTHING & MAY CAUSE WATCHDOG EXEPTIONS.
+    enum STATES { STORED, LOW, MED, HUMANPLAYER, HIGH, PICKUP, SCORE};
 
-  enum STATES { STORED, LOW, MED, HUMANPLAYER, HIGH, PICKUP};
+namespace TRAJECTORY
   {
    const std::vector<units::meter_t> Y_POS =
       {
@@ -121,3 +122,4 @@ namespace CONSTANTS
 
   }
 }
+
