@@ -1,5 +1,4 @@
 #include "Robot.hpp"
-#include "Trajectory.hpp"
 
 
 /******************************************************************/
@@ -326,7 +325,29 @@ switch (state)
     }
 
 }
-
+void Robot::drivebase_goto(Trajectory::HEIGHT h)
+{
+  if (db_last_tgt != h)
+  {
+  switch (h)
+  {
+      case Trajectory::HEIGHT::HIGH:
+        m_trajectory = Trajectory::generate_live_traj(Trajectory::determine_desired_traj(Trajectory::HEIGHT::HIGH));
+        break;
+      case Trajectory::HEIGHT::MED:
+        m_trajectory = Trajectory::generate_live_traj(Trajectory::determine_desired_traj(Trajectory::HEIGHT::MED));
+         break;
+      case Trajectory::HEIGHT::GROUND:
+        m_trajectory = Trajectory::generate_live_traj(Trajectory::determine_desired_traj(Trajectory::HEIGHT::GROUND));
+    }
+    db_last_tgt = h;
+    Trajectory::init_live_traj(m_trajectory);
+  }
+  else
+  {
+    Trajectory::follow_live_traj(m_trajectory);
+  }
+}
 void Robot::make_test_path()
 {
   frc::Pose2d current_pose = Odometry::getPose();

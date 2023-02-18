@@ -32,7 +32,7 @@ namespace Trajectory
     /******************************************************************/
     /*                  Public Function Declarations                  */
     /******************************************************************/
-    enum HEIGHT {HIGH, MED, GROUND};
+    enum class HEIGHT {HIGH, MED, GROUND};
     enum BIG_TABLE
         {
             LEFT_1,
@@ -71,7 +71,7 @@ namespace Trajectory
 
     units::meter_t determine_desired_y();
 
-    TrajDepends determine_desired_traj(Target tgt);
+    TrajDepends determine_desired_traj(HEIGHT h);
 
     PathPlannerTrajectory generate_live_traj(TrajDepends t);
 

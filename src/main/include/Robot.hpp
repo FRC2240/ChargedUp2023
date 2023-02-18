@@ -1,7 +1,6 @@
 #pragma once
 
-
-#include <list>
+#include "Trajectory.hpp"
 #include "Vision.h"
 #include "Buttons.h"
 #include "Dash.h"
@@ -69,14 +68,13 @@ public:
     void TestInit() override;
     void TestPeriodic() override;
 
+    void drivebase_goto(Trajectory::HEIGHT h);
     void make_test_path();
 
 
 
 private:
-    
-    CONSTANTS::STATES state = CONSTANTS::STATES::STORED;
-
+    Trajectory::HEIGHT db_last_tgt = Trajectory::HEIGHT::GROUND;
     bool m_is_auto = false;
     std::vector<double> m_test_case = {1,2,3,4,5};
     Vision m_camera;

@@ -22,7 +22,6 @@ frc::Timer m_trajTimer;
 /******************************************************************/
 /*                   Public Function Definitions                  */
 /******************************************************************/
-
 units::meter_t Trajectory::determine_desired_y()
 {
     /*
@@ -56,7 +55,7 @@ units::meter_t Trajectory::determine_desired_y()
     return CONSTANTS::TRAJECTORY::Y_POS[CONSTANTS::TRAJECTORY::Y_POS.size()-1];
 }
 
-Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::Target tgt)
+Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
 {
     /*
      * Takes the known apriltag that will be scored at and converts
@@ -65,43 +64,44 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::Target tg
      */
     frc::Pose2d current_pose = Odometry::getPose();
     Trajectory::TrajDepends ret;
+    auto heading = (frc::Translation2d(1_m, 1_m) - current_pose.Translation()).Angle().Degrees();
 
     if (current_pose.X().value() < 0)
         // Blue alliance X positions
         {
-            switch (tgt.height)
+            switch (h)
                 {
-                case HIGH:
+                case Trajectory::HEIGHT::HIGH:
                     ret.desired_x = CONSTANTS::TRAJECTORY::B::HIGH_X;
                     break;
-                case MED:
+                case Trajectory::HEIGHT::MED:
                     ret.desired_x = CONSTANTS::TRAJECTORY::B::MID_X;
                     break;
-                case GROUND:
+                case Trajectory::HEIGHT::GROUND:
                     ret.desired_x = CONSTANTS::TRAJECTORY::B::GROUND_X;
                     break;
                 }
         }
     else
         {
-            switch (tgt.height)
+            switch (h)
                 {
-                case HIGH:
+                case Trajectory::HEIGHT::HIGH:
                     ret.desired_x = CONSTANTS::TRAJECTORY::R::HIGH_X;
                     break;
-                case MED:
+                case Trajectory::HEIGHT::MED:
                     ret.desired_x = CONSTANTS::TRAJECTORY::R::MID_X;
                     break;
-                case GROUND:
+                case Trajectory::HEIGHT::GROUND:
                     ret.desired_x = CONSTANTS::TRAJECTORY::R::GROUND_X;
                     break;
                 }
         }
 
-    ret.desired_head = 0_deg;
+    ret.desired_head = heading;
     ret.desired_rot = 0_deg;
-    ret.current_rot = Drivetrain::getAngle();
-    ret.current_head = ret.current_rot;
+    ret.current_rot = current_pose.Rotation().Degrees();
+    ret.current_head = heading;
     ret.current_x = current_pose.X();
     ret.current_y = current_pose.Y();
 
@@ -118,9 +118,9 @@ void Trajectory::printRobotRelativeSpeeds()
     frc::SmartDashboard::PutNumber("Estimated VY Speed", robot_relative.vy.value());
     frc::SmartDashboard::PutNumber("Estimated Omega Speed", units::degrees_per_second_t{robot_relative.omega}.value() / 720);
 }
-/*
 PathPlannerTrajectory Trajectory::generate_live_traj(TrajDepends t)
 {
+
     return
         PathPlanner::generatePath(
 
@@ -139,7 +139,7 @@ PathPlannerTrajectory Trajectory::generate_live_traj(TrajDepends t)
                                             )
                                   );
 
-}*/
+}
 
 
 PathPlannerTrajectory Trajectory::generate_live_traj(units::meter_t current_x,
