@@ -9,7 +9,7 @@ class Candle{
 
     enum STATES { PURPLE_LEFT, PURPLE_RIGHT, YELLOW_LEFT, YELLOW_RIGHT};
 
-    STATES candle_logic(bool left_button, bool right_button, 
+    void candle_logic(bool left_button, bool right_button, 
                         bool yellow_button, bool purple_button);
 
     Candle();
@@ -24,7 +24,10 @@ class Candle{
     STATES state = PURPLE_LEFT;
     STATES previous_state;
 
+    bool side;
+    bool color;
+
     ctre::phoenix::led::CANdle m_candle {CONSTANTS::CANDLE::CANDLE_ID, "canivore"};
-    ctre::phoenix::led::RainbowAnimation rainbow1{1.0, 0.5, -1, false, 8};
+    ctre::phoenix::led::RainbowAnimation rainbow{1.0, 0.5, -1, false, 8};
 };
 
