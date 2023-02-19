@@ -150,9 +150,16 @@ void Robot::RobotPeriodic()
 
 void Robot::AutonomousInit()
 {
+
+    if(m_autoSelected == TEST){
+      m_autoSequence = &m_testSequence;
+    }
+
+    m_autoAction = m_autoSequence->front();
+
   // Start aiming
 
-  m_autoSelected = m_chooser.GetSelected();
+  //m_autoSelected = m_chooser.GetSelected();
   std::cout << "auto selected \n";
 
   fs::path deployDirectory = frc::filesystem::GetDeployDirectory();
@@ -170,6 +177,12 @@ void Robot::AutonomousInit()
    {
       deployDirectory = "Straight Line";
    }
+
+   if(m_autoSelected == TEST){
+      deployDirectory = "Test";
+    }
+
+    m_autoAction = m_autoSequence->front();
 
    std::cout << "auto chooser\n";
 
@@ -189,6 +202,8 @@ void Robot::AutonomousPeriodic()
   // This is what gets called after Init()
   Drivetrain::stop();
 }
+// File
+  fs::path deployDirectory = frc::filesystem::GetDeployDirectory();
 
 //  Drivetrain::stop();
 
