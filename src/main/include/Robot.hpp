@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+#include <list>
 #include <frc/TimedRobot.h>
 #include <units/velocity.h>
 #include <units/length.h>
@@ -10,6 +12,7 @@
 #include <frc/trajectory/TrajectoryUtil.h>
 #include <wpi/fs.h>
 #include "Vision.h"
+#include <iostream>
 
 // more libraries more better
 #include <frc/smartdashboard/SendableChooser.h>
@@ -22,7 +25,6 @@
 #include "Candle.h"
 #include "Wrist.h"
 #include "Arm.h"
-
 
 
 
@@ -68,14 +70,45 @@ private:
     const std::string LINE = "Line";
     const std::string CIRCLE = "Circle";
     const std::string NON_HOLONOMIC = "Non holonomic";
-
-    bool breakbeam;
+    const std::string TEST = "Test";
 
     std::string m_autoSelected;
+    bool breakbeam;
 
     Grabber m_grabber;
     Grippad m_grippad;
     Candle m_candle;
     Wrist m_wrist;
     
+
+    enum autoActions {
+        kPickup,
+        kDrop,
+        k2Piece,
+        kTestPath,
+        kTerminalPath1,
+        kTerminalPath2,
+        kTerminalPath3,
+        kTerminalPath4,
+        kInstantPath,
+        kDelayPath,
+        kIdle
+  };
+
+      enum autoState {
+    kDriving,
+    kNothing
+  };
+
+  std::list<autoActions> *m_autoSequence; 
+  std::list<autoActions> m_testSequence{
+    kPickup,
+    kTestPath,
+    kDrop,
+    kIdle
+  };
+
+autoActions m_autoAction;
+autoState m_autoState;
+
 };
