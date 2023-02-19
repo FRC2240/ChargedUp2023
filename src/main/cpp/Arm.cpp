@@ -42,7 +42,7 @@ void Arm::move()
     //m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::Position, desired_position * TICKS_PER_CANCODER_DEGREE);
     //double AFF = 0;
     double AFF = sin((3.1415/180)*(desired_position-horizontalPoint + 90)) * maxAFF;
-    std::cout << AFF << std::endl;
+    //std::cout << AFF << std::endl;
     m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, desired_position * TICKS_PER_CANCODER_DEGREE,
     ctre::phoenix::motorcontrol::DemandType::DemandType_ArbitraryFeedForward, AFF);
 }
@@ -133,38 +133,38 @@ bool Arm::arm_moved(CONSTANTS::STATES state)
     switch (state)
     {
         case CONSTANTS::STATES::STORED:
-            std::cout << "state: " << "store" << "\n";
+            //std::cout << "state: " << "store" << "\n";
             desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
             move();
             return false;
             break;
 
         case CONSTANTS::STATES::HUMANPLAYER:
-            std::cout << "state: " << "hp" << "\n";
+            //std::cout << "state: " << "hp" << "\n";
             desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
             move();
             break;
 
         case CONSTANTS::STATES::PICKUP:
-            std::cout << "state: " << "pickup" << "\n";
+            //std::cout << "state: " << "pickup" << "\n";
             desired_position = CONSTANTS::ARM::MOTORPOSITIONS::PICKUP;
             move();
             break;
 
         case CONSTANTS::STATES::LOW:
-            std::cout << "state: " << "low" << "\n";
+            //std::cout << "state: " << "low" << "\n";
             desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
             move();
             break;
 
         case CONSTANTS::STATES::MED:
-            std::cout << "state: " << "med" << "\n";
+           // std::cout << "state: " << "med" << "\n";
             desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
             move();
             break;
 
         case CONSTANTS::STATES::HIGH:
-            std::cout << "state: " << "high" << "\n";
+            //std::cout << "state: " << "high" << "\n";
             desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
             move();
             break;
@@ -174,12 +174,12 @@ bool Arm::arm_moved(CONSTANTS::STATES state)
     if (arm_cancoder.GetAbsolutePosition()/desired_position > CONSTANTS::ARM::MIN_THRESHOLD &&
         arm_cancoder.GetAbsolutePosition()/desired_position < CONSTANTS::ARM::MAX_THRESHOLD)
     {
-        std::cout << "IN THRESHOLD \n";
+        //std::cout << "IN THRESHOLD \n";
         return true;
     } 
     else
     {
-        std::cout << arm_cancoder.GetAbsolutePosition()/desired_position << std::endl;
+        //std::cout << arm_cancoder.GetAbsolutePosition()/desired_position << std::endl;
         return false;
         
     }
@@ -190,7 +190,7 @@ bool Arm::arm_moved(CONSTANTS::STATES state)
 
 void Arm::test()
 {
-    std::cout << "encoder: " << arm_cancoder.GetAbsolutePosition() << "\n";
+    //std::cout << "encoder: " << arm_cancoder.GetAbsolutePosition() << "\n";
 }
 
 

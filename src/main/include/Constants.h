@@ -27,23 +27,23 @@ namespace TRAJECTORY
          *
          *  Copyright Westly Miller, 2023.
          */
-        38.636_in,
-        16.386_in,
-        -5.364_in,
+        -38.636_in,
+        -16.386_in,
+        5.364_in,
         27.364_in,
-        -48.614_in,
-        -71.864_in,
-        -93.864_in,
-        -115.614_in,
-        -137.864_in
+        48.614_in,
+        71.864_in,
+        93.864_in,
+        115.614_in,
+        137.864_in
      };
     namespace R
     {
       //Red Team and blue team will use seperate data.
 
-      constexpr units::meter_t HIGH_X = 0_m;
-      constexpr units::meter_t MID_X = 0_m;
-      constexpr units::meter_t GROUND_X = 0_m;
+      constexpr units::meter_t HIGH_X = 6.46_m;
+      constexpr units::meter_t MID_X = 6.02_m;
+      constexpr units::meter_t GROUND_X = 6.06_m;
     }
 
     namespace B
@@ -105,7 +105,7 @@ namespace TRAJECTORY
     //Remove above warning when values found
     constexpr int BUFFER_SIZE = 5;
     constexpr int MIN_GOOD_FRAMES = 4;
-    constexpr double MAX_STD_DEV = 10; //CHANGEME
+    constexpr double MAX_STD_DEV = 0.06; //CHANGEME
     constexpr double MIN_STD_DEV = 1.0e-10; //CHANGEME
     constexpr double MAX_STD_DEV_ROT = 10; //CHANGEME
     constexpr double MIN_STD_DEV_ROT = 1.0e-5; //CHANGEME

@@ -85,6 +85,7 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
      * it to a position.
      *
      */
+    std::cout << "here\n";
     frc::Pose2d current_pose = Odometry::getPose();
     Trajectory::TrajDepends ret;
     auto heading = (frc::Translation2d(1_m, 1_m) - current_pose.Translation()).Angle().Degrees();
@@ -129,6 +130,8 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
     ret.current_y = current_pose.Y();
 
     ret.desired_y = determine_desired_y();
+    std::cout << "cx: " << ret.current_x.value() << "\n cy: " << ret.current_y.value() << std::endl;
+    std::cout << "X: " << ret.desired_x.value() << "\n Y: " << ret.desired_y.value() << std::endl;
 
     return ret;
 }
@@ -147,21 +150,20 @@ PathPlannerTrajectory Trajectory::generate_live_traj(TrajDepends t)
     return
         PathPlanner::generatePath(
 
-                                  PathConstraints(Drivetrain::TRAJ_MAX_SPEED,
-                                                  Drivetrain::TRAJ_MAX_ACCELERATION),
+                                  PathConstraints(Drivetrain::TRAJ_MAX_SPEED/3,
+                                                  Drivetrain::TRAJ_MAX_ACCELERATION/3),
 
                                   PathPoint(frc::Translation2d(t.current_x,
-                                                               t.current_y),
+                                                               -t.current_y),
                                             frc::Rotation2d(t.current_head),
                                             frc::Rotation2d(t.current_rot)
                                             ),
                                   PathPoint(frc::Translation2d(t.desired_x,
-                                                               t.desired_y),
+                                                                -t.desired_y),
                                             frc::Rotation2d(t.desired_head),
                                             frc::Rotation2d(t.desired_rot)
                                             )
                                   );
-
 }
 
 
@@ -276,19 +278,15 @@ bool Trajectory::follow_live_traj(PathPlannerTrajectory traj)
                                                                   sample.holonomicRotation.Degrees().value(), m_trajTimer.Get().value()));
             
                 std::cout << "sample: "
-                //<< sample.pose.X().value() << "," 
-                //<< sample.pose.Y().value() << ","
-                << sample.pose.Rotation().Degrees().value() << ","
-                << sample.holonomicRotation.Degrees().value() << ","
-                << m_trajTimer.Get().value() << ","
+                << sample.pose.X().value() << "," 
+                << sample.pose.Y().value() << ","
                 << std::endl;
 
             auto pose = Odometry::getPose();
 
             std::cout << "robot: "
-                //<< pose.X().value() << "," 
-                //<< pose.Y().value() << ","
-                << pose.Rotation().Degrees().value() << ","
+                << pose.X().value() << "," 
+                << pose.Y().value() << ","
                 << std::endl;
 
             printRobotRelativeSpeeds();

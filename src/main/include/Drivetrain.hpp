@@ -29,7 +29,7 @@ namespace Drivetrain
     // Distance of module from center is 1.294ft
 
     // Max effective linear speed
-    constexpr units::meters_per_second_t ROBOT_MAX_SPEED =  4.5_fps; //9.533_fps; // 5.47_fps;
+    constexpr units::meters_per_second_t ROBOT_MAX_SPEED =  19.533_fps; 
     constexpr units::radians_per_second_t ROBOT_MAX_ANGULAR_SPEED{std::numbers::pi};
 
     constexpr units::meters_per_second_t TELEOP_MAX_SPEED = ROBOT_MAX_SPEED;
