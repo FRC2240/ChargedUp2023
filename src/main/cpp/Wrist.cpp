@@ -8,7 +8,7 @@ Wrist::Wrist(){
 
         WristPIDInit();
         WristDashInit();
-        WristDashRead();
+        //WristDashRead();
         
   m_wrist_Encoder.SetInverted(false);
   m_wrist_PIDController.SetFeedbackDevice(m_wrist_Encoder);
@@ -70,10 +70,28 @@ void Wrist::Stop()
 
 void Wrist::Follow(double arm_pos)
 {
-    m_wrist_PIDController.SetReference(-arm_pos + CONSTANTS::WRIST::WRIST_ENCODER_OFFSET, rev::ControlType::kPosition);
+    //1.02 + -0.0176x + 2.51E-04x^2 + -1.78E-06x^3 + 4.55E-09x^4
+    //m_wrist_PIDController.SetReference(1.1, rev::CANSparkMax::ControlType::kPosition);
+    double position = 1.02 - (0.0176*arm_pos) + (2.51e-4*pow(arm_pos,2)) - (1.78e-6*pow(arm_pos,3)) + (4.55e-9*pow(arm_pos,4));
+    // if (arm_pos < 31) {
+    //     position = .848;
+    // }
+    // else if (arm_pos >= 31 && arm_pos < 65 ){
+    //     position = .665;
+    // }
+    // else if (arm_pos >= 65 && arm_pos < 110){
+    //     position = .586;
+    // }
+    // else if (arm_pos >= 110 && arm_pos < 130){
+    //     position = .430;
+    // }
+    // else if (arm_pos >= 130){
+    //     position = .393;
+    // }
+    m_wrist_PIDController.SetReference(position, rev::CANSparkMax::ControlType::kPosition);
 }
 
-void Wrist::Follow_Flare(double arm_pos)
-{
-    m_wrist_PIDController.SetReference(-arm_pos + CONSTANTS::WRIST::WRIST_ENCODER_OFFSET + CONSTANTS::WRIST::WRIST_FLARE_OFFSET, rev::ControlType::kPosition);
+
+void Wrist::Test(){
+    std::cout << "wrist encoder: " << m_wrist_Encoder.GetPosition() << "\n";
 }

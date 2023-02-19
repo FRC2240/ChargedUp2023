@@ -1,11 +1,26 @@
 #pragma once
 
-#include <vector>
+
 #include <list>
+#include "Vision.h"
+#include "Buttons.h"
+#include "Dash.h"
+#include "Grabber.h"
+#include "Grippad.h"
+#include "Candle.h"
+#include "Wrist.h"
+#include "Arm.h"
+#include "Constants.h"
+#include "Drivetrain.hpp"
+#include "RobotState.hpp"
+#include "ngr.hpp"
+#include "Odometry.hpp"
+
 #include <frc/TimedRobot.h>
 #include <units/velocity.h>
 #include <units/length.h>
 #include <units/angle.h>
+#include <vector>
 #include <wpi/sendable/Sendable.h>
 #include <wpi/sendable/SendableHelper.h>
 #include <frc/Filesystem.h>
@@ -18,13 +33,12 @@
 #include <frc/smartdashboard/SendableChooser.h>
 #include "frc/smartdashboard/SmartDashboard.h"
 #include <frc/trajectory/TrajectoryGenerator.h>
-#include "Buttons.h"
-#include "Dash.h"
-#include "Grabber.h"
-#include "Grippad.h"
-#include "Candle.h"
-#include "Wrist.h"
-#include "Arm.h"
+#include <frc/MathUtil.h>
+#include <iostream>
+#include <fmt/format.h>
+#include <pathplanner/lib/PathPlannerTrajectory.h>
+
+
 
 
 
@@ -59,18 +73,21 @@ public:
 
 
 private:
-    //Vision m_camera;
+    bool m_is_auto = false;
+    std::vector<double> m_test_case = {1,2,3,4,5};
+    Vision m_camera;
+    int m_cycle = 0;
 
     Arm m_arm;
-    int m_cam_counter = 0;
-
-    frc::Trajectory m_trajectory;
+    //frc::Trajectory m_trajectory;
 
     frc::SendableChooser<std::string> m_chooser;
     const std::string LINE = "Line";
     const std::string CIRCLE = "Circle";
     const std::string NON_HOLONOMIC = "Non holonomic";
     const std::string TEST = "Test";
+
+    bool arm_bool;
 
     std::string m_autoSelected;
     bool breakbeam;
@@ -79,6 +96,7 @@ private:
     Grippad m_grippad;
     Candle m_candle;
     Wrist m_wrist;
+    pathplanner::PathPlannerTrajectory m_trajectory;
     
 
     enum autoActions {

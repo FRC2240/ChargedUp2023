@@ -12,9 +12,11 @@ public:
 
   Grabber();
 
-  void Stop();
   void In();
   void Out();
+
+  void GrabberLogic(bool arm_bool);
+
   bool grabberToggle = false;
   
 
@@ -26,7 +28,6 @@ private:
 
   STATES state = STOWED;
 
-  rev::CANSparkMax m_motor_Grabber{CONSTANTS::GRABBER::GRABBER_MOTOR_ID,rev::CANSparkMax::MotorType::kBrushless};
   frc::DoubleSolenoid m_grabberPiston{frc::PneumaticsModuleType::REVPH,CONSTANTS::GRABBER::GRABBER_PISTON_ID1,CONSTANTS::GRABBER::GRABBER_PISTON_ID2};
 
   

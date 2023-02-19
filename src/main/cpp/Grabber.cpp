@@ -13,16 +13,14 @@ Grabber::Grabber(){}
 void Grabber::In()
 {
   m_grabberPiston.Set(frc::DoubleSolenoid::Value::kForward);
-  m_motor_Grabber.Set(1.0);
 }
 
 void Grabber::Out()
 {
   m_grabberPiston.Set(frc::DoubleSolenoid::Value::kReverse);
-  m_motor_Grabber.Set(-1.0);
 }
 
- void Grabber::Stop()
- {
-   m_motor_Grabber.Set(0.0);
- }
+void Grabber::GrabberLogic(bool arm_bool)
+{
+
+}

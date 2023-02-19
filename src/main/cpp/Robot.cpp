@@ -1,16 +1,6 @@
 #include "Robot.hpp"
-#include "Drivetrain.hpp"
-#include "RobotState.hpp"
-#include "ngr.hpp"
-#include "Odometry.hpp"
 #include "Trajectory.hpp"
 
-
-#include <frc/MathUtil.h>
-#include <iostream>
-#include <frc/smartdashboard/SmartDashboard.h>
-#include <frc/smartdashboard/SendableChooser.h>
-#include <fmt/format.h>
 
 /******************************************************************/
 /*                        Private Variables                       */
@@ -36,6 +26,60 @@ static auto field_centric = true;
 // Needed to flash on/off temp warnings on SmartDashboard/ShuffleBoard
 //static bool drivers_flashing_red = false;
 //static bool turners_flashing_red = false;
+
+Robot::Robot()
+{
+  // setup RobotStates
+  RobotState::IsEnabled = [this]()
+  { return IsEnabled(); };
+
+  RobotState::IsDisabled = [this]()
+  { return IsDisabled(); };
+
+  RobotState::IsAutonomous = [this]()
+  { return IsAutonomous(); };
+
+  RobotState::IsAutonomousEnabled = [this]()
+  { return IsAutonomousEnabled(); };
+
+  RobotState::IsTeleop = [this]()
+  { return IsTeleop(); };
+
+  RobotState::IsTeleopEnabled = [this]()
+  { return IsTeleopEnabled(); };
+
+  RobotState::IsTest = [this]()
+  { return IsTest(); };
+
+  // Call the inits for all subsystems here
+  Drivetrain::init();
+  std::cout << "Drivtrain started \n";
+  Odometry::putField2d();
+  std::cout << "Odometry putfield done \n";
+
+  /* legacy
+  frc::SmartDashboard::PutData("Traj Selector", &traj_selector);
+  frc::SmartDashboard::PutBoolean("Traj Reversed", Trajectory::reverse_trajectory);
+  */
+
+
+  // Auto paths
+  m_chooser.AddOption(Robot::CIRCLE, Robot::CIRCLE);
+  m_chooser.AddOption(Robot::LINE, Robot::LINE);
+  m_chooser.AddOption(Robot::NON_HOLONOMIC, Robot::NON_HOLONOMIC);
+
+  frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+
+std::cout << "robot object created \n";
+std::cout << "go get em tiger" << std::endl;
+}
+
+void Robot::RobotInit()
+{
+  Odometry::putField2d();
+  std::cout << "RobotInit done \n";
+}
+
 
 void buttonManager()
 {
@@ -89,73 +133,19 @@ void swerveDrive(bool const &field_relative)
 /******************************************************************/
 /*                   Public Function Definitions                  */
 /******************************************************************/
-
-Robot::Robot()
-{
-
-  // setup RobotStates
-  RobotState::IsEnabled = [this]()
-  { return IsEnabled(); };
-
-  RobotState::IsDisabled = [this]()
-  { return IsDisabled(); };
-
-  RobotState::IsAutonomous = [this]()
-  { return IsAutonomous(); };
-
-  RobotState::IsAutonomousEnabled = [this]()
-  { return IsAutonomousEnabled(); };
-
-  RobotState::IsTeleop = [this]()
-  { return IsTeleop(); };
-
-  RobotState::IsTeleopEnabled = [this]()
-  { return IsTeleopEnabled(); };
-
-  RobotState::IsTest = [this]()
-  { return IsTest(); };
-
-  // Call the inits for all subsystems here
-  Drivetrain::init();
-  std::cout << "Drivtrain started \n";
-  Odometry::putField2d();
-  std::cout << "Odometry putfield done \n";
-
-  /* legacy
-  frc::SmartDashboard::PutData("Traj Selector", &traj_selector);
-  frc::SmartDashboard::PutBoolean("Traj Reversed", Trajectory::reverse_trajectory);
-  */
-
-
-  // Auto paths
-  m_chooser.AddOption(Robot::CIRCLE, Robot::CIRCLE);
-  m_chooser.AddOption(Robot::LINE, Robot::LINE);
-  m_chooser.AddOption(Robot::NON_HOLONOMIC, Robot::NON_HOLONOMIC);
-
-  frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
-
-std::cout << "robot object created \n";
-}
-
-void Robot::RobotInit()
-{
-
-  Odometry::putField2d();
-  std::cout << "RobotInit done \n";
-}
-
 void Robot::RobotPeriodic()
 {
   Trajectory::reverse_trajectory = frc::SmartDashboard::GetBoolean("Traj Reversed", Trajectory::reverse_trajectory);
   //std::cout << "Robot Periodic \n";
 
-  if (m_arm.position > m_arm.ARM_FLARE_LOW && m_arm.position < m_arm.ARM_FLARE_HIGH){
-    m_wrist.Follow_Flare(m_arm.position);
-  }
-  else {
-    m_wrist.Follow(m_arm.position);
-  }
-
+  // if (m_arm.position > m_arm.ARM_FLARE_LOW && m_arm.position < m_arm.ARM_FLARE_HIGH){
+  //   m_wrist.Follow_Flare(m_arm.position);
+  // }
+  // else {
+  //std::cout << m_arm.position << std::endl;
+  m_wrist.Follow(m_arm.position);
+  // }
+  m_arm.Read_Position();
 }
 
 void Robot::AutonomousInit()
@@ -226,6 +216,7 @@ void Robot::TeleopPeriodic()
 {
   //DASHBOARD::update_botpose(m_camera.get_field_pos_by_tag());
   //Drivetrain::print_angle();
+ // m_camera.pose_loop();
   buttonManager();
   swerveDrive(field_centric);
   //Odometry::update();
@@ -251,30 +242,50 @@ void Robot::TeleopPeriodic()
       m_grabber.grabberToggle = false; 
       breakbeam = false;
     }
+
+
+  m_arm.arm_moved(BUTTON::ARM::ARM_STORED(), BUTTON::ARM::ARM_LOW(), 
+                  BUTTON::ARM::ARM_MID(), BUTTON::ARM::ARM_HP(), 
+                  BUTTON::ARM::ARM_HIGH(), BUTTON::ARM::ARM_PICKUP());
+  arm_bool = m_arm.open_grabber;
+  m_grabber.GrabberLogic(arm_bool);
+
 }
 
 void Robot::make_test_path()
 {
   frc::Pose2d current_pose = Odometry::getPose();
-  Trajectory::follow_live_traj(
-  Trajectory::generate_live_traj(current_pose.X(),
+
+  auto heading = (frc::Translation2d(1_m, 1_m) - current_pose.Translation()).Angle().Degrees();
+
+  m_trajectory = Trajectory::generate_live_traj(current_pose.X(),
                                  current_pose.Y(),
-                                 frc::Rotation2d(Drivetrain::getCCWHeading()),
-                                 frc::Rotation2d(Drivetrain::getCCWHeading()),
-                                 current_pose.X() + 1_m,
-                                 current_pose.Y() + 1_m,
-                                 -frc::Rotation2d(Drivetrain::getCCWHeading()),
-                                 -frc::Rotation2d(Drivetrain::getCCWHeading())
-                                 ));
+                                frc::Rotation2d(heading/*current_pose.Rotation().Degrees()*/),
+                                 frc::Rotation2d(current_pose.Rotation().Degrees()),
+                                 current_pose.X() + 0.25_m,
+                                 current_pose.Y() + 0.5_m,
+                                 frc::Rotation2d(heading),
+                                 frc::Rotation2d(0.0_deg/*current_pose.Rotation().Degrees()*/)
+                                //frc::Rotation2d(Drivetrain::getCCWHeading()),
+                                 //frc::Rotation2d(Drivetrain::getCCWHeading())
+                                 );
 }
 void Robot::TestInit()
 {
+  std::cout << "Test init \n";
+  Odometry::update();
+  make_test_path();
+  Trajectory::init_live_traj(m_trajectory);
+  m_is_auto = false;
 }
 
 void Robot::TestPeriodic()
 {
-  m_arm.test();
+  //auto pose = Odometry::getPose();
+  //std::cout << "Navx " << Drivetrain::getAngle().value() << std::endl;
+    Trajectory::follow_live_traj(m_trajectory);
 }
+
 
 #ifndef RUNNING_FRC_TESTS
 int main()
