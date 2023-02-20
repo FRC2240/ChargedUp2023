@@ -19,6 +19,8 @@ void Candle::candle_logic(bool left_button, bool right_button,
     
     m_candle.ClearAnimation(0);
 
+    previous_state = state;
+
     if (m_alliance == frc::DriverStation::Alliance::kRed){
         m_candle.SetLEDs(255, 0, 0, 0, 8, 54);
         m_candle.SetLEDs(255, 0, 0, 0, 108, 100);
@@ -79,6 +81,10 @@ void Candle::candle_logic(bool left_button, bool right_button,
         m_candle.SetLEDs(254, 162, 1, 0, 100, 11);
 
         break;
+    }
+
+    if (state != previous_state){
+        m_candle.SetLEDs(0, 0, 0, 0);
     }
 }
 

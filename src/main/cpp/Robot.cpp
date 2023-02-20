@@ -231,6 +231,8 @@ void Robot::TeleopPeriodic()
       m_grabber.Out();
       m_grabber.grabberToggle = false;
     }
+
+  m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(), BUTTON::CANDLE::CANDLE_RIGHT(), BUTTON::CANDLE::CANDLE_YELLOW(), BUTTON::CANDLE::CANDLE_PURPLE());
 }
 
 void Robot::make_test_path()
@@ -253,8 +255,7 @@ void Robot::TestInit()
 
 void Robot::TestPeriodic()
 {
-  // m_arm.test();
-  m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(),BUTTON::CANDLE::CANDLE_RIGHT(),BUTTON::CANDLE::CANDLE_YELLOW(),BUTTON::CANDLE::CANDLE_PURPLE());
+  m_arm.test();
 }
 
 void Robot::DisabledPeriodic()
