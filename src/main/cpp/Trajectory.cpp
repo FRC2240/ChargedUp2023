@@ -40,6 +40,7 @@ Trajectory::TrajDepends Trajectory::fall_back()
     ret.current_x = current_pose.X();
     ret.current_y = current_pose.Y();
     ret.desired_y = current_pose.Y();
+    std::cout << "desired x: " << ret.desired_x.value() << std::endl;
     return ret;
 }
 /******************************************************************/
@@ -56,6 +57,7 @@ units::meter_t Trajectory::determine_desired_y()
      */
     auto current_y = Odometry::getPose().Y();
     auto lowest = 100.0_m;
+    auto lastGood = 0.0_m;
     std::cout << "current_y: " << current_y.value() << std::endl;
 
     for (const auto item : CONSTANTS::TRAJECTORY::Y_POS) {
@@ -63,10 +65,11 @@ units::meter_t Trajectory::determine_desired_y()
 
         auto next = units::math::abs(current_y - item);
         if (lowest > next) {
+            lastGood = item;
             lowest = next;
         } else {
             std::cout << "select good:" <<  item.value() << std::endl;
-            return item;
+            return lastGood;
         }
     }
     std::cout << "select last:" <<  CONSTANTS::TRAJECTORY::Y_POS.back().value() << std::endl;
@@ -83,7 +86,6 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
     std::cout << "here\n";
     frc::Pose2d current_pose = Odometry::getPose();
     Trajectory::TrajDepends ret;
-    auto heading = (frc::Translation2d(1_m, 1_m) - current_pose.Translation()).Angle().Degrees();
 
     if (current_pose.X().value() < 0)
         // Blue alliance X positions
@@ -116,17 +118,17 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
                     break;
                 }
         }
-
-    ret.desired_head = heading;
     ret.desired_rot = 0_deg;
     ret.current_rot = current_pose.Rotation().Degrees();
-    ret.current_head = heading;
     ret.current_x = current_pose.X();
     ret.current_y = current_pose.Y();
 
     ret.desired_y = determine_desired_y();
     std::cout << "cx: " << ret.current_x.value() << "\n cy: " << ret.current_y.value() << std::endl;
     std::cout << "X: " << ret.desired_x.value() << "\n Y: " << ret.desired_y.value() << std::endl;
+    auto heading = (frc::Translation2d(ret.desired_x, ret.desired_y) - current_pose.Translation()).Angle().Degrees();
+    ret.current_head = heading;
+    ret.desired_head = heading;
 
     return ret;
 }
@@ -223,7 +225,7 @@ PathPlannerTrajectory Trajectory::generate_live_traj(units::meter_t current_x,
         return ret_val;
 }
 */
-void Trajectory::init_live_traj(PathPlannerTrajectory traj)
+void Trajectory::init_live_traj(PathPlannerTrajectory traj, units::second_t offset)
 {
     auto const inital_state = traj.getInitialState();
     auto const inital_pose = inital_state.pose;
@@ -232,6 +234,7 @@ void Trajectory::init_live_traj(PathPlannerTrajectory traj)
     // to construct a new Pose2d as the original Pose2d's Z (rotation) value uses non-holonomic math
     Odometry::resetPosition({inital_pose.Translation(), inital_state.holonomicRotation}, Drivetrain::getCCWHeading());
 
+    
     m_trajTimer.Reset();
     m_trajTimer.Start();
 
@@ -266,6 +269,7 @@ bool Trajectory::follow_live_traj(PathPlannerTrajectory traj)
 
         if constexpr (CONSTANTS::DEBUGGING)
         {
+            /*
             static int trajectory_samples{};
             frc::SmartDashboard::PutString("Sample:", fmt::format(
                                                                   "Current trajectory sample value: {}, Pose X: {}, Pose Y: {}, Pose Z: {}\nHolonomic Rotation: {}, Timer: {}\n",
@@ -286,9 +290,8 @@ bool Trajectory::follow_live_traj(PathPlannerTrajectory traj)
 
             printRobotRelativeSpeeds();
             printFieldRelativeSpeeds();
+            */
         }
-
-        using namespace std::chrono_literals;
         // This is the refresh rate of the HolonomicDriveController's PID controllers (can be tweaked if needed)
     }
     else

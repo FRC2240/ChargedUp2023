@@ -11,7 +11,7 @@ namespace CONSTANTS
 {
   constexpr bool DEBUGGING = true; //DO NOT USE IN COMP.
   //SLOWS DOWN EVERYTHING & MAY CAUSE WATCHDOG EXEPTIONS.
-    enum STATES { STORED, LOW, MED, HUMANPLAYER, HIGH, PICKUP, SCORE};
+    enum STATES { STORED, LOW, MED, HUMANPLAYER, HIGH, PICKUP, SCORE, FALLBACK};
 
 namespace TRAJECTORY
   {
@@ -103,9 +103,9 @@ namespace TRAJECTORY
     //Remove above warning when values found
     constexpr int APRILTAG_PIPE = 1; 
     //Remove above warning when values found
-    constexpr int BUFFER_SIZE = 5;
-    constexpr int MIN_GOOD_FRAMES = 4;
-    constexpr double MAX_STD_DEV = 0.06; //CHANGEME
+    constexpr int BUFFER_SIZE = 15;
+    constexpr int MIN_GOOD_FRAMES = 10;
+    constexpr double MAX_STD_DEV = 0.02; //CHANGEME
     constexpr double MIN_STD_DEV = 1.0e-10; //CHANGEME
     constexpr double MAX_STD_DEV_ROT = 10; //CHANGEME
     constexpr double MIN_STD_DEV_ROT = 1.0e-5; //CHANGEME

@@ -99,7 +99,7 @@ namespace Trajectory
                                              units::degree_t desired_rot
                                              );
 
-    void init_live_traj(PathPlannerTrajectory traj);
+    void init_live_traj(PathPlannerTrajectory traj, units::second_t offset = 0.0_s);
 
     bool follow_live_traj(PathPlannerTrajectory traj);
 

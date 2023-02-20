@@ -41,7 +41,6 @@
 #include "Constants.h"
 
 
-
 #define m_deadband 0.15
 
 class Robot : public frc::TimedRobot
@@ -93,6 +92,7 @@ private:
     const std::string TEST = "Test";
 
     bool arm_bool;
+
     
     frc::Timer m_robot_timer;
 
@@ -104,6 +104,8 @@ private:
     Candle m_candle;
     Wrist m_wrist;
     pathplanner::PathPlannerTrajectory m_trajectory;
+        pathplanner::PathPlannerTrajectory m_back_trajectory;
+
     
 
     enum autoActions {

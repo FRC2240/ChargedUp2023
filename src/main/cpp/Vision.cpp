@@ -4,9 +4,13 @@ Vision::Vision()
 {
   m_left_table->PutNumber("ledMode", 1); // Disable lights on boot
   m_right_table->PutNumber("ledMode", 1);
+    nonsense.trans_x = 12346789.0;
+  nonsense.trans_y = 987654321;
+  nonsense.rot_x = 987654321;
+  nonsense.is_good = false;
 }
 
-void Vision::pose_loop()
+bool Vision::pose_loop()
 {
   /**
    * The main loop for collecting data.
@@ -58,6 +62,10 @@ void Vision::pose_loop()
                                            Vision::collect(&Data::rot_x,
                                                            m_right_buffer));
           Vision::update_pose(pose_ret_val);
+         std::fill(m_left_buffer.begin(), m_left_buffer.end(), nonsense);
+         std::fill(m_right_buffer.begin(), m_right_buffer.end(), nonsense);
+
+          return true;
     }
   else if (dev_check_l)
     {
@@ -65,6 +73,10 @@ void Vision::pose_loop()
       pose_ret_val.trans_y = Vision::average(Vision::collect(&Data::trans_y, m_left_buffer));
       pose_ret_val.rot_x = Vision::average(Vision::collect(&Data::rot_x, m_left_buffer));
      Vision::update_pose(pose_ret_val);
+              std::fill(m_left_buffer.begin(), m_left_buffer.end(), nonsense);
+
+               return true;
+
     }
   else if (dev_check_r)
     {
@@ -72,8 +84,12 @@ void Vision::pose_loop()
       pose_ret_val.trans_y= Vision::average(Vision::collect(&Data::trans_y, m_right_buffer));
       pose_ret_val.rot_x = Vision::average(Vision::collect(&Data::rot_x, m_right_buffer));
       Vision::update_pose(pose_ret_val);
-    }
+               std::fill(m_right_buffer.begin(), m_right_buffer.end(), nonsense);
 
+      return true;
+
+    }
+  return false;
 }
 
 std::vector<double> Vision::collect(double Data::* f, std::vector<Data> const& v)
@@ -184,6 +200,7 @@ bool Vision::check_std_dev(std::vector<Data> buffer)
            (z <= CONSTANTS::VISION::MAX_STD_DEV_ROT))
           )
         {
+          std::cout<<"true\n";
          return true;
         }
 
