@@ -54,28 +54,18 @@ units::meter_t Trajectory::determine_desired_y()
      * will always be the shortest path to that distance.
      *
      */
+    auto current_y = Odometry::getPose().Y().value();
+    auto lowest = 100.0;
 
-    frc::Pose2d current_pose = Odometry::getPose();
-    double temp = std::fabs(current_pose.Y().value() -
-                            CONSTANTS::TRAJECTORY::Y_POS[0].value());
-
-    for (unsigned int i = 0; i < CONSTANTS::TRAJECTORY::Y_POS.size(); i++)
-        {
-
-            if (temp > std::fabs( current_pose.Y().value() -
-                                  CONSTANTS::TRAJECTORY::Y_POS[i++].value()
-                                  )
-                )
-                {
-                    temp = std::fabs(current_pose.Y().value() -
-                                     CONSTANTS::TRAJECTORY::Y_POS[i++].value());
-                }
-            else
-                {
-                    return CONSTANTS::TRAJECTORY::Y_POS[i++];
-                }
+    for (const auto item : CONSTANTS::TRAJECTORY::Y_POS) {
+        auto next = std::fabs(current_y - item.value());
+        if (lowest > next) {
+            lowest = next;
+        } else {
+            return item;
         }
-    return CONSTANTS::TRAJECTORY::Y_POS[CONSTANTS::TRAJECTORY::Y_POS.size()-1];
+    }
+    return CONSTANTS::TRAJECTORY::Y_POS.back();
 }
 
 Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
