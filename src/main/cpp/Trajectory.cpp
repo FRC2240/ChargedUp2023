@@ -54,17 +54,22 @@ units::meter_t Trajectory::determine_desired_y()
      * will always be the shortest path to that distance.
      *
      */
-    auto current_y = Odometry::getPose().Y().value();
-    auto lowest = 100.0;
+    auto current_y = Odometry::getPose().Y();
+    auto lowest = 100.0_m;
+    std::cout << "current_y: " << current_y.value() << std::endl;
 
     for (const auto item : CONSTANTS::TRAJECTORY::Y_POS) {
-        auto next = std::fabs(current_y - item.value());
+        std::cout << "item:" <<  item.value() << std::endl;
+
+        auto next = units::math::abs(current_y - item);
         if (lowest > next) {
             lowest = next;
         } else {
+            std::cout << "select good:" <<  item.value() << std::endl;
             return item;
         }
     }
+    std::cout << "select last:" <<  CONSTANTS::TRAJECTORY::Y_POS.back().value() << std::endl;
     return CONSTANTS::TRAJECTORY::Y_POS.back();
 }
 
@@ -134,6 +139,7 @@ void Trajectory::printRobotRelativeSpeeds()
     frc::SmartDashboard::PutNumber("Estimated VY Speed", robot_relative.vy.value());
     frc::SmartDashboard::PutNumber("Estimated Omega Speed", units::degrees_per_second_t{robot_relative.omega}.value() / 720);
 }
+
 PathPlannerTrajectory Trajectory::generate_live_traj(TrajDepends t)
 {
 
@@ -144,18 +150,17 @@ PathPlannerTrajectory Trajectory::generate_live_traj(TrajDepends t)
                                                   Drivetrain::TRAJ_MAX_ACCELERATION/3),
 
                                   PathPoint(frc::Translation2d(t.current_x,
-                                                               -t.current_y),
+                                                               t.current_y),
                                             frc::Rotation2d(t.current_head),
                                             frc::Rotation2d(t.current_rot)
                                             ),
                                   PathPoint(frc::Translation2d(t.desired_x,
-                                                                -t.desired_y),
+                                                                t.desired_y),
                                             frc::Rotation2d(t.desired_head),
                                             frc::Rotation2d(t.desired_rot)
                                             )
                                   );
 }
-
 
 PathPlannerTrajectory Trajectory::generate_live_traj(units::meter_t current_x,
                                                      units::meter_t current_y,
@@ -169,8 +174,8 @@ PathPlannerTrajectory Trajectory::generate_live_traj(units::meter_t current_x,
 {
     PathPlannerTrajectory ret_val =
         PathPlanner::generatePath(
-                                  PathConstraints(Drivetrain::TRAJ_MAX_SPEED,
-                                                  Drivetrain::TRAJ_MAX_ACCELERATION),
+                                  PathConstraints(Drivetrain::TRAJ_MAX_SPEED/2,
+                                                  Drivetrain::TRAJ_MAX_ACCELERATION/2),
 
                                   PathPoint(frc::Translation2d(current_x,
                                                                current_y),
@@ -243,7 +248,7 @@ void Trajectory::init_live_traj(PathPlannerTrajectory traj)
 bool Trajectory::follow_live_traj(PathPlannerTrajectory traj)
 {
 
-    if ( (m_trajTimer.Get() <= traj.getTotalTime() /*+ 0.1_s*/))
+    if ( (m_trajTimer.Get() <= traj.getTotalTime() + 0.02_s))
     {
         auto current_time = m_trajTimer.Get();
 
@@ -274,7 +279,7 @@ bool Trajectory::follow_live_traj(PathPlannerTrajectory traj)
 
             auto pose = Odometry::getPose();
 
-            std::cout << "robot: "
+            std::cout << " robot: "
                 << pose.X().value() << "," 
                 << pose.Y().value() << ","
                 << std::endl;
