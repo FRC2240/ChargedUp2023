@@ -12,6 +12,18 @@
 #include <frc/kinematics/ChassisSpeeds.h>
 #include "Constants.h"
 #include <functional>
+#include <cmath>
+#include "Drivetrain.hpp"
+#include "RobotState.hpp"
+#include "ngr.hpp"
+#include "Odometry.hpp"
+
+#include <frc/controller/HolonomicDriveController.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+
+#include <chrono>
+#include <thread>
+#include <frc/Timer.h>
 
 using namespace pathplanner; // PathPlanner keeps everything hidden behind 2 sets of namespaces so it's safe to remove the first layer
 
@@ -20,6 +32,51 @@ namespace Trajectory
     /******************************************************************/
     /*                  Public Function Declarations                  */
     /******************************************************************/
+    enum HEIGHT {HIGH, MED, GROUND};
+    enum BIG_TABLE
+        {
+            LEFT_1,
+            LEFT_2,
+            LEFT_3,
+
+            CENTER_1,
+            CENTER_2,
+            CENTER_3,
+
+            RIGHT_1,
+            RIGHT_2,
+            RIGHT_3
+    };
+    enum LCR {LEFT, CENTER, /*"co-op"*/ RIGHT};
+    enum PIECE {CONE, CUBE}; //"cube"
+
+    struct Target
+    {
+        HEIGHT height;
+        BIG_TABLE table;
+        PIECE piece;
+    };
+
+    struct TrajDepends
+    {
+        units::meter_t current_x;
+        units::meter_t current_y;
+        units::degree_t current_head;
+        units::degree_t current_rot;
+        units::meter_t desired_x;
+        units::meter_t desired_y;
+        units::degree_t desired_head;
+        units::degree_t desired_rot;
+    };
+
+    units::meter_t determine_desired_y();
+
+    TrajDepends determine_desired_traj(Target tgt);
+
+    PathPlannerTrajectory generate_live_traj(TrajDepends t);
+
+    //frc::Timer m_trajTimer;
+
     PathPlannerTrajectory generate_live_traj(units::meter_t current_x,
                                              units::meter_t current_y,
                                              frc::Rotation2d current_head,
@@ -40,11 +97,9 @@ namespace Trajectory
                                              units::degree_t desired_rot
                                              );
 
+    void init_live_traj(PathPlannerTrajectory traj);
 
-void follow_live_traj(PathPlannerTrajectory traj,
-                      std::function<void(units::second_t time)> const &periodic = nullptr,
-                      units::meters_per_second_t const &max_vel = Drivetrain::TRAJ_MAX_SPEED,
-                      units::meters_per_second_squared_t const &max_accl = Drivetrain::TRAJ_MAX_ACCELERATION);
+    void follow_live_traj(PathPlannerTrajectory traj);
 
 
     void printRobotRelativeSpeeds();

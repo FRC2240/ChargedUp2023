@@ -218,7 +218,7 @@ void Drivetrain::faceDirection(units::meters_per_second_t const &dx,
                                double const &rot_p,
                                units::degrees_per_second_t const &max_rot_speed)
 {
-  int error_theta = (theta - getAngle()).to<int>() % 360; // Get difference between old and new angle;
+  int error_theta = (theta + getAngle()).to<int>() % 360; // Get difference between old and new angle;
                                                           // gets the equivalent value between -360 and 360
 
   if (error_theta < -180)

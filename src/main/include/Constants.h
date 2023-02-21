@@ -1,9 +1,56 @@
-#ifndef CONSTANTS_H_
-#define CONSTANTS_H_
+#pragma once
+
+#include <units/length.h>
+#include <units/angle.h>
+#include <frc/DriverStation.h>
+#include <iostream>
+#include <vector>
+
 
 namespace CONSTANTS 
 {
-  constexpr bool DEBUGGING = true;
+  constexpr bool DEBUGGING = true; //DO NOT USE IN COMP. 
+  //SLOWS DOWN EVERYTHING & MAY CAUSE WATCHDOG EXEPTIONS.
+  namespace TRAJECTORY
+  {
+   const std::vector<units::meter_t> Y_POS =
+      {
+        /*
+         * A list of all Y positions to score at.
+         * Ordered from the pipe farthest on the robot's left side of the
+         * red alliance grid to the rightmost.
+         *
+         * Since the field isn't mirrored, the lists are the same for the
+         * red alliance and the blue alliance.
+         *
+         *  Copyright Westly Miller, 2023.
+         */
+        0_m,
+        0_m,
+        0_m,
+        0_m,
+        0_m,
+        0_m,
+        0_m,
+        0_m,
+        0_m
+     };
+    namespace R
+    {
+      //Red Team and blue team will use seperate data.
+
+      constexpr units::meter_t HIGH_X = 0_m;
+      constexpr units::meter_t MID_X = 0_m;
+      constexpr units::meter_t GROUND_X = 0_m;
+    }
+
+    namespace B
+    {
+      constexpr units::meter_t HIGH_X = 0_m;
+      constexpr units::meter_t MID_X = 0_m;
+      constexpr units::meter_t GROUND_X = 0_m;
+    }
+  }
   namespace GRIPPAD
   {
     constexpr int GRIPPAD_CHANNEL = 0;
@@ -12,46 +59,53 @@ namespace CONSTANTS
   namespace WRIST
   {
     constexpr int WRIST_MOTOR_ID = 1;
-    constexpr double WRIST_ENCODER_OFFSET = 0.0;
-    constexpr double WRIST_FLARE_OFFSET = 10.0;
   }
 
   namespace ARM
   {
-    constexpr int RIGHT_ARM_MOTOR_ID = 2;
-    constexpr int LEFT_ARM_MOTOR_ID = 3;
-    constexpr double ARM_ENCODER_OFFSET = 0.0;
-    constexpr double ARM_FLARE_HIGH = -60;
-    constexpr double ARM_FLARE_LOW = -70;
+    constexpr int RIGHT_ARM_MOTOR_ID = 3;
+    constexpr int LEFT_ARM_MOTOR_ID = 2;
+    constexpr double ARM_ENCODER_OFFSET = -112.0;
+    constexpr int ARM_CANCODER_ID = 1;
+    constexpr double MIN_THRESHOLD = 0.98;
+    constexpr double MAX_THRESHOLD = 1.02;
     
     namespace PID
     {
-      constexpr int kP = 0.0;
-      constexpr int kI = 0.0;
-      constexpr int kD = 0.0;
-      constexpr int kIz = 0.0;
-      constexpr int kFF = 0.0;
-      constexpr int kMaxOutput = 0.0;
-      constexpr int kMinOutput = 0.0;
-      constexpr int slotIdx = 0;
-      constexpr int pidIdx = 0;
+      constexpr double kP = 0.1;
+      constexpr double kI = 0.0;
+      constexpr double kD = 0.0;
+      constexpr double kIz = 0.0;
+      constexpr double kFF = 0.0;
+      constexpr double kMaxOutput = 1.0;
+      constexpr double kMinOutput = -1.0;
+      constexpr double slotIdx = 0;
+      constexpr double pidIdx = 0;
 
     }
 
     namespace MOTORPOSITIONS
     {
-      constexpr int STORED = 0.0;
-      constexpr int LOW = 0.0;
-      constexpr int MED = 0.0;
-      constexpr int HP = 0.0;
-      constexpr int HIGH = 0.0;
+      //Add 112 (the offset) and 7 (the margin of error) to all values
+      constexpr double STORED = 134.0;
+      constexpr double LOW = 189.0;
+      constexpr double MED = 244.0;
+      constexpr double HP = 0.0;
+      constexpr double HIGH = 260.0;
+      constexpr double PICKUP = 159.0;
     }
   }
 
   namespace VISION {
-    constexpr int APRILTAG_PIPE = 1; //CHANGEME
-    constexpr int ARRAY_SIZE = 5;
-    constexpr double MAX_STD_DEV = 1; //CHANGEME
+    //Remove above warning when values found
+    constexpr int APRILTAG_PIPE = 1; 
+    //Remove above warning when values found
+    constexpr int BUFFER_SIZE = 5;
+    constexpr int MIN_GOOD_FRAMES = 4;
+    constexpr double MAX_STD_DEV = 10; //CHANGEME
+    constexpr double MIN_STD_DEV = 1.0e-10; //CHANGEME
+    constexpr double MAX_STD_DEV_ROT = 10; //CHANGEME
+    constexpr double MIN_STD_DEV_ROT = 1.0e-5; //CHANGEME
 
   }
 
@@ -60,10 +114,8 @@ namespace CONSTANTS
   }
 
   namespace GRABBER{
-    constexpr int GRABBER_MOTOR_ID = 6;
     constexpr int GRABBER_PISTON_ID1 = 1;
     constexpr int GRABBER_PISTON_ID2 = 2;
 
   }
 }
-#endif // CONSTANTS_H_

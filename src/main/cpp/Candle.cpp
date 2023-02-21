@@ -21,38 +21,48 @@ void Candle::candle_logic(bool left_button, bool right_button,
 
     previous_state = state;
 
-    if (m_alliance == frc::DriverStation::Alliance::kRed){
+    if (m_alliance == frc::DriverStation::Alliance::kRed)
+    {
         m_candle.SetLEDs(255, 0, 0, 0, 8, 54);
         m_candle.SetLEDs(255, 0, 0, 0, 108, 100);
     } 
-    else if (m_alliance == frc::DriverStation::Alliance::kBlue){
+    else if (m_alliance == frc::DriverStation::Alliance::kBlue)
+    {
         m_candle.SetLEDs(0, 0, 255, 0, 8, 54);
         m_candle.SetLEDs(0, 0, 255, 0, 108, 100);
     }
     
-    if (left_button) {
+    if (left_button) 
+    {
        side = true;
     } 
-    if (right_button) {
+    if (right_button) 
+    {
         side = false;
     } 
-    if(purple_button){
+    if (purple_button)
+    {
         color = true;
     } 
-    if(yellow_button){
+    if (yellow_button)
+    {
         color = false;
     } 
 
-    if (side && color){
+    if (side && color)
+    {
         state = PURPLE_LEFT;
     }
-    else if (!side && color){
+    else if (!side && color)
+    {
         state = PURPLE_RIGHT;
     }
-    else if (side && !color){
+    else if (side && !color)
+    {
         state = YELLOW_LEFT;
     }
-    else if (!side && !color){
+    else if (!side && !color)
+    {
         state = YELLOW_RIGHT;
     }
 
