@@ -28,6 +28,10 @@ class Arm
   bool arm_moved(bool store_button_raw, bool low_button_raw, 
                  bool med_button_raw, bool hp_button_raw,
                  bool high_button_raw, bool pickup_button_raw);
+                 
+  void arm_overide(bool low_button_raw, bool med_button_raw,
+                   bool hp_button_raw,bool high_button_raw,
+                   bool pickup_button_raw);
   double desired_position;
 
   double position;

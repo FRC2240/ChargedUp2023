@@ -206,6 +206,41 @@ bool Arm::arm_moved(bool store_button_raw, bool low_button_raw,
 
 }
 
+void Arm::arm_overide(bool low_button_overide, bool med_button_overide,
+                      bool hp_button_overide,bool high_button_overide,
+                      bool pickup_button_overide)
+{
+    if (pickup_button_overide)
+    {
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::PICKUP;
+        move();
+    }
+
+    if (low_button_overide)
+    {
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
+        move();
+    }
+
+    if (med_button_overide)
+    {
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
+        move();
+    }
+
+    if (hp_button_overide)
+    {
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
+        move();
+    }
+
+    if (high_button_overide)
+    {
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
+        move();
+    }
+}
+
 void Arm::test()
 {
     std::cout << "encoder: " << arm_cancoder.GetAbsolutePosition() << "\n";
