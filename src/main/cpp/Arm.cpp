@@ -127,61 +127,116 @@ bool Arm::arm_moved(CONSTANTS::STATES state)
 
     switch (state)
     {
-        case CONSTANTS::STATES::STORED:
-            //std::cout << "state: " << "store" << "\n";
-            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
-            move();
-            return false;
-            break;
-
-        case CONSTANTS::STATES::HUMANPLAYER:
-            //std::cout << "state: " << "hp" << "\n";
-            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
-            move();
-            break;
-
-        case CONSTANTS::STATES::PICKUP:
-            //std::cout << "state: " << "pickup" << "\n";
-            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::PICKUP;
-            move();
-            break;
-
-        case CONSTANTS::STATES::LOW:
-            //std::cout << "state: " << "low" << "\n";
-            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
-            move();
-            break;
-
-        case CONSTANTS::STATES::MED:
-           // std::cout << "state: " << "med" << "\n";
-            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
-            move();
-            break;
-
-        case CONSTANTS::STATES::HIGH:
-            //std::cout << "state: " << "high" << "\n";
-            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
-            move();
-            break;
-        
+        store_button = !store_button;
     }
 
-    if (arm_cancoder.GetAbsolutePosition()/desired_position > CONSTANTS::ARM::MIN_THRESHOLD &&
-        arm_cancoder.GetAbsolutePosition()/desired_position < CONSTANTS::ARM::MAX_THRESHOLD)
+    if (pickup_button_raw)
     {
-        //std::cout << "IN THRESHOLD \n";
-        return true;
-    } 
+        pickup_button = !pickup_button;
+    }
+
+    if (low_button_raw)
+    {
+        low_button = !low_button;
+    }
+
+    if (med_button_raw)
+    {
+        med_button = !med_button;
+    }
+
+    if (hp_button_raw)
+    {
+        hp_button = !hp_button;
+    }
+
+    if (high_button_raw)
+    {
+        high_button = !high_button;
+    }
+
+    if(pickup_button)
+    {
+        std::cout << "state: " << "pickup" << "\n";
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::PICKUP;
+        move();
+        open_grabber = true;
+    }
+    else if(low_button)
+    {
+        std::cout << "state: " << "low" << "\n";
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
+        move();
+    }
+    else if(med_button)
+    {
+        std::cout << "state: " << "med" << "\n";
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
+        move();
+    }
+    else if(hp_button)
+    {
+        std::cout << "state: " << "hp" << "\n";
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
+        move();
+        open_grabber = false;
+    }
+    else if(high_button)
+    {
+        std::cout << "state: " << "high" << "\n";
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
+        move();
+    }
+    else if(store_button)
+    {
+        std::cout << "state: " << "store" << "\n";
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
+        move();
+        open_grabber = true;
+    }
     else
     {
-        //std::cout << arm_cancoder.GetAbsolutePosition()/desired_position << std::endl;
-        return false;
-        
+        open_grabber = false;
     }
 
     
 }
 
+
+void Arm::arm_overide(bool low_button_overide, bool med_button_overide,
+                      bool hp_button_overide,bool high_button_overide,
+                      bool pickup_button_overide)
+{
+    if (pickup_button_overide)
+    {
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::PICKUP;
+        move();
+    }
+
+    if (low_button_overide)
+    {
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
+        move();
+    }
+
+    if (med_button_overide)
+    {
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
+        move();
+    }
+
+    if (hp_button_overide)
+    {
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
+        move();
+    }
+
+    if (high_button_overide)
+    {
+        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
+        move();
+    }
+}
 
 void Arm::test()
 {

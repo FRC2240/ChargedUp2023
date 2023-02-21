@@ -387,6 +387,19 @@ void Robot::traj_init(Trajectory::HEIGHT h)
   std::cout << "here 1 \n";
   Trajectory::init_live_traj(m_trajectory);
   std::cout << "here 2 \n";
+
+  m_arm.arm_moved(BUTTON::ARM::ARM_STORED(), BUTTON::ARM::ARM_LOW(), 
+                  BUTTON::ARM::ARM_MID(), BUTTON::ARM::ARM_HP(), 
+                  BUTTON::ARM::ARM_HIGH(), BUTTON::ARM::ARM_PICKUP());
+  arm_bool = m_arm.open_grabber;
+  m_grabber.GrabberLogic(arm_bool);
+
+  m_arm.arm_overide(BUTTON::ARM::OVERIDES::ARM_OVERIDE_LOW(),
+                    BUTTON::ARM::OVERIDES::ARM_OVERIDE_MID(), 
+                    BUTTON::ARM::OVERIDES::ARM_OVERIDE_HP(),
+                    BUTTON::ARM::OVERIDES::ARM_OVERIDE_HIGH(),
+                    BUTTON::ARM::OVERIDES::ARM_OVERIDE_PICKUP());
+
 }
 
 void Robot::make_test_path()
