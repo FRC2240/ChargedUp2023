@@ -63,7 +63,7 @@ public:
     void TeleopPeriodic() override;
 
     // void DisabledInit() override;
-    // void DisabledPeriodic() override;
+     void DisabledPeriodic() override;
 
     void TestInit() override;
     void TestPeriodic() override;
