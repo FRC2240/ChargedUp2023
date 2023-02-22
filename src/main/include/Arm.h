@@ -23,7 +23,6 @@ class Arm
   void Up();
   void Down();
   void Stop();
-  void Test();
   bool arm_moved(CONSTANTS::STATES state);
   double desired_position;
 
