@@ -5,7 +5,7 @@
 
 void Grippad::deploy()
 {
-//    m_grippad_pistons.Set(true);
+   m_grippad_pistons.Set(false);
 }
 
 void Grippad::retract()

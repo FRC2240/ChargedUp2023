@@ -227,6 +227,10 @@ void Robot::TeleopPeriodic()
     std::cout << "retracting...\n";
     m_grippad.retract();
   }
+  else if (BUTTON::GRIPPADS::GRIPPADS_DEPLOY())
+  {
+    m_grippad.deploy();
+  }
 
   if (BUTTON::ARM::ARM_STORED())
   {
