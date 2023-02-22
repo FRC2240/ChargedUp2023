@@ -127,6 +127,10 @@ bool Arm::arm_moved(CONSTANTS::STATES state)
 
     switch (state)
     {
+        case CONSTANTS::STATES::ABORT:
+            desired_position = arm_cancoder.GetAbsolutePosition();
+            move();
+            break;
         case CONSTANTS::STATES::STORED:
             //std::cout << "state: " << "store" << "\n";
             desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;

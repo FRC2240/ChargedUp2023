@@ -1,8 +1,9 @@
 #ifndef BUTTONS_H_
 #define BUTTONS_H_
 
-
 #include <frc/XboxController.h>
+#include <frc/MathUtil.h>
+#include "Constants.h"
 
 namespace BUTTON
 {
@@ -19,6 +20,24 @@ namespace BUTTON
     inline double RX() {return BUTTON::m_stick.GetRightX();}
     inline double RY() {return BUTTON::m_stick.GetRightY();}
     inline double FIELD_CENTRIC(){return BUTTON::m_stick.GetRightStickButtonPressed();}
+
+   inline bool ABORT()
+    {
+      if 
+        (
+         frc::ApplyDeadband(BUTTON::DRIVETRAIN::LX(), CONSTANTS::DEADBAND) ||
+         frc::ApplyDeadband(BUTTON::DRIVETRAIN::LY(), CONSTANTS::DEADBAND) ||
+         frc::ApplyDeadband(BUTTON::DRIVETRAIN::RX(), CONSTANTS::DEADBAND) ||
+         frc::ApplyDeadband(BUTTON::DRIVETRAIN::RY(), CONSTANTS::DEADBAND)
+         )
+        {
+          return true;
+        }
+      else 
+        {
+          return false;
+        }
+    } 
   }
 
   namespace ARM
@@ -62,5 +81,7 @@ namespace BUTTON
     inline bool CANDLE_PURPLE() {return BUTTON::m_aux_stick.GetAButton();}
   }
 }
+
+
 
 #endif //BUTTONS_H_
