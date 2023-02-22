@@ -92,10 +92,10 @@ void tuneFF() {}
 
 void swerveDrive(bool const &field_relative)
 {
-  auto const left_right = -frc::ApplyDeadband(BUTTON::DRIVETRAIN::LX(), m_deadband) *
+  auto const left_right = -frc::ApplyDeadband(BUTTON::DRIVETRAIN::LX(), CONSTANTS::DEADBAND) *
                           Drivetrain::TELEOP_MAX_SPEED;
 
-  auto const front_back = -frc::ApplyDeadband(BUTTON::DRIVETRAIN::LY(), m_deadband) *
+  auto const front_back = -frc::ApplyDeadband(BUTTON::DRIVETRAIN::LY(), CONSTANTS::DEADBAND) *
                           Drivetrain::TELEOP_MAX_SPEED;
   // std::cout << "left_right = " << BUTTON::PS5.GetX() << "front_back = " << BUTTON::PS5.GetY() << std::endl;
 
@@ -116,7 +116,7 @@ void swerveDrive(bool const &field_relative)
   }
   else
   {
-    auto const rot = frc::ApplyDeadband(BUTTON::DRIVETRAIN::RX(), m_deadband) * Drivetrain::TELEOP_MAX_ANGULAR_SPEED;
+    auto const rot = frc::ApplyDeadband(BUTTON::DRIVETRAIN::RX(), CONSTANTS::DEADBAND) * Drivetrain::TELEOP_MAX_ANGULAR_SPEED;
 
     Drivetrain::drive(front_back, -left_right, rot, field_relative);
   }
