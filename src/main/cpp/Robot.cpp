@@ -80,7 +80,7 @@ void buttonManager()
 {
   if (BUTTON::DRIVETRAIN::FIELD_CENTRIC())
   {
-    std::cout << "MODE: RT"
+    std::cout << field_centric
               << "\n";
     field_centric = !field_centric;
   }
@@ -120,7 +120,7 @@ void swerveDrive(bool const &field_relative)
   {
     auto const rot = frc::ApplyDeadband(BUTTON::DRIVETRAIN::RX(), CONSTANTS::DEADBAND) * Drivetrain::TELEOP_MAX_ANGULAR_SPEED;
 
-    Drivetrain::drive(front_back, -left_right, rot, field_relative);
+    Drivetrain::drive(front_back, left_right, rot, field_relative);
   }
 }
 
