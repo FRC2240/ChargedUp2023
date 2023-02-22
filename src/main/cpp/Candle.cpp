@@ -12,8 +12,12 @@ Candle::Candle(){
 }
 
 void Candle::candle_logic(bool left_button, bool right_button, 
-                                    bool yellow_button, bool purple_button)
+                          bool yellow_button, bool purple_button, bool grabber_status)
 {
+
+    if (grabber_status == false){
+        m_candle_timer.Start();
+    }
 
     m_alliance = frc::DriverStation::GetAlliance();
     
@@ -21,7 +25,10 @@ void Candle::candle_logic(bool left_button, bool right_button,
 
     previous_state = state;
 
-    if (m_alliance == frc::DriverStation::Alliance::kRed)
+    if (grabber_status = false && m_candle_timer.Get() < units::time::second_t(0.5)){
+        state = GRABBER_FLASH;
+    }
+    else if (m_alliance == frc::DriverStation::Alliance::kRed)
     {
         m_candle.SetLEDs(255, 0, 0, 0, 8, 54);
         m_candle.SetLEDs(255, 0, 0, 0, 108, 100);
@@ -49,7 +56,10 @@ void Candle::candle_logic(bool left_button, bool right_button,
         color = false;
     } 
 
-    if (side && color)
+    if (grabber_status = false && m_candle_timer.Get() < units::time::second_t(0.5)){
+        state = GRABBER_FLASH;
+    }
+    else if (side && color)
     {
         state = PURPLE_LEFT;
     }
@@ -91,10 +101,20 @@ void Candle::candle_logic(bool left_button, bool right_button,
         m_candle.SetLEDs(254, 162, 1, 0, 100, 11);
 
         break;
+
+    case GRABBER_FLASH:
+        m_candle.SetLEDs(0, 255, 0, 0);
+        break;
+
     }
 
     if (state != previous_state){
         m_candle.SetLEDs(0, 0, 0, 0);
+    }
+
+    if (grabber_status == true){
+        m_candle_timer.Stop();
+        m_candle_timer.Reset();
     }
 }
 

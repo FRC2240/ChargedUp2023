@@ -243,7 +243,7 @@ void Robot::TeleopPeriodic()
       breakbeam = false;
     }
 
-  m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(), BUTTON::CANDLE::CANDLE_RIGHT(), BUTTON::CANDLE::CANDLE_YELLOW(), BUTTON::CANDLE::CANDLE_PURPLE());
+  m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(), BUTTON::CANDLE::CANDLE_RIGHT(), BUTTON::CANDLE::CANDLE_YELLOW(), BUTTON::CANDLE::CANDLE_PURPLE(), m_grabber.grabberStatus());
 
 
   m_arm.arm_moved(BUTTON::ARM::ARM_STORED(), BUTTON::ARM::ARM_LOW(), 

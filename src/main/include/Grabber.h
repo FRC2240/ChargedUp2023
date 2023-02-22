@@ -23,12 +23,16 @@ public:
   STATES Logic(bool intake_button, bool extake_button, bool stow_button);
   frc::DigitalInput  m_BreakBeamSensor{0};
 
+  bool grabberStatus();
+
 
 private:
 
   STATES state = STOWED;
 
   frc::DoubleSolenoid m_grabberPiston{frc::PneumaticsModuleType::REVPH,CONSTANTS::GRABBER::GRABBER_PISTON_ID1,CONSTANTS::GRABBER::GRABBER_PISTON_ID2};
+
+  bool grabberStatusBool = false;
 
   
 };
