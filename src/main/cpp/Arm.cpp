@@ -31,18 +31,13 @@ Arm::Arm()
     m_arm_motor_right.ConfigMotionCruiseVelocity(100);
     m_arm_motor_right.ConfigMotionAcceleration(100);
     
-    //m_arm_motor_left.SetInverted(ctre::phoenix::motorcontrol::InvertType::OpposeMaster);
-
-    //m_arm_motor_left.Follow(m_arm_motor_right);
+    // Follower
+    m_arm_motor_left.Follow(m_arm_motor_right);
 }
 
 void Arm::move()
 {
-    
-    //m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::Position, desired_position * TICKS_PER_CANCODER_DEGREE);
-    //double AFF = 0;
     double AFF = sin((3.1415/180)*(desired_position-horizontalPoint + 90)) * maxAFF;
-    //std::cout << AFF << std::endl;
     m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, desired_position * TICKS_PER_CANCODER_DEGREE,
     ctre::phoenix::motorcontrol::DemandType::DemandType_ArbitraryFeedForward, AFF);
 }
@@ -104,10 +99,10 @@ void Arm::Read_Position()
 }
 
 void Arm::Up(){
-    m_arm_motor_right.Set(0.1);
+    //m_arm_motor_right.Set(0.1);
 
-    m_arm_motor_left.SetInverted(ctre::phoenix::motorcontrol::InvertType::FollowMaster);
-    m_arm_motor_left.Follow(m_arm_motor_right);
+    //m_arm_motor_left.SetInverted(ctre::phoenix::motorcontrol::InvertType::FollowMaster);
+    //m_arm_motor_left.Follow(m_arm_motor_right);
     
     // Add 7 degrees to all PID degree values
     //m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::Position, 200.0 * TICKS_PER_CANCODER_DEGREE );

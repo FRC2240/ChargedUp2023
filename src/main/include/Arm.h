@@ -49,7 +49,7 @@ class Arm
 
     double horizontalPoint = 244;
 
-    double maxAFF = 0.15;
+    double maxAFF = 0.075;
 
     TalonFXSensorCollection m_Arm_RightEncoder = m_arm_motor_right.GetSensorCollection();
 

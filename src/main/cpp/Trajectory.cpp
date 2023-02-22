@@ -23,7 +23,6 @@ Trajectory::TrajDepends Trajectory::fall_back()
 {
     frc::Pose2d current_pose = Odometry::getPose();
     Trajectory::TrajDepends ret;
-    auto heading = (frc::Translation2d(1_m, 1_m) - current_pose.Translation()).Angle().Degrees();
 
     if (current_pose.X().value() < 0)
         {
@@ -33,13 +32,15 @@ Trajectory::TrajDepends Trajectory::fall_back()
         {
             ret.desired_x = current_pose.X() - 1_m;
         }
+        ret.desired_y = current_pose.Y();
+
+    auto heading = (frc::Translation2d(ret.desired_x, ret.desired_y) - current_pose.Translation()).Angle().Degrees();
     ret.desired_head = heading;
     ret.desired_rot = 0_deg;
     ret.current_rot = current_pose.Rotation().Degrees();
     ret.current_head = heading;
     ret.current_x = current_pose.X();
     ret.current_y = current_pose.Y();
-    ret.desired_y = current_pose.Y();
     std::cout << "desired x: " << ret.desired_x.value() << std::endl;
     return ret;
 }
@@ -58,21 +59,16 @@ units::meter_t Trajectory::determine_desired_y()
     auto current_y = Odometry::getPose().Y();
     auto lowest = 100.0_m;
     auto lastGood = 0.0_m;
-    std::cout << "current_y: " << current_y.value() << std::endl;
 
     for (const auto item : CONSTANTS::TRAJECTORY::Y_POS) {
-        std::cout << "item:" <<  item.value() << std::endl;
-
         auto next = units::math::abs(current_y - item);
         if (lowest > next) {
             lastGood = item;
             lowest = next;
         } else {
-            std::cout << "select good:" <<  item.value() << std::endl;
             return lastGood;
         }
     }
-    std::cout << "select last:" <<  CONSTANTS::TRAJECTORY::Y_POS.back().value() << std::endl;
     return CONSTANTS::TRAJECTORY::Y_POS.back();
 }
 
