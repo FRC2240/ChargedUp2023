@@ -143,7 +143,7 @@ void Robot::RobotPeriodic()
   // }
   // else {
   //std::cout << m_arm.position << std::endl;
-  m_wrist.Follow(m_arm.position);
+  //m_wrist.Follow(m_arm.position);
   // }
   m_arm.Read_Position();
 }
@@ -217,15 +217,15 @@ void Robot::TeleopPeriodic()
   //DASHBOARD::update_botpose(m_camera.get_field_pos_by_tag());
   //Drivetrain::print_angle();
  // m_camera.pose_loop();
-  buttonManager();
-  swerveDrive(field_centric);
+  // buttonManager();
+  // swerveDrive(field_centric);
   //Odometry::update();
 
-  if constexpr (debugging)
-    {
-      Trajectory::printRobotRelativeSpeeds();
-      Trajectory::printFieldRelativeSpeeds();
-    }
+  // if constexpr (debugging)
+  //   {
+  //     Trajectory::printRobotRelativeSpeeds();
+  //     Trajectory::printFieldRelativeSpeeds();
+  //   }
 
   if (breakbeam == false && m_grabber.m_BreakBeamSensor.Get() == true ){
     breakbeam = true;
@@ -246,11 +246,11 @@ void Robot::TeleopPeriodic()
   m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(), BUTTON::CANDLE::CANDLE_RIGHT(), BUTTON::CANDLE::CANDLE_YELLOW(), BUTTON::CANDLE::CANDLE_PURPLE(), m_grabber.grabberStatus());
 
 
-  m_arm.arm_moved(BUTTON::ARM::ARM_STORED(), BUTTON::ARM::ARM_LOW(), 
-                  BUTTON::ARM::ARM_MID(), BUTTON::ARM::ARM_HP(), 
-                  BUTTON::ARM::ARM_HIGH(), BUTTON::ARM::ARM_PICKUP());
-  arm_bool = m_arm.open_grabber;
-  m_grabber.GrabberLogic(arm_bool);
+  // m_arm.arm_moved(BUTTON::ARM::ARM_STORED(), BUTTON::ARM::ARM_LOW(), 
+  //                 BUTTON::ARM::ARM_MID(), BUTTON::ARM::ARM_HP(), 
+  //                 BUTTON::ARM::ARM_HIGH(), BUTTON::ARM::ARM_PICKUP());
+  // arm_bool = m_arm.open_grabber;
+  // m_grabber.GrabberLogic(arm_bool);
 
   m_arm.arm_overide(BUTTON::ARM::OVERIDES::ARM_OVERIDE_LOW(),
                     BUTTON::ARM::OVERIDES::ARM_OVERIDE_MID(), 

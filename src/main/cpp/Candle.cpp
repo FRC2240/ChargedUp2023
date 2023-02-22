@@ -30,12 +30,12 @@ void Candle::candle_logic(bool left_button, bool right_button,
     }
     else if (m_alliance == frc::DriverStation::Alliance::kRed)
     {
-        m_candle.SetLEDs(255, 0, 0, 0, 8, 54);
+        m_candle.SetLEDs(255, 0, 0, 0, 8, 53);
         m_candle.SetLEDs(255, 0, 0, 0, 108, 100);
     } 
     else if (m_alliance == frc::DriverStation::Alliance::kBlue)
     {
-        m_candle.SetLEDs(0, 0, 255, 0, 8, 54);
+        m_candle.SetLEDs(0, 0, 255, 0, 8, 53);
         m_candle.SetLEDs(0, 0, 255, 0, 108, 100);
     }
     
@@ -85,8 +85,8 @@ void Candle::candle_logic(bool left_button, bool right_button,
         break;
 
     case PURPLE_RIGHT:
-        m_candle.SetLEDs(82, 28, 200, 0, 75, 12);
-        m_candle.SetLEDs(82, 28, 200, 0, 100, 11);
+        m_candle.SetLEDs(82, 28, 200, 0, 74, 12);
+        m_candle.SetLEDs(82, 28, 200, 0, 100, 9);
 
         break;
 
@@ -98,14 +98,13 @@ void Candle::candle_logic(bool left_button, bool right_button,
 
     case YELLOW_RIGHT:
         m_candle.SetLEDs(254, 162, 1, 0, 74, 12);
-        m_candle.SetLEDs(254, 162, 1, 0, 100, 11);
+        m_candle.SetLEDs(254, 162, 1, 0, 100, 9);
 
         break;
 
     case GRABBER_FLASH:
         m_candle.SetLEDs(0, 255, 0, 0);
-        break;
-
+        break; 
     }
 
     if (state != previous_state){
@@ -116,6 +115,8 @@ void Candle::candle_logic(bool left_button, bool right_button,
         m_candle_timer.Stop();
         m_candle_timer.Reset();
     }
+
+    std::cout << grabber_status << std::endl;
 }
 
 void Candle::RainbowAnim()

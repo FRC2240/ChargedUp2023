@@ -4,6 +4,7 @@
 #include "ctre/phoenix/led/RainbowAnimation.h"
 #include <frc/DriverStation.h>
 #include <frc/Timer.h>
+#include <iostream>
 
 class Candle{
     public:
