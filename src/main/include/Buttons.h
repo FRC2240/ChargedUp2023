@@ -43,12 +43,6 @@ namespace BUTTON
     inline bool GRIPPADS_RETRACT() {return BUTTON::m_stick.GetPOV() == 0;}
     }
   
-  namespace WRIST
-  {
-    inline bool WRIST_UP() {return BUTTON::m_stick.GetAButton();}
-    inline bool WRIST_DOWN() {return BUTTON::m_stick.GetYButton();}
-  }
-
   namespace CANDLE
   {
     inline bool CANDLE_LEFT() {return BUTTON::m_aux_stick.GetBButton();}

@@ -14,15 +14,7 @@ public:
         Wrist();
         ~Wrist();
         void WristPIDInit();
-        void WristDashInit();
-        void WristDashRead();
-        void InitializeEncoders();
-        void ReadEncoders();
-        void Up();
-        void Down();
-        void Stop();
         void Follow(double arm_pos);
-        void Follow_Flare(double arm_pos);
         void Test();
         
         rev::SparkMaxPIDController m_wrist_PIDController = m_wrist_motor.GetPIDController();
