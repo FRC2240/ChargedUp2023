@@ -32,7 +32,7 @@ namespace Trajectory
     /******************************************************************/
     /*                  Public Function Declarations                  */
     /******************************************************************/
-    enum HEIGHT {HIGH, MED, GROUND};
+    enum class HEIGHT {HIGH, MED, GROUND, SAFE};
     enum BIG_TABLE
         {
             LEFT_1,
@@ -69,9 +69,11 @@ namespace Trajectory
         units::degree_t desired_rot;
     };
 
+    TrajDepends fall_back();
+
     units::meter_t determine_desired_y();
 
-    TrajDepends determine_desired_traj(Target tgt);
+    TrajDepends determine_desired_traj(HEIGHT h);
 
     PathPlannerTrajectory generate_live_traj(TrajDepends t);
 
@@ -97,9 +99,9 @@ namespace Trajectory
                                              units::degree_t desired_rot
                                              );
 
-    void init_live_traj(PathPlannerTrajectory traj);
+    void init_live_traj(PathPlannerTrajectory traj, units::second_t offset = 0.0_s);
 
-    void follow_live_traj(PathPlannerTrajectory traj);
+    bool follow_live_traj(PathPlannerTrajectory traj);
 
 
     void printRobotRelativeSpeeds();

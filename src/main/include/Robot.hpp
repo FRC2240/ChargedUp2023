@@ -1,7 +1,7 @@
 #pragma once
 
-
 #include <list>
+#include "Trajectory.hpp"
 #include "Vision.h"
 #include "Buttons.h"
 #include "Dash.h"
@@ -39,7 +39,7 @@
 #include <pathplanner/lib/PathPlannerTrajectory.h>
 
 
-
+#include "Constants.h"
 
 
 #define m_deadband 0.15
@@ -68,11 +68,19 @@ public:
     void TestInit() override;
     void TestPeriodic() override;
 
+    void traj_fall_back();
+    void traj_init(Trajectory::HEIGHT h);
     void make_test_path();
 
 
 
 private:
+
+    CONSTANTS::STATES state = CONSTANTS::STATES::STORED;
+
+    bool fall_back_init = false;
+    Trajectory::HEIGHT db_last_tgt = Trajectory::HEIGHT::SAFE;
+
     bool m_is_auto = false;
     std::vector<double> m_test_case = {1,2,3,4,5};
     Vision m_camera;
@@ -89,6 +97,9 @@ private:
 
     bool arm_bool;
 
+    
+    frc::Timer m_robot_timer;
+
     std::string m_autoSelected;
     bool breakbeam;
 
@@ -97,6 +108,8 @@ private:
     Candle m_candle;
     Wrist m_wrist;
     pathplanner::PathPlannerTrajectory m_trajectory;
+        pathplanner::PathPlannerTrajectory m_back_trajectory;
+
     
 
     enum autoActions {

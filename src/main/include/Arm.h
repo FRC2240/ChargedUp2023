@@ -13,7 +13,6 @@ class Arm
   public:
   Arm();
   ~Arm();
-  enum STATES { STORED, LOW, MED, HUMANPLAYER, HIGH, PICKUP};
 
   void move();
   void arm_pid_init();
@@ -25,12 +24,12 @@ class Arm
   void Down();
   void Stop();
   void Test();
-  bool arm_moved(bool store_button_raw, bool low_button_raw, 
-                 bool med_button_raw, bool hp_button_raw,
-                 bool high_button_raw, bool pickup_button_raw);
+  bool arm_moved(CONSTANTS::STATES state);
   double desired_position;
 
   double position;
+
+ private:
   double ARM_FLARE_HIGH;
   double ARM_FLARE_LOW;
   bool store_button;
@@ -40,16 +39,17 @@ class Arm
   bool hp_button;
   bool high_button;
   bool open_grabber;
- private:
-
-  STATES state = STORED;
 
     WPI_TalonFX m_arm_motor_right {CONSTANTS::ARM::RIGHT_ARM_MOTOR_ID};
     WPI_TalonFX m_arm_motor_left {CONSTANTS::ARM::LEFT_ARM_MOTOR_ID};
 
     WPI_CANCoder arm_cancoder{CONSTANTS::ARM::ARM_CANCODER_ID};
 
-    frc::Timer m_arm_timer;
+    frc::Timer m_timer;
+
+    double horizontalPoint = 244;
+
+    double maxAFF = 0.075;
 
     TalonFXSensorCollection m_Arm_RightEncoder = m_arm_motor_right.GetSensorCollection();
 

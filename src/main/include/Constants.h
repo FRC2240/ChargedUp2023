@@ -5,13 +5,15 @@
 #include <frc/DriverStation.h>
 #include <iostream>
 #include <vector>
-
+#include <units/time.h>
 
 namespace CONSTANTS 
 {
-  constexpr bool DEBUGGING = true; //DO NOT USE IN COMP. 
+  constexpr bool DEBUGGING = true; //DO NOT USE IN COMP.
   //SLOWS DOWN EVERYTHING & MAY CAUSE WATCHDOG EXEPTIONS.
-  namespace TRAJECTORY
+    enum STATES { STORED, LOW, MED, HUMANPLAYER, HIGH, PICKUP, SCORE, FALLBACK};
+
+namespace TRAJECTORY
   {
    const std::vector<units::meter_t> Y_POS =
       {
@@ -25,23 +27,23 @@ namespace CONSTANTS
          *
          *  Copyright Westly Miller, 2023.
          */
-        0_m,
-        0_m,
-        0_m,
-        0_m,
-        0_m,
-        0_m,
-        0_m,
-        0_m,
-        0_m
+        38.636_in,
+        16.386_in,
+        -5.364_in,
+        -27.364_in,
+        -48.614_in,
+        -71.864_in,
+        -93.864_in,
+        -115.614_in,
+        -137.864_in
      };
     namespace R
     {
       //Red Team and blue team will use seperate data.
 
-      constexpr units::meter_t HIGH_X = 0_m;
-      constexpr units::meter_t MID_X = 0_m;
-      constexpr units::meter_t GROUND_X = 0_m;
+      constexpr units::meter_t HIGH_X = 6.46_m;
+      constexpr units::meter_t MID_X = 6.02_m;
+      constexpr units::meter_t GROUND_X = 6.06_m;
     }
 
     namespace B
@@ -63,12 +65,13 @@ namespace CONSTANTS
 
   namespace ARM
   {
+    constexpr units::second_t DELAY = 2_s;
     constexpr int RIGHT_ARM_MOTOR_ID = 3;
     constexpr int LEFT_ARM_MOTOR_ID = 2;
     constexpr double ARM_ENCODER_OFFSET = -112.0;
     constexpr int ARM_CANCODER_ID = 1;
-    constexpr double MIN_THRESHOLD = 0.98;
-    constexpr double MAX_THRESHOLD = 1.02;
+    constexpr double MIN_THRESHOLD = 0.95;
+    constexpr double MAX_THRESHOLD = 1.05;
     
     namespace PID
     {
@@ -90,7 +93,7 @@ namespace CONSTANTS
       constexpr double STORED = 134.0;
       constexpr double LOW = 189.0;
       constexpr double MED = 244.0;
-      constexpr double HP = 0.0;
+      constexpr double HP = 250.0;
       constexpr double HIGH = 260.0;
       constexpr double PICKUP = 159.0;
     }
@@ -100,9 +103,9 @@ namespace CONSTANTS
     //Remove above warning when values found
     constexpr int APRILTAG_PIPE = 1; 
     //Remove above warning when values found
-    constexpr int BUFFER_SIZE = 5;
-    constexpr int MIN_GOOD_FRAMES = 4;
-    constexpr double MAX_STD_DEV = 10; //CHANGEME
+    constexpr int BUFFER_SIZE = 15;
+    constexpr int MIN_GOOD_FRAMES = 10;
+    constexpr double MAX_STD_DEV = 0.02; //CHANGEME
     constexpr double MIN_STD_DEV = 1.0e-10; //CHANGEME
     constexpr double MAX_STD_DEV_ROT = 10; //CHANGEME
     constexpr double MIN_STD_DEV_ROT = 1.0e-5; //CHANGEME
@@ -119,3 +122,4 @@ namespace CONSTANTS
 
   }
 }
+

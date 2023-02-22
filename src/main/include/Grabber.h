@@ -12,20 +12,17 @@ public:
 
   Grabber();
 
-  void In();
-  void Out();
+  bool break_beam();
+  void open();
+  void close();
 
-  void GrabberLogic(bool arm_bool);
-
-  bool grabberToggle = false;
-  
+  void GrabberLogic(bool arm_bool, bool toggle_raw);
 
   STATES Logic(bool intake_button, bool extake_button, bool stow_button);
-  frc::DigitalInput  m_BreakBeamSensor{0};
-
-
+  frc::DigitalInput  m_beam{0};
 private:
 
+  bool toggle = false;
   STATES state = STOWED;
 
   frc::DoubleSolenoid m_grabberPiston{frc::PneumaticsModuleType::REVPH,CONSTANTS::GRABBER::GRABBER_PISTON_ID1,CONSTANTS::GRABBER::GRABBER_PISTON_ID2};

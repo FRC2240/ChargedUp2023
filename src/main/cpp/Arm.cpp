@@ -23,22 +23,23 @@ Arm::Arm()
     arm_right_config.remoteFilter0.remoteSensorDeviceID = arm_cancoder.GetDeviceNumber();
     arm_right_config.remoteFilter0.remoteSensorSource = RemoteSensorSource::RemoteSensorSource_CANCoder;
     arm_right_config.primaryPID.selectedFeedbackSensor = FeedbackDevice::RemoteSensor0;
-    arm_right_config.slot0.kP = 0.7;
-    arm_right_config.slot0.kD = 0.0;
+    arm_right_config.slot0.kP = 0.4;
+    arm_right_config.slot0.kD = 4.0;
     arm_right_config.slot0.kI = 0.0008;
     m_arm_motor_right.ConfigAllSettings(arm_right_config);
 
-    m_arm_motor_right.ConfigMotionCruiseVelocity(1000);
-    m_arm_motor_right.ConfigMotionAcceleration(1000);
+    m_arm_motor_right.ConfigMotionCruiseVelocity(100);
+    m_arm_motor_right.ConfigMotionAcceleration(100);
     
-    //m_arm_motor_left.SetInverted(ctre::phoenix::motorcontrol::InvertType::OpposeMaster);
-
-    //m_arm_motor_left.Follow(m_arm_motor_right);
+    // Follower
+    m_arm_motor_left.Follow(m_arm_motor_right);
 }
 
 void Arm::move()
 {
-    m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::Position, desired_position * TICKS_PER_CANCODER_DEGREE);
+    double AFF = sin((3.1415/180)*(desired_position-horizontalPoint + 90)) * maxAFF;
+    m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, desired_position * TICKS_PER_CANCODER_DEGREE,
+    ctre::phoenix::motorcontrol::DemandType::DemandType_ArbitraryFeedForward, AFF);
 }
 
 void Arm::arm_pid_init()
@@ -98,10 +99,10 @@ void Arm::Read_Position()
 }
 
 void Arm::Up(){
-    m_arm_motor_right.Set(0.1);
+    //m_arm_motor_right.Set(0.1);
 
-    m_arm_motor_left.SetInverted(ctre::phoenix::motorcontrol::InvertType::FollowMaster);
-    m_arm_motor_left.Follow(m_arm_motor_right);
+    //m_arm_motor_left.SetInverted(ctre::phoenix::motorcontrol::InvertType::FollowMaster);
+    //m_arm_motor_left.Follow(m_arm_motor_right);
     
     // Add 7 degrees to all PID degree values
     //m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::Position, 200.0 * TICKS_PER_CANCODER_DEGREE );
@@ -121,94 +122,70 @@ void Arm::Stop(){
     m_arm_motor_right.Set(0.0);
 }
 
-
-bool Arm::arm_moved(bool store_button_raw, bool low_button_raw, 
-                    bool med_button_raw, bool hp_button_raw,
-                    bool high_button_raw, bool pickup_button_raw)
+bool Arm::arm_moved(CONSTANTS::STATES state)
 {
 
-    m_arm_motor_left.SetInverted(ctre::phoenix::motorcontrol::InvertType::FollowMaster);
-    m_arm_motor_left.Follow(m_arm_motor_right);
+    switch (state)
+    {
+        case CONSTANTS::STATES::STORED:
+            //std::cout << "state: " << "store" << "\n";
+            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
+            move();
+            return false;
+            break;
 
-    if (store_button_raw)
-    {
-        store_button = !store_button;
+        case CONSTANTS::STATES::HUMANPLAYER:
+            //std::cout << "state: " << "hp" << "\n";
+            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
+            move();
+            break;
+
+        case CONSTANTS::STATES::PICKUP:
+            //std::cout << "state: " << "pickup" << "\n";
+            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::PICKUP;
+            move();
+            break;
+
+        case CONSTANTS::STATES::LOW:
+            //std::cout << "state: " << "low" << "\n";
+            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
+            move();
+            break;
+
+        case CONSTANTS::STATES::MED:
+           // std::cout << "state: " << "med" << "\n";
+            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
+            move();
+            break;
+
+        case CONSTANTS::STATES::HIGH:
+            //std::cout << "state: " << "high" << "\n";
+            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
+            move();
+            break;
+        
     }
 
-    if (pickup_button_raw)
+    if (arm_cancoder.GetAbsolutePosition()/desired_position > CONSTANTS::ARM::MIN_THRESHOLD &&
+        arm_cancoder.GetAbsolutePosition()/desired_position < CONSTANTS::ARM::MAX_THRESHOLD)
     {
-        pickup_button = !pickup_button;
-    }
-
-    if (low_button_raw)
-    {
-        low_button = !low_button;
-    }
-
-    if (med_button_raw)
-    {
-        med_button = !med_button;
-    }
-
-    if (hp_button_raw)
-    {
-        hp_button = !hp_button;
-    }
-
-    if (high_button_raw)
-    {
-        high_button = !high_button;
-    }
-
-    if(pickup_button)
-    {
-        std::cout << "state: " << "pickup" << "\n";
-        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::PICKUP;
-        move();
-        open_grabber = true;
-    }
-    else if(low_button)
-    {
-        std::cout << "state: " << "low" << "\n";
-        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
-        move();
-    }
-    else if(med_button)
-    {
-        std::cout << "state: " << "med" << "\n";
-        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
-        move();
-    }
-    else if(hp_button)
-    {
-        std::cout << "state: " << "hp" << "\n";
-        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
-        move();
-        open_grabber = false;
-    }
-    else if(high_button)
-    {
-        std::cout << "state: " << "high" << "\n";
-        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
-        move();
-    }
-    else if(store_button)
-    {
-        std::cout << "state: " << "store" << "\n";
-        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
-        move();
-        open_grabber = true;
-    }
+        //std::cout << "IN THRESHOLD \n";
+        return true;
+    } 
     else
     {
-        open_grabber = false;
+        //std::cout << arm_cancoder.GetAbsolutePosition()/desired_position << std::endl;
+        return false;
+        
     }
 
+    
 }
+
 
 void Arm::test()
 {
-    std::cout << "encoder: " << arm_cancoder.GetAbsolutePosition() << "\n";
+    //std::cout << "encoder: " << arm_cancoder.GetAbsolutePosition() << "\n";
 }
 
 

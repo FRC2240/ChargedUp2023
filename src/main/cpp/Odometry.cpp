@@ -79,7 +79,7 @@ void Odometry::reset_position_from_vision(const frc::Pose2d &bot_pose)
                            );
     if constexpr (CONSTANTS::DEBUGGING)
         {
-            std::cout << "Position reset" << std::endl;
+          //  std::cout << "Position reset" << std::endl;
         }
 }
 

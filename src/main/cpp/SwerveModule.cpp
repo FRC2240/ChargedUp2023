@@ -11,7 +11,7 @@
 /*                       Private Constants                        */
 /******************************************************************/
 
-constexpr units::meter_t WHEEL_RADIUS = 2_in;
+constexpr units::meter_t WHEEL_RADIUS = 2.32_in; // measured
 constexpr auto MOTOR_ROTATIONS_TO_TALON_ENCODER_TICKS = 2048;
 constexpr auto CANCODER_TICKS_PER_ROTATION = 4096;
 
