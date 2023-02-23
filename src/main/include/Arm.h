@@ -25,9 +25,9 @@ class Arm
   void Stop();
   bool arm_moved(CONSTANTS::STATES state);
                  
-  void arm_overide(bool low_button_raw, bool med_button_raw,
-                   bool hp_button_raw,bool high_button_raw,
-                   bool pickup_button_raw);
+  void arm_overide(bool low_button_overide, bool med_button_overide,
+                   bool hp_button_overide,bool high_button_overide,
+                   bool pickup_button_overide);
   double desired_position;
 
   double position;

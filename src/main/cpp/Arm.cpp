@@ -127,76 +127,56 @@ bool Arm::arm_moved(CONSTANTS::STATES state)
 
     switch (state)
     {
-        store_button = !store_button;
+        case CONSTANTS::STATES::STORED:
+            //std::cout << "state: " << "store" << "\n";
+            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
+            move();
+            return false;
+            break;
+
+        case CONSTANTS::STATES::HUMANPLAYER:
+            //std::cout << "state: " << "hp" << "\n";
+            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
+            move();
+            break;
+
+        case CONSTANTS::STATES::PICKUP:
+            //std::cout << "state: " << "pickup" << "\n";
+            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::PICKUP;
+            move();
+            break;
+
+        case CONSTANTS::STATES::LOW:
+            //std::cout << "state: " << "low" << "\n";
+            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
+            move();
+            break;
+
+        case CONSTANTS::STATES::MED:
+           // std::cout << "state: " << "med" << "\n";
+            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
+            move();
+            break;
+
+        case CONSTANTS::STATES::HIGH:
+            //std::cout << "state: " << "high" << "\n";
+            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
+            move();
+            break;
+        
     }
 
-    if (pickup_button_raw)
+    if (arm_cancoder.GetAbsolutePosition()/desired_position > CONSTANTS::ARM::MIN_THRESHOLD &&
+        arm_cancoder.GetAbsolutePosition()/desired_position < CONSTANTS::ARM::MAX_THRESHOLD)
     {
-        pickup_button = !pickup_button;
-    }
-
-    if (low_button_raw)
-    {
-        low_button = !low_button;
-    }
-
-    if (med_button_raw)
-    {
-        med_button = !med_button;
-    }
-
-    if (hp_button_raw)
-    {
-        hp_button = !hp_button;
-    }
-
-    if (high_button_raw)
-    {
-        high_button = !high_button;
-    }
-
-    if(pickup_button)
-    {
-        std::cout << "state: " << "pickup" << "\n";
-        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::PICKUP;
-        move();
-        open_grabber = true;
-    }
-    else if(low_button)
-    {
-        std::cout << "state: " << "low" << "\n";
-        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::LOW;
-        move();
-    }
-    else if(med_button)
-    {
-        std::cout << "state: " << "med" << "\n";
-        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
-        move();
-    }
-    else if(hp_button)
-    {
-        std::cout << "state: " << "hp" << "\n";
-        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
-        move();
-        open_grabber = false;
-    }
-    else if(high_button)
-    {
-        std::cout << "state: " << "high" << "\n";
-        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HIGH;
-        move();
-    }
-    else if(store_button)
-    {
-        std::cout << "state: " << "store" << "\n";
-        desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
-        move();
-        open_grabber = true;
-    }
+        //std::cout << "IN THRESHOLD \n";
+        return true;
+    } 
     else
     {
-        open_grabber = false;
+        //std::cout << arm_cancoder.GetAbsolutePosition()/desired_position << std::endl;
+        return false;
+        
     }
 
     
