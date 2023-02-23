@@ -406,6 +406,8 @@ void Robot::TeleopPeriodic()
     case CONSTANTS::STATES::O_LOW:
       if (m_arm.arm_moved(CONSTANTS::STATES::LOW))
       {
+        std::cout << "In treshhold \n";
+        std::cout << BUTTON::GRABBER::TOGGLE() << std::endl;
         if (BUTTON::GRABBER::TOGGLE())
         {
           m_grabber.open();
