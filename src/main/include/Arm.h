@@ -20,6 +20,7 @@ class Arm
   void arm_dash_read();
   void test();
   double Read_Position();
+  void force_move(double pos);
   void Up();
   void Down();
   void Stop();

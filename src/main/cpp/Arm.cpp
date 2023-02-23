@@ -122,7 +122,13 @@ void Arm::Down(){
 void Arm::Stop(){
     m_arm_motor_right.Set(0.0);
 }
-
+void Arm::force_move(double pos)
+{
+    double AFF = sin((3.1415/180)*(pos-horizontalPoint + 90)) * maxAFF;
+    m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, pos * TICKS_PER_CANCODER_DEGREE,
+    ctre::phoenix::motorcontrol::DemandType::DemandType_ArbitraryFeedForward, AFF);
+   
+}
 bool Arm::arm_moved(CONSTANTS::STATES state)
 {
 

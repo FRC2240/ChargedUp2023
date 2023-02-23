@@ -266,9 +266,11 @@ void Robot::TeleopPeriodic()
   {
     state = CONSTANTS::STATES::HIGH;
   }
-  else if (state == CONSTANTS::STATES::SCORE && BUTTON::DRIVETRAIN::ABORT())
+  else if ((state == CONSTANTS::STATES::SCORE && BUTTON::DRIVETRAIN::ABORT()) ||
+    ((state == CONSTANTS::STATES::HUMANPLAYER && BUTTON::DRIVETRAIN::ABORT())))
   {
     state = CONSTANTS::STATES::ABORT;
+    m_force_pos = m_arm.Read_Position() + 112;
   }
   else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_HP())
   {
@@ -384,6 +386,7 @@ void Robot::TeleopPeriodic()
 
   case CONSTANTS::STATES::ABORT:
     m_arm.arm_moved(CONSTANTS::STATES::ABORT);
+    m_arm.force_move(m_force_pos);
     m_grabber.close();
     m_robot_timer.Stop();
     m_robot_timer.Reset();

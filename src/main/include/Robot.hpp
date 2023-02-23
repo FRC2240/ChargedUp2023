@@ -97,6 +97,8 @@ private:
 
     bool arm_bool;
 
+    double m_force_pos;
+
     
     frc::Timer m_robot_timer;
 
