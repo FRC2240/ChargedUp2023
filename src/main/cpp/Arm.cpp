@@ -93,9 +93,10 @@ void Arm::arm_dash_read()
 
 }
 
-void Arm::Read_Position()
+double Arm::Read_Position()
 {
     position = arm_cancoder.GetAbsolutePosition() + CONSTANTS::ARM::ARM_ENCODER_OFFSET;
+    return position;
 }
 
 void Arm::Up(){
