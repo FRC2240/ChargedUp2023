@@ -394,6 +394,12 @@ void Robot::traj_init(Trajectory::HEIGHT h)
   Trajectory::init_live_traj(m_trajectory);
   std::cout << "here 2 \n";
 
+  m_arm.arm_overide(BUTTON::ARM::OVERIDES::ARM_OVERIDE_LOW(),
+                    BUTTON::ARM::OVERIDES::ARM_OVERIDE_MID(), 
+                    BUTTON::ARM::OVERIDES::ARM_OVERIDE_HP(),
+                    BUTTON::ARM::OVERIDES::ARM_OVERIDE_HIGH(),
+                    BUTTON::ARM::OVERIDES::ARM_OVERIDE_PICKUP());
+
 }
 
 void Robot::make_test_path()
