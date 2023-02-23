@@ -257,14 +257,26 @@ void Robot::TeleopPeriodic()
   else if (BUTTON::ARM::ARM_LOW())
   {
     state = CONSTANTS::STATES::LOW;
+    std::cout << "start: " << Odometry::getPose().X().value() << 
+    " , " <<
+     Odometry::getPose().Y().value() <<
+     std::endl;
   }
   else if (BUTTON::ARM::ARM_MID())
   {
     state = CONSTANTS::STATES::MED;
+     std::cout << "start: " << Odometry::getPose().X().value() << 
+    " , " <<
+     Odometry::getPose().Y().value() <<
+     std::endl;
   }
   else if (BUTTON::ARM::ARM_HIGH())
   {
     state = CONSTANTS::STATES::HIGH;
+    std::cout << "start: " << Odometry::getPose().X().value() << 
+    " , " <<
+     Odometry::getPose().Y().value() <<
+     std::endl;
   }
   else if ((state == CONSTANTS::STATES::SCORE && BUTTON::DRIVETRAIN::ABORT()) ||
     ((state == CONSTANTS::STATES::HUMANPLAYER && BUTTON::DRIVETRAIN::ABORT())))
@@ -374,6 +386,7 @@ void Robot::TeleopPeriodic()
     break;
 
   case CONSTANTS::STATES::FALLBACK:
+  std::cout << 10/0;
     if (Trajectory::follow_live_traj(m_back_trajectory))
     {
       m_robot_timer.Stop();
@@ -401,6 +414,10 @@ void Robot::TeleopPeriodic()
 
       if (m_robot_timer.Get() > units::time::second_t(0.5))
       {
+        std::cout << "end: " << Odometry::getPose().X().value() << 
+        " , " <<
+        Odometry::getPose().Y().value() <<
+        std::endl;
         m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back());
         Trajectory::init_live_traj(m_back_trajectory);
         state = CONSTANTS::STATES::FALLBACK;
