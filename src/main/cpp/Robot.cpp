@@ -260,10 +260,10 @@ void Robot::TeleopPeriodic()
   {
     state = CONSTANTS::STATES::O_HP;
   }
-  else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_PICKUP())
-  {
-    state = CONSTANTS::STATES::PICKUP;
-  }
+  // else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_PICKUP())
+  // {
+  //   state = CONSTANTS::STATES::PICKUP;
+  // }
   else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_LOW())
   {
     state = CONSTANTS::STATES::O_LOW;
