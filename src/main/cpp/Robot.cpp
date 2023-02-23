@@ -72,6 +72,8 @@ void Robot::RobotInit()
 {
   Odometry::putField2d();
   std::cout << "RobotInit done \n";
+
+  m_grippad.retract();
 }
 
 void buttonManager()
@@ -143,6 +145,8 @@ void Robot::RobotPeriodic()
 void Robot::AutonomousInit()
 {
 
+  m_grippad.retract();
+
   if (m_autoSelected == TEST)
   {
     m_autoSequence = &m_testSequence;
@@ -204,6 +208,8 @@ fs::path deployDirectory = frc::filesystem::GetDeployDirectory();
 void Robot::TeleopInit()
 {
   std::cout << "TeleopInit";
+
+   m_grippad.retract();
 }
 
 void Robot::TeleopPeriodic()
