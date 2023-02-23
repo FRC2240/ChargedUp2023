@@ -424,7 +424,7 @@ void Robot::TeleopPeriodic()
       case CONSTANTS::STATES::O_MED:
         if (m_arm.arm_moved(CONSTANTS::STATES::MED))
         {
-          if (BUTTON::GRABBER::TOGGLE())
+          if (BUTTON::GRABBER::OVERIDE_TOGGLE())
           {
             m_grabber.open();
             m_robot_timer.Start();
@@ -440,7 +440,7 @@ void Robot::TeleopPeriodic()
         case CONSTANTS::STATES::O_HIGH:
         if (m_arm.arm_moved(CONSTANTS::STATES::HIGH))
         {
-          if (BUTTON::GRABBER::TOGGLE())
+          if (BUTTON::GRABBER::OVERIDE_TOGGLE())
           {
             m_grabber.open();
             m_robot_timer.Start();
