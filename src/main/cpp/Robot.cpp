@@ -407,8 +407,8 @@ void Robot::TeleopPeriodic()
       if (m_arm.arm_moved(CONSTANTS::STATES::LOW))
       {
         std::cout << "In treshhold \n";
-        std::cout << BUTTON::GRABBER::TOGGLE() << std::endl;
-        if (BUTTON::GRABBER::TOGGLE())
+        std::cout << BUTTON::GRABBER::OVERIDE_TOGGLE() << std::endl;
+        if (BUTTON::GRABBER::OVERIDE_TOGGLE())
         {
           m_grabber.open();
           m_robot_timer.Start();
