@@ -114,13 +114,13 @@ void swerveDrive(bool const &field_relative)
       Drivetrain::faceDirection(front_back, left_right, -units::radian_t{atan2(rotate_joy_y, rotate_joy_x)} + 90_deg, field_relative);
     }
     else
-      Drivetrain::drive(front_back, -left_right, units::radians_per_second_t{0}, field_relative);
+      Drivetrain::drive(front_back, left_right, units::radians_per_second_t{0}, field_relative);
   }
   else
   {
     auto const rot = frc::ApplyDeadband(BUTTON::DRIVETRAIN::RX(), CONSTANTS::DEADBAND) * Drivetrain::TELEOP_MAX_ANGULAR_SPEED;
 
-    Drivetrain::drive(front_back, left_right, rot, field_relative);
+    Drivetrain::drive(front_back, -left_right, rot, field_relative);
   }
 }
 
