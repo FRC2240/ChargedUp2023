@@ -58,18 +58,20 @@ Robot::Robot()
   */
 
   // Auto paths
-  m_chooser.AddOption(Robot::CIRCLE, Robot::CIRCLE);
-  m_chooser.AddOption(Robot::LINE, Robot::LINE);
-  m_chooser.AddOption(Robot::NON_HOLONOMIC, Robot::NON_HOLONOMIC);
-
-  frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
-
   std::cout << "robot object created \n";
   std::cout << "go get em tiger" << std::endl;
 }
 
 void Robot::RobotInit()
 {
+  //  m_chooser.AddOption(Robot::PLACE, Robot::PLACE);
+  m_chooser.AddOption(Robot::TEST, Robot::TEST);
+  m_chooser.AddOption(Robot::LINE, Robot::LINE);
+  m_chooser.AddOption(Robot::NON_HOLONOMIC, Robot::NON_HOLONOMIC);
+
+  frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+
+
   Odometry::putField2d();
   std::cout << "RobotInit done \n";
 
@@ -147,40 +149,26 @@ void Robot::AutonomousInit()
 
   m_grippad.retract();
 
-  if (m_autoSelected == TEST)
-  {
-    m_autoSequence = &m_testSequence;
-  }
 
-  m_autoAction = m_autoSequence->front();
+  //m_autoAction = m_autoSequence->front();
 
   // Start aiming
 
   // m_autoSelected = m_chooser.GetSelected();
   std::cout << "auto selected \n";
 
-  fs::path deployDirectory = frc::filesystem::GetDeployDirectory();
-  if (m_autoSelected == CIRCLE)
-  {
-    deployDirectory = "Circle";
-  }
+  
+  
+    if (deployDirectory == TEST)
+    {
+      deployDirectory = "TestPath";
+    }
 
-  if (m_autoSelected == LINE)
-  {
-    deployDirectory = "30 degree turn";
-  }
-
-  if (m_autoSelected == LINE)
-  {
-    deployDirectory = "Straight Line";
-  }
-
-  if (m_autoSelected == TEST)
-  {
-    deployDirectory = "Test";
-  }
-
-  m_autoAction = m_autoSequence->front();
+    else if (deployDirectory == TEST_PLACE_H)
+    {
+      Robot::traj_init(Trajectory::HEIGHT::HIGH);
+      return;
+    } 
 
   std::cout << "auto chooser\n";
 
@@ -197,16 +185,39 @@ void Robot::AutonomousInit()
 
 void Robot::AutonomousPeriodic()
 {
-  // This is what gets called after Init()
-  Drivetrain::stop();
-}
-// File
-fs::path deployDirectory = frc::filesystem::GetDeployDirectory();
+  switch (m_auto_state)
+  {
+  case PLACE:
+    if (Trajectory::follow_live_traj(m_trajectory))
+      {
+        m_auto_state = FALL_BACK;
+        m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back());
+        Trajectory::init_live_traj(m_back_trajectory);
+        m_robot_timer.Restart();
+      }
+     break;
 
-//  Drivetrain::stop();
+    case FALL_BACK:
+      m_grabber.open();
+      if(m_robot_timer.Get() > 1.0_s)
+        {
+          if (Trajectory::follow_live_traj(m_back_trajectory))
+          {
+            m_robot_timer.Reset();
+            m_robot_timer.Stop();
+          }
+        }
+    break;
+  
+  default:
+    break;
+  }
+  
+  }
 
 void Robot::TeleopInit()
 {
+  Drivetrain::stop();
   std::cout << "TeleopInit";
 
    m_grippad.retract();

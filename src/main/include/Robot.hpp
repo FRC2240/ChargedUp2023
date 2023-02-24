@@ -72,10 +72,10 @@ public:
     void traj_init(Trajectory::HEIGHT h);
     void make_test_path();
 
-
-
+    enum AUTO_STATE  {PLACE, FALL_BACK};
+    AUTO_STATE m_auto_state;
 private:
-
+  fs::path deployDirectory = frc::filesystem::GetDeployDirectory();
     CONSTANTS::STATES state = CONSTANTS::STATES::STORED;
 
     bool fall_back_init = false;
@@ -94,6 +94,7 @@ private:
     const std::string CIRCLE = "Circle";
     const std::string NON_HOLONOMIC = "Non holonomic";
     const std::string TEST = "Test";
+    const std::string TEST_PLACE_H = "Place";
 
     bool arm_bool;
 
