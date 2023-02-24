@@ -29,13 +29,13 @@ namespace TRAJECTORY
          *  Copyright Westly Miller, 2023.
          */
         38.636_in,
-        16.386_in,
+        //16.386_in,
         -5.364_in,
         -27.364_in,
-        -48.614_in,
+        //-48.614_in,
         -71.864_in,
         -93.864_in,
-        -115.614_in,
+        //-115.614_in,
         -137.864_in
      };
     namespace R

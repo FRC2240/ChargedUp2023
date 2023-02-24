@@ -386,7 +386,6 @@ void Robot::TeleopPeriodic()
     break;
 
   case CONSTANTS::STATES::FALLBACK:
-  std::cout << 10/0;
     if (Trajectory::follow_live_traj(m_back_trajectory))
     {
       m_robot_timer.Stop();
