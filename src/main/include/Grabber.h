@@ -25,6 +25,7 @@ public:
 
   bool grabberStatus();
 
+  bool grabberStatusBool = false;
 
 private:
 
@@ -32,7 +33,7 @@ private:
 
   frc::DoubleSolenoid m_grabberPiston{frc::PneumaticsModuleType::REVPH,CONSTANTS::GRABBER::GRABBER_PISTON_ID1,CONSTANTS::GRABBER::GRABBER_PISTON_ID2};
 
-  bool grabberStatusBool = false;
+  
 
   
 };

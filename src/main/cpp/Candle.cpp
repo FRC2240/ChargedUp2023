@@ -25,18 +25,15 @@ void Candle::candle_logic(bool left_button, bool right_button,
 
     previous_state = state;
 
-    if (grabber_status = false && m_candle_timer.Get() < units::time::second_t(0.5)){
-        state = GRABBER_FLASH;
-    }
-    else if (m_alliance == frc::DriverStation::Alliance::kRed)
+    if (m_alliance == frc::DriverStation::Alliance::kRed)
     {
-        m_candle.SetLEDs(255, 0, 0, 0, 8, 53);
-        m_candle.SetLEDs(255, 0, 0, 0, 108, 100);
+        m_candle.SetLEDs(255, 0, 0, 0, 8, 55);
+        m_candle.SetLEDs(255, 0, 0, 0, 107, 100);
     } 
     else if (m_alliance == frc::DriverStation::Alliance::kBlue)
     {
-        m_candle.SetLEDs(0, 0, 255, 0, 8, 53);
-        m_candle.SetLEDs(0, 0, 255, 0, 108, 100);
+        m_candle.SetLEDs(0, 0, 255, 0, 8, 55);
+        m_candle.SetLEDs(0, 0, 255, 0, 107, 100);
     }
     
     if (left_button) 
@@ -56,7 +53,7 @@ void Candle::candle_logic(bool left_button, bool right_button,
         color = false;
     } 
 
-    if (grabber_status = false && m_candle_timer.Get() < units::time::second_t(0.5)){
+    if (grabber_status == false && m_candle_timer.Get() < units::time::second_t(0.5)){
         state = GRABBER_FLASH;
     }
     else if (side && color)
@@ -79,26 +76,29 @@ void Candle::candle_logic(bool left_button, bool right_button,
     switch (state)
     {
     case PURPLE_LEFT:
-        m_candle.SetLEDs(82, 28, 200, 0, 63, 11);
-        m_candle.SetLEDs(82, 28, 200, 0, 88, 12);
-
-        break;
-
-    case PURPLE_RIGHT:
         m_candle.SetLEDs(82, 28, 200, 0, 74, 12);
         m_candle.SetLEDs(82, 28, 200, 0, 100, 9);
 
         break;
 
+    case PURPLE_RIGHT:
+        m_candle.SetLEDs(82, 28, 200, 0, 63, 11);
+        m_candle.SetLEDs(82, 28, 200, 0, 88, 12);
+
+        break;
+
     case YELLOW_LEFT:
-        m_candle.SetLEDs(254, 162, 1, 0, 63, 11);
-        m_candle.SetLEDs(254, 162, 1, 0, 88, 12);
+
+        m_candle.SetLEDs(254, 162, 1, 0, 74, 12);
+        m_candle.SetLEDs(254, 162, 1, 0, 100, 9);
 
         break;
 
     case YELLOW_RIGHT:
-        m_candle.SetLEDs(254, 162, 1, 0, 74, 12);
-        m_candle.SetLEDs(254, 162, 1, 0, 100, 9);
+
+        m_candle.SetLEDs(254, 162, 1, 0, 63, 11);
+        m_candle.SetLEDs(254, 162, 1, 0, 88, 12);
+        
 
         break;
 

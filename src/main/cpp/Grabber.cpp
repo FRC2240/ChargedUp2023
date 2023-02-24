@@ -24,6 +24,7 @@ void Grabber::Out()
 
 bool Grabber::grabberStatus()
 {
+  std::cout << grabberStatusBool;
   return grabberStatusBool;
 }
 
