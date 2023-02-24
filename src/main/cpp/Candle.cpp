@@ -115,8 +115,6 @@ void Candle::candle_logic(bool left_button, bool right_button,
         m_candle_timer.Stop();
         m_candle_timer.Reset();
     }
-
-    std::cout << grabber_status << std::endl;
 }
 
 void Candle::RainbowAnim()

@@ -230,18 +230,13 @@ void Robot::TeleopPeriodic()
   if (m_grabber.grabberToggle == false && BUTTON::GRABBER::GRABBER_TOGGLE())
     {
       m_grabber.In();
-      std::cout << "Closed \n";
       m_grabber.grabberToggle = true;
     }
   else if (m_grabber.grabberToggle == true && BUTTON::GRABBER::GRABBER_TOGGLE())
     {
-      std::cout << "Open \n";
       m_grabber.Out();
       m_grabber.grabberToggle = false; 
     }
-
-  std::cout << "Grabber Button: " << BUTTON::GRABBER::GRABBER_TOGGLE() << std::endl;
-  std::cout << m_grabber.grabberStatusBool << std::endl;
 
   m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(), BUTTON::CANDLE::CANDLE_RIGHT(), BUTTON::CANDLE::CANDLE_YELLOW(), BUTTON::CANDLE::CANDLE_PURPLE(), m_grabber.grabberStatus());
 
