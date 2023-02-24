@@ -14,6 +14,7 @@ public:
         Wrist();
         ~Wrist();
         void WristPIDInit();
+        void pickupFollow(double arm_pos);
         void Follow(double arm_pos);
         void test();
         

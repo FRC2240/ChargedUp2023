@@ -95,7 +95,7 @@ void Arm::arm_dash_read()
 
 double Arm::Read_Position()
 {
-    position = arm_cancoder.GetAbsolutePosition() + CONSTANTS::ARM::ARM_ENCODER_OFFSET;
+    position = arm_cancoder.GetAbsolutePosition(); // + CONSTANTS::ARM::ARM_ENCODER_OFFSET;
     return position;
 }
 
@@ -195,7 +195,7 @@ bool Arm::arm_moved(CONSTANTS::STATES state)
 
 void Arm::test()
 {
-    //std::cout << "encoder: " << arm_cancoder.GetAbsolutePosition() << "\n";
+    std::cout << "arm: " << arm_cancoder.GetAbsolutePosition() << "\n";
 }
 
 
