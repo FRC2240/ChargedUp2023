@@ -4,22 +4,16 @@
 
 Grabber::Grabber(){}
 
-//FIXME
-// Only handles one case
-// functions not used
-// Other issues
-// DO NOT IGNORE WARNINGS FROM THIS FUNCTION 
- 
-void Grabber::In()
+void Grabber::close()
+{
+  grabberStatusBool = false;
+  m_grabberPiston.Set(frc::DoubleSolenoid::Value::kReverse);
+}
+
+void Grabber::open()
 {
   m_grabberPiston.Set(frc::DoubleSolenoid::Value::kForward);
   grabberStatusBool = true;
-}
-
-void Grabber::Out()
-{
-  m_grabberPiston.Set(frc::DoubleSolenoid::Value::kReverse);
-  grabberStatusBool = false;
 }
 
 bool Grabber::grabberStatus()
@@ -27,7 +21,5 @@ bool Grabber::grabberStatus()
   return grabberStatusBool;
 }
 
-void Grabber::GrabberLogic(bool arm_bool)
-{
+bool Grabber::break_beam(){return m_beam.Get();}
 
-}
