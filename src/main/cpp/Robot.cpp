@@ -136,7 +136,6 @@ void Robot::RobotPeriodic()
   //   m_wrist.Follow_Flare(m_arm.position);
   // }
   // else {
-  // std::cout << m_arm.position << std::endl;
   m_wrist.Follow(m_arm.position);
   // }
   m_arm.Read_Position();
@@ -467,7 +466,7 @@ void Robot::TeleopPeriodic()
         break;
   }
 
-  m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(), BUTTON::CANDLE::CANDLE_RIGHT(), BUTTON::CANDLE::CANDLE_YELLOW(), BUTTON::CANDLE::CANDLE_PURPLE());
+  m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(), BUTTON::CANDLE::CANDLE_RIGHT(), BUTTON::CANDLE::CANDLE_YELLOW(), BUTTON::CANDLE::CANDLE_PURPLE(), m_grabber.grabberStatus());
 }
 
 void Robot::traj_init(Trajectory::HEIGHT h)

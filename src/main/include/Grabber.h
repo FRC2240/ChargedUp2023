@@ -19,6 +19,11 @@ public:
   void GrabberLogic(bool arm_bool, bool toggle_raw);
 
   STATES Logic(bool intake_button, bool extake_button, bool stow_button);
+
+  bool grabberStatus();
+
+  bool grabberStatusBool = false;
+
   frc::DigitalInput  m_beam{0};
 private:
 
@@ -26,6 +31,8 @@ private:
   STATES state = STOWED;
 
   frc::DoubleSolenoid m_grabberPiston{frc::PneumaticsModuleType::REVPH,CONSTANTS::GRABBER::GRABBER_PISTON_ID1,CONSTANTS::GRABBER::GRABBER_PISTON_ID2};
+
+  
 
   
 };
