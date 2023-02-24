@@ -34,6 +34,6 @@ void Wrist::Follow(double arm_pos)
 }
 
 
-void Wrist::Test(){
+void Wrist::test(){
     std::cout << "wrist encoder: " << m_wrist_Encoder.GetPosition() << "\n";
 }

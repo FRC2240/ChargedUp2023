@@ -15,7 +15,7 @@ public:
         ~Wrist();
         void WristPIDInit();
         void Follow(double arm_pos);
-        void Test();
+        void test();
         
         rev::SparkMaxPIDController m_wrist_PIDController = m_wrist_motor.GetPIDController();
 

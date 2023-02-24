@@ -515,18 +515,12 @@ void Robot::make_test_path()
 }
 void Robot::TestInit()
 {
-  std::cout << "Test init \n";
-  Odometry::update();
-  make_test_path();
-  Trajectory::init_live_traj(m_trajectory);
-  m_is_auto = false;
 }
 
 void Robot::TestPeriodic()
 {
-  // auto pose = Odometry::getPose();
-  // std::cout << "Navx " << Drivetrain::getAngle().value() << std::endl;
-  Trajectory::follow_live_traj(m_trajectory);
+  m_arm.test();
+  m_wrist.test();
 }
 
 void Robot::DisabledPeriodic()
