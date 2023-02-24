@@ -93,9 +93,10 @@ void Arm::arm_dash_read()
 
 }
 
-void Arm::Read_Position()
+double Arm::Read_Position()
 {
     position = arm_cancoder.GetAbsolutePosition() + CONSTANTS::ARM::ARM_ENCODER_OFFSET;
+    return position;
 }
 
 void Arm::Up(){
@@ -121,12 +122,22 @@ void Arm::Down(){
 void Arm::Stop(){
     m_arm_motor_right.Set(0.0);
 }
-
+void Arm::force_move(double pos)
+{
+    double AFF = sin((3.1415/180)*(pos-horizontalPoint + 90)) * maxAFF;
+    m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, pos * TICKS_PER_CANCODER_DEGREE,
+    ctre::phoenix::motorcontrol::DemandType::DemandType_ArbitraryFeedForward, AFF);
+   
+}
 bool Arm::arm_moved(CONSTANTS::STATES state)
 {
 
     switch (state)
     {
+        case CONSTANTS::STATES::ABORT:
+            desired_position = arm_cancoder.GetAbsolutePosition();
+            move();
+            break;
         case CONSTANTS::STATES::STORED:
             //std::cout << "state: " << "store" << "\n";
             desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;

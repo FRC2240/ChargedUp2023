@@ -80,7 +80,7 @@ void buttonManager()
 {
   if (BUTTON::DRIVETRAIN::FIELD_CENTRIC())
   {
-    std::cout << "MODE: RT"
+    std::cout << field_centric
               << "\n";
     field_centric = !field_centric;
   }
@@ -114,7 +114,7 @@ void swerveDrive(bool const &field_relative)
       Drivetrain::faceDirection(front_back, left_right, -units::radian_t{atan2(rotate_joy_y, rotate_joy_x)} + 90_deg, field_relative);
     }
     else
-      Drivetrain::drive(front_back, -left_right, units::radians_per_second_t{0}, field_relative);
+      Drivetrain::drive(front_back, left_right, units::radians_per_second_t{0}, field_relative);
   }
   else
   {
@@ -257,14 +257,32 @@ void Robot::TeleopPeriodic()
   else if (BUTTON::ARM::ARM_LOW())
   {
     state = CONSTANTS::STATES::LOW;
+    std::cout << "start: " << Odometry::getPose().X().value() << 
+    " , " <<
+     Odometry::getPose().Y().value() <<
+     std::endl;
   }
   else if (BUTTON::ARM::ARM_MID())
   {
     state = CONSTANTS::STATES::MED;
+     std::cout << "start: " << Odometry::getPose().X().value() << 
+    " , " <<
+     Odometry::getPose().Y().value() <<
+     std::endl;
   }
   else if (BUTTON::ARM::ARM_HIGH())
   {
     state = CONSTANTS::STATES::HIGH;
+    std::cout << "start: " << Odometry::getPose().X().value() << 
+    " , " <<
+     Odometry::getPose().Y().value() <<
+     std::endl;
+  }
+  else if ((state == CONSTANTS::STATES::SCORE && BUTTON::DRIVETRAIN::ABORT()) ||
+    ((state == CONSTANTS::STATES::HUMANPLAYER && BUTTON::DRIVETRAIN::ABORT())))
+  {
+    state = CONSTANTS::STATES::ABORT;
+    m_force_pos = m_arm.Read_Position() + 112;
   }
   else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_HP())
   {
@@ -378,6 +396,14 @@ void Robot::TeleopPeriodic()
     }
     break;
 
+  case CONSTANTS::STATES::ABORT:
+    m_arm.arm_moved(CONSTANTS::STATES::ABORT);
+    m_arm.force_move(m_force_pos);
+    m_grabber.close();
+    m_robot_timer.Stop();
+    m_robot_timer.Reset();
+    break;
+
   case CONSTANTS::STATES::SCORE:
 
     if (Trajectory::follow_live_traj(m_trajectory))
@@ -387,6 +413,10 @@ void Robot::TeleopPeriodic()
 
       if (m_robot_timer.Get() > units::time::second_t(0.5))
       {
+        std::cout << "end: " << Odometry::getPose().X().value() << 
+        " , " <<
+        Odometry::getPose().Y().value() <<
+        std::endl;
         m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back());
         Trajectory::init_live_traj(m_back_trajectory);
         state = CONSTANTS::STATES::FALLBACK;

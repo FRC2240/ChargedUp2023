@@ -12,7 +12,7 @@ namespace CONSTANTS
   constexpr double DEADBAND = 0.15;
   constexpr bool DEBUGGING = true; //DO NOT USE IN COMP.
   //SLOWS DOWN EVERYTHING & MAY CAUSE WATCHDOG EXEPTIONS.
-    enum STATES { STORED, LOW, MED, HUMANPLAYER, HIGH, PICKUP, SCORE, FALLBACK, O_LOW, O_MED, O_HP, O_HIGH};
+    enum STATES { STORED, LOW, MED, HUMANPLAYER, HIGH, PICKUP, SCORE, FALLBACK, ABORT, O_LOW, O_MED, O_HP, O_HIGH};
 
 namespace TRAJECTORY
   {
@@ -29,13 +29,13 @@ namespace TRAJECTORY
          *  Copyright Westly Miller, 2023.
          */
         38.636_in,
-        16.386_in,
+        //16.386_in,
         -5.364_in,
         -27.364_in,
-        -48.614_in,
+        //-48.614_in,
         -71.864_in,
         -93.864_in,
-        -115.614_in,
+        //-115.614_in,
         -137.864_in
      };
     namespace R
