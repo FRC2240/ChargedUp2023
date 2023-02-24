@@ -220,7 +220,11 @@ void Robot::TeleopPeriodic()
   buttonManager();
   swerveDrive(field_centric);
 
-  Odometry::update();
+  if (BUTTON::DRIVETRAIN::ZERO())
+  {
+    Drivetrain::zero_yaw();
+  }
+  Odometry::update(); 
 
   if constexpr (debugging)
   {
@@ -261,6 +265,26 @@ void Robot::TeleopPeriodic()
   else if (BUTTON::ARM::ARM_HIGH())
   {
     state = CONSTANTS::STATES::HIGH;
+  }
+  else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_HP())
+  {
+    state = CONSTANTS::STATES::O_HP;
+  }
+  // else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_PICKUP())
+  // {
+  //   state = CONSTANTS::STATES::PICKUP;
+  // }
+  else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_LOW())
+  {
+    state = CONSTANTS::STATES::O_LOW;
+  }
+  else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_MID())
+  {
+    state = CONSTANTS::STATES::O_MED;
+  }
+  else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_HIGH())
+  {
+    state = CONSTANTS::STATES::O_HIGH;
   }
 
   switch (state)
@@ -368,6 +392,49 @@ void Robot::TeleopPeriodic()
         state = CONSTANTS::STATES::FALLBACK;
       }
     }
+    break;
+
+    case CONSTANTS::STATES::O_HP:
+      if (m_arm.arm_moved(CONSTANTS::STATES::HUMANPLAYER))
+      {
+      m_grabber.open();
+      m_robot_timer.Start();
+      if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(0.5))
+      {
+        m_grabber.close();
+      }
+    }
+    break;
+
+    case CONSTANTS::STATES::O_LOW:
+      if (m_arm.arm_moved(CONSTANTS::STATES::LOW))
+      {
+        if (BUTTON::GRABBER::OVERIDE_TOGGLE())
+        {
+          m_grabber.open();
+        }
+      }
+      break;
+
+      case CONSTANTS::STATES::O_MED:
+        if (m_arm.arm_moved(CONSTANTS::STATES::MED))
+        {
+          if (BUTTON::GRABBER::OVERIDE_TOGGLE())
+          {
+            m_grabber.open();
+          }
+        }
+        break;
+
+        case CONSTANTS::STATES::O_HIGH:
+        if (m_arm.arm_moved(CONSTANTS::STATES::HIGH))
+        {
+          if (BUTTON::GRABBER::OVERIDE_TOGGLE())
+          {
+            m_grabber.open();
+          }
+        }
+        break;
   }
 
   m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(), BUTTON::CANDLE::CANDLE_RIGHT(), BUTTON::CANDLE::CANDLE_YELLOW(), BUTTON::CANDLE::CANDLE_PURPLE());

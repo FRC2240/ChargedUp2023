@@ -182,7 +182,6 @@ bool Arm::arm_moved(CONSTANTS::STATES state)
     
 }
 
-
 void Arm::test()
 {
     //std::cout << "encoder: " << arm_cancoder.GetAbsolutePosition() << "\n";

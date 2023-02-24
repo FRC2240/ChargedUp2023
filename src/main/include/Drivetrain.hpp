@@ -10,6 +10,7 @@
 
 namespace Drivetrain
 {
+    void zero_yaw();
     void print_angle();
 
     /******************************************************************/

@@ -13,11 +13,12 @@ namespace BUTTON
 
   namespace  DRIVETRAIN
   {
+    inline double ZERO() {return BUTTON::m_stick.GetStartButtonPressed();}
     inline double LX() {return BUTTON::m_stick.GetLeftX();}
     inline double LY() {return BUTTON::m_stick.GetLeftY();}
     inline double RX() {return BUTTON::m_stick.GetRightX();}
     inline double RY() {return BUTTON::m_stick.GetRightY();}
-    inline double FIELD_CENTRIC(){return BUTTON::m_stick.GetRightStickButton();}
+    inline double FIELD_CENTRIC(){return BUTTON::m_stick.GetRightStickButtonPressed();}
   }
 
   namespace ARM
@@ -28,11 +29,21 @@ namespace BUTTON
     inline bool ARM_MID() {return BUTTON::m_stick.GetBButton();}
     inline bool ARM_HIGH() {return BUTTON::m_stick.GetYButton();}
     inline bool ARM_HP() {return BUTTON::m_stick.GetXButtonPressed();}
+
+    namespace OVERIDES
+    {
+      inline bool ARM_OVERIDE_HP() {return BUTTON::m_aux_stick.GetPOV() == 270;}
+      inline bool ARM_OVERIDE_LOW() {return BUTTON::m_aux_stick.GetPOV() == 180;}
+      inline bool ARM_OVERIDE_MID() {return BUTTON::m_aux_stick.GetPOV() == 90;}
+      inline bool ARM_OVERIDE_HIGH() {return BUTTON::m_aux_stick.GetPOV() == 0;}
+      inline bool ARM_OVERIDE_PICKUP() {return BUTTON::m_aux_stick.GetLeftBumperPressed();}
+    }
   }
 
   namespace GRABBER
   {
-    inline bool TOGGLE() {return BUTTON::m_stick.GetRightBumperReleased();}
+  inline bool TOGGLE() {return BUTTON::m_stick.GetRightBumper();}
+  inline bool OVERIDE_TOGGLE() {return BUTTON::m_aux_stick.GetRightBumper();}
     //inline bool GRABBER_STORE() {return BUTTON::m_stick.GetLeftBumperReleased();}
     
   }
