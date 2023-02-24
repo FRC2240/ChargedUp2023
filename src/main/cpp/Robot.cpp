@@ -214,6 +214,10 @@ void Robot::TeleopPeriodic()
   buttonManager();
   swerveDrive(field_centric);
 
+  if (BUTTON::DRIVETRAIN::ZERO())
+  {
+    Drivetrain::zero_yaw();
+  }
   Odometry::update(); 
 
   if constexpr (debugging)
@@ -392,13 +396,6 @@ void Robot::TeleopPeriodic()
       if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(0.5))
       {
         m_grabber.close();
-        if (m_robot_timer.Get() > units::time::second_t(1.5))
-        {
-          m_robot_timer.Stop();
-          m_robot_timer.Reset();
-          m_arm.arm_moved(CONSTANTS::STATES::STORED);
-          state = CONSTANTS::STATES::STORED;
-        }
       }
     }
     break;
@@ -406,17 +403,9 @@ void Robot::TeleopPeriodic()
     case CONSTANTS::STATES::O_LOW:
       if (m_arm.arm_moved(CONSTANTS::STATES::LOW))
       {
-        std::cout << "In treshhold \n";
-        std::cout << BUTTON::GRABBER::OVERIDE_TOGGLE() << std::endl;
         if (BUTTON::GRABBER::OVERIDE_TOGGLE())
         {
           m_grabber.open();
-          m_robot_timer.Start();
-          if (m_robot_timer.Get() > units::time::second_t(1.0))
-          {
-            m_arm.arm_moved(CONSTANTS::STATES::STORED);
-            state = CONSTANTS::STATES::STORED;
-          }
         }
       }
       break;
@@ -427,12 +416,6 @@ void Robot::TeleopPeriodic()
           if (BUTTON::GRABBER::OVERIDE_TOGGLE())
           {
             m_grabber.open();
-            m_robot_timer.Start();
-            if (m_robot_timer.Get() > units::time::second_t(1.0))
-            {
-              m_arm.arm_moved(CONSTANTS::STATES::STORED);
-              state = CONSTANTS::STATES::STORED;
-            }
           }
         }
         break;
@@ -443,12 +426,6 @@ void Robot::TeleopPeriodic()
           if (BUTTON::GRABBER::OVERIDE_TOGGLE())
           {
             m_grabber.open();
-            m_robot_timer.Start();
-            if (m_robot_timer.Get() > units::time::second_t(1.0))
-            {
-              m_arm.arm_moved(CONSTANTS::STATES::STORED);
-              state = CONSTANTS::STATES::STORED;
-            }
           }
         }
         break;

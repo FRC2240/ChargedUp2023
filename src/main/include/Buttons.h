@@ -13,11 +13,12 @@ namespace BUTTON
 
   namespace  DRIVETRAIN
   {
+    inline double ZERO() {return BUTTON::m_stick.GetStartButtonPressed();}
     inline double LX() {return BUTTON::m_stick.GetLeftX();}
     inline double LY() {return BUTTON::m_stick.GetLeftY();}
     inline double RX() {return BUTTON::m_stick.GetRightX();}
     inline double RY() {return BUTTON::m_stick.GetRightY();}
-    inline double FIELD_CENTRIC(){return BUTTON::m_stick.GetRightStickButton();}
+    inline double FIELD_CENTRIC(){return BUTTON::m_stick.GetRightStickButtonPressed();}
   }
 
   namespace ARM

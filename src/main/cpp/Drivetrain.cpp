@@ -14,6 +14,12 @@
 /******************************************************************/
 
 static std::unique_ptr<AHRS> navx;
+
+void Drivetrain::zero_yaw()
+{
+  navx->ZeroYaw();
+}
+
 void Drivetrain::print_angle()
   {
     std::cout << "ANGLE: " << navx->GetAngle() << "\n";
