@@ -18,8 +18,33 @@ static frc::HolonomicDriveController controller{
             Drivetrain::TRAJ_MAX_ANGULAR_ACCELERATION}}};
 
 frc::Timer m_trajTimer;
+Trajectory::TrajDepends Trajectory::balance()
+{
+    frc::Pose2d current_pose = Odometry::getPose();
+    Trajectory::TrajDepends ret;
 
-Trajectory::TrajDepends Trajectory::fall_back()
+    if (current_pose.X().value() < 0)
+        {
+            ret.desired_x = CONSTANTS::TRAJECTORY::R::BALANCE_DIST;
+        }
+    else
+        {
+            ret.desired_x = CONSTANTS::TRAJECTORY::B::BALANCE_DIST;
+        }
+
+    ret.desired_y = current_pose.Y();
+    auto heading = (frc::Translation2d(ret.desired_x, ret.desired_y) - current_pose.Translation()).Angle().Degrees();
+    ret.desired_head = heading;
+    ret.desired_rot = 0_deg;
+    ret.current_rot = current_pose.Rotation().Degrees();
+    ret.current_head = heading;
+    ret.current_x = current_pose.X();
+    ret.current_y = current_pose.Y();
+    std::cout << "desired x: " << ret.desired_x.value() << std::endl;
+    return ret;
+}
+
+Trajectory::TrajDepends Trajectory::fall_back(bool is_auto)
 {
     frc::Pose2d current_pose = Odometry::getPose();
     Trajectory::TrajDepends ret;
@@ -27,10 +52,18 @@ Trajectory::TrajDepends Trajectory::fall_back()
     if (current_pose.X().value() < 0)
         {
             ret.desired_x = current_pose.X() + 1_m;
+            if (is_auto)
+            {
+                ret.desired_x = CONSTANTS::TRAJECTORY::R::CROSS_AUTO;
+            }
         }
     else
         {
             ret.desired_x = current_pose.X() - 1_m;
+            if (is_auto)
+            {
+                ret.desired_x = CONSTANTS::TRAJECTORY::B::CROSS_AUTO;
+            }
         }
         ret.desired_y = current_pose.Y();
 
@@ -41,6 +74,7 @@ Trajectory::TrajDepends Trajectory::fall_back()
     ret.current_head = heading;
     ret.current_x = current_pose.X();
     ret.current_y = current_pose.Y();
+    
     std::cout << "desired x: " << ret.desired_x.value() << std::endl;
     return ret;
 }

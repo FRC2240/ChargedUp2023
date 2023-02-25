@@ -69,7 +69,9 @@ namespace Trajectory
         units::degree_t desired_rot;
     };
 
-    TrajDepends fall_back();
+    TrajDepends balance();
+
+    TrajDepends fall_back(bool is_auto = false);
 
     units::meter_t determine_desired_y();
 

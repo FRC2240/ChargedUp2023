@@ -164,9 +164,17 @@ void Robot::AutonomousInit()
       deployDirectory = "TestPath";
     }
 
+    else if (deployDirectory == CHARGE)
+    {
+      Robot::traj_init(Trajectory::HEIGHT::HIGH);
+      m_auto_state = CHARGE_PLACE;
+      return;
+    }
+
     else if (deployDirectory == TEST_PLACE_H)
     {
       Robot::traj_init(Trajectory::HEIGHT::HIGH);
+      m_auto_state = PLACE;
       return;
     } 
 
@@ -188,13 +196,20 @@ void Robot::AutonomousPeriodic()
   switch (m_auto_state)
   {
   case PLACE:
-    if (Trajectory::follow_live_traj(m_trajectory))
+  std::cout << "placing...\n";
+  m_arm.arm_moved(CONSTANTS::STATES::HIGH);
+  if(m_camera.pose_loop())
+  {
+    if (Trajectory::follow_live_traj(m_trajectory) &&
+        m_arm.arm_moved(CONSTANTS::STATES::HIGH))
       {
+        m_grabber.open();
         m_auto_state = FALL_BACK;
-        m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back());
+        m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(true));
         Trajectory::init_live_traj(m_back_trajectory);
         m_robot_timer.Restart();
       }
+  }
      break;
 
     case FALL_BACK:
@@ -208,9 +223,23 @@ void Robot::AutonomousPeriodic()
           }
         }
     break;
-  
-  default:
-    break;
+
+    case CHARGE_PLACE:
+      m_arm.arm_moved(CONSTANTS::STATES::HIGH);
+      if(m_camera.pose_loop())
+      {
+        if (Trajectory::follow_live_traj(m_trajectory) &&
+          m_arm.arm_moved(CONSTANTS::STATES::HIGH))
+      {
+        m_grabber.open();
+        m_auto_state = BALANCE;
+        m_balance_trajectory = Trajectory::generate_live_traj(Trajectory::balance());
+        Trajectory::init_live_traj(m_balance_trajectory);
+        m_robot_timer.Restart();
+      }
+  }
+ 
+
   }
   
   }

@@ -42,6 +42,8 @@ namespace TRAJECTORY
     {
       //Red Team and blue team will use seperate data.
 
+      constexpr units::meter_t CROSS_AUTO = 4.0_m; //FIXME
+      constexpr units::meter_t BALANCE_DIST = 4.46_m; //FIXME
       constexpr units::meter_t HIGH_X = 6.46_m;
       constexpr units::meter_t MID_X = 6.02_m;
       constexpr units::meter_t GROUND_X = 6.06_m;
@@ -49,6 +51,9 @@ namespace TRAJECTORY
 
     namespace B
     {
+
+      constexpr units::meter_t CROSS_AUTO = 4.0_m; //FIXME
+      constexpr units::meter_t BALANCE_DIST = 4.46_m; //FIXME
       constexpr units::meter_t HIGH_X = 0_m;
       constexpr units::meter_t MID_X = 0_m;
       constexpr units::meter_t GROUND_X = 0_m;

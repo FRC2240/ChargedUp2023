@@ -72,7 +72,7 @@ public:
     void traj_init(Trajectory::HEIGHT h);
     void make_test_path();
 
-    enum AUTO_STATE  {PLACE, FALL_BACK};
+    enum AUTO_STATE {PLACE, FALL_BACK, BALANCE, CHARGE_PLACE};
     AUTO_STATE m_auto_state;
 private:
   fs::path deployDirectory = frc::filesystem::GetDeployDirectory();
@@ -95,6 +95,7 @@ private:
     const std::string NON_HOLONOMIC = "Non holonomic";
     const std::string TEST = "Test";
     const std::string TEST_PLACE_H = "Place";
+    const std::string CHARGE = "Charge";
 
     bool arm_bool;
 
@@ -111,8 +112,8 @@ private:
     Candle m_candle;
     Wrist m_wrist;
     pathplanner::PathPlannerTrajectory m_trajectory;
-        pathplanner::PathPlannerTrajectory m_back_trajectory;
-
+    pathplanner::PathPlannerTrajectory m_back_trajectory;
+    pathplanner::PathPlannerTrajectory m_balance_trajectory;
     
 
     enum autoActions {
