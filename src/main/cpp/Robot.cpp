@@ -71,7 +71,6 @@ void Robot::RobotInit()
 
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
-
   Odometry::putField2d();
   std::cout << "RobotInit done \n";
 
@@ -149,34 +148,32 @@ void Robot::AutonomousInit()
 
   m_grippad.retract();
 
-
-  //m_autoAction = m_autoSequence->front();
+  // m_autoAction = m_autoSequence->front();
 
   // Start aiming
 
   // m_autoSelected = m_chooser.GetSelected();
   std::cout << "auto selected \n";
 
-  
-  
-    if (deployDirectory == TEST)
-    {
-      deployDirectory = "TestPath";
-    }
+  if (deployDirectory == TEST)
+  {
+    deployDirectory = "TestPath";
+  }
 
-    else if (deployDirectory == CHARGE)
-    {
-      Robot::traj_init(Trajectory::HEIGHT::HIGH);
-      m_auto_state = CHARGE_PLACE;
-      return;
-    }
+  else if (deployDirectory == CHARGE)
+  {
+    Robot::traj_init(Trajectory::HEIGHT::HIGH);
+    m_auto_state = CHARGE_PLACE;
+    return;
+  }
 
-    else if (deployDirectory == TEST_PLACE_H)
-    {
-      Robot::traj_init(Trajectory::HEIGHT::HIGH);
-      m_auto_state = PLACE;
-      return;
-    } 
+  else if (deployDirectory == TEST_PLACE_H)
+  {
+    Robot::traj_init(Trajectory::HEIGHT::HIGH);
+    m_auto_state = PLACE;
+    std::cout << "Placing high \n";
+    return;
+  }
 
   std::cout << "auto chooser\n";
 
@@ -196,60 +193,77 @@ void Robot::AutonomousPeriodic()
   switch (m_auto_state)
   {
   case PLACE:
-  std::cout << "placing...\n";
-  m_arm.arm_moved(CONSTANTS::STATES::HIGH);
-  if(m_camera.pose_loop())
-  {
-    if (Trajectory::follow_live_traj(m_trajectory) &&
-        m_arm.arm_moved(CONSTANTS::STATES::HIGH))
+    std::cout << "placing...\n";
+    m_arm.arm_moved(CONSTANTS::STATES::HIGH);
+    if (m_camera.pose_loop())
+    {
+      std::cout << "Pose locked \n";
+      if (Trajectory::follow_live_traj(m_trajectory) &&
+          m_arm.arm_moved(CONSTANTS::STATES::HIGH))
       {
+        std::cout << "Opening grabber \n";
         m_grabber.open();
         m_auto_state = FALL_BACK;
         m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(true));
         Trajectory::init_live_traj(m_back_trajectory);
         m_robot_timer.Restart();
       }
-  }
-     break;
-
-    case FALL_BACK:
-      m_grabber.open();
-      if(m_robot_timer.Get() > 1.0_s)
-        {
-          if (Trajectory::follow_live_traj(m_back_trajectory))
-          {
-            m_robot_timer.Reset();
-            m_robot_timer.Stop();
-          }
-        }
+    }
     break;
 
-    case CHARGE_PLACE:
-      m_arm.arm_moved(CONSTANTS::STATES::HIGH);
-      if(m_camera.pose_loop())
+  case FALL_BACK:
+    std::cout << "Waiting... \n";
+    m_grabber.open();
+    if (m_robot_timer.Get() > 1.0_s)
+    {
+      if (Trajectory::follow_live_traj(m_back_trajectory))
       {
-        if (Trajectory::follow_live_traj(m_trajectory) &&
+        std::cout << "Fell back... \n";
+        m_robot_timer.Reset();
+        m_robot_timer.Stop();
+      }
+    }
+    break;
+
+  case CHARGE_PLACE:
+    m_arm.arm_moved(CONSTANTS::STATES::HIGH);
+    if (m_camera.pose_loop())
+    {
+      if (Trajectory::follow_live_traj(m_trajectory) &&
           m_arm.arm_moved(CONSTANTS::STATES::HIGH))
       {
+        std::cout << "Ready to balance... \n";
         m_grabber.open();
         m_auto_state = BALANCE;
         m_balance_trajectory = Trajectory::generate_live_traj(Trajectory::balance());
         Trajectory::init_live_traj(m_balance_trajectory);
         m_robot_timer.Restart();
       }
-  }
- 
+    }
+    break;
 
+  case BALANCE:
+    std::cout << "Waiting... \n";
+    m_grabber.open();
+    if (m_robot_timer.Get() > 1.0_s)
+    {
+      if (Trajectory::follow_live_traj(m_balance_trajectory))
+      {
+        std::cout << "Balance \n";
+        m_robot_timer.Reset();
+        m_robot_timer.Stop();
+      }
+    }
+    break;
   }
-  
-  }
+}
 
 void Robot::TeleopInit()
 {
   Drivetrain::stop();
   std::cout << "TeleopInit";
 
-   m_grippad.retract();
+  m_grippad.retract();
 }
 
 void Robot::TeleopPeriodic()
@@ -264,7 +278,7 @@ void Robot::TeleopPeriodic()
   {
     Drivetrain::zero_yaw();
   }
-  Odometry::update(); 
+  Odometry::update();
 
   if constexpr (debugging)
   {
@@ -297,29 +311,20 @@ void Robot::TeleopPeriodic()
   else if (BUTTON::ARM::ARM_LOW())
   {
     state = CONSTANTS::STATES::LOW;
-    std::cout << "start: " << Odometry::getPose().X().value() << 
-    " , " <<
-     Odometry::getPose().Y().value() <<
-     std::endl;
+    std::cout << "start: " << Odometry::getPose().X().value() << " , " << Odometry::getPose().Y().value() << std::endl;
   }
   else if (BUTTON::ARM::ARM_MID())
   {
     state = CONSTANTS::STATES::MED;
-     std::cout << "start: " << Odometry::getPose().X().value() << 
-    " , " <<
-     Odometry::getPose().Y().value() <<
-     std::endl;
+    std::cout << "start: " << Odometry::getPose().X().value() << " , " << Odometry::getPose().Y().value() << std::endl;
   }
   else if (BUTTON::ARM::ARM_HIGH())
   {
     state = CONSTANTS::STATES::HIGH;
-    std::cout << "start: " << Odometry::getPose().X().value() << 
-    " , " <<
-     Odometry::getPose().Y().value() <<
-     std::endl;
+    std::cout << "start: " << Odometry::getPose().X().value() << " , " << Odometry::getPose().Y().value() << std::endl;
   }
   else if ((state == CONSTANTS::STATES::SCORE && BUTTON::DRIVETRAIN::ABORT()) ||
-    ((state == CONSTANTS::STATES::HUMANPLAYER && BUTTON::DRIVETRAIN::ABORT())))
+           ((state == CONSTANTS::STATES::HUMANPLAYER && BUTTON::DRIVETRAIN::ABORT())))
   {
     state = CONSTANTS::STATES::ABORT;
     m_force_pos = m_arm.Read_Position() + 112;
@@ -453,10 +458,7 @@ void Robot::TeleopPeriodic()
 
       if (m_robot_timer.Get() > units::time::second_t(0.5))
       {
-        std::cout << "end: " << Odometry::getPose().X().value() << 
-        " , " <<
-        Odometry::getPose().Y().value() <<
-        std::endl;
+        std::cout << "end: " << Odometry::getPose().X().value() << " , " << Odometry::getPose().Y().value() << std::endl;
         m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back());
         Trajectory::init_live_traj(m_back_trajectory);
         state = CONSTANTS::STATES::FALLBACK;
@@ -464,9 +466,9 @@ void Robot::TeleopPeriodic()
     }
     break;
 
-    case CONSTANTS::STATES::O_HP:
-      if (m_arm.arm_moved(CONSTANTS::STATES::HUMANPLAYER))
-      {
+  case CONSTANTS::STATES::O_HP:
+    if (m_arm.arm_moved(CONSTANTS::STATES::HUMANPLAYER))
+    {
       m_grabber.open();
       m_robot_timer.Start();
       if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(0.5))
@@ -476,35 +478,35 @@ void Robot::TeleopPeriodic()
     }
     break;
 
-    case CONSTANTS::STATES::O_LOW:
-      if (m_arm.arm_moved(CONSTANTS::STATES::LOW))
+  case CONSTANTS::STATES::O_LOW:
+    if (m_arm.arm_moved(CONSTANTS::STATES::LOW))
+    {
+      if (BUTTON::GRABBER::OVERIDE_TOGGLE())
       {
-        if (BUTTON::GRABBER::OVERIDE_TOGGLE())
-        {
-          m_grabber.open();
-        }
+        m_grabber.open();
       }
-      break;
+    }
+    break;
 
-      case CONSTANTS::STATES::O_MED:
-        if (m_arm.arm_moved(CONSTANTS::STATES::MED))
-        {
-          if (BUTTON::GRABBER::OVERIDE_TOGGLE())
-          {
-            m_grabber.open();
-          }
-        }
-        break;
+  case CONSTANTS::STATES::O_MED:
+    if (m_arm.arm_moved(CONSTANTS::STATES::MED))
+    {
+      if (BUTTON::GRABBER::OVERIDE_TOGGLE())
+      {
+        m_grabber.open();
+      }
+    }
+    break;
 
-        case CONSTANTS::STATES::O_HIGH:
-        if (m_arm.arm_moved(CONSTANTS::STATES::HIGH))
-        {
-          if (BUTTON::GRABBER::OVERIDE_TOGGLE())
-          {
-            m_grabber.open();
-          }
-        }
-        break;
+  case CONSTANTS::STATES::O_HIGH:
+    if (m_arm.arm_moved(CONSTANTS::STATES::HIGH))
+    {
+      if (BUTTON::GRABBER::OVERIDE_TOGGLE())
+      {
+        m_grabber.open();
+      }
+    }
+    break;
   }
 
   m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(), BUTTON::CANDLE::CANDLE_RIGHT(), BUTTON::CANDLE::CANDLE_YELLOW(), BUTTON::CANDLE::CANDLE_PURPLE());
