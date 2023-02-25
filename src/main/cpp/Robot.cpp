@@ -136,7 +136,7 @@ void Robot::RobotPeriodic()
   //   m_wrist.Follow_Flare(m_arm.position);
   // }
   // else {
-  m_wrist.Follow(m_arm.position);
+  //m_wrist.Follow(m_arm.position);
   // }
   m_arm.Read_Position();
 }
@@ -247,7 +247,7 @@ void Robot::TeleopPeriodic()
   }
   else if (BUTTON::ARM::ARM_HP())
   {
-    state = CONSTANTS::STATES::HUMANPLAYER;
+    state = CONSTANTS::STATES::O_HP;
   }
   else if (BUTTON::ARM::ARM_PICKUP())
   {
@@ -255,27 +255,27 @@ void Robot::TeleopPeriodic()
   }
   else if (BUTTON::ARM::ARM_LOW())
   {
-    state = CONSTANTS::STATES::LOW;
-    std::cout << "start: " << Odometry::getPose().X().value() << 
-    " , " <<
-     Odometry::getPose().Y().value() <<
-     std::endl;
+    state = CONSTANTS::STATES::O_LOW;
+    // std::cout << "start: " << Odometry::getPose().X().value() << 
+    // " , " <<
+    //  Odometry::getPose().Y().value() <<
+    //  std::endl;
   }
   else if (BUTTON::ARM::ARM_MID())
   {
-    state = CONSTANTS::STATES::MED;
-     std::cout << "start: " << Odometry::getPose().X().value() << 
-    " , " <<
-     Odometry::getPose().Y().value() <<
-     std::endl;
+    state = CONSTANTS::STATES::O_MED;
+    //  std::cout << "start: " << Odometry::getPose().X().value() << 
+    // " , " <<
+    //  Odometry::getPose().Y().value() <<
+    //  std::endl;
   }
   else if (BUTTON::ARM::ARM_HIGH())
   {
-    state = CONSTANTS::STATES::HIGH;
-    std::cout << "start: " << Odometry::getPose().X().value() << 
-    " , " <<
-     Odometry::getPose().Y().value() <<
-     std::endl;
+    state = CONSTANTS::STATES::O_HIGH;
+    // std::cout << "start: " << Odometry::getPose().X().value() << 
+    // " , " <<
+    //  Odometry::getPose().Y().value() <<
+    //  std::endl;
   }
   else if ((state == CONSTANTS::STATES::SCORE && BUTTON::DRIVETRAIN::ABORT()) ||
     ((state == CONSTANTS::STATES::HUMANPLAYER && BUTTON::DRIVETRAIN::ABORT())))
@@ -302,6 +302,13 @@ void Robot::TeleopPeriodic()
   else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_HIGH())
   {
     state = CONSTANTS::STATES::O_HIGH;
+  }
+
+  if (state == CONSTANTS::STATES::O_HIGH || state == CONSTANTS::STATES::O_LOW || state == CONSTANTS::STATES::O_MED || state == CONSTANTS::STATES::STORED || state == CONSTANTS::STATES::SCORE){
+    m_wrist.Follow(m_arm.position);
+  }
+  else if (state == CONSTANTS::STATES::O_HP || state == CONSTANTS::STATES::PICKUP){
+    m_wrist.pickupFollow(m_arm.position);
   }
 
   switch (state)
@@ -467,6 +474,8 @@ void Robot::TeleopPeriodic()
   }
 
   m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(), BUTTON::CANDLE::CANDLE_RIGHT(), BUTTON::CANDLE::CANDLE_YELLOW(), BUTTON::CANDLE::CANDLE_PURPLE(), m_grabber.grabberStatus());
+
+  std::cout << m_arm.position << std::endl;
 }
 
 void Robot::traj_init(Trajectory::HEIGHT h)
@@ -515,18 +524,12 @@ void Robot::make_test_path()
 }
 void Robot::TestInit()
 {
-  std::cout << "Test init \n";
-  Odometry::update();
-  make_test_path();
-  Trajectory::init_live_traj(m_trajectory);
-  m_is_auto = false;
 }
 
 void Robot::TestPeriodic()
 {
-  // auto pose = Odometry::getPose();
-  // std::cout << "Navx " << Drivetrain::getAngle().value() << std::endl;
-  Trajectory::follow_live_traj(m_trajectory);
+  m_arm.test();
+  m_wrist.test();
 }
 
 void Robot::DisabledPeriodic()

@@ -14,8 +14,9 @@ public:
         Wrist();
         ~Wrist();
         void WristPIDInit();
+        void pickupFollow(double arm_pos);
         void Follow(double arm_pos);
-        void Test();
+        void test();
         
         rev::SparkMaxPIDController m_wrist_PIDController = m_wrist_motor.GetPIDController();
 
@@ -23,6 +24,7 @@ private:
         
        rev::CANSparkMax m_wrist_motor{CONSTANTS::WRIST::WRIST_MOTOR_ID, rev::CANSparkMax::MotorType::kBrushless};
 
+        double position = 0.0;
 
        struct pidCoeff
        {

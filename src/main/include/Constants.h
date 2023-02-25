@@ -71,8 +71,8 @@ namespace TRAJECTORY
     constexpr int LEFT_ARM_MOTOR_ID = 2;
     constexpr double ARM_ENCODER_OFFSET = -112.0;
     constexpr int ARM_CANCODER_ID = 1;
-    constexpr double MIN_THRESHOLD = 0.95;
-    constexpr double MAX_THRESHOLD = 1.05;
+    constexpr double MIN_THRESHOLD = 0.93;
+    constexpr double MAX_THRESHOLD = 1.07;
     
     namespace PID
     {
@@ -93,10 +93,10 @@ namespace TRAJECTORY
       //Add 112 (the offset) and 7 (the margin of error) to all values
       constexpr double STORED = 134.0;
       constexpr double LOW = 189.0;
-      constexpr double MED = 249.0;
-      constexpr double HP = 246.0;
-      constexpr double HIGH = 270.0;
-      constexpr double PICKUP = 159.0;
+      constexpr double MED = 230.0;
+      constexpr double HP = 239.0;
+      constexpr double HIGH = 244.0;
+      constexpr double PICKUP = 170.0;
     }
   }
 
