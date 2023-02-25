@@ -281,28 +281,28 @@ void Robot::TeleopPeriodic()
     ((state == CONSTANTS::STATES::HUMANPLAYER && BUTTON::DRIVETRAIN::ABORT())))
   {
     state = CONSTANTS::STATES::ABORT;
-    m_force_pos = m_arm.Read_Position() + 112;
+    m_force_pos = m_arm.Read_Position();
   }
-  else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_HP())
-  {
-    state = CONSTANTS::STATES::O_HP;
-  }
+  // else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_HP())
+  // {
+  //   state = CONSTANTS::STATES::O_HP;
+  // }
   // else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_PICKUP())
   // {
   //   state = CONSTANTS::STATES::PICKUP;
   // }
-  else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_LOW())
-  {
-    state = CONSTANTS::STATES::O_LOW;
-  }
-  else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_MID())
-  {
-    state = CONSTANTS::STATES::O_MED;
-  }
-  else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_HIGH())
-  {
-    state = CONSTANTS::STATES::O_HIGH;
-  }
+  // else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_LOW())
+  // {
+  //   state = CONSTANTS::STATES::O_LOW;
+  // }
+  // else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_MID())
+  // {
+  //   state = CONSTANTS::STATES::O_MED;
+  // }
+  // else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_HIGH())
+  // {
+  //   state = CONSTANTS::STATES::O_HIGH;
+  // }
 
   if (state == CONSTANTS::STATES::O_HIGH || state == CONSTANTS::STATES::O_LOW || state == CONSTANTS::STATES::O_MED || state == CONSTANTS::STATES::STORED || state == CONSTANTS::STATES::SCORE){
     m_wrist.Follow(m_arm.position);
@@ -349,11 +349,17 @@ void Robot::TeleopPeriodic()
       // std::cout << "Break Beam: " << m_grabber.break_beam() <<std::endl;
       if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))
       {
-        m_robot_timer.Stop();
-        m_robot_timer.Reset();
         m_grabber.close();
-        m_arm.arm_moved(CONSTANTS::STATES::STORED);
-        state = CONSTANTS::STATES::STORED;
+        m_robot_timer2.Start();
+        if (m_robot_timer2.Get() > units::time::second_t(0.5))
+        {
+          m_robot_timer.Stop();
+          m_robot_timer.Reset();
+          m_robot_timer2.Stop();
+          m_robot_timer2.Reset();
+          m_arm.arm_moved(CONSTANTS::STATES::STORED);
+          state = CONSTANTS::STATES::STORED;
+        }
       }
     }
     break;
@@ -438,6 +444,8 @@ void Robot::TeleopPeriodic()
       if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(0.5))
       {
         m_grabber.close();
+        m_robot_timer.Stop();
+        m_robot_timer.Reset();
       }
     }
     break;

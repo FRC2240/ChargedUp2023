@@ -101,6 +101,7 @@ private:
 
     
     frc::Timer m_robot_timer;
+    frc::Timer m_robot_timer2;
 
     std::string m_autoSelected;
     bool breakbeam;
