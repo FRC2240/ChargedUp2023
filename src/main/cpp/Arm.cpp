@@ -25,11 +25,11 @@ Arm::Arm()
     arm_right_config.primaryPID.selectedFeedbackSensor = FeedbackDevice::RemoteSensor0;
     arm_right_config.slot0.kP = 0.4;
     arm_right_config.slot0.kD = 4.0;
-    arm_right_config.slot0.kI = 0.0008;
+    arm_right_config.slot0.kI = 0.0; //0.0008;
     m_arm_motor_right.ConfigAllSettings(arm_right_config);
 
-    m_arm_motor_right.ConfigMotionCruiseVelocity(100);
-    m_arm_motor_right.ConfigMotionAcceleration(100);
+    m_arm_motor_right.ConfigMotionCruiseVelocity(200);
+    m_arm_motor_right.ConfigMotionAcceleration(200);
     
     // Follower
     m_arm_motor_left.Follow(m_arm_motor_right);

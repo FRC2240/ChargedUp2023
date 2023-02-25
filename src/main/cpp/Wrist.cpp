@@ -29,13 +29,20 @@ void Wrist::WristPIDInit() {
 
 void Wrist::pickupFollow(double arm_pos)
 {
-    double position = (-2.78e-3*arm_pos) + 1.16;
+    if (arm_pos < 140.0){
+        position = (-3.11e-3*arm_pos) + 1.36;
+    }
+    else {
+        position = (-2.78e-3*arm_pos) + 1.17;
+    }
+    //double position = -8.88 + (0.243*arm_pos) - (2.13e-3*pow(arm_pos,2)) + (7.9e-6*pow(arm_pos,3)) - (1.07e-8*pow(arm_pos,4));
+    //std::cout << position << std::endl;
     m_wrist_PIDController.SetReference(position, rev::CANSparkMax::ControlType::kPosition);
 }
 
 void Wrist::Follow(double arm_pos)
 {
-    double position = 1.47 - (4.6e-3*arm_pos) + (4.65e-6*pow(arm_pos,2)) - (2.26e-9*pow(arm_pos,3));
+    position = 1.47 - (4.6e-3*arm_pos) + (4.65e-6*pow(arm_pos,2)) - (2.26e-9*pow(arm_pos,3));
     //double position = -225 + (7.49*arm_pos) - (0.102*pow(arm_pos,2)) + (7.29e-4*pow(arm_pos,3)) - (2.89e-6*pow(arm_pos,4)) + (6.03e-9*pow(arm_pos,5)) - (5.17e-12*pow(arm_pos,6));
     //std::cout << position << std::endl;
     m_wrist_PIDController.SetReference(position, rev::CANSparkMax::ControlType::kPosition);

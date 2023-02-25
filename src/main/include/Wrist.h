@@ -24,6 +24,7 @@ private:
         
        rev::CANSparkMax m_wrist_motor{CONSTANTS::WRIST::WRIST_MOTOR_ID, rev::CANSparkMax::MotorType::kBrushless};
 
+        double position = 0.0;
 
        struct pidCoeff
        {

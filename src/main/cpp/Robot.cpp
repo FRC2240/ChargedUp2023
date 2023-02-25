@@ -474,6 +474,8 @@ void Robot::TeleopPeriodic()
   }
 
   m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(), BUTTON::CANDLE::CANDLE_RIGHT(), BUTTON::CANDLE::CANDLE_YELLOW(), BUTTON::CANDLE::CANDLE_PURPLE(), m_grabber.grabberStatus());
+
+  std::cout << m_arm.position << std::endl;
 }
 
 void Robot::traj_init(Trajectory::HEIGHT h)
