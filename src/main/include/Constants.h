@@ -71,8 +71,8 @@ namespace TRAJECTORY
     constexpr int LEFT_ARM_MOTOR_ID = 2;
     constexpr double ARM_ENCODER_OFFSET = -112.0;
     constexpr int ARM_CANCODER_ID = 1;
-    constexpr double MIN_THRESHOLD = 0.93;
-    constexpr double MAX_THRESHOLD = 1.07;
+    constexpr double MIN_THRESHOLD = 0.90;
+    constexpr double MAX_THRESHOLD = 1.10;
     
     namespace PID
     {
