@@ -28,12 +28,12 @@ void Candle::candle_logic(bool left_button, bool right_button,
     if (m_alliance == frc::DriverStation::Alliance::kRed)
     {
         m_candle.SetLEDs(255, 0, 0, 0, 8, 55);
-        m_candle.SetLEDs(255, 0, 0, 0, 107, 100);
+        m_candle.SetLEDs(255, 0, 0, 0, 109, 100);
     } 
     else if (m_alliance == frc::DriverStation::Alliance::kBlue)
     {
         m_candle.SetLEDs(0, 0, 255, 0, 8, 55);
-        m_candle.SetLEDs(0, 0, 255, 0, 107, 100);
+        m_candle.SetLEDs(0, 0, 255, 0, 109, 100);
     }
     
     if (left_button) 
