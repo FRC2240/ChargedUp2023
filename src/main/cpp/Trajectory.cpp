@@ -19,18 +19,18 @@ static frc::HolonomicDriveController controller{
 
 frc::Timer m_trajTimer;
 
-Trajectory::TrajDepends Trajectory::fall_back()
+Trajectory::TrajDepends Trajectory::fall_back(units::meter_t fallback_pos)
 {
     frc::Pose2d current_pose = Odometry::getPose();
     Trajectory::TrajDepends ret;
 
     if (current_pose.X().value() < 0)
         {
-            ret.desired_x = current_pose.X() + 1_m;
+            ret.desired_x = current_pose.X() + fallback_pos;
         }
     else
         {
-            ret.desired_x = current_pose.X() - 1_m;
+            ret.desired_x = current_pose.X() - fallback_pos;
         }
         ret.desired_y = current_pose.Y();
 

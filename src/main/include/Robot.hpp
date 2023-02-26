@@ -90,10 +90,9 @@ private:
     //frc::Trajectory m_trajectory;
 
     frc::SendableChooser<std::string> m_chooser;
-    const std::string LINE = "Line";
-    const std::string CIRCLE = "Circle";
-    const std::string NON_HOLONOMIC = "Non holonomic";
-    const std::string TEST = "Test";
+    const std::string AUTO_STATION = "SCORE + STATION";
+    const std::string AUTO_LINE = "SCORE + LEAVE";
+    const std::string AUTO_NOTHING = "DO NOTHING";
 
     bool arm_bool;
 
@@ -111,38 +110,7 @@ private:
     Candle m_candle;
     Wrist m_wrist;
     pathplanner::PathPlannerTrajectory m_trajectory;
-        pathplanner::PathPlannerTrajectory m_back_trajectory;
+    pathplanner::PathPlannerTrajectory m_back_trajectory;
 
-    
-
-    enum autoActions {
-        kPickup,
-        kDrop,
-        k2Piece,
-        kTestPath,
-        kTerminalPath1,
-        kTerminalPath2,
-        kTerminalPath3,
-        kTerminalPath4,
-        kInstantPath,
-        kDelayPath,
-        kIdle
-  };
-
-      enum autoState {
-    kDriving,
-    kNothing
-  };
-
-  std::list<autoActions> *m_autoSequence; 
-  std::list<autoActions> m_testSequence{
-    kPickup,
-    kTestPath,
-    kDrop,
-    kIdle
-  };
-
-autoActions m_autoAction;
-autoState m_autoState;
-
+    units::meter_t m_fallback_pos;
 };
