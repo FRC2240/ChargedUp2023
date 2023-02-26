@@ -12,7 +12,12 @@
 /*                        Private Variables                       */
 /******************************************************************/
 
-extern frc::SwerveDriveKinematics<4> const kinematics;
+//extern frc::SwerveDriveKinematics<4> const kinematics;
+
+frc::SwerveDriveKinematics<4> kinematics{frc::Translation2d{12.25_in, -12.25_in},
+                                         frc::Translation2d{12.25_in, 12.25_in},
+                                         frc::Translation2d{-12.25_in, -12.25_in},
+                                         frc::Translation2d{-12.25_in, 12.25_in}};
 
 static frc::SwerveDriveOdometry<4> odometry{
     kinematics,
