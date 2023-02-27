@@ -48,14 +48,7 @@ Robot::Robot()
 
   // Call the inits for all subsystems here
   Drivetrain::init();
-  std::cout << "Drivtrain started \n";
   Odometry::putField2d();
-  std::cout << "Odometry putfield done \n";
-
-  /* legacy
-  frc::SmartDashboard::PutData("Traj Selector", &traj_selector);
-  frc::SmartDashboard::PutBoolean("Traj Reversed", Trajectory::reverse_trajectory);
-  */
 
   // Auto paths
   m_chooser.AddOption(AUTO_STATION, AUTO_STATION);
@@ -431,10 +424,10 @@ void Robot::TeleopPeriodic()
 
       if (m_robot_timer.Get() > units::time::second_t(0.5))
       {
-        std::cout << "end: " << Odometry::getPose().X().value() << 
-        " , " <<
-        Odometry::getPose().Y().value() <<
-        std::endl;
+        //std::cout << "end: " << Odometry::getPose().X().value() << 
+        //" , " <<
+        //Odometry::getPose().Y().value() <<
+        //std::endl;
         m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(1.0_m));
         Trajectory::init_live_traj(m_back_trajectory);
         state = CONSTANTS::STATES::FALLBACK;
@@ -502,24 +495,18 @@ void Robot::TeleopPeriodic()
 
 void Robot::traj_init(Trajectory::HEIGHT h)
 {
-  std::cout << "here 0 \n";
   switch (h)
   {
   case Trajectory::HEIGHT::HIGH:
-    std::cout << "high \n";
     m_trajectory = Trajectory::generate_live_traj(Trajectory::determine_desired_traj(Trajectory::HEIGHT::HIGH));
     break;
   case Trajectory::HEIGHT::MED:
-    std::cout << "mid \n";
     m_trajectory = Trajectory::generate_live_traj(Trajectory::determine_desired_traj(Trajectory::HEIGHT::MED));
     break;
   case Trajectory::HEIGHT::GROUND:
-    std::cout << "gnd \n";
     m_trajectory = Trajectory::generate_live_traj(Trajectory::determine_desired_traj(Trajectory::HEIGHT::GROUND));
   }
-  std::cout << "here 1 \n";
   Trajectory::init_live_traj(m_trajectory);
-  std::cout << "here 2 \n";
 }
 
 void Robot::make_test_path()
