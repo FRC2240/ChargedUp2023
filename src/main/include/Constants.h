@@ -12,7 +12,7 @@ namespace CONSTANTS
   constexpr double DEADBAND = 0.15;
   constexpr bool DEBUGGING = true; //DO NOT USE IN COMP.
   //SLOWS DOWN EVERYTHING & MAY CAUSE WATCHDOG EXEPTIONS.
-    enum STATES { STORED, LOW, MED, HUMANPLAYER, HIGH, PICKUP, SCORE, FALLBACK, ABORT, O_LOW, O_MED, O_HP, O_HIGH};
+    enum STATES { STORED, LOW, MED, HUMANPLAYER, HIGH, PICKUP, SCORE, FALLBACK, ABORT, O_LOW, O_MED, O_HP, O_HIGH, IDLE, O_OPEN, O_UP};
 
 namespace TRAJECTORY
   {
@@ -90,13 +90,13 @@ namespace TRAJECTORY
 
     namespace MOTORPOSITIONS
     {
-      //Add 112 (the offset) and 7 (the margin of error) to all values
       constexpr double STORED = 134.0;
       constexpr double LOW = 189.0;
       constexpr double MED = 230.0;
       constexpr double HP = 239.0;
       constexpr double HIGH = 246.0;
       constexpr double PICKUP = 170.0;
+      constexpr double UP = 258.0;
     }
   }
 
