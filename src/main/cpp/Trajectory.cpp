@@ -79,7 +79,6 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
      * it to a position.
      *
      */
-    std::cout << "here\n";
     frc::Pose2d current_pose = Odometry::getPose();
     Trajectory::TrajDepends ret;
 
@@ -120,8 +119,8 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
     ret.current_y = current_pose.Y();
 
     ret.desired_y = determine_desired_y();
-    std::cout << "cx: " << ret.current_x.value() << "\n cy: " << ret.current_y.value() << std::endl;
-    std::cout << "X: " << ret.desired_x.value() << "\n Y: " << ret.desired_y.value() << std::endl;
+    //std::cout << "cx: " << ret.current_x.value() << "\n cy: " << ret.current_y.value() << std::endl;
+    //std::cout << "X: " << ret.desired_x.value() << "\n Y: " << ret.desired_y.value() << std::endl;
     auto heading = (frc::Translation2d(ret.desired_x, ret.desired_y) - current_pose.Translation()).Angle().Degrees();
     ret.current_head = heading;
     ret.desired_head = heading;

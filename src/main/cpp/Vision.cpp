@@ -200,7 +200,7 @@ bool Vision::check_std_dev(std::vector<Data> buffer)
            (z <= CONSTANTS::VISION::MAX_STD_DEV_ROT))
           )
         {
-          std::cout<<"true\n";
+         //std::cout<<"true\n";
          return true;
         }
 
