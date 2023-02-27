@@ -15,15 +15,9 @@ class Arm
   ~Arm();
 
   void move();
-  void arm_pid_init();
-  void arm_dash_init();
-  void arm_dash_read();
   void test();
   double Read_Position();
   void force_move(double pos);
-  void Up();
-  void Down();
-  void Stop();
   bool arm_moved(CONSTANTS::STATES state);
   double desired_position;
 

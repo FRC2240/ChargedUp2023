@@ -44,32 +44,32 @@ namespace BUTTON
   {
     inline bool ARM_STORED() {return BUTTON::m_stick.GetLeftBumper();}
     inline bool ARM_PICKUP() {return BUTTON::m_stick.GetPOV() == 270;}
-    inline bool ARM_LOW() {return false;}
-    inline bool ARM_MID() {return false;}
-    inline bool ARM_HIGH() {return false;}
-    inline bool ARM_HP() {return false;}
+    inline bool ARM_LOW() {return BUTTON::m_stick.GetXButtonPressed();}
+    inline bool ARM_MID() {return BUTTON::m_stick.GetBButtonPressed();}
+    inline bool ARM_HIGH() {return BUTTON::m_stick.GetYButtonPressed();}
+    inline bool ARM_HP() {return BUTTON::m_stick.GetXButtonPressed();}
 
     namespace OVERIDES
     {
-      inline bool ARM_OVERIDE_HP() {return BUTTON::m_stick.GetXButtonPressed();}
-      inline bool ARM_OVERIDE_LOW() {return BUTTON::m_stick.GetAButtonPressed();}
-      inline bool ARM_OVERIDE_MID() {return BUTTON::m_stick.GetBButtonPressed();}
-      inline bool ARM_OVERIDE_HIGH() {return BUTTON::m_stick.GetYButtonPressed();}
-      //inline bool ARM_OVERIDE_PICKUP() {return BUTTON::m_stick.GetRightBumperPressed();}
+    //   inline bool ARM_OVERIDE_HP() {return BUTTON::m_stick.GetXButtonPressed();}
+    //   inline bool ARM_OVERIDE_LOW() {return BUTTON::m_stick.GetAButtonPressed();}
+    //   inline bool ARM_OVERIDE_MID() {return BUTTON::m_stick.GetBButtonPressed();}
+    //   inline bool ARM_OVERIDE_HIGH() {return BUTTON::m_stick.GetYButtonPressed();}
+    //   inline bool ARM_OVERIDE_PICKUP() {return BUTTON::m_stick.GetRightBumperPressed();}
+    inline bool ARM_OVERIDE_UP() {return BUTTON::m_aux_stick.GetPOV() == 0;}
+    inline bool ARM_OVERIDE_OPEN() {return BUTTON::m_aux_stick.GetLeftBumperPressed();}
     }
   }
 
   namespace GRABBER
   {
-  inline bool TOGGLE() {return BUTTON::m_stick.GetRightBumper();}
-  inline bool OVERIDE_TOGGLE() {return BUTTON::m_stick.GetRightBumper();}
-    //inline bool GRABBER_STORE() {return BUTTON::m_stick.GetLeftBumperReleased();}
-    
+    inline bool TOGGLE() {return BUTTON::m_stick.GetRightBumper();}
+    inline bool OVERIDE_TOGGLE() {return BUTTON::m_stick.GetRightBumper();}
   }
 
   namespace GRIPPADS
   {
-    inline bool GRIPPADS_DEPLOY() {return BUTTON::m_stick.GetPOV() <= 225 && BUTTON::m_stick.GetPOV() >= 135;}
+    inline bool GRIPPADS_DEPLOY() {return BUTTON::m_stick.GetPOV() == 180;}
     inline bool GRIPPADS_RETRACT() {return BUTTON::m_stick.GetPOV() == 0;}
     }
   

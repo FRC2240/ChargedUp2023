@@ -77,6 +77,7 @@ public:
 private:
 
     CONSTANTS::STATES state = CONSTANTS::STATES::STORED;
+    CONSTANTS::STATES last_state;
 
     bool fall_back_init = false;
     Trajectory::HEIGHT db_last_tgt = Trajectory::HEIGHT::SAFE;
