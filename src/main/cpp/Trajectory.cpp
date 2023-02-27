@@ -19,18 +19,18 @@ static frc::HolonomicDriveController controller{
 
 frc::Timer m_trajTimer;
 
-Trajectory::TrajDepends Trajectory::fall_back()
+Trajectory::TrajDepends Trajectory::fall_back(units::meter_t fallback_pos)
 {
     frc::Pose2d current_pose = Odometry::getPose();
     Trajectory::TrajDepends ret;
 
     if (current_pose.X().value() < 0)
         {
-            ret.desired_x = current_pose.X() + 1_m;
+            ret.desired_x = current_pose.X() + fallback_pos;
         }
     else
         {
-            ret.desired_x = current_pose.X() - 1_m;
+            ret.desired_x = current_pose.X() - fallback_pos;
         }
         ret.desired_y = current_pose.Y();
 
@@ -79,7 +79,6 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
      * it to a position.
      *
      */
-    std::cout << "here\n";
     frc::Pose2d current_pose = Odometry::getPose();
     Trajectory::TrajDepends ret;
 
@@ -120,8 +119,8 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
     ret.current_y = current_pose.Y();
 
     ret.desired_y = determine_desired_y();
-    std::cout << "cx: " << ret.current_x.value() << "\n cy: " << ret.current_y.value() << std::endl;
-    std::cout << "X: " << ret.desired_x.value() << "\n Y: " << ret.desired_y.value() << std::endl;
+    //std::cout << "cx: " << ret.current_x.value() << "\n cy: " << ret.current_y.value() << std::endl;
+    //std::cout << "X: " << ret.desired_x.value() << "\n Y: " << ret.desired_y.value() << std::endl;
     auto heading = (frc::Translation2d(ret.desired_x, ret.desired_y) - current_pose.Translation()).Angle().Degrees();
     ret.current_head = heading;
     ret.desired_head = heading;

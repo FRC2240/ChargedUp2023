@@ -48,19 +48,12 @@ Robot::Robot()
 
   // Call the inits for all subsystems here
   Drivetrain::init();
-  std::cout << "Drivtrain started \n";
   Odometry::putField2d();
-  std::cout << "Odometry putfield done \n";
-
-  /* legacy
-  frc::SmartDashboard::PutData("Traj Selector", &traj_selector);
-  frc::SmartDashboard::PutBoolean("Traj Reversed", Trajectory::reverse_trajectory);
-  */
 
   // Auto paths
-  m_chooser.AddOption(Robot::CIRCLE, Robot::CIRCLE);
-  m_chooser.AddOption(Robot::LINE, Robot::LINE);
-  m_chooser.AddOption(Robot::NON_HOLONOMIC, Robot::NON_HOLONOMIC);
+  m_chooser.AddOption(AUTO_STATION, AUTO_STATION);
+  m_chooser.AddOption(AUTO_LINE, AUTO_LINE);
+  m_chooser.AddOption(AUTO_NOTHING, AUTO_NOTHING);
 
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
@@ -74,6 +67,9 @@ void Robot::RobotInit()
   std::cout << "RobotInit done \n";
 
   m_grippad.retract();
+
+  // Get choosen autonomous mode
+  m_autoSelected = m_chooser.GetSelected();
 }
 
 void buttonManager()
@@ -124,62 +120,72 @@ void Robot::RobotPeriodic()
 
 void Robot::AutonomousInit()
 {
-
   m_grippad.retract();
-/*
-  if (m_autoSelected == TEST)
-  {
-    m_autoSequence = &m_testSequence;
+
+  // Get choosen autonomous mode
+  m_autoSelected = m_chooser.GetSelected();
+
+  if (m_autoSelected == AUTO_STATION) {
+    state = CONSTANTS::STATES::HIGH;
+    m_fallback_pos = 9.9_ft;
+  } else if (m_autoSelected == AUTO_LINE) {
+    state = CONSTANTS::STATES::HIGH;
+    m_fallback_pos = 12.0_ft;
+  } else {
+    state = CONSTANTS::STATES::STORED;
   }
-
-  m_autoAction = m_autoSequence->front();
-
-  // Start aiming
-
-  // m_autoSelected = m_chooser.GetSelected();
-  std::cout << "auto selected \n";
-
-  fs::path deployDirectory = frc::filesystem::GetDeployDirectory();
-  if (m_autoSelected == CIRCLE)
-  {
-    deployDirectory = "Circle";
-  }
-
-  if (m_autoSelected == LINE)
-  {
-    deployDirectory = "30 degree turn";
-  }
-
-  if (m_autoSelected == LINE)
-  {
-    deployDirectory = "Straight Line";
-  }
-
-  if (m_autoSelected == TEST)
-  {
-    deployDirectory = "Test";
-  }
-
-  m_autoAction = m_autoSequence->front();
-
-  std::cout << "auto chooser\n";
-
-  Trajectory::follow(deployDirectory);
-  std::cout << "directory deployed \n";
-  Drivetrain::stop();
-  std::cout << "drivetrian stop \n";
-
-  // If driving after "stop" is called is a problem, I will add a "stop" method
-  //  which runs a few times to ensure all modules are stopped
-
-  // Will only finish after trajectory is done, so we can add additional trajectories and timers to intake & shoot
-  */
 }
 
 void Robot::AutonomousPeriodic()
 {
-  // This is what gets called after Init()
-  //Drivetrain::stop();
+  m_wrist.Follow(m_arm.position);
+
+  switch (state)
+  {
+  case CONSTANTS::STATES::STORED:
+    m_grabber.close();
+    m_arm.arm_moved(state);
+    break;
+
+  case CONSTANTS::STATES::HIGH:
+    if (m_camera.pose_loop())
+    {
+      if (m_arm.arm_moved(state))
+      {
+        Robot::traj_init(Trajectory::HEIGHT::HIGH);
+        state = CONSTANTS::STATES::SCORE;
+      }
+    }
+    break;
+
+  case CONSTANTS::STATES::SCORE:
+    if (Trajectory::follow_live_traj(m_trajectory))
+    {
+      m_grabber.open();
+      m_robot_timer.Start();
+
+      if (m_robot_timer.Get() > units::time::second_t(0.5))
+      {
+        m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(m_fallback_pos));
+        Trajectory::init_live_traj(m_back_trajectory);
+        state = CONSTANTS::STATES::FALLBACK;
+      }
+    }
+    break;
+
+  case CONSTANTS::STATES::FALLBACK:
+    if (Trajectory::follow_live_traj(m_back_trajectory))
+    {
+      m_robot_timer.Stop();
+      m_robot_timer.Reset();
+      m_grabber.close();
+      m_arm.arm_moved(CONSTANTS::STATES::STORED);
+      state = CONSTANTS::STATES::STORED;
+    }
+    break;
+  default:
+    break;
+  }
 }
 // File
 //fs::path deployDirectory = frc::filesystem::GetDeployDirectory();
@@ -189,6 +195,8 @@ void Robot::AutonomousPeriodic()
 void Robot::TeleopInit()
 {
   std::cout << "TeleopInit";
+  state = CONSTANTS::STATES::STORED;
+
 
    m_grippad.retract();
 }
@@ -394,19 +402,13 @@ void Robot::TeleopPeriodic()
 
       if (Trajectory::follow_live_traj(m_trajectory))
       {
-        m_grabber.open();
-        m_robot_timer.Start();
-
-        if (m_robot_timer.Get() > units::time::second_t(0.5))
-        {
-          std::cout << "end: " << Odometry::getPose().X().value() << 
-          " , " <<
-          Odometry::getPose().Y().value() <<
-          std::endl;
-          m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back());
-          Trajectory::init_live_traj(m_back_trajectory);
-          state = CONSTANTS::STATES::FALLBACK;
-        }
+        //std::cout << "end: " << Odometry::getPose().X().value() << 
+        //" , " <<
+        //Odometry::getPose().Y().value() <<
+        //std::endl;
+        m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(1.0_m));
+        Trajectory::init_live_traj(m_back_trajectory);
+        state = CONSTANTS::STATES::FALLBACK;
       }
       break;
 
@@ -477,24 +479,18 @@ void Robot::TeleopPeriodic()
 
 void Robot::traj_init(Trajectory::HEIGHT h)
 {
-  std::cout << "here 0 \n";
   switch (h)
   {
   case Trajectory::HEIGHT::HIGH:
-    std::cout << "high \n";
     m_trajectory = Trajectory::generate_live_traj(Trajectory::determine_desired_traj(Trajectory::HEIGHT::HIGH));
     break;
   case Trajectory::HEIGHT::MED:
-    std::cout << "mid \n";
     m_trajectory = Trajectory::generate_live_traj(Trajectory::determine_desired_traj(Trajectory::HEIGHT::MED));
     break;
   case Trajectory::HEIGHT::GROUND:
-    std::cout << "gnd \n";
     m_trajectory = Trajectory::generate_live_traj(Trajectory::determine_desired_traj(Trajectory::HEIGHT::GROUND));
   }
-  std::cout << "here 1 \n";
   Trajectory::init_live_traj(m_trajectory);
-  std::cout << "here 2 \n";
 }
 
 void Robot::make_test_path()
