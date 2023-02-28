@@ -14,10 +14,30 @@ namespace CONSTANTS
   constexpr double DEADBAND = 0.15;
   constexpr bool DEBUGGING = true; //DO NOT USE IN COMP.
   //SLOWS DOWN EVERYTHING & MAY CAUSE WATCHDOG EXEPTIONS.
-    enum STATES { STORED, LOW, MED, HUMANPLAYER, HIGH, PICKUP, SCORE, FALLBACK, ABORT, O_LOW, O_MED, O_HP, O_HIGH, IDLE, O_OPEN, O_UP};
+    enum STATES 
+  {
+            STORED,
+            LOW,
+            MED, 
+            HUMANPLAYER,
+            HIGH,
+            PICKUP,
+            SCORE,
+            FALLBACK,
+            ABORT,
+            O_LOW,
+            O_MED,
+            O_HP,
+            O_HIGH,
+            IDLE,
+            O_OPEN,
+            O_UP,
+            AUTO_SIMP_HIGH
+};
 
 namespace TRAJECTORY
   {
+    constexpr units::meter_t SIMPLE_FORWARDS = -25_in; //CHANGEME
    const std::vector<units::meter_t> Y_POS =
       {
         /*
