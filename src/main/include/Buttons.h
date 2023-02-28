@@ -14,6 +14,7 @@ namespace BUTTON
 
   namespace  DRIVETRAIN
   {
+    inline bool TURBO() {return BUTTON::m_stick.GetLeftTriggerAxis() > 0.5;}
     inline double ZERO() {return BUTTON::m_stick.GetStartButtonPressed();}
     inline double LX() {return BUTTON::m_stick.GetLeftX();}
     inline double LY() {return BUTTON::m_stick.GetLeftY();}
@@ -44,7 +45,7 @@ namespace BUTTON
   {
     inline bool ARM_STORED() {return BUTTON::m_stick.GetLeftBumper();}
     inline bool ARM_PICKUP() {return BUTTON::m_stick.GetPOV() == 270;}
-    inline bool ARM_LOW() {return BUTTON::m_stick.GetXButtonPressed();}
+    inline bool ARM_LOW() {return BUTTON::m_stick.GetAButtonPressed();}
     inline bool ARM_MID() {return BUTTON::m_stick.GetBButtonPressed();}
     inline bool ARM_HIGH() {return BUTTON::m_stick.GetYButtonPressed();}
     inline bool ARM_HP() {return BUTTON::m_stick.GetXButtonPressed();}
