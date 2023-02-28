@@ -6,9 +6,11 @@
 #include <iostream>
 #include <vector>
 #include <units/time.h>
+#include <units/velocity.h>
 
 namespace CONSTANTS 
 {
+   constexpr double NON_TURBO = 0.5;
   constexpr double DEADBAND = 0.15;
   constexpr bool DEBUGGING = true; //DO NOT USE IN COMP.
   //SLOWS DOWN EVERYTHING & MAY CAUSE WATCHDOG EXEPTIONS.
@@ -29,13 +31,13 @@ namespace TRAJECTORY
          *  Copyright Westly Miller, 2023.
          */
         38.636_in,
-        //16.386_in,
+        16.386_in,
         -5.364_in,
         -27.364_in,
-        //-48.614_in,
+        48.614_in,
         -71.864_in,
         -93.864_in,
-        //-115.614_in,
+        115.614_in,
         -137.864_in
      };
     namespace R

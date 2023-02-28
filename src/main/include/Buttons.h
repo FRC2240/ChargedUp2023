@@ -14,6 +14,7 @@ namespace BUTTON
 
   namespace  DRIVETRAIN
   {
+    inline bool TURBO() {return BUTTON::m_stick.GetLeftTriggerAxis() > 0.5;}
     inline double ZERO() {return BUTTON::m_stick.GetStartButtonPressed();}
     inline double LX() {return BUTTON::m_stick.GetLeftX();}
     inline double LY() {return BUTTON::m_stick.GetLeftY();}
