@@ -45,7 +45,7 @@ namespace BUTTON
   {
     inline bool ARM_STORED() {return BUTTON::m_stick.GetLeftBumper();}
     inline bool ARM_PICKUP() {return BUTTON::m_stick.GetPOV() == 270;}
-    inline bool ARM_LOW() {return BUTTON::m_stick.GetXButtonPressed();}
+    inline bool ARM_LOW() {return BUTTON::m_stick.GetAButtonPressed();}
     inline bool ARM_MID() {return BUTTON::m_stick.GetBButtonPressed();}
     inline bool ARM_HIGH() {return BUTTON::m_stick.GetYButtonPressed();}
     inline bool ARM_HP() {return BUTTON::m_stick.GetXButtonPressed();}
