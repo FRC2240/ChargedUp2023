@@ -118,10 +118,18 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
     ret.current_x = current_pose.X();
     ret.current_y = current_pose.Y();
 
+    if (ret.current_x < 0.0_m) {
+        ret.current_x = -ret.current_x;
+        ret.current_y = -ret.current_y;
+        ret.desired_x = -ret.desired_x;
+        ret.desired_y = -ret.desired_y;
+    }
+
     ret.desired_y = determine_desired_y();
-    //std::cout << "cx: " << ret.current_x.value() << "\n cy: " << ret.current_y.value() << std::endl;
-    //std::cout << "X: " << ret.desired_x.value() << "\n Y: " << ret.desired_y.value() << std::endl;
+    std::cout << "cx: " << ret.current_x.value() << "\n cy: " << ret.current_y.value() << std::endl;
+    std::cout << "X: " << ret.desired_x.value() << "\n Y: " << ret.desired_y.value() << std::endl;
     auto heading = (frc::Translation2d(ret.desired_x, ret.desired_y) - current_pose.Translation()).Angle().Degrees();
+    std::cout << "heading: " <<  heading.value() << std::endl;
     ret.current_head = heading;
     ret.desired_head = heading;
 
@@ -270,7 +278,7 @@ bool Trajectory::follow_live_traj(PathPlannerTrajectory traj)
                                                                   "Current trajectory sample value: {}, Pose X: {}, Pose Y: {}, Pose Z: {}\nHolonomic Rotation: {}, Timer: {}\n",
                                                                   ++trajectory_samples, sample.pose.X().value(), sample.pose.Y().value(), sample.pose.Rotation().Degrees().value(),
                                                                   sample.holonomicRotation.Degrees().value(), m_trajTimer.Get().value()));
-            
+            */
                 std::cout << "sample: "
                 << sample.pose.X().value() << "," 
                 << sample.pose.Y().value() << ","
@@ -285,7 +293,7 @@ bool Trajectory::follow_live_traj(PathPlannerTrajectory traj)
 
             printRobotRelativeSpeeds();
             printFieldRelativeSpeeds();
-            */
+            
         }
         // This is the refresh rate of the HolonomicDriveController's PID controllers (can be tweaked if needed)
     }
