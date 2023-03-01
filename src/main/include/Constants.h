@@ -37,7 +37,7 @@ namespace CONSTANTS
 
 namespace TRAJECTORY
   {
-    constexpr units::meter_t SIMPLE_FORWARDS = -25_in; //CHANGEME
+    constexpr units::meter_t SIMPLE_FORWARDS = -22_in; //CHANGEME
    const std::vector<units::meter_t> Y_POS =
       {
         /*

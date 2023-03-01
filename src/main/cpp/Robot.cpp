@@ -152,8 +152,9 @@ void Robot::AutonomousPeriodic()
   switch (state)
   {
   case CONSTANTS::STATES::AUTO_SIMP_HIGH:
-    if (m_arm.arm_moved(state))
+    if (m_arm.arm_moved(CONSTANTS::STATES::HIGH))
     {
+      std::cout << "init traj \n";
       m_simp_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(CONSTANTS::TRAJECTORY::SIMPLE_FORWARDS));
       Trajectory::init_live_traj(m_simp_trajectory);
       state = CONSTANTS::STATES::SCORE; 
@@ -162,7 +163,7 @@ void Robot::AutonomousPeriodic()
 
   case CONSTANTS::STATES::STORED:
     m_grabber.close();
-    m_arm.arm_moved(state);
+    m_arm.arm_moved(CONSTANTS::STATES::STORED);
     break;
 
   case CONSTANTS::STATES::HIGH:
@@ -177,13 +178,16 @@ void Robot::AutonomousPeriodic()
     break;
 
   case CONSTANTS::STATES::SCORE:
-    if (Trajectory::follow_live_traj(m_trajectory))
+  std::cout << "scoring\n";
+    if (Trajectory::follow_live_traj(m_simp_trajectory))
     {
+      std::cout << "followed path \n";
       m_grabber.open();
       m_robot_timer.Start();
 
       if (m_robot_timer.Get() > units::time::second_t(0.5))
       {
+        std::cout << "timer expired \n";
         m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(m_fallback_pos));
         Trajectory::init_live_traj(m_back_trajectory);
         state = CONSTANTS::STATES::FALLBACK;
@@ -192,8 +196,10 @@ void Robot::AutonomousPeriodic()
     break;
 
   case CONSTANTS::STATES::FALLBACK:
+      std::cout << "falling back\n";
     if (Trajectory::follow_live_traj(m_back_trajectory))
     {
+      std::cout << "fell back\n";
       m_robot_timer.Stop();
       m_robot_timer.Reset();
       m_grabber.close();
