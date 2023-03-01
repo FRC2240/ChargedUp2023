@@ -10,7 +10,7 @@
 
 namespace CONSTANTS 
 {
-   constexpr double NON_TURBO = 0.5;
+   constexpr double NON_TURBO = 1;
   constexpr double DEADBAND = 0.15;
   constexpr bool DEBUGGING = true; //DO NOT USE IN COMP.
   //SLOWS DOWN EVERYTHING & MAY CAUSE WATCHDOG EXEPTIONS.
