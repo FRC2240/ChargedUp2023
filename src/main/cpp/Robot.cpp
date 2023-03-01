@@ -135,6 +135,7 @@ void Robot::AutonomousInit()
 
   if (m_autoSelected == AUTO_STATION) {
     state = CONSTANTS::STATES::AUTO_SIMP_HIGH;
+    std::cout << "here\n";
     m_fallback_pos = 9.9_ft;
   } else if (m_autoSelected == AUTO_LINE) {
     state = CONSTANTS::STATES::AUTO_SIMP_HIGH;
