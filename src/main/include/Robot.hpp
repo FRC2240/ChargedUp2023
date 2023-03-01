@@ -111,6 +111,7 @@ private:
     Candle m_candle;
     Wrist m_wrist;
     pathplanner::PathPlannerTrajectory m_trajectory;
+    pathplanner::PathPlannerTrajectory m_simp_trajectory;
     pathplanner::PathPlannerTrajectory m_back_trajectory;
 
     units::meter_t m_fallback_pos;

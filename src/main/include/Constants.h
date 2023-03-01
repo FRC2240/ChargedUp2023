@@ -14,10 +14,30 @@ namespace CONSTANTS
   constexpr double DEADBAND = 0.15;
   constexpr bool DEBUGGING = true; //DO NOT USE IN COMP.
   //SLOWS DOWN EVERYTHING & MAY CAUSE WATCHDOG EXEPTIONS.
-    enum STATES { STORED, LOW, MED, HUMANPLAYER, HIGH, PICKUP, SCORE, FALLBACK, ABORT, O_LOW, O_MED, O_HP, O_HIGH, IDLE, O_OPEN, O_UP};
+    enum STATES 
+  {
+            STORED,
+            LOW,
+            MED, 
+            HUMANPLAYER,
+            HIGH,
+            PICKUP,
+            SCORE,
+            FALLBACK,
+            ABORT,
+            O_LOW,
+            O_MED,
+            O_HP,
+            O_HIGH,
+            IDLE,
+            O_OPEN,
+            O_UP,
+            AUTO_SIMP_HIGH
+};
 
 namespace TRAJECTORY
   {
+    constexpr units::meter_t SIMPLE_FORWARDS = -22_in; //CHANGEME
    const std::vector<units::meter_t> Y_POS =
       {
         /*
@@ -30,15 +50,15 @@ namespace TRAJECTORY
          *
          *  Copyright Westly Miller, 2023.
          */
-        38.636_in,
-        16.386_in,
-        -5.364_in,
-        -27.364_in,
-        48.614_in,
-        -71.864_in,
-        -93.864_in,
-        115.614_in,
-        -137.864_in
+        38.386_in,
+        //16.386_in,
+        -5.614_in,
+        -27.614_in,
+        //-49.614_in,
+        -71.614_in,
+        -93.614_in,
+        //-115.614_in,
+        -137.614_in
      };
     namespace R
     {
@@ -51,9 +71,9 @@ namespace TRAJECTORY
 
     namespace B
     {
-      constexpr units::meter_t HIGH_X = 0_m;
-      constexpr units::meter_t MID_X = 0_m;
-      constexpr units::meter_t GROUND_X = 0_m;
+      constexpr units::meter_t HIGH_X = -6.46_m;
+      constexpr units::meter_t MID_X = -6.02_m;
+      constexpr units::meter_t GROUND_X = -6.06_m;
     }
   }
   namespace GRIPPAD
