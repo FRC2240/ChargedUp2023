@@ -24,6 +24,7 @@ namespace CONSTANTS
             PICKUP,
             SCORE,
             FALLBACK,
+            FALLBACK2,
             ABORT,
             O_LOW,
             O_MED,

@@ -115,4 +115,5 @@ private:
     pathplanner::PathPlannerTrajectory m_back_trajectory;
 
     units::meter_t m_fallback_pos;
+    units::meter_t m_fallback_pos2;
 };
