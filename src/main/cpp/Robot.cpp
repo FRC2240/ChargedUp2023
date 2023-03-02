@@ -57,14 +57,14 @@ Robot::Robot()
 
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
-  std::cout << "robot object created \n";
-  std::cout << "go get em tiger" << std::endl;
+  //std::cout << "robot object created \n";
+  //std::cout << "go get em tiger" << std::endl;
 }
 
 void Robot::RobotInit()
 {
   Odometry::putField2d();
-  std::cout << "RobotInit done \n";
+  //std::cout << "RobotInit done \n";
 
   m_grippad.retract();
 
@@ -76,8 +76,8 @@ void buttonManager()
 {
   if (BUTTON::DRIVETRAIN::FIELD_CENTRIC())
   {
-    std::cout << field_centric
-              << "\n";
+    /*std::cout << field_centric
+              << "\n";*/
     field_centric = !field_centric;
   }
 }
@@ -135,7 +135,7 @@ void Robot::AutonomousInit()
 
   if (m_autoSelected == AUTO_STATION) {
     state = CONSTANTS::STATES::AUTO_SIMP_HIGH;
-    std::cout << "here\n";
+    //std::cout << "here\n";
     m_fallback_pos = 9.9_ft;
   } else if (m_autoSelected == AUTO_LINE) {
     state = CONSTANTS::STATES::AUTO_SIMP_HIGH;
@@ -154,7 +154,7 @@ void Robot::AutonomousPeriodic()
   case CONSTANTS::STATES::AUTO_SIMP_HIGH:
     if (m_arm.arm_moved(CONSTANTS::STATES::HIGH))
     {
-      std::cout << "init traj \n";
+      // std::cout << "init traj \n";
       m_simp_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(CONSTANTS::TRAJECTORY::SIMPLE_FORWARDS));
       Trajectory::init_live_traj(m_simp_trajectory);
       state = CONSTANTS::STATES::SCORE; 
@@ -178,16 +178,16 @@ void Robot::AutonomousPeriodic()
     break;
 
   case CONSTANTS::STATES::SCORE:
-  std::cout << "scoring\n";
+  //std::cout << "scoring\n";
     if (Trajectory::follow_live_traj(m_simp_trajectory))
     {
-      std::cout << "followed path \n";
+      //std::cout << "followed path \n";
       m_grabber.open();
       m_robot_timer.Start();
 
       if (m_robot_timer.Get() > units::time::second_t(0.5))
       {
-        std::cout << "timer expired \n";
+        //std::cout << "timer expired \n";
         m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(m_fallback_pos));
         Trajectory::init_live_traj(m_back_trajectory);
         state = CONSTANTS::STATES::FALLBACK;
@@ -196,10 +196,10 @@ void Robot::AutonomousPeriodic()
     break;
 
   case CONSTANTS::STATES::FALLBACK:
-      std::cout << "falling back\n";
+      //std::cout << "falling back\n";
     if (Trajectory::follow_live_traj(m_back_trajectory))
     {
-      std::cout << "fell back\n";
+      //std::cout << "fell back\n";
       m_robot_timer.Stop();
       m_robot_timer.Reset();
       m_grabber.close();
@@ -217,7 +217,7 @@ void Robot::AutonomousPeriodic()
 
 void Robot::TeleopInit()
 {
-  std::cout << "TeleopInit";
+  //std::cout << "TeleopInit";
   state = CONSTANTS::STATES::STORED;
 
 
@@ -246,7 +246,7 @@ void Robot::TeleopPeriodic()
 
   if (BUTTON::GRIPPADS::GRIPPADS_RETRACT())
   {
-    std::cout << "retracting...\n";
+    //std::cout << "retracting...\n";
     m_grippad.retract();
   }
   else if (BUTTON::GRIPPADS::GRIPPADS_DEPLOY())
