@@ -136,10 +136,12 @@ void Robot::AutonomousInit()
   if (m_autoSelected == AUTO_STATION) {
     state = CONSTANTS::STATES::AUTO_SIMP_HIGH;
     //std::cout << "here\n";
-    m_fallback_pos = 9.9_ft;
+    m_fallback_pos = 2.0_ft;
+    m_fallback_pos2 = 6.87_ft;
   } else if (m_autoSelected == AUTO_LINE) {
     state = CONSTANTS::STATES::AUTO_SIMP_HIGH;
-    m_fallback_pos = 12.0_ft;
+    m_fallback_pos = 2.0_ft;
+    m_fallback_pos2 = 10.5_ft;
   } else {
     state = CONSTANTS::STATES::STORED;
   }
@@ -204,10 +206,19 @@ void Robot::AutonomousPeriodic()
       m_robot_timer.Reset();
       m_grabber.close();
       m_arm.arm_moved(CONSTANTS::STATES::STORED);
-      state = CONSTANTS::STATES::STORED;
+      m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(m_fallback_pos2));
+      Trajectory::init_live_traj(m_back_trajectory);
+      state = CONSTANTS::STATES::FALLBACK2;
     }
     break;
 
+  case CONSTANTS::STATES::FALLBACK2:
+    m_arm.arm_moved(CONSTANTS::STATES::STORED);
+    if (Trajectory::follow_live_traj(m_back_trajectory))
+    {
+      state = CONSTANTS::STATES::STORED;
+    }
+    break;
   }
 }
 // File

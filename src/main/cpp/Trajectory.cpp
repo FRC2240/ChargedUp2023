@@ -24,14 +24,7 @@ Trajectory::TrajDepends Trajectory::fall_back(units::meter_t fallback_pos)
     frc::Pose2d current_pose = Odometry::getPose();
     Trajectory::TrajDepends ret;
 
-    if (current_pose.X().value() < 0)
-        {
-            ret.desired_x = current_pose.X() + fallback_pos;
-        }
-    else
-        {
-            ret.desired_x = current_pose.X() - fallback_pos;
-        }
+        ret.desired_x = current_pose.X() - fallback_pos;
         ret.desired_y = current_pose.Y();
 
     auto heading = (frc::Translation2d(ret.desired_x, ret.desired_y) - current_pose.Translation()).Angle().Degrees();
@@ -41,7 +34,7 @@ Trajectory::TrajDepends Trajectory::fall_back(units::meter_t fallback_pos)
     ret.current_head = heading;
     ret.current_x = current_pose.X();
     ret.current_y = current_pose.Y();
-    std::cout << "desired x: " << ret.desired_x.value() << std::endl;
+    //std::cout << "desired x: " << ret.desired_x.value() << std::endl;
     return ret;
 }
 /******************************************************************/
@@ -126,10 +119,10 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
         ret.desired_y = -ret.desired_y;
     }
 
-    std::cout << "cx: " << ret.current_x.value() << "\n cy: " << ret.current_y.value() << std::endl;
-    std::cout << "X: " << ret.desired_x.value() << "\n Y: " << ret.desired_y.value() << std::endl;
+    //std::cout << "cx: " << ret.current_x.value() << "\n cy: " << ret.current_y.value() << std::endl;
+    //std::cout << "X: " << ret.desired_x.value() << "\n Y: " << ret.desired_y.value() << std::endl;
     auto heading = (frc::Translation2d(ret.desired_x, ret.desired_y) - current_pose.Translation()).Angle().Degrees();
-    std::cout << "heading: " <<  heading.value() << std::endl;
+    //std::cout << "heading: " <<  heading.value() << std::endl;
     ret.current_head = heading;
     ret.desired_head = heading;
 
@@ -150,8 +143,8 @@ PathPlannerTrajectory Trajectory::generate_live_traj(TrajDepends t)
     return
         PathPlanner::generatePath(
 
-                                  PathConstraints(Drivetrain::TRAJ_MAX_SPEED/3,
-                                                  Drivetrain::TRAJ_MAX_ACCELERATION/3),
+                                  PathConstraints(Drivetrain::TRAJ_MAX_SPEED/4,
+                                                  Drivetrain::TRAJ_MAX_ACCELERATION/4),
 
                                   PathPoint(frc::Translation2d(t.current_x,
                                                                t.current_y),
@@ -279,17 +272,17 @@ bool Trajectory::follow_live_traj(PathPlannerTrajectory traj)
                                                                   ++trajectory_samples, sample.pose.X().value(), sample.pose.Y().value(), sample.pose.Rotation().Degrees().value(),
                                                                   sample.holonomicRotation.Degrees().value(), m_trajTimer.Get().value()));
             */
-                std::cout << "sample: "
+                /*std::cout << "sample: "
                 << sample.pose.X().value() << "," 
                 << sample.pose.Y().value() << ","
-                << std::endl;
+                << std::endl;*/
 
             auto pose = Odometry::getPose();
 
-            std::cout << " robot: "
+           /* std::cout << " robot: "
                 << pose.X().value() << "," 
                 << pose.Y().value() << ","
-                << std::endl;
+                << std::endl;*/
 
             printRobotRelativeSpeeds();
             printFieldRelativeSpeeds();
