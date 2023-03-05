@@ -143,8 +143,8 @@ PathPlannerTrajectory Trajectory::generate_live_traj(TrajDepends t)
     return
         PathPlanner::generatePath(
 
-                                  PathConstraints(Drivetrain::TRAJ_MAX_SPEED/4,
-                                                  Drivetrain::TRAJ_MAX_ACCELERATION/4),
+                                  PathConstraints(Drivetrain::TRAJ_MAX_SPEED/6,
+                                                  Drivetrain::TRAJ_MAX_ACCELERATION/6),
 
                                   PathPoint(frc::Translation2d(t.current_x,
                                                                t.current_y),

@@ -137,7 +137,7 @@ void Robot::AutonomousInit()
     state = CONSTANTS::STATES::AUTO_SIMP_HIGH;
     //std::cout << "here\n";
     m_fallback_pos = 2.0_ft;
-    m_fallback_pos2 = 6.87_ft;
+    m_fallback_pos2 = 6.0_ft;
   } else if (m_autoSelected == AUTO_LINE) {
     state = CONSTANTS::STATES::AUTO_SIMP_HIGH;
     m_fallback_pos = 2.0_ft;
@@ -335,6 +335,8 @@ void Robot::TeleopPeriodic()
   switch (state)
   {
     case CONSTANTS::STATES::STORED:
+      m_robot_timer.Stop();
+      m_robot_timer.Reset();
       m_grabber.close();
       m_arm.arm_moved(state);
       break;
