@@ -123,7 +123,7 @@ void swerveDrive(bool const &field_relative)
 void Robot::RobotPeriodic()
 {
   Trajectory::reverse_trajectory = frc::SmartDashboard::GetBoolean("Traj Reversed", Trajectory::reverse_trajectory);
-  m_arm.Read_Position();
+  m_arm.read_position();
 }
 
 void Robot::AutonomousInit()
@@ -133,30 +133,31 @@ void Robot::AutonomousInit()
   // Get choosen autonomous mode
   m_autoSelected = m_chooser.GetSelected();
 
-  if (m_autoSelected == AUTO_STATION) {
+  if (m_autoSelected == AUTO_STATION) 
+  {
     state = CONSTANTS::STATES::AUTO_SIMP_HIGH;
-    //std::cout << "here\n";
     m_fallback_pos = 2.0_ft;
     m_fallback_pos2 = 6.0_ft;
-  } else if (m_autoSelected == AUTO_LINE) {
+  } else if (m_autoSelected == AUTO_LINE) 
+  {
     state = CONSTANTS::STATES::AUTO_SIMP_HIGH;
     m_fallback_pos = 2.0_ft;
     m_fallback_pos2 = 10.5_ft;
-  } else {
+  } else 
+  {
     state = CONSTANTS::STATES::STORED;
   }
 }
 
 void Robot::AutonomousPeriodic()
 {
-  m_wrist.Follow(m_arm.position);
+  m_wrist.follow(m_arm.position);
 
   switch (state)
   {
   case CONSTANTS::STATES::AUTO_SIMP_HIGH:
     if (m_arm.arm_moved(CONSTANTS::STATES::HIGH))
     {
-      // std::cout << "init traj \n";
       m_simp_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(CONSTANTS::TRAJECTORY::SIMPLE_FORWARDS));
       Trajectory::init_live_traj(m_simp_trajectory);
       state = CONSTANTS::STATES::SCORE; 
@@ -180,16 +181,13 @@ void Robot::AutonomousPeriodic()
     break;
 
   case CONSTANTS::STATES::SCORE:
-  //std::cout << "scoring\n";
     if (Trajectory::follow_live_traj(m_simp_trajectory))
     {
-      //std::cout << "followed path \n";
       m_grabber.open();
       m_robot_timer.Start();
 
       if (m_robot_timer.Get() > units::time::second_t(0.5))
       {
-        //std::cout << "timer expired \n";
         m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(m_fallback_pos));
         Trajectory::init_live_traj(m_back_trajectory);
         state = CONSTANTS::STATES::FALLBACK;
@@ -198,10 +196,8 @@ void Robot::AutonomousPeriodic()
     break;
 
   case CONSTANTS::STATES::FALLBACK:
-      //std::cout << "falling back\n";
     if (Trajectory::follow_live_traj(m_back_trajectory))
     {
-      //std::cout << "fell back\n";
       m_robot_timer.Stop();
       m_robot_timer.Reset();
       m_grabber.close();
@@ -293,7 +289,7 @@ void Robot::TeleopPeriodic()
     ((state == CONSTANTS::STATES::HUMANPLAYER && BUTTON::DRIVETRAIN::ABORT())))
   {
     state = CONSTANTS::STATES::ABORT;
-    m_force_pos = m_arm.Read_Position();
+    m_force_pos = m_arm.read_position();
   }
   /*else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_HP())
   {
@@ -325,11 +321,16 @@ void Robot::TeleopPeriodic()
     state = CONSTANTS::STATES::O_UP;
   }
 
-  if (state == CONSTANTS::STATES::O_HIGH || state == CONSTANTS::STATES::O_LOW || state == CONSTANTS::STATES::O_MED || state == CONSTANTS::STATES::STORED || state == CONSTANTS::STATES::SCORE || state == CONSTANTS::STATES::O_UP || state == CONSTANTS::STATES::O_OPEN){
-    m_wrist.Follow(m_arm.position);
+  if (state == CONSTANTS::STATES::O_HIGH || state == CONSTANTS::STATES::O_LOW || 
+      state == CONSTANTS::STATES::O_MED || state == CONSTANTS::STATES::STORED || 
+      state == CONSTANTS::STATES::SCORE || state == CONSTANTS::STATES::O_UP || 
+      state == CONSTANTS::STATES::O_OPEN)
+  {
+    m_wrist.follow(m_arm.position);
   }
-  else if (state == CONSTANTS::STATES::O_HP || state == CONSTANTS::STATES::PICKUP){
-    m_wrist.pickupFollow(m_arm.position);
+  else if (state == CONSTANTS::STATES::O_HP || state == CONSTANTS::STATES::PICKUP)
+  {
+    m_wrist.pickup_follow(m_arm.position);
   }
 
   switch (state)
@@ -510,21 +511,23 @@ void Robot::TeleopPeriodic()
 
   }
 
-  m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(), BUTTON::CANDLE::CANDLE_RIGHT(), BUTTON::CANDLE::CANDLE_YELLOW(), BUTTON::CANDLE::CANDLE_PURPLE(), m_grabber.grabberStatus());
+  m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(), 
+                        BUTTON::CANDLE::CANDLE_RIGHT(), BUTTON::CANDLE::CANDLE_YELLOW(),
+                         BUTTON::CANDLE::CANDLE_PURPLE(), m_grabber.grabber_status());
 }
 
 void Robot::traj_init(Trajectory::HEIGHT h)
 {
   switch (h)
   {
-  case Trajectory::HEIGHT::HIGH:
-    m_trajectory = Trajectory::generate_live_traj(Trajectory::determine_desired_traj(Trajectory::HEIGHT::HIGH));
-    break;
-  case Trajectory::HEIGHT::MED:
-    m_trajectory = Trajectory::generate_live_traj(Trajectory::determine_desired_traj(Trajectory::HEIGHT::MED));
-    break;
-  case Trajectory::HEIGHT::GROUND:
-    m_trajectory = Trajectory::generate_live_traj(Trajectory::determine_desired_traj(Trajectory::HEIGHT::GROUND));
+    case Trajectory::HEIGHT::HIGH:
+      m_trajectory = Trajectory::generate_live_traj(Trajectory::determine_desired_traj(Trajectory::HEIGHT::HIGH));
+      break;
+    case Trajectory::HEIGHT::MED:
+      m_trajectory = Trajectory::generate_live_traj(Trajectory::determine_desired_traj(Trajectory::HEIGHT::MED));
+      break;
+    case Trajectory::HEIGHT::GROUND:
+      m_trajectory = Trajectory::generate_live_traj(Trajectory::determine_desired_traj(Trajectory::HEIGHT::GROUND));
   }
   Trajectory::init_live_traj(m_trajectory);
 }
@@ -563,7 +566,7 @@ void Robot::TestPeriodic()
 
 void Robot::DisabledPeriodic()
 {
-  m_candle.RainbowAnim();
+  m_candle.rainbow_anim();
 }
 
 #ifndef RUNNING_FRC_TESTS

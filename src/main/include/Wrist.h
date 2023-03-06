@@ -13,12 +13,12 @@ public:
 
         Wrist();
         ~Wrist();
-        void WristPIDInit();
-        void pickupFollow(double arm_pos);
-        void Follow(double arm_pos);
+        void wrist_PID_init();
+        void pickup_follow(double arm_pos);
+        void follow(double arm_pos);
         void test();
         
-        rev::SparkMaxPIDController m_wrist_PIDController = m_wrist_motor.GetPIDController();
+        rev::SparkMaxPIDController m_wrist_PID_controller = m_wrist_motor.GetPIDController();
 
 private:
         
@@ -32,5 +32,5 @@ private:
         };
 
         pidCoeff m_wrist_coeff{1.5, 0.0, 8.0, 0.0, 0.0, 1.0, -1.0};
-        rev::SparkMaxAbsoluteEncoder m_wrist_Encoder = m_wrist_motor.GetAbsoluteEncoder(rev::SparkMaxAbsoluteEncoder::Type::kDutyCycle);
+        rev::SparkMaxAbsoluteEncoder m_wrist_encoder = m_wrist_motor.GetAbsoluteEncoder(rev::SparkMaxAbsoluteEncoder::Type::kDutyCycle);
 };

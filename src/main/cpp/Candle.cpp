@@ -1,6 +1,7 @@
 #include "Candle.h"
 
-Candle::Candle(){
+Candle::Candle()
+{
 
     ctre::phoenix::led::CANdleConfiguration candle_config;
     candle_config.stripType = ctre::phoenix::led::LEDStripType::RGB; 
@@ -15,7 +16,8 @@ void Candle::candle_logic(bool left_button, bool right_button,
                           bool yellow_button, bool purple_button, bool grabber_status)
 {
 
-    if (grabber_status == false){
+    if (grabber_status == false)
+    {
         m_candle_timer.Start();
     }
 
@@ -53,7 +55,8 @@ void Candle::candle_logic(bool left_button, bool right_button,
         color = false;
     } 
 
-    if (grabber_status == false && m_candle_timer.Get() < units::time::second_t(0.5)){
+    if (grabber_status == false && m_candle_timer.Get() < units::time::second_t(0.5))
+    {
         state = GRABBER_FLASH;
     }
     else if (side && color)
@@ -107,17 +110,19 @@ void Candle::candle_logic(bool left_button, bool right_button,
         break; 
     }
 
-    if (state != previous_state){
+    if (state != previous_state)
+    {
         m_candle.SetLEDs(0, 0, 0, 0);
     }
 
-    if (grabber_status == true){
+    if (grabber_status == true)
+    {
         m_candle_timer.Stop();
         m_candle_timer.Reset();
     }
 }
 
-void Candle::RainbowAnim()
+void Candle::rainbow_anim()
 {
     m_candle.Animate(rainbow);
 }

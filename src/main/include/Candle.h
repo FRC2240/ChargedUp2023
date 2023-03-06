@@ -16,7 +16,7 @@ class Candle{
 
     Candle();
 
-    void RainbowAnim();
+    void rainbow_anim();
 
 
     private:

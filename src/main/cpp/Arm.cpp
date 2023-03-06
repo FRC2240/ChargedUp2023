@@ -26,7 +26,7 @@ Arm::Arm()
     arm_right_config.primaryPID.selectedFeedbackSensor = FeedbackDevice::RemoteSensor0;
     arm_right_config.slot0.kP = 0.4;
     arm_right_config.slot0.kD = 4.0;
-    arm_right_config.slot0.kI = 0.0; //0.0008;
+    arm_right_config.slot0.kI = 0.0;
 
     arm_cancoder.ConfigAllSettings(arm_cancoder_config);
     m_arm_motor_right.ConfigAllSettings(arm_right_config);
@@ -40,21 +40,23 @@ Arm::Arm()
 
 void Arm::move()
 {
-    double AFF = sin((3.1415/180)*(desired_position-horizontalPoint + 90)) * maxAFF;
-    m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, desired_position * TICKS_PER_CANCODER_DEGREE,
+    double AFF = sin((3.1415/180)*(desired_position-horizontal_point + 90)) * max_AFF;
+    m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, 
+    desired_position * TICKS_PER_CANCODER_DEGREE,
     ctre::phoenix::motorcontrol::DemandType::DemandType_ArbitraryFeedForward, AFF);
 }
 
-double Arm::Read_Position()
+double Arm::read_position()
 {
-    position = arm_cancoder.GetAbsolutePosition(); // + CONSTANTS::ARM::ARM_ENCODER_OFFSET;
+    position = arm_cancoder.GetAbsolutePosition();
     return position;
 }
 
 void Arm::force_move(double pos)
 {
-    double AFF = sin((3.1415/180)*(pos-horizontalPoint + 90)) * maxAFF;
-    m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, pos * TICKS_PER_CANCODER_DEGREE,
+    double AFF = sin((3.1415/180)*(pos-horizontal_point + 90)) * max_AFF;
+    m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, 
+    pos * TICKS_PER_CANCODER_DEGREE,
     ctre::phoenix::motorcontrol::DemandType::DemandType_ArbitraryFeedForward, AFF);
    
 }
