@@ -76,7 +76,7 @@ bool Arm::arm_moved(CONSTANTS::STATES state)
             return false;
             break;
 
-        case CONSTANTS::STATES::HUMANPLAYER:
+        case CONSTANTS::STATES::HP:
             desired_position = CONSTANTS::ARM::MOTORPOSITIONS::HP;
             move();
             break;
@@ -91,8 +91,8 @@ bool Arm::arm_moved(CONSTANTS::STATES state)
             move();
             break;
 
-        case CONSTANTS::STATES::MED:
-            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MED;
+        case CONSTANTS::STATES::MID:
+            desired_position = CONSTANTS::ARM::MOTORPOSITIONS::MID;
             move();
             break;
 

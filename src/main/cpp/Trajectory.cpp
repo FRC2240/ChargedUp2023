@@ -83,11 +83,11 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
                 case Trajectory::HEIGHT::HIGH:
                     ret.desired_x = CONSTANTS::TRAJECTORY::B::HIGH_X;
                     break;
-                case Trajectory::HEIGHT::MED:
+                case Trajectory::HEIGHT::MID:
                     ret.desired_x = CONSTANTS::TRAJECTORY::B::MID_X;
                     break;
-                case Trajectory::HEIGHT::GROUND:
-                    ret.desired_x = CONSTANTS::TRAJECTORY::B::GROUND_X;
+                case Trajectory::HEIGHT::LOW:
+                    ret.desired_x = CONSTANTS::TRAJECTORY::B::LOW_X;
                     break;
                 }
         }
@@ -98,11 +98,11 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
                 case Trajectory::HEIGHT::HIGH:
                     ret.desired_x = CONSTANTS::TRAJECTORY::R::HIGH_X;
                     break;
-                case Trajectory::HEIGHT::MED:
+                case Trajectory::HEIGHT::MID:
                     ret.desired_x = CONSTANTS::TRAJECTORY::R::MID_X;
                     break;
-                case Trajectory::HEIGHT::GROUND:
-                    ret.desired_x = CONSTANTS::TRAJECTORY::R::GROUND_X;
+                case Trajectory::HEIGHT::LOW:
+                    ret.desired_x = CONSTANTS::TRAJECTORY::R::LOW_X;
                     break;
                 }
         }

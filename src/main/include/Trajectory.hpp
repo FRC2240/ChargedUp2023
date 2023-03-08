@@ -32,7 +32,7 @@ namespace Trajectory
     /******************************************************************/
     /*                  Public Function Declarations                  */
     /******************************************************************/
-    enum class HEIGHT {HIGH, MED, GROUND, SAFE};
+    enum class HEIGHT {HIGH, MID, LOW, SAFE};
     enum BIG_TABLE
         {
             LEFT_1,

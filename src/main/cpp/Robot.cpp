@@ -279,14 +279,14 @@ void Robot::TeleopPeriodic()
   }
   else if (BUTTON::ARM::ARM_MID())
   {
-    state = CONSTANTS::STATES::O_MED;
+    state = CONSTANTS::STATES::O_MID;
   }
   else if (BUTTON::ARM::ARM_HIGH())
   {
     state = CONSTANTS::STATES::O_HIGH;
   }
   else if ((state == CONSTANTS::STATES::SCORE && BUTTON::DRIVETRAIN::ABORT()) ||
-    ((state == CONSTANTS::STATES::HUMANPLAYER && BUTTON::DRIVETRAIN::ABORT())))
+    ((state == CONSTANTS::STATES::HP && BUTTON::DRIVETRAIN::ABORT())))
   {
     state = CONSTANTS::STATES::ABORT;
     m_force_pos = m_arm.read_position();
@@ -305,7 +305,7 @@ void Robot::TeleopPeriodic()
   }
   else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_MID())
   {
-    state = CONSTANTS::STATES::O_MED;
+    state = CONSTANTS::STATES::O_MID;
   }
   else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_HIGH())
   {
@@ -322,7 +322,7 @@ void Robot::TeleopPeriodic()
   }
 
   if (state == CONSTANTS::STATES::O_HIGH || state == CONSTANTS::STATES::O_LOW || 
-      state == CONSTANTS::STATES::O_MED || state == CONSTANTS::STATES::STORED || 
+      state == CONSTANTS::STATES::O_MID || state == CONSTANTS::STATES::STORED || 
       state == CONSTANTS::STATES::SCORE || state == CONSTANTS::STATES::O_UP || 
       state == CONSTANTS::STATES::O_OPEN)
   {
@@ -342,7 +342,7 @@ void Robot::TeleopPeriodic()
       m_arm.arm_moved(state);
       break;
 
-    case CONSTANTS::STATES::HUMANPLAYER:
+    case CONSTANTS::STATES::HP:
       if (m_arm.arm_moved(state))
       {
         m_grabber.open();
@@ -394,12 +394,12 @@ void Robot::TeleopPeriodic()
       }
       break;
 
-    case CONSTANTS::STATES::MED:
+    case CONSTANTS::STATES::MID:
       if (m_camera.pose_loop())
       {
         if (m_arm.arm_moved(state))
         {
-          Robot::traj_init(Trajectory::HEIGHT::MED);
+          Robot::traj_init(Trajectory::HEIGHT::MID);
           state = CONSTANTS::STATES::SCORE;
         }
       }
@@ -450,7 +450,7 @@ void Robot::TeleopPeriodic()
       break;
 
     case CONSTANTS::STATES::O_HP:
-      if (m_arm.arm_moved(CONSTANTS::STATES::HUMANPLAYER))
+      if (m_arm.arm_moved(CONSTANTS::STATES::HP))
       {
       m_grabber.open();
       m_robot_timer.Start();
@@ -459,7 +459,7 @@ void Robot::TeleopPeriodic()
         m_grabber.close();
         m_robot_timer.Stop();
         m_robot_timer.Reset();
-        last_state = CONSTANTS::STATES::HUMANPLAYER;
+        last_state = CONSTANTS::STATES::HP;
         state = CONSTANTS::STATES::IDLE;
         
       }
@@ -476,8 +476,8 @@ void Robot::TeleopPeriodic()
       }
       break;
 
-    case CONSTANTS::STATES::O_MED:
-      if (m_arm.arm_moved(CONSTANTS::STATES::MED))
+    case CONSTANTS::STATES::O_MID:
+      if (m_arm.arm_moved(CONSTANTS::STATES::MID))
       {
         if (BUTTON::GRABBER::OVERIDE_TOGGLE())
         {
@@ -523,8 +523,8 @@ void Robot::traj_init(Trajectory::HEIGHT h)
     case Trajectory::HEIGHT::HIGH:
       m_trajectory = Trajectory::generate_live_traj(Trajectory::determine_desired_traj(Trajectory::HEIGHT::HIGH));
       break;
-    case Trajectory::HEIGHT::MED:
-      m_trajectory = Trajectory::generate_live_traj(Trajectory::determine_desired_traj(Trajectory::HEIGHT::MED));
+    case Trajectory::HEIGHT::MID:
+      m_trajectory = Trajectory::generate_live_traj(Trajectory::determine_desired_traj(Trajectory::HEIGHT::MID));
       break;
     case Trajectory::HEIGHT::GROUND:
       m_trajectory = Trajectory::generate_live_traj(Trajectory::determine_desired_traj(Trajectory::HEIGHT::GROUND));

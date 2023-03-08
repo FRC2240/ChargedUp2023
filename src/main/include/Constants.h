@@ -18,8 +18,8 @@ namespace CONSTANTS
   {
             STORED,
             LOW,
-            MED, 
-            HUMANPLAYER,
+            MID, 
+            HP,
             HIGH,
             PICKUP,
             SCORE,
@@ -27,7 +27,7 @@ namespace CONSTANTS
             FALLBACK2,
             ABORT,
             O_LOW,
-            O_MED,
+            O_MID,
             O_HP,
             O_HIGH,
             IDLE,
@@ -67,14 +67,14 @@ namespace TRAJECTORY
 
       constexpr units::meter_t HIGH_X = 6.46_m;
       constexpr units::meter_t MID_X = 6.02_m;
-      constexpr units::meter_t GROUND_X = 6.06_m;
+      constexpr units::meter_t LOW_X = 6.06_m;
     }
 
     namespace B
     {
       constexpr units::meter_t HIGH_X = -6.46_m;
       constexpr units::meter_t MID_X = -6.02_m;
-      constexpr units::meter_t GROUND_X = -6.06_m;
+      constexpr units::meter_t LOW_X = -6.06_m;
     }
   }
   namespace GRIPPAD
@@ -115,7 +115,7 @@ namespace TRAJECTORY
     {
       constexpr double STORED = 134.0;
       constexpr double LOW = 189.0;
-      constexpr double MED = 230.0;
+      constexpr double MID = 230.0;
       constexpr double HP = 239.0;
       constexpr double HIGH = 249.0;
       constexpr double PICKUP = 170.0;
