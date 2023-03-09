@@ -239,7 +239,7 @@ void Robot::TeleopPeriodic()
 {
   // DASHBOARD::update_botpose(m_camera.get_field_pos_by_tag());
   // Drivetrain::print_angle();
-  //  m_camera.pose_loop();
+ /*TEST*/  m_camera.pose_loop();
   buttonManager();
   swerveDrive(field_centric);
 
@@ -531,11 +531,12 @@ void Robot::traj_init(Trajectory::HEIGHT h)
 
 void Robot::make_test_path()
 {
-  // frc::Pose2d current_pose = Odometry::getPose();
-  frc::Pose2d current_pose(frc::Translation2d(5.0_m, 0.0_m), frc::Rotation2d(Drivetrain::getCCWHeading()));
+   frc::Pose2d current_pose = Odometry::getPose();
+//  frc::Pose2d current_pose(frc::Translation2d(5.0_m, 0.0_m), frc::Rotation2d(Drivetrain::getCCWHeading()));
+
 
   auto x = 0.5_m;
-  auto y = -2.0_m;
+  auto y = 0_m; //-2.0_m;
 
   auto heading = (frc::Translation2d(x, y) - current_pose.Translation()).Angle().Degrees();
 
@@ -553,12 +554,15 @@ void Robot::make_test_path()
 }
 void Robot::TestInit()
 {
+  make_test_path();
+ Trajectory::init_live_traj(m_trajectory);
 }
 
 void Robot::TestPeriodic()
 {
   m_arm.test();
   m_wrist.test();
+  Trajectory::follow_live_traj(m_trajectory);
 }
 
 void Robot::DisabledPeriodic()

@@ -1,7 +1,7 @@
 #include "Drivetrain.hpp"
 #include "SwerveModule.hpp"
 #include "ngr.hpp"
-
+#include "Constants.h"
 #include <frc/kinematics/SwerveDriveKinematics.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 
@@ -187,7 +187,7 @@ void Drivetrain::drive(wpi::array<frc::SwerveModuleState, 4> states)
             << "\n";*/
 
   
-  if constexpr (debugging)
+  if constexpr (CONSTANTS::DEBUGGING)
   {
     frc::SmartDashboard::PutString("Target Front Left Module", fmt::format("Speed (mps): {}, Direction: {}", fl.speed.value(), fl.angle.Degrees().value()));
     frc::SmartDashboard::PutString("Target Front Right Module", fmt::format("Speed (mps): {}, Direction: {}", fr.speed.value(), fr.angle.Degrees().value()));

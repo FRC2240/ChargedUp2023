@@ -155,16 +155,7 @@ double Vision::average(std::vector<double> buffer_a,
 {
   std::vector<double> v;
 
-  #warning "MINOR: You're doing this wrong. Join buffers better"
-  for (unsigned short int i = 0; i < buffer_a.size(); i++)
-    {
-      v.push_back(buffer_a[i]);
-    }
-
-   for (unsigned short int i = 0; i < buffer_b.size(); i++)
-    {
-      v.push_back(buffer_b[i]);
-    }
+  buffer_a.insert( buffer_a.end(), buffer_b.begin(), buffer_b.end() );
 
   // https://stackoverflow.com/questions/201718/concatenating-two-stdvectors
   double mean = 0.0;
