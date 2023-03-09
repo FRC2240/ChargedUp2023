@@ -557,8 +557,9 @@ void Robot::TestInit()
 
 void Robot::TestPeriodic()
 {
-  m_arm.test();
-  m_wrist.test();
+  //m_arm.test();
+  //m_wrist.test();
+  Drivetrain::debug_angles();
 }
 
 void Robot::DisabledPeriodic()

@@ -31,6 +31,10 @@ public:
 
     void manualVelocityContol(double const &velocity_ticks_per_100ms);
 
+    double getEncoder() {
+        return driver.GetSelectedSensorPosition();
+    }
+
     // No copies/moves should be occuring (Talons don't support this)
     SwerveModule(SwerveModule const &) = delete;
     SwerveModule(SwerveModule &&) = delete;

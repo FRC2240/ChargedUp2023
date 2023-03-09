@@ -13,6 +13,18 @@
     },
     "types": {
       "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Ungrouped/DigitalInput[0]": "Digital Input",
+      "/LiveWindow/Ungrouped/Talon FX [2]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon FX [30]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon FX [31]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon FX [3]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon FX [40]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon FX [41]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon FX [50]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon FX [51]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon FX [60]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon FX [61]": "Motor Controller",
+      "/LiveWindow/Ungrouped/navX-Sensor[4]": "Gyro",
       "/SmartDashboard/Auto Modes": "String Chooser",
       "/SmartDashboard/Odometry Field": "Field2d"
     },

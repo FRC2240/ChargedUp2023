@@ -71,9 +71,9 @@ SwerveModule::SwerveModule(int const &driver_adr, int const &turner_adr, int con
 
     // Configure Turner
     TalonFXConfiguration turner_config{};
-    turner_config.slot0.kP = 1.0;
+    turner_config.slot0.kP = 1.6;
     turner_config.slot0.kI = 0;
-    turner_config.slot0.kD = 0;
+    turner_config.slot0.kD = 16;
     turner_config.slot0.kF = 0;
     turner_config.neutralDeadband = 0.07;
     turner_config.peakOutputForward = .5;
