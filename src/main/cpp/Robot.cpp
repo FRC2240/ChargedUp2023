@@ -277,6 +277,7 @@ void Robot::TeleopPeriodic()
   {
     state = CONSTANTS::STATES::PICKUP;
   }
+  /*
   else if (BUTTON::ARM::ARM_LOW())
   {
     state = CONSTANTS::STATES::O_LOW;
@@ -289,6 +290,7 @@ void Robot::TeleopPeriodic()
   {
     state = CONSTANTS::STATES::O_HIGH;
   }
+  */
   else if ((state == CONSTANTS::STATES::SCORE && BUTTON::DRIVETRAIN::ABORT()) ||
     ((state == CONSTANTS::STATES::HUMANPLAYER && BUTTON::DRIVETRAIN::ABORT())))
   {
@@ -325,7 +327,14 @@ void Robot::TeleopPeriodic()
     state = CONSTANTS::STATES::O_UP;
   }
 
-  if (state == CONSTANTS::STATES::O_HIGH || state == CONSTANTS::STATES::O_LOW || state == CONSTANTS::STATES::O_MED || state == CONSTANTS::STATES::STORED || state == CONSTANTS::STATES::SCORE || state == CONSTANTS::STATES::O_UP || state == CONSTANTS::STATES::O_OPEN){
+  if (state == CONSTANTS::STATES::O_HIGH || 
+      state == CONSTANTS::STATES::O_LOW || 
+      state == CONSTANTS::STATES::O_MED || 
+      state == CONSTANTS::STATES::STORED || 
+      state == CONSTANTS::STATES::SCORE || 
+      state == CONSTANTS::STATES::O_UP || 
+      state == CONSTANTS::STATES::O_OPEN)
+  {
     m_wrist.Follow(m_arm.position);
   }
   else if (state == CONSTANTS::STATES::O_HP || state == CONSTANTS::STATES::PICKUP){
@@ -510,7 +519,11 @@ void Robot::TeleopPeriodic()
 
   }
 
-  m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(), BUTTON::CANDLE::CANDLE_RIGHT(), BUTTON::CANDLE::CANDLE_YELLOW(), BUTTON::CANDLE::CANDLE_PURPLE(), m_grabber.grabberStatus());
+  m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(), 
+                        BUTTON::CANDLE::CANDLE_RIGHT(), 
+                        BUTTON::CANDLE::CANDLE_YELLOW(), 
+                        BUTTON::CANDLE::CANDLE_PURPLE(), 
+                        m_grabber.grabberStatus());
 }
 
 void Robot::traj_init(Trajectory::HEIGHT h)
