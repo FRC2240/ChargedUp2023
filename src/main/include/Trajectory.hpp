@@ -103,6 +103,9 @@ namespace Trajectory
 
     bool follow_live_traj(PathPlannerTrajectory traj);
 
+    PathPlannerTrajectory extract(std::string const &traj_dir,
+                                units::meters_per_second_t const &max_vel = Drivetrain::TRAJ_MAX_SPEED,
+                                units::meters_per_second_squared_t const &max_accl = Drivetrain::TRAJ_MAX_ACCELERATION);
 
     void printRobotRelativeSpeeds();
 
