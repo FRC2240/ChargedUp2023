@@ -60,10 +60,10 @@ void Drivetrain::init()
   navx = std::make_unique<AHRS>(frc::SPI::Port::kMXP);
 
   using namespace Module;
-  front_left  = std::make_unique<SwerveModule>(60, 61, 14, 2.256);
-  front_right = std::make_unique<SwerveModule>(50, 51, 13, -609.561);
-  back_left   = std::make_unique<SwerveModule>(30, 31, 11, 14.121);
-  back_right  = std::make_unique<SwerveModule>(40, 41, 12, 153.715);
+  front_left  = std::make_unique<SwerveModule>(60, 61, 14, 11.689/*2.256*/);
+  front_right = std::make_unique<SwerveModule>(50, 51, 13, 117.369/*-609.561*/);
+  back_left   = std::make_unique<SwerveModule>(30, 31, 11, 22.061/*14.121*/);
+  back_right  = std::make_unique<SwerveModule>(40, 41, 12, 157.115/*153.715*/);
 }
 
 // Returns values with 0 being front and positive angles going CW
@@ -96,7 +96,24 @@ wpi::array<double, 4> Drivetrain::getDriverTemps()
           back_left->getDriverTemp(),
           back_right->getDriverTemp()};
 }
+void Drivetrain::debug_angles()
+{
+  auto fl_old = Module::front_left->getState();
+  auto fr_old = Module::front_right->getState();
+  auto bl_old = Module::back_left->getState();
+  auto br_old = Module::back_right->getState();
 
+  frc::SmartDashboard::PutNumber("front left alignment", fl_old.angle.Degrees().value());
+  frc::SmartDashboard::PutNumber("front right alignment", fr_old.angle.Degrees().value());
+  frc::SmartDashboard::PutNumber("back left alignment", bl_old.angle.Degrees().value());
+  frc::SmartDashboard::PutNumber("back right alignment", br_old.angle.Degrees().value());
+  
+  frc::SmartDashboard::PutNumber("front left pos", Module::front_left->getEncoder());
+  frc::SmartDashboard::PutNumber("front right pos", Module::front_right->getEncoder());
+  frc::SmartDashboard::PutNumber("back left ps", Module::back_left->getEncoder());
+  frc::SmartDashboard::PutNumber("back right pos", Module::back_right->getEncoder());
+
+}
 wpi::array<double, 4> Drivetrain::getTurnerTemps()
 {
   using namespace Module;

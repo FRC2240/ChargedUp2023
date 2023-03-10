@@ -12,6 +12,7 @@ namespace Drivetrain
 {
     void zero_yaw();
     void print_angle();
+    void debug_angles();
 
     /******************************************************************/
     /*                        Public Constants                        */
