@@ -532,34 +532,37 @@ void Robot::traj_init(Trajectory::HEIGHT h)
 void Robot::make_test_path()
 {
   // frc::Pose2d current_pose = Odometry::getPose();
-  frc::Pose2d current_pose(frc::Translation2d(5.0_m, 0.0_m), frc::Rotation2d(Drivetrain::getCCWHeading()));
+  frc::Pose2d current_pose(frc::Translation2d(0.0_m, 0.0_m), frc::Rotation2d(Drivetrain::getCCWHeading()));
 
-  auto x = 0.5_m;
-  auto y = -2.0_m;
+  auto dx = 8.0_ft;
+  auto dy = 0.0_ft;
 
-  auto heading = (frc::Translation2d(x, y) - current_pose.Translation()).Angle().Degrees();
+  auto heading = (frc::Translation2d(dx, dy) - current_pose.Translation()).Angle().Degrees();
 
   m_trajectory = Trajectory::generate_live_traj(current_pose.X(),
                                                 current_pose.Y(),
                                                 frc::Rotation2d(heading /*current_pose.Rotation().Degrees()*/),
                                                 frc::Rotation2d(current_pose.Rotation().Degrees()),
-                                                current_pose.X() + x,
-                                                current_pose.Y() + y,
+                                                current_pose.X() + dx,
+                                                current_pose.Y() + dy,
                                                 frc::Rotation2d(heading),
                                                 frc::Rotation2d(0.0_deg /*current_pose.Rotation().Degrees()*/)
                                                 // frc::Rotation2d(Drivetrain::getCCWHeading()),
                                                 // frc::Rotation2d(Drivetrain::getCCWHeading())
   );
 }
+
 void Robot::TestInit()
 {
+  std::cout << "Test init \n";
+  Odometry::update();
+  make_test_path();
+  Trajectory::init_live_traj(m_trajectory);
 }
 
 void Robot::TestPeriodic()
 {
-  //m_arm.test();
-  //m_wrist.test();
-  Drivetrain::debug_angles();
+    Trajectory::follow_live_traj(m_trajectory);
 }
 
 void Robot::DisabledPeriodic()
