@@ -61,7 +61,7 @@ class Vision
   double standard_dev(std::vector<double> v);
 private:
   Data nonsense;
-
+  //bool check_x(m_right_buffer);
 
   int m_index_pt = 0;
   std::vector<double> m_zero_vector = {42.0, 42.0, 42.0, 92, 10, 22};

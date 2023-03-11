@@ -243,6 +243,11 @@ void Robot::TeleopPeriodic()
   buttonManager();
   swerveDrive(field_centric);
 
+  if (BUTTON::m_aux_stick.GetStartButton())
+  {
+    m_camera.pose_loop();
+  }
+
   if (BUTTON::DRIVETRAIN::ZERO())
   {
     Drivetrain::zero_yaw();
@@ -279,11 +284,11 @@ void Robot::TeleopPeriodic()
   }
   else if (BUTTON::ARM::ARM_LOW())
   {
-    state = CONSTANTS::STATES::O_LOW;
+    state = CONSTANTS::STATES::LOW;
   }
   else if (BUTTON::ARM::ARM_MID())
   {
-    state = CONSTANTS::STATES::O_MED;
+    state = CONSTANTS::STATES::MED;
   }
   else if (BUTTON::ARM::ARM_HIGH())
   {
@@ -391,28 +396,36 @@ void Robot::TeleopPeriodic()
       break;
 
     case CONSTANTS::STATES::LOW:
-      if (m_camera.pose_loop())
+    if (Drivetrain::snap_to_zero())
+    {
+      if (m_arm.arm_moved(state))
       {
-        if (m_arm.arm_moved(state))
+        if (m_camera.pose_loop())
         {
           Robot::traj_init(Trajectory::HEIGHT::GROUND);
           state = CONSTANTS::STATES::SCORE;
         }
       }
+  }
       break;
 
     case CONSTANTS::STATES::MED:
-      if (m_camera.pose_loop())
+    if (Drivetrain::snap_to_zero())
+    {
+      if (m_arm.arm_moved(state))
       {
-        if (m_arm.arm_moved(state))
+        if (m_camera.pose_loop())
         {
           Robot::traj_init(Trajectory::HEIGHT::MED);
           state = CONSTANTS::STATES::SCORE;
         }
       }
+  }
       break;
 
     case CONSTANTS::STATES::HIGH:
+    if (Drivetrain::snap_to_zero())
+    {
       if (m_arm.arm_moved(state))
       {
         if (m_camera.pose_loop())
@@ -421,6 +434,7 @@ void Robot::TeleopPeriodic()
           state = CONSTANTS::STATES::SCORE;
         }
       }
+  }
       break;
 
     case CONSTANTS::STATES::FALLBACK:
@@ -579,7 +593,9 @@ void Robot::TestInit()
 
 void Robot::TestPeriodic()
 {
-    Trajectory::follow_live_traj(m_trajectory);
+  m_grippad.retract();
+  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 7.5);
+    //Trajectory::follow_live_traj(m_trajectory);
 }
 
 void Robot::DisabledPeriodic()

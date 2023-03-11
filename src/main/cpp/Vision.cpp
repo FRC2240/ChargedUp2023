@@ -19,13 +19,8 @@ bool Vision::pose_loop()
    * 2. Check std dev (every cycle)
    * 3. If valid, update pose
    **/
-  if constexpr (CONSTANTS::DEBUGGING)
-    {
 
-      if (m_index_pt == CONSTANTS::VISION::BUFFER_SIZE)
-        {
-        }
-    }
+
   if ((m_right_table->GetNumber("tv", 0.0) == 1.0) || (m_left_table->GetNumber("tv", 0.0) == 1.0))
     {
       Vision::get_raw_data(m_index_pt);
@@ -41,9 +36,12 @@ bool Vision::pose_loop()
 
   bool dev_check_l = Vision::check_std_dev(m_left_buffer);
   bool dev_check_r = Vision::check_std_dev(m_right_buffer);
+  //bool x_check_r = Vision::check_x(m_right_buffer);
+  //bool x_check_l = Vision::check_x(m_left_buffer);
+
 
   Data pose_ret_val;
-  if (dev_check_l && dev_check_r)
+  if (dev_check_l && dev_check_r) 
     {
       pose_ret_val.trans_x = Vision::average(
                                              Vision::collect(&Data::trans_x,
@@ -199,8 +197,7 @@ bool Vision::check_std_dev(std::vector<Data> buffer)
            (z <= CONSTANTS::VISION::MAX_STD_DEV_ROT))
           )
         {
-         //std::cout<<"true\n";
-         return true;
+          return true;
         }
 
     }
@@ -213,7 +210,8 @@ int Vision::find_good_frames(std::vector<Data> data)
   int frames = 0;
   for (int i = 0; i < CONSTANTS::VISION::BUFFER_SIZE; i++)
     {
-      if (data[i].is_good)
+      if (data[i].is_good && 
+      (data[i].trans_x <= 6.0 && data[i].trans_x >= 5.0))
         {
           frames++;
         }

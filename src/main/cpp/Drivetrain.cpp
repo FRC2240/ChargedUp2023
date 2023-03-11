@@ -88,6 +88,15 @@ frc::Rotation2d Drivetrain::getCCWHeading() { return {getAngle()}; }
 
 frc::Rotation2d Drivetrain::getCWHeading() { return {-getAngle()}; }
 
+units::degree_t Drivetrain::get_absolute_angle()
+{
+  auto angle = Drivetrain::getAngle().value();
+  auto a = angle/360.0;
+  auto b = 360.0 * (a - round(a));
+  units::degree_t c{b};
+  return c;
+}
+
 wpi::array<double, 4> Drivetrain::getDriverTemps()
 {
   using namespace Module;
@@ -236,7 +245,19 @@ void Drivetrain::stop()
 /******************************************************************/
 /*                        Facing Functions                        */
 /******************************************************************/
-
+bool Drivetrain::snap_to_zero()
+{
+  std::cout << Drivetrain::get_absolute_angle().value() << std::endl;
+  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 10);
+  if (Drivetrain::get_absolute_angle() >= -3_deg && Drivetrain::get_absolute_angle() <= 3_deg )
+  {
+    return true;
+  }
+  else 
+  {
+    return false;
+  }
+}
 void Drivetrain::faceDirection(units::meters_per_second_t const &dx,
                                units::meters_per_second_t const &dy,
                                units::degree_t const &theta,

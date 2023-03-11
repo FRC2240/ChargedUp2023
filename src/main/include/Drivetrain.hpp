@@ -66,6 +66,9 @@ namespace Drivetrain
     [[nodiscard]] wpi::array<frc::SwerveModulePosition, 4> getModulePositions();
 
     // Handles inversing
+    bool snap_to_zero();
+    units::degree_t get_absolute_angle();
+
     void tankDrive(double const &x_speed, double const &y_speed);
 
     void drive(units::meters_per_second_t const &xSpeed,
