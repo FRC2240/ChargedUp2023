@@ -277,7 +277,6 @@ void Robot::TeleopPeriodic()
   {
     state = CONSTANTS::STATES::PICKUP;
   }
-  /*
   else if (BUTTON::ARM::ARM_LOW())
   {
     state = CONSTANTS::STATES::O_LOW;
@@ -288,9 +287,9 @@ void Robot::TeleopPeriodic()
   }
   else if (BUTTON::ARM::ARM_HIGH())
   {
-    state = CONSTANTS::STATES::O_HIGH;
+    state = CONSTANTS::STATES::HIGH;
+    std::cout << "here\n";
   }
-  */
   else if ((state == CONSTANTS::STATES::SCORE && BUTTON::DRIVETRAIN::ABORT()) ||
     ((state == CONSTANTS::STATES::HUMANPLAYER && BUTTON::DRIVETRAIN::ABORT())))
   {
@@ -414,9 +413,9 @@ void Robot::TeleopPeriodic()
       break;
 
     case CONSTANTS::STATES::HIGH:
-      if (m_camera.pose_loop())
+      if (m_arm.arm_moved(state))
       {
-        if (m_arm.arm_moved(state))
+        if (m_camera.pose_loop())
         {
           Robot::traj_init(Trajectory::HEIGHT::HIGH);
           state = CONSTANTS::STATES::SCORE;
@@ -447,13 +446,18 @@ void Robot::TeleopPeriodic()
 
       if (Trajectory::follow_live_traj(m_trajectory))
       {
-        //std::cout << "end: " << Odometry::getPose().X().value() << 
-        //" , " <<
-        //Odometry::getPose().Y().value() <<
-        //std::endl;
-        m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(1.0_m));
-        Trajectory::init_live_traj(m_back_trajectory);
-        state = CONSTANTS::STATES::FALLBACK;
+        m_grabber.open();
+        m_robot_timer.Start();
+        if (m_robot_timer.Get() > 0.5_s)
+          {
+          //std::cout << "end: " << Odometry::getPose().X().value() << 
+          //" , " <<
+          //Odometry::getPose().Y().value() <<
+          //std::endl;
+          m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(1.0_m));
+          Trajectory::init_live_traj(m_back_trajectory);
+          state = CONSTANTS::STATES::FALLBACK;
+          } 
       }
       break;
 

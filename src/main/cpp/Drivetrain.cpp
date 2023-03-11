@@ -22,7 +22,7 @@ void Drivetrain::zero_yaw()
 
 void Drivetrain::print_angle()
   {
-    //std::cout << "ANGLE: " << navx->GetAngle() << "\n";
+   // std::cout << "ANGLE: " << navx->GetAngle() << "\n";
   }
 /******************************************************************/
 /*                        Public Variables                        */
