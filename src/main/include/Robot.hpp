@@ -37,6 +37,7 @@
 #include <iostream>
 #include <fmt/format.h>
 #include <pathplanner/lib/PathPlannerTrajectory.h>
+#include <TimeOfFlight.h>
 
 
 #include "Constants.h"
@@ -71,8 +72,7 @@ public:
     void traj_fall_back();
     void traj_init(Trajectory::HEIGHT h);
     void make_test_path();
-
-
+    double getDistance();
 
 private:
 
@@ -105,6 +105,8 @@ private:
 
     std::string m_autoSelected;
     bool breakbeam;
+
+    frc::TimeOfFlight m_distanceSensor{1};
 
     Grabber m_grabber;
     Grippad m_grippad;
