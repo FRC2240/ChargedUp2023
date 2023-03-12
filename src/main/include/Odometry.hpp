@@ -4,15 +4,20 @@
 #include <frc/smartdashboard/Field2d.h>
 #include <frc/geometry/Pose2d.h>
 #include <frc/estimator/SwerveDrivePoseEstimator.h>
+#include <TimeOfFlight.h>
+#include <frc/DriverStation.h>
 
 namespace Odometry
 {
+
     void putField2d();
 
     [[nodiscard]] frc::Pose2d getPose();
 
 
     void reset_position_from_vision(const frc::Pose2d &bot_pose);
+
+    void reset_from_distance();
 
     void update();
 

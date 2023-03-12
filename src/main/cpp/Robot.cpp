@@ -570,11 +570,6 @@ void Robot::DisabledPeriodic()
   m_candle.RainbowAnim();
 }
 
-double Robot::getDistance()
-{
- m_distanceSensor.GetRange();
-}
-
 #ifndef RUNNING_FRC_TESTS
 int main()
 {
