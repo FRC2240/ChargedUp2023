@@ -210,8 +210,7 @@ int Vision::find_good_frames(std::vector<Data> data)
   int frames = 0;
   for (int i = 0; i < CONSTANTS::VISION::BUFFER_SIZE; i++)
     {
-      if (data[i].is_good && 
-      (data[i].trans_x <= 6.0 && data[i].trans_x >= 5.0))
+      if (data[i].is_good)
         {
           frames++;
         }

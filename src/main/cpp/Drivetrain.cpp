@@ -247,14 +247,14 @@ void Drivetrain::stop()
 /******************************************************************/
 bool Drivetrain::snap_to_zero()
 {
-  std::cout << Drivetrain::get_absolute_angle().value() << std::endl;
-  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 10);
+  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 25);
   if (Drivetrain::get_absolute_angle() >= -3_deg && Drivetrain::get_absolute_angle() <= 3_deg )
   {
     return true;
   }
   else 
   {
+    std::cout << "failed threshold check: " << Drivetrain::get_absolute_angle().value() << std::endl;
     return false;
   }
 }

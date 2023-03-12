@@ -293,7 +293,6 @@ void Robot::TeleopPeriodic()
   else if (BUTTON::ARM::ARM_HIGH())
   {
     state = CONSTANTS::STATES::HIGH;
-    std::cout << "here\n";
   }
   else if ((state == CONSTANTS::STATES::SCORE && BUTTON::DRIVETRAIN::ABORT()) ||
     ((state == CONSTANTS::STATES::HUMANPLAYER && BUTTON::DRIVETRAIN::ABORT())))

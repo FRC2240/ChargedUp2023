@@ -67,7 +67,7 @@ namespace TRAJECTORY
 
       constexpr units::meter_t HIGH_X = 6.46_m;
       constexpr units::meter_t MID_X = 6.02_m;
-      constexpr units::meter_t GROUND_X = 6.06_m;
+      constexpr units::meter_t GROUND_X = 6.09_m;
     }
 
     namespace B
