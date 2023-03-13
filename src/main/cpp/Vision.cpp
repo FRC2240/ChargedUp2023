@@ -8,6 +8,16 @@ Vision::Vision()
   nonsense.trans_y = 987654321;
   nonsense.rot_x = 987654321;
   nonsense.is_good = false;
+
+  // initialize buffers
+  for (auto &elem : m_left_buffer)
+    {
+      elem = nonsense;
+    }
+  for (auto &elem : m_right_buffer)
+    {
+      elem = nonsense;
+    }
 }
 
 bool Vision::pose_loop()
@@ -21,7 +31,7 @@ bool Vision::pose_loop()
    **/
 
 
-  if ((m_right_table->GetNumber("tv", 0.0) == 1.0) || (m_left_table->GetNumber("tv", 0.0) == 1.0))
+  if ((m_right_table->GetNumber("tv", 0.0) > 0.5) || (m_left_table->GetNumber("tv", 0.0) > 0.5))
     {
       Vision::get_raw_data(m_index_pt);
 
@@ -115,7 +125,7 @@ void Vision::get_raw_data(int i)
      *Used to reset odometry and for auto placement.
      *Use the position from a known apriltag to get position.
      **/
-  if (m_left_table->GetNumber("tv", 0.0))
+  if (m_left_table->GetNumber("tv", 0.0) > 0.5)
     {
       m_left_buffer[i] = m_left_table->GetNumberArray("botpose", m_zero_vector);
       m_left_buffer[i].is_good = true;
@@ -125,7 +135,7 @@ void Vision::get_raw_data(int i)
       m_left_buffer[i].is_good = false;
     }
 
-  if (m_right_table->GetNumber("tv", 0.0))
+  if (m_right_table->GetNumber("tv", 0.0) > 0.5)
     {
       m_right_buffer[i] = m_right_table->GetNumberArray("botpose", m_zero_vector);
       m_right_buffer[i].is_good = true;
@@ -188,10 +198,10 @@ bool Vision::check_std_dev(std::vector<Data> buffer)
       double z = Vision::standard_dev(Vision::collect(&Data::rot_x, buffer));
       if (
           ((x >= CONSTANTS::VISION::MIN_STD_DEV) &&
-           (x <= CONSTANTS::VISION::MAX_STD_DEV)) ||
+           (x <= CONSTANTS::VISION::MAX_STD_DEV)) &&
 
           ((y >= CONSTANTS::VISION::MIN_STD_DEV) &&
-           (y <= CONSTANTS::VISION::MAX_STD_DEV)) ||
+           (y <= CONSTANTS::VISION::MAX_STD_DEV)) &&
 
           ((z >= CONSTANTS::VISION::MIN_STD_DEV_ROT) &&
            (z <= CONSTANTS::VISION::MAX_STD_DEV_ROT))
