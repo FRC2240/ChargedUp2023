@@ -21,6 +21,7 @@
 #include <units/length.h>
 #include <units/angle.h>
 #include <vector>
+#include <list>
 #include <wpi/sendable/Sendable.h>
 #include <wpi/sendable/SendableHelper.h>
 #include <frc/Filesystem.h>
@@ -76,6 +77,7 @@ public:
 private:
 
     CONSTANTS::STATES state = CONSTANTS::STATES::STORED;
+    CONSTANTS::AUTO_STATES auto_state;
     CONSTANTS::STATES last_state;
 
     bool fall_back_init = false;
@@ -93,6 +95,11 @@ private:
     const std::string AUTO_STATION = "SCORE + STATION";
     const std::string AUTO_LINE = "SCORE + LEAVE";
     const std::string AUTO_NOTHING = "DO NOTHING";
+    const std::string HP_LINK = "HUMANPLAYER LINK";
+    const std::string HP_CONE = "HUMANPLAYER CONES ONLY";
+    const std::string CS = "CHARGE STATION 2 PIECES";
+    const std::string CABLE_LINK = "CABLE BUMP LINK";
+    const std::string CABLE_CONE = "CABLE BUMP CONES ONLY";
 
     bool arm_bool;
 
@@ -116,4 +123,55 @@ private:
 
     units::meter_t m_fallback_pos;
     units::meter_t m_fallback_pos2;
+
+    enum autoActions {
+        kIntake,
+        kScore,
+        kBalance,
+        kIntake,
+        kCSPath1,
+        kCSPath2,
+        kCSPath3,
+        kCableConePath1,
+        kCableConePath2,
+        kCableConePath3,
+        kCableConePath4,
+        kHPConePath1,
+        kHPConePath2,
+        kHPConePath3,
+        kHPConePath4,
+        kCableLinkPath1,
+        kCableLinkPath2,
+        kCableLinkPath3,
+        kCableLinkPath4,
+        kHPLinkPath1,
+        kHPLinkPath2,
+        kHPLinkPath3,
+        kHPLinkPath4,
+        kIdle
+    };
+
+    enum autoState {
+        kDriving,
+        kScoring,
+        kIntaking,
+        kBalancing
+        kNothing
+    };
+
+    std::list<autoActions> m_HP_link_sequence{
+        kScore,
+        kHPLinkPath1,
+        kIntake,
+        kHPLinkPath2,
+        kScore,
+        kHPLinkPath3,
+        kIntake,
+        kHPLinkPath4,
+        kScore
+    };
+
+    std::list<autoActions> *m_autoSequence;
+    autoActions m_autoAction;
+    autoState m_autoState;
 };

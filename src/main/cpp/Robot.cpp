@@ -54,6 +54,11 @@ Robot::Robot()
   m_chooser.AddOption(AUTO_STATION, AUTO_STATION);
   m_chooser.AddOption(AUTO_LINE, AUTO_LINE);
   m_chooser.AddOption(AUTO_NOTHING, AUTO_NOTHING);
+  m_chooser.AddOption(HP_LINK, HP_LINK);
+  m_chooser.AddOption(HP_CONE, HP_CONE);
+  m_chooser.AddOption(CS, CS);
+  m_chooser.AddOption(CABLE_LINK, CABLE_LINK);
+  m_chooser.AddOption(CABLE_CONE, CABLE_CONE);
 
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
@@ -128,23 +133,51 @@ void Robot::RobotPeriodic()
 
 void Robot::AutonomousInit()
 {
+  //auto_state = CONSTANTS::AUTO_STATES::SCORE_HIGH;
   m_grippad.retract();
 
   // Get choosen autonomous mode
   m_autoSelected = m_chooser.GetSelected();
 
-  if (m_autoSelected == AUTO_STATION) {
+  if (m_autoSelected == AUTO_STATION) 
+  {
     state = CONSTANTS::STATES::AUTO_SIMP_HIGH;
-    //std::cout << "here\n";
     m_fallback_pos = 2.0_ft;
     m_fallback_pos2 = 6.0_ft;
-  } else if (m_autoSelected == AUTO_LINE) {
+  } 
+  else if (m_autoSelected == AUTO_LINE) 
+  {
     state = CONSTANTS::STATES::AUTO_SIMP_HIGH;
     m_fallback_pos = 2.0_ft;
     m_fallback_pos2 = 10.5_ft;
-  } else {
+  } 
+  else if (m_autoSelected == HP_LINK) 
+  {
+    m_autoSequence = &m_HP_link_sequence;
+  } 
+  else if (m_autoSelected == HP_CONE) 
+  {
+    
+  } 
+  else if (m_autoSelected == CS) 
+  {
+    
+  } 
+  else if (m_autoSelected == CABLE_LINK) 
+  {
+    
+  } 
+  else if (m_autoSelected == CABLE_CONE) 
+  {
+    
+  } 
+  else 
+  {
     state = CONSTANTS::STATES::STORED;
   }
+
+  m_autoAction = m_autoSequence->front();
+  m_autoState = kNothing;
 }
 
 void Robot::AutonomousPeriodic()
@@ -440,7 +473,7 @@ void Robot::TeleopPeriodic()
   }
       break;
 
-    case CONSTANTS::STATES::FALLBACK:
+    case CONSTANTS::STATES::SCORE_FALLBACK:
       if (Trajectory::follow_live_traj(m_back_trajectory))
       {
         m_robot_timer.Stop();
