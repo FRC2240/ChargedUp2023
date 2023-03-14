@@ -77,6 +77,7 @@ public:
 private:
 
     CONSTANTS::STATES state = CONSTANTS::STATES::STORED;
+    CONSTANTS::AUTO_STATES auto_state;
     CONSTANTS::STATES last_state;
 
     bool fall_back_init = false;
@@ -128,6 +129,7 @@ private:
         kIntake,
         kScore,
         kBalance,
+        kIntake,
         kCSPath1,
         kCSPath2,
         kCSPath3,
@@ -151,8 +153,10 @@ private:
     };
 
     enum autoState {
+        kDriving,
+        kScoring,
         kIntaking,
-        kBalancing,
+        kBalancing
         kNothing
     };
 
