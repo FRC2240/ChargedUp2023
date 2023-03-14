@@ -54,6 +54,11 @@ Robot::Robot()
   m_chooser.AddOption(AUTO_STATION, AUTO_STATION);
   m_chooser.AddOption(AUTO_LINE, AUTO_LINE);
   m_chooser.AddOption(AUTO_NOTHING, AUTO_NOTHING);
+  m_chooser.AddOption(HP_LINK, HP_LINK);
+  m_chooser.AddOption(HP_CONE, HP_CONE);
+  m_chooser.AddOption(CS, CS);
+  m_chooser.AddOption(CABLE_LINK, CABLE_LINK);
+  m_chooser.AddOption(CABLE_CONE, CABLE_CONE);
 
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
@@ -134,18 +139,45 @@ void Robot::AutonomousInit()
   // Get choosen autonomous mode
   m_autoSelected = m_chooser.GetSelected();
 
-  if (m_autoSelected == AUTO_STATION) {
+  if (m_autoSelected == AUTO_STATION) 
+  {
     state = CONSTANTS::STATES::AUTO_SIMP_HIGH;
-    //std::cout << "here\n";
     m_fallback_pos = 2.0_ft;
     m_fallback_pos2 = 6.0_ft;
-  } else if (m_autoSelected == AUTO_LINE) {
+  } 
+  else if (m_autoSelected == AUTO_LINE) 
+  {
     state = CONSTANTS::STATES::AUTO_SIMP_HIGH;
     m_fallback_pos = 2.0_ft;
     m_fallback_pos2 = 10.5_ft;
-  } else {
+  } 
+  else if (m_autoSelected == HP_LINK) 
+  {
+    m_autoSequence = &m_HP_link_sequence;
+  } 
+  else if (m_autoSelected == HP_CONE) 
+  {
+    
+  } 
+  else if (m_autoSelected == CS) 
+  {
+    
+  } 
+  else if (m_autoSelected == CABLE_LINK) 
+  {
+    
+  } 
+  else if (m_autoSelected == CABLE_CONE) 
+  {
+    
+  } 
+  else 
+  {
     state = CONSTANTS::STATES::STORED;
   }
+
+  m_autoAction = m_autoSequence->front();
+  m_autoState = kNothing;
 }
 
 void Robot::AutonomousPeriodic()
@@ -444,9 +476,33 @@ void Robot::TeleopPeriodic()
         }
         break;
 
-      case CONSTANTS::STATES::FALLBACK:
-    m_candle.BounceAnim();
-        if (Trajectory::follow_live_traj(m_back_trajectory))
+    case CONSTANTS::STATES::SCORE_FALLBACK:
+        m_candle.BounceAnim();
+      if (Trajectory::follow_live_traj(m_back_trajectory))
+      {
+        m_robot_timer.Stop();
+        m_robot_timer.Reset();
+        m_grabber.close();
+        m_arm.arm_moved(CONSTANTS::STATES::STORED);
+        state = CONSTANTS::STATES::STORED;
+      }
+      break;
+
+    case CONSTANTS::STATES::ABORT:
+      m_arm.arm_moved(CONSTANTS::STATES::ABORT);
+      m_arm.force_move(m_force_pos);
+      m_grabber.close();
+      m_robot_timer.Stop();
+      m_robot_timer.Reset();
+      break;
+
+    case CONSTANTS::STATES::SCORE:
+
+      if (Trajectory::follow_live_traj(m_trajectory))
+      {
+        m_grabber.open();
+        m_robot_timer.Start();
+        if (m_robot_timer.Get() > 0.5_s)
           {
             m_robot_timer.Stop();
             m_robot_timer.Reset();
