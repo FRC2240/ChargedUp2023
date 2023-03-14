@@ -379,6 +379,8 @@ void Robot::TeleopPeriodic()
       break;
 
     case CONSTANTS::STATES::PICKUP:
+    m_arm.test();
+      std::cout << "here0\n";
       if (m_arm.arm_moved(state))
       {
         m_wrist.Pickup();
@@ -405,7 +407,7 @@ void Robot::TeleopPeriodic()
       break;
 
   case CONSTANTS::STATES::LOW:
-    m_candle.set_anim(CANDLE::STATES::BOUNCE);
+    m_candle.set_anim(m_candle.BOUNCE);
     if (Drivetrain::snap_to_zero())
       {
         if (m_camera.pose_loop())
@@ -417,7 +419,7 @@ void Robot::TeleopPeriodic()
     break;
 
   case CONSTANTS::STATES::MED:
-    m_candle.set_anim(CANDLE::STATES::BOUNCE);
+    m_candle.set_anim(m_candle.BOUNCE);
     if (Drivetrain::snap_to_zero())
       {
         if (m_camera.pose_loop())
@@ -429,7 +431,7 @@ void Robot::TeleopPeriodic()
     break;
 
   case CONSTANTS::STATES::HIGH:
-    m_candle.set_anim(CANDLE::STATES::BOUNCE);
+    m_candle.set_anim(m_candle.BOUNCE);
     if (Drivetrain::snap_to_zero())
       {
         if (m_camera.pose_loop())
@@ -441,7 +443,7 @@ void Robot::TeleopPeriodic()
         break;
 
       case CONSTANTS::STATES::FALLBACK:
-        m_candle.set_anim(CANDLE::STATES::BOUNCE);
+        m_candle.set_anim(m_candle.BOUNCE);
         if (Trajectory::follow_live_traj(m_back_trajectory))
           {
             m_robot_timer.Stop();
@@ -461,7 +463,7 @@ void Robot::TeleopPeriodic()
         break;
 
       case CONSTANTS::STATES::SCORE:
-        m_candle.set_anim(CANDLE::STATES::BOUNCE);
+        m_candle.set_anim(m_candle.BOUNCE);
         if (Trajectory::follow_live_traj(m_trajectory))
         {
           m_grabber.open();
@@ -614,6 +616,12 @@ void Robot::TestPeriodic()
 {
   m_arm.test();
   m_wrist.test();
+  m_grippad.retract();
+//  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 7.5);
+    //Trajectory::follow_live_traj(m_trajectory);
+  m_arm.test();
+  m_wrist.test();
+    //Trajectory::follow_live_traj(m_trajectory);
 }
 
 void Robot::DisabledPeriodic()
