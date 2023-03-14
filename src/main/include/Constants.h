@@ -129,8 +129,8 @@ namespace TRAJECTORY
     //Remove above warning when values found
     constexpr int BUFFER_SIZE = 15;
     constexpr int MIN_GOOD_FRAMES = 10;
-    constexpr double MAX_STD_DEV = 0.02; //CHANGEME
-    constexpr double MIN_STD_DEV = 1.0e-10; //CHANGEME
+    constexpr double MAX_STD_DEV = 0.02;
+    constexpr double MIN_STD_DEV = 1.0e-10;
     constexpr double MAX_STD_DEV_ROT = 10; //CHANGEME
     constexpr double MIN_STD_DEV_ROT = 1.0e-5; //CHANGEME
 

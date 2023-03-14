@@ -295,7 +295,10 @@ void Robot::TeleopPeriodic()
     state = CONSTANTS::STATES::O_HIGH;
   }
   else if ((state == CONSTANTS::STATES::SCORE && BUTTON::DRIVETRAIN::ABORT()) ||
-    ((state == CONSTANTS::STATES::HUMANPLAYER && BUTTON::DRIVETRAIN::ABORT())))
+    ((state == CONSTANTS::STATES::HIGH && BUTTON::DRIVETRAIN::ABORT())) ||
+    ((state == CONSTANTS::STATES::MED && BUTTON::DRIVETRAIN::ABORT())) ||
+    ((state == CONSTANTS::STATES::LOW && BUTTON::DRIVETRAIN::ABORT())))
+
   {
     state = CONSTANTS::STATES::ABORT;
     m_force_pos = m_arm.Read_Position();
@@ -331,7 +334,10 @@ void Robot::TeleopPeriodic()
   }
 
   if (state == CONSTANTS::STATES::O_HIGH || 
-      state == CONSTANTS::STATES::O_LOW || 
+      state == CONSTANTS::STATES::LOW ||
+      state == CONSTANTS::STATES::MED ||
+      state == CONSTANTS::STATES::HIGH ||
+      state == CONSTANTS::STATES::O_LOW ||
       state == CONSTANTS::STATES::O_MED || 
       state == CONSTANTS::STATES::STORED || 
       state == CONSTANTS::STATES::SCORE || 
@@ -346,7 +352,7 @@ void Robot::TeleopPeriodic()
 
   switch (state)
   {
-    case CONSTANTS::STATES::STORED:
+  case CONSTANTS::STATES::STORED:
       m_robot_timer.Stop();
       m_robot_timer.Reset();
       m_grabber.close();
@@ -398,153 +404,159 @@ void Robot::TeleopPeriodic()
       }
       break;
 
-    case CONSTANTS::STATES::LOW:
+  case CONSTANTS::STATES::LOW:
+    m_candle.set_anim(CANDLE::STATES::BOUNCE);
     if (Drivetrain::snap_to_zero())
-    {
-      if (m_arm.arm_moved(state))
       {
         if (m_camera.pose_loop())
-        {
-          Robot::traj_init(Trajectory::HEIGHT::GROUND);
-          state = CONSTANTS::STATES::SCORE;
-        }
-      }
-  }
-      break;
-
-    case CONSTANTS::STATES::MED:
-    if (Drivetrain::snap_to_zero())
-    {
-      if (m_arm.arm_moved(state))
-      {
-        if (m_camera.pose_loop())
-        {
-          Robot::traj_init(Trajectory::HEIGHT::MED);
-          state = CONSTANTS::STATES::SCORE;
-        }
-      }
-  }
-      break;
-
-    case CONSTANTS::STATES::HIGH:
-    if (Drivetrain::snap_to_zero())
-    {
-      if (m_arm.arm_moved(state))
-      {
-        if (m_camera.pose_loop())
-        {
-          Robot::traj_init(Trajectory::HEIGHT::HIGH);
-          state = CONSTANTS::STATES::SCORE;
-        }
-      }
-  }
-      break;
-
-    case CONSTANTS::STATES::FALLBACK:
-      if (Trajectory::follow_live_traj(m_back_trajectory))
-      {
-        m_robot_timer.Stop();
-        m_robot_timer.Reset();
-        m_grabber.close();
-        m_arm.arm_moved(CONSTANTS::STATES::STORED);
-        state = CONSTANTS::STATES::STORED;
-      }
-      break;
-
-    case CONSTANTS::STATES::ABORT:
-      m_arm.arm_moved(CONSTANTS::STATES::ABORT);
-      m_arm.force_move(m_force_pos);
-      m_grabber.close();
-      m_robot_timer.Stop();
-      m_robot_timer.Reset();
-      break;
-
-    case CONSTANTS::STATES::SCORE:
-
-      if (Trajectory::follow_live_traj(m_trajectory))
-      {
-        m_grabber.open();
-        m_robot_timer.Start();
-        if (m_robot_timer.Get() > 0.5_s)
           {
-          //std::cout << "end: " << Odometry::getPose().X().value() << 
-          //" , " <<
-          //Odometry::getPose().Y().value() <<
-          //std::endl;
-          m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(1.0_m));
-          Trajectory::init_live_traj(m_back_trajectory);
-          state = CONSTANTS::STATES::FALLBACK;
-          } 
+            Robot::traj_init(Trajectory::HEIGHT::GROUND);
+            state = CONSTANTS::STATES::SCORE;
+          }
       }
-      break;
+    break;
 
-    case CONSTANTS::STATES::O_HP:
-      if (m_arm.arm_moved(CONSTANTS::STATES::HUMANPLAYER))
+  case CONSTANTS::STATES::MED:
+    m_candle.set_anim(CANDLE::STATES::BOUNCE);
+    if (Drivetrain::snap_to_zero())
       {
-      m_wrist.HumanPlayer();
-      m_grabber.open();
-      m_robot_timer.Start();
-       if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(0.5))
+        if (m_camera.pose_loop())
+          {
+            Robot::traj_init(Trajectory::HEIGHT::MED);
+            state = CONSTANTS::STATES::SCORE;
+          }
+      }
+    break;
+
+  case CONSTANTS::STATES::HIGH:
+    m_candle.set_anim(CANDLE::STATES::BOUNCE);
+    if (Drivetrain::snap_to_zero())
       {
+        if (m_camera.pose_loop())
+            {
+              Robot::traj_init(Trajectory::HEIGHT::HIGH);
+              state = CONSTANTS::STATES::SCORE;
+            }
+        }
+        break;
+
+      case CONSTANTS::STATES::FALLBACK:
+        m_candle.set_anim(CANDLE::STATES::BOUNCE);
+        if (Trajectory::follow_live_traj(m_back_trajectory))
+          {
+            m_robot_timer.Stop();
+            m_robot_timer.Reset();
+            m_grabber.close();
+            m_arm.arm_moved(CONSTANTS::STATES::STORED);
+            state = CONSTANTS::STATES::STORED;
+          }
+        break;
+
+      case CONSTANTS::STATES::ABORT:
+        m_arm.arm_moved(CONSTANTS::STATES::ABORT);
+        m_arm.force_move(m_force_pos);
         m_grabber.close();
         m_robot_timer.Stop();
         m_robot_timer.Reset();
-        last_state = CONSTANTS::STATES::HUMANPLAYER;
-        state = CONSTANTS::STATES::IDLE;
-        
-      }
-    }
-    else {
+        break;
+
+      case CONSTANTS::STATES::SCORE:
+        m_candle.set_anim(CANDLE::STATES::BOUNCE);
+        if (Trajectory::follow_live_traj(m_trajectory))
+        {
+          m_grabber.open();
+          m_robot_timer.Start();
+          if (m_robot_timer.Get() > 0.5_s)
+            {
+              //std::cout << "end: " << Odometry::getPose().X().value() <<
+              //" , " <<
+              //Odometry::getPose().Y().value() <<
+              //std::endl;
+              m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(1.0_m));
+              Trajectory::init_live_traj(m_back_trajectory);
+              state = CONSTANTS::STATES::FALLBACK;
+            }
+        }
+        break;
+
+      case CONSTANTS::STATES::O_HP:
+        if (m_arm.arm_moved(CONSTANTS::STATES::HUMANPLAYER))
+          {
+            m_wrist.HumanPlayer();
+      m_grabber.open();
+            m_robot_timer.Start();
+            if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(0.5))
+              {
+                m_grabber.close();
+                m_robot_timer.Stop();
+                m_robot_timer.Reset();
+                last_state = CONSTANTS::STATES::HUMANPLAYER;
+                state = CONSTANTS::STATES::IDLE;
+
+              }
+          }
+        else {
         m_wrist.Follow(m_arm.position);
       }
     break;
 
-    case CONSTANTS::STATES::O_LOW:
-      if (m_arm.arm_moved(CONSTANTS::STATES::LOW))
-      {
-        if (BUTTON::GRABBER::OVERIDE_TOGGLE())
-        {
-          m_grabber.open();
-        }
+      case CONSTANTS::STATES::O_LOW:
+        if (m_arm.arm_moved(CONSTANTS::STATES::LOW))
+          {
+            if (BUTTON::ARM::TRIGGER_AUTO())
+              {
+                state = CONSTANTS::STATES::LOW;
+              }
+            if (BUTTON::GRABBER::OVERIDE_TOGGLE())
+              {
+                m_grabber.open();
+              }
+          }
+        break;
+
+      case CONSTANTS::STATES::O_MED:
+        if (m_arm.arm_moved(CONSTANTS::STATES::MED))
+          {
+            if (BUTTON::ARM::TRIGGER_AUTO())
+              {
+                state = CONSTANTS::STATES::MED;
+              }
+            if (BUTTON::GRABBER::OVERIDE_TOGGLE())
+              {
+                m_grabber.open();
+              }
+          }
+        break;
+
+      case CONSTANTS::STATES::O_HIGH:
+        if (m_arm.arm_moved(CONSTANTS::STATES::HIGH))
+          {
+            if (BUTTON::ARM::TRIGGER_AUTO())
+              {
+                state = CONSTANTS::STATES::MED;
+              }
+            if (BUTTON::GRABBER::OVERIDE_TOGGLE())
+              {
+                m_grabber.open();
+              }
+          }
+        break;
+
+      case CONSTANTS::STATES::IDLE:
+        m_arm.arm_moved(last_state);
+        break;
+
+
+      case CONSTANTS::STATES::O_OPEN:
+        m_grabber.open();
+        break;
+
+      case CONSTANTS::STATES::O_UP:
+        m_arm.arm_moved(state);
+        break;
+
       }
-      break;
-
-    case CONSTANTS::STATES::O_MED:
-      if (m_arm.arm_moved(CONSTANTS::STATES::MED))
-      {
-        if (BUTTON::GRABBER::OVERIDE_TOGGLE())
-        {
-          m_grabber.open();
-        }
-      }
-      break;
-
-    case CONSTANTS::STATES::O_HIGH:
-      if (m_arm.arm_moved(CONSTANTS::STATES::HIGH))
-      {
-        if (BUTTON::GRABBER::OVERIDE_TOGGLE())
-        {
-          m_grabber.open();
-        }
-      }
-      break;
-
-    case CONSTANTS::STATES::IDLE:
-      m_arm.arm_moved(last_state);
-      break;
-    
-
-    case CONSTANTS::STATES::O_OPEN:
-      m_grabber.open();
-      break;
-
-    case CONSTANTS::STATES::O_UP:
-      m_arm.arm_moved(state);
-      break;
-
-  }
-
-  m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(), 
+  m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(),
                         BUTTON::CANDLE::CANDLE_RIGHT(), 
                         BUTTON::CANDLE::CANDLE_YELLOW(), 
                         BUTTON::CANDLE::CANDLE_PURPLE(), 
