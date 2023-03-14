@@ -284,15 +284,15 @@ void Robot::TeleopPeriodic()
   }
   else if (BUTTON::ARM::ARM_LOW())
   {
-    state = CONSTANTS::STATES::LOW;
+    state = CONSTANTS::STATES::O_LOW;
   }
   else if (BUTTON::ARM::ARM_MID())
   {
-    state = CONSTANTS::STATES::MED;
+    state = CONSTANTS::STATES::O_MED;
   }
   else if (BUTTON::ARM::ARM_HIGH())
   {
-    state = CONSTANTS::STATES::HIGH;
+    state = CONSTANTS::STATES::O_HIGH;
   }
   else if ((state == CONSTANTS::STATES::SCORE && BUTTON::DRIVETRAIN::ABORT()) ||
     ((state == CONSTANTS::STATES::HUMANPLAYER && BUTTON::DRIVETRAIN::ABORT())))
