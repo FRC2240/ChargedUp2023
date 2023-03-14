@@ -330,9 +330,9 @@ void Robot::TeleopPeriodic()
     state = CONSTANTS::STATES::O_UP;
   }
 
-  if (state == CONSTANTS::STATES::O_HIGH || 
-      state == CONSTANTS::STATES::O_LOW || 
-      state == CONSTANTS::STATES::O_MED || 
+  if (state == CONSTANTS::STATES::HIGH || 
+      state == CONSTANTS::STATES::LOW || 
+      state == CONSTANTS::STATES::MED || 
       state == CONSTANTS::STATES::STORED || 
       state == CONSTANTS::STATES::SCORE || 
       state == CONSTANTS::STATES::O_UP || 
@@ -340,9 +340,9 @@ void Robot::TeleopPeriodic()
   {
     m_wrist.Follow(m_arm.position);
   }
-  else if (state == CONSTANTS::STATES::O_HP || state == CONSTANTS::STATES::PICKUP){
-    m_wrist.pickupFollow(m_arm.position);
-  }
+  // else if (state == CONSTANTS::STATES::O_HP || state == CONSTANTS::STATES::PICKUP){
+  //   m_wrist.pickupFollow(m_arm.position);
+  // }
 
   switch (state)
   {
@@ -375,6 +375,7 @@ void Robot::TeleopPeriodic()
     case CONSTANTS::STATES::PICKUP:
       if (m_arm.arm_moved(state))
       {
+        m_wrist.Pickup();
         m_grabber.open();
         m_robot_timer.Start();
         if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))
@@ -477,6 +478,7 @@ void Robot::TeleopPeriodic()
     case CONSTANTS::STATES::O_HP:
       if (m_arm.arm_moved(CONSTANTS::STATES::HUMANPLAYER))
       {
+      m_wrist.HumanPlayer();
       m_grabber.open();
       m_robot_timer.Start();
        if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(0.5))
@@ -592,9 +594,8 @@ void Robot::TestInit()
 
 void Robot::TestPeriodic()
 {
-  m_grippad.retract();
-  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 7.5);
-    //Trajectory::follow_live_traj(m_trajectory);
+  m_arm.test();
+  m_wrist.test();
 }
 
 void Robot::DisabledPeriodic()

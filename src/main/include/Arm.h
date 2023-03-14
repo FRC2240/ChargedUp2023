@@ -41,7 +41,7 @@ class Arm
 
     frc::Timer m_timer;
 
-    double horizontalPoint = 244;
+    double horizontalPoint = 143;
 
     double maxAFF = 0.075;
 
