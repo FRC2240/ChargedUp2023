@@ -11,9 +11,10 @@ static frc::HolonomicDriveController controller{
     frc2::PIDController{1, 0, 0},
     frc2::PIDController{1, 0, 0},
     frc::ProfiledPIDController<units::radian>{
-        //10, -0.003, 0,
-        0.8, 0.0, 0.0,
+        20, 0.003, 0,
+        //0.8, 0.0, 0.0,
         frc::TrapezoidProfile<units::radian>::Constraints{
+
             Drivetrain::TRAJ_MAX_ANGULAR_SPEED,
             Drivetrain::TRAJ_MAX_ANGULAR_ACCELERATION}}};
 
@@ -112,6 +113,7 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
     ret.current_y = current_pose.Y();
 
     ret.desired_y = determine_desired_y();
+    //ret.desired_y = - ret.desired_y;
     if (ret.current_x < 0.0_m) {
         ret.current_x = -ret.current_x;
         ret.current_y = -ret.current_y;
@@ -119,8 +121,10 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
         ret.desired_y = -ret.desired_y;
     }
 
-    //std::cout << "cx: " << ret.current_x.value() << "\n cy: " << ret.current_y.value() << std::endl;
-    //std::cout << "X: " << ret.desired_x.value() << "\n Y: " << ret.desired_y.value() << std::endl;
+    ret.desired_y = 2.0*ret.current_y - ret.desired_y;
+
+    std::cout << "cx: " << ret.current_x.value() << "\n cy: " << ret.current_y.value() << std::endl;
+    std::cout << "dx: " << ret.desired_x.value() << "\n dy: " << ret.desired_y.value() << std::endl;
     auto heading = (frc::Translation2d(ret.desired_x, ret.desired_y) - current_pose.Translation()).Angle().Degrees();
     //std::cout << "heading: " <<  heading.value() << std::endl;
     ret.current_head = heading;
@@ -149,8 +153,8 @@ PathPlannerTrajectory Trajectory::generate_live_traj(TrajDepends t)
     return
         PathPlanner::generatePath(
 
-                                  PathConstraints(Drivetrain::TRAJ_MAX_SPEED/6,
-                                                  Drivetrain::TRAJ_MAX_ACCELERATION/6),
+                                  PathConstraints(Drivetrain::TRAJ_MAX_SPEED/2,
+                                                  Drivetrain::TRAJ_MAX_ACCELERATION/2),
 
                                   PathPoint(frc::Translation2d(t.current_x,
                                                                t.current_y),
@@ -163,6 +167,7 @@ PathPlannerTrajectory Trajectory::generate_live_traj(TrajDepends t)
                                             frc::Rotation2d(t.desired_rot)
                                             )
                                   );
+
 }
 
 

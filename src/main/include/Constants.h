@@ -52,13 +52,13 @@ namespace TRAJECTORY
          *  Copyright Westly Miller, 2023.
          */
         38.386_in,
-        //16.386_in,
+        //16.386_in, //cube
         -5.614_in,
         -27.614_in,
-        //-49.614_in,
+        //-49.614_in, //cube
         -71.614_in,
         -93.614_in,
-        //-115.614_in,
+        //-115.614_in, //cube
         -137.614_in
      };
     namespace R
@@ -67,7 +67,7 @@ namespace TRAJECTORY
 
       constexpr units::meter_t HIGH_X = 6.46_m;
       constexpr units::meter_t MID_X = 6.02_m;
-      constexpr units::meter_t GROUND_X = 6.06_m;
+      constexpr units::meter_t GROUND_X = 6.09_m;
     }
 
     namespace B
@@ -113,13 +113,13 @@ namespace TRAJECTORY
 
     namespace MOTORPOSITIONS
     {
-      constexpr double STORED = 134.0;
-      constexpr double LOW = 189.0;
-      constexpr double MED = 230.0;
-      constexpr double HP = 239.0;
-      constexpr double HIGH = 249.0;
-      constexpr double PICKUP = 170.0;
-      constexpr double UP = 258.0;
+      constexpr double STORED = 36.0;
+      constexpr double LOW = 91.0;
+      constexpr double MED = 132.0;
+      constexpr double HP = 141.0;
+      constexpr double HIGH = 151.0;
+      constexpr double PICKUP = 72.0;
+      constexpr double UP = 160.0;
     }
   }
 

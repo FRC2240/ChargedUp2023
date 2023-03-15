@@ -8,6 +8,16 @@ Vision::Vision()
   nonsense.trans_y = 987654321;
   nonsense.rot_x = 987654321;
   nonsense.is_good = false;
+
+  // initialize buffers
+  for (auto &elem : m_left_buffer)
+    {
+      elem = nonsense;
+    }
+  for (auto &elem : m_right_buffer)
+    {
+      elem = nonsense;
+    }
 }
 
 bool Vision::pose_loop()
@@ -20,14 +30,8 @@ bool Vision::pose_loop()
    * 3. If valid, update pose
    **/
 
-  if constexpr (CONSTANTS::DEBUGGING)
-    {
 
-      if (m_index_pt == CONSTANTS::VISION::BUFFER_SIZE)
-        {
-        }
-    }
-  if ((m_right_table->GetNumber("tv", 0.0) == 1.0) || (m_left_table->GetNumber("tv", 0.0) == 1.0))
+  if ((m_right_table->GetNumber("tv", 0.0) > 0.5) || (m_left_table->GetNumber("tv", 0.0) > 0.5))
     {
       Vision::get_raw_data(m_index_pt);
 
@@ -42,9 +46,12 @@ bool Vision::pose_loop()
 
   bool dev_check_l = Vision::check_std_dev(m_left_buffer);
   bool dev_check_r = Vision::check_std_dev(m_right_buffer);
+  //bool x_check_r = Vision::check_x(m_right_buffer);
+  //bool x_check_l = Vision::check_x(m_left_buffer);
+
 
   Data pose_ret_val;
-  if (dev_check_l && dev_check_r)
+  if (dev_check_l && dev_check_r) 
     {
       pose_ret_val.trans_x = Vision::average(
                                              Vision::collect(&Data::trans_x,
@@ -118,7 +125,7 @@ void Vision::get_raw_data(int i)
      *Used to reset odometry and for auto placement.
      *Use the position from a known apriltag to get position.
      **/
-  if (m_left_table->GetNumber("tv", 0.0))
+  if (m_left_table->GetNumber("tv", 0.0) > 0.5)
     {
       m_left_buffer[i] = m_left_table->GetNumberArray("botpose", m_zero_vector);
       m_left_buffer[i].is_good = true;
@@ -128,7 +135,7 @@ void Vision::get_raw_data(int i)
       m_left_buffer[i].is_good = false;
     }
 
-  if (m_right_table->GetNumber("tv", 0.0))
+  if (m_right_table->GetNumber("tv", 0.0) > 0.5)
     {
       m_right_buffer[i] = m_right_table->GetNumberArray("botpose", m_zero_vector);
       m_right_buffer[i].is_good = true;
@@ -191,17 +198,16 @@ bool Vision::check_std_dev(std::vector<Data> buffer)
       double z = Vision::standard_dev(Vision::collect(&Data::rot_x, buffer));
       if (
           ((x >= CONSTANTS::VISION::MIN_STD_DEV) &&
-           (x <= CONSTANTS::VISION::MAX_STD_DEV)) ||
+           (x <= CONSTANTS::VISION::MAX_STD_DEV)) &&
 
           ((y >= CONSTANTS::VISION::MIN_STD_DEV) &&
-           (y <= CONSTANTS::VISION::MAX_STD_DEV)) ||
+           (y <= CONSTANTS::VISION::MAX_STD_DEV)) &&
 
           ((z >= CONSTANTS::VISION::MIN_STD_DEV_ROT) &&
            (z <= CONSTANTS::VISION::MAX_STD_DEV_ROT))
           )
         {
-         //std::cout<<"true\n";
-         return true;
+          return true;
         }
 
     }
@@ -241,8 +247,12 @@ void Vision::update_pose(Data bot_pose)
   frc::Rotation2d rot{units::degree_t(bot_pose.rot_x)};
   // units::meter_t x, y, Rotation::2d theta
   frc::Pose2d pose{trans_x, trans_y, Drivetrain::getCCWHeading()};
-  /*std::cout << "VISION RESET: " << trans_x.value() << " / " << trans_y.value() <<
-   std::endl;*/
+  std::cout << "VISION RESET: " << trans_x.value() << 
+  ", " <<
+   trans_y.value() <<
+   ", " <<
+   rot.Degrees().value() <<
+   std::endl;
 
   Odometry::reset_position_from_vision(pose);
 }
