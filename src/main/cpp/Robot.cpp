@@ -330,9 +330,9 @@ void Robot::TeleopPeriodic()
     state = CONSTANTS::STATES::O_UP;
   }
 
-  if (state == CONSTANTS::STATES::HIGH || 
-      state == CONSTANTS::STATES::LOW || 
-      state == CONSTANTS::STATES::MED || 
+  if (state == CONSTANTS::STATES::O_HIGH || 
+      state == CONSTANTS::STATES::O_LOW || 
+      state == CONSTANTS::STATES::O_MED || 
       state == CONSTANTS::STATES::STORED || 
       state == CONSTANTS::STATES::SCORE || 
       state == CONSTANTS::STATES::O_UP || 
@@ -392,6 +392,9 @@ void Robot::TeleopPeriodic()
             state = CONSTANTS::STATES::STORED;
           }
         }
+      }
+      else {
+        m_wrist.Follow(m_arm.position);
       }
       break;
 
@@ -491,6 +494,9 @@ void Robot::TeleopPeriodic()
         
       }
     }
+    else {
+        m_wrist.Follow(m_arm.position);
+      }
     break;
 
     case CONSTANTS::STATES::O_LOW:
