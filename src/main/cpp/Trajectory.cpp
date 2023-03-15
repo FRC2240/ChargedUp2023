@@ -11,7 +11,7 @@ static frc::HolonomicDriveController controller{
     frc2::PIDController{1, 0, 0},
     frc2::PIDController{1, 0, 0},
     frc::ProfiledPIDController<units::radian>{
-        20, 0.003, 0,
+        35, 0, 160,
         //0.8, 0.0, 0.0,
         frc::TrapezoidProfile<units::radian>::Constraints{
 

@@ -379,8 +379,6 @@ void Robot::TeleopPeriodic()
       break;
 
     case CONSTANTS::STATES::PICKUP:
-    m_arm.test();
-      std::cout << "here0\n";
       if (m_arm.arm_moved(state))
       {
         m_wrist.Pickup();
@@ -407,7 +405,7 @@ void Robot::TeleopPeriodic()
       break;
 
   case CONSTANTS::STATES::LOW:
-    m_candle.set_anim(m_candle.BOUNCE);
+    m_candle.BounceAnim();
     if (Drivetrain::snap_to_zero())
       {
         if (m_camera.pose_loop())
@@ -419,7 +417,7 @@ void Robot::TeleopPeriodic()
     break;
 
   case CONSTANTS::STATES::MED:
-    m_candle.set_anim(m_candle.BOUNCE);
+    m_candle.BounceAnim();
     if (Drivetrain::snap_to_zero())
       {
         if (m_camera.pose_loop())
@@ -431,7 +429,7 @@ void Robot::TeleopPeriodic()
     break;
 
   case CONSTANTS::STATES::HIGH:
-    m_candle.set_anim(m_candle.BOUNCE);
+    m_candle.BounceAnim();
     if (Drivetrain::snap_to_zero())
       {
         if (m_camera.pose_loop())
@@ -443,7 +441,7 @@ void Robot::TeleopPeriodic()
         break;
 
       case CONSTANTS::STATES::FALLBACK:
-        m_candle.set_anim(m_candle.BOUNCE);
+    m_candle.BounceAnim();
         if (Trajectory::follow_live_traj(m_back_trajectory))
           {
             m_robot_timer.Stop();
@@ -463,7 +461,7 @@ void Robot::TeleopPeriodic()
         break;
 
       case CONSTANTS::STATES::SCORE:
-        m_candle.set_anim(m_candle.BOUNCE);
+    m_candle.BounceAnim();
         if (Trajectory::follow_live_traj(m_trajectory))
         {
           m_grabber.open();
@@ -535,7 +533,7 @@ void Robot::TeleopPeriodic()
           {
             if (BUTTON::ARM::TRIGGER_AUTO())
               {
-                state = CONSTANTS::STATES::MED;
+                state = CONSTANTS::STATES::HIGH;
               }
             if (BUTTON::GRABBER::OVERIDE_TOGGLE())
               {
@@ -558,11 +556,20 @@ void Robot::TeleopPeriodic()
         break;
 
       }
-  m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(),
+      if (
+        state != CONSTANTS::STATES::HIGH &&
+        state != CONSTANTS::STATES::MED &&
+        state != CONSTANTS::STATES::LOW &&
+        state != CONSTANTS::STATES::SCORE &&
+        state != CONSTANTS::STATES::FALLBACK
+      )
+      {
+          m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(),
                         BUTTON::CANDLE::CANDLE_RIGHT(), 
                         BUTTON::CANDLE::CANDLE_YELLOW(), 
                         BUTTON::CANDLE::CANDLE_PURPLE(), 
                         m_grabber.grabberStatus());
+      }
 }
 
 void Robot::traj_init(Trajectory::HEIGHT h)
