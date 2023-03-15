@@ -247,7 +247,7 @@ void Drivetrain::stop()
 /******************************************************************/
 bool Drivetrain::snap_to_zero()
 {
-  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 1);
+  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 5);
   if (Drivetrain::get_absolute_angle() >= -1_deg && Drivetrain::get_absolute_angle() <= 1_deg )
   {
     return true;
