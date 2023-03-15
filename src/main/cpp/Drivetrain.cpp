@@ -247,7 +247,7 @@ void Drivetrain::stop()
 /******************************************************************/
 bool Drivetrain::snap_to_zero()
 {
-  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 25);
+  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 1);
   if (Drivetrain::get_absolute_angle() >= -1_deg && Drivetrain::get_absolute_angle() <= 1_deg )
   {
     return true;
@@ -277,9 +277,9 @@ void Drivetrain::faceDirection(units::meters_per_second_t const &dx,
 
   double p_rotation = error_theta * rot_p; // Modifies error_theta in order to get a faster turning speed
 
-  if (std::abs(p_rotation) > max_rot_speed.value())
+/*  if (std::abs(p_rotation) > max_rot_speed.value())
     p_rotation = max_rot_speed.value() * ((p_rotation > 0) ? 1 : -1); // Constrains turn speed
-
+*/
   // p_rotation is negated since the robot actually turns ccw, not cw
   drive(dx, dy, units::degrees_per_second_t{-p_rotation}, field_relative);
 }

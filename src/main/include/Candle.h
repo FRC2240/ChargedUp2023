@@ -58,5 +58,5 @@ class Candle{
 
     ctre::phoenix::led::CANdle m_candle {CONSTANTS::CANDLE::CANDLE_ID, "canivore"};
     ctre::phoenix::led::RainbowAnimation rainbow{1.0, 0.5, -1, false, 8};
-    ctre::phoenix::led::LarsonAnimation bounce{red.r, red.g, red.b, red.w};
+    ctre::phoenix::led::LarsonAnimation bounce{red.r, red.g, red.b, red.w, 0.7};
 };

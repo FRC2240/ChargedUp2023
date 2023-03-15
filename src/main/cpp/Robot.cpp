@@ -613,7 +613,7 @@ void Robot::make_test_path()
 
 void Robot::TestInit()
 {
-  std::cout << "Test init \n";
+  //std::cout << "Test init \n";
   Odometry::update();
   make_test_path();
   Trajectory::init_live_traj(m_trajectory);
