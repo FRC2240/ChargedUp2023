@@ -47,7 +47,7 @@ void Arm::move()
 
 double Arm::Read_Position()
 {
-    position = arm_cancoder.GetAbsolutePosition() + CONSTANTS::ARM::ARM_ENCODER_OFFSET;
+    position = arm_cancoder.GetAbsolutePosition(); //+ CONSTANTS::ARM::ARM_ENCODER_OFFSET;
     return position;
 }
 
