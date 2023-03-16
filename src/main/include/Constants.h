@@ -65,15 +65,15 @@ namespace TRAJECTORY
     {
       //Red Team and blue team will use seperate data.
 
-      constexpr units::meter_t HIGH_X = 6.46_m;
-      constexpr units::meter_t MID_X = 6.02_m;
+      constexpr units::meter_t HIGH_X = 6.50_m;
+      constexpr units::meter_t MID_X = 6.12_m;
       constexpr units::meter_t GROUND_X = 6.09_m;
     }
 
     namespace B
     {
-      constexpr units::meter_t HIGH_X = -6.46_m;
-      constexpr units::meter_t MID_X = -6.02_m;
+      constexpr units::meter_t HIGH_X = -6.50_m;
+      constexpr units::meter_t MID_X = -6.12_m;
       constexpr units::meter_t GROUND_X = -6.06_m;
     }
   }
@@ -92,7 +92,7 @@ namespace TRAJECTORY
     constexpr units::second_t DELAY = 2_s;
     constexpr int RIGHT_ARM_MOTOR_ID = 3;
     constexpr int LEFT_ARM_MOTOR_ID = 2;
-    constexpr double ARM_ENCODER_OFFSET = -112.0;
+    constexpr double ARM_ENCODER_OFFSET = 93.0;
     constexpr int ARM_CANCODER_ID = 1;
     constexpr double MIN_THRESHOLD = 0.90;
     constexpr double MAX_THRESHOLD = 1.10;
@@ -113,11 +113,12 @@ namespace TRAJECTORY
 
     namespace MOTORPOSITIONS
     {
+      // All units in degrees
       constexpr double STORED = 36.0;
       constexpr double LOW = 91.0;
-      constexpr double MED = 132.0;
+      constexpr double MED = 124.0;
       constexpr double HP = 141.0;
-      constexpr double HIGH = 151.0;
+      constexpr double HIGH = 148.0;
       constexpr double PICKUP = 72.0;
       constexpr double UP = 160.0;
     }
@@ -129,8 +130,8 @@ namespace TRAJECTORY
     //Remove above warning when values found
     constexpr int BUFFER_SIZE = 15;
     constexpr int MIN_GOOD_FRAMES = 10;
-    constexpr double MAX_STD_DEV = 0.02; //CHANGEME
-    constexpr double MIN_STD_DEV = 1.0e-10; //CHANGEME
+    constexpr double MAX_STD_DEV = 0.02;
+    constexpr double MIN_STD_DEV = 1.0e-10;
     constexpr double MAX_STD_DEV_ROT = 10; //CHANGEME
     constexpr double MIN_STD_DEV_ROT = 1.0e-5; //CHANGEME
 
