@@ -642,7 +642,7 @@ void Robot::TeleopPeriodic()
         break;
 
       case CONSTANTS::STATES::SCORE:
-    m_candle.BounceAnim();
+        m_candle.BounceAnim();
         if (Trajectory::follow_live_traj(m_trajectory))
         {
           m_grabber.open();
@@ -664,7 +664,7 @@ void Robot::TeleopPeriodic()
         if (m_arm.arm_moved(CONSTANTS::STATES::HUMANPLAYER))
           {
             m_wrist.HumanPlayer();
-      m_grabber.open();
+            m_grabber.open();
             m_robot_timer.Start();
             if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(0.5))
               {
@@ -678,8 +678,8 @@ void Robot::TeleopPeriodic()
           }
         else {
         m_wrist.Follow(m_arm.position);
-      }
-    break;
+        }
+        break;
 
       case CONSTANTS::STATES::O_LOW:
         if (m_arm.arm_moved(CONSTANTS::STATES::LOW))
