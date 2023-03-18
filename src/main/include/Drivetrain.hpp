@@ -10,6 +10,7 @@
 
 namespace Drivetrain
 {
+    void flip();
     void zero_yaw();
     void print_angle();
     void debug_angles();

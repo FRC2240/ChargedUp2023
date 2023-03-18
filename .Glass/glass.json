@@ -6,9 +6,6 @@
     "Retained Values": {
       "open": false
     },
-    "Transitory Values": {
-      "open": false
-    },
     "transitory": {
       "LiveWindow": {
         ".status": {
@@ -17,6 +14,9 @@
         "open": true
       },
       "SmartDashboard": {
+        "Odometry Field": {
+          "open": true
+        },
         "open": true
       }
     },
