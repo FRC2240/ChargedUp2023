@@ -155,22 +155,22 @@ void Robot::AutonomousInit()
   {
     m_autoSequence = &m_HP_link_sequence;
   } 
-  else if (m_autoSelected == HP_CONE) 
-  {
+  // else if (m_autoSelected == HP_CONE) 
+  // {
     
-  } 
-  else if (m_autoSelected == CS) 
-  {
+  // } 
+  // else if (m_autoSelected == CS) 
+  // {
     
-  } 
-  else if (m_autoSelected == CABLE_LINK) 
-  {
+  // } 
+  // else if (m_autoSelected == CABLE_LINK) 
+  // {
     
-  } 
-  else if (m_autoSelected == CABLE_CONE) 
-  {
+  // } 
+  // else if (m_autoSelected == CABLE_CONE) 
+  // {
     
-  } 
+  // } 
   else 
   {
     state = CONSTANTS::STATES::STORED;
@@ -253,6 +253,87 @@ void Robot::AutonomousPeriodic()
     }
     break;
   }
+
+
+  switch(m_autoAction) {
+    case kIntake:
+      m_autoAction = kIdle;
+      m_autoState = kIntaking;
+      break;
+
+    case kHPLinkPath1:
+      m_path_trajectory = Trajectory::extract("link_HP_side_1");
+      Trajectory::init_live_traj(m_back_trajectory);
+      if (Trajectory::follow_live_traj(m_back_trajectory))
+      {
+        m_autoSequence->pop_front();
+        m_autoAction = m_autoSequence->front();
+        m_autoState = kNothing;
+      }
+      break;
+
+    case kHPLinkPath2:
+      m_path_trajectory = Trajectory::extract("link_HP_side_2");
+      Trajectory::init_live_traj(m_back_trajectory);
+      if (Trajectory::follow_live_traj(m_back_trajectory))
+      {
+        m_autoSequence->pop_front();
+        m_autoAction = m_autoSequence->front();
+        m_autoState = kNothing;
+      }
+      break;
+
+    case kHPLinkPath3:
+      m_path_trajectory = Trajectory::extract("link_HP_side_3");
+      Trajectory::init_live_traj(m_back_trajectory);
+      if (Trajectory::follow_live_traj(m_back_trajectory))
+      {
+        m_autoSequence->pop_front();
+        m_autoAction = m_autoSequence->front();
+        m_autoState = kNothing;
+      }
+      break;
+
+    case kHPLinkPath4:
+      m_path_trajectory = Trajectory::extract("link_HP_side_4");
+      Trajectory::init_live_traj(m_back_trajectory);
+      if (Trajectory::follow_live_traj(m_back_trajectory))
+      {
+        m_autoSequence->pop_front();
+        m_autoAction = m_autoSequence->front();
+        m_autoState = kNothing;
+      }
+      break;
+
+    case kIdle:
+      break;
+  }
+
+  if (m_autoState == kIntaking) {
+    if (m_arm.arm_moved(state))
+      {
+        m_grabber.open();
+        m_robot_timer.Start();
+        if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))
+        {
+          m_grabber.close();
+          m_robot_timer2.Start();
+          if (m_robot_timer2.Get() > units::time::second_t(0.5))
+          {
+            m_robot_timer.Stop();
+            m_robot_timer.Reset();
+            m_robot_timer2.Stop();
+            m_robot_timer2.Reset();
+            m_arm.arm_moved(CONSTANTS::STATES::STORED);
+            state = CONSTANTS::STATES::STORED;
+            m_autoSequence->pop_front();
+            m_autoAction = m_autoSequence->front();
+            m_autoState = kNothing;
+          }
+        }
+      }
+  }
+
 }
 // File
 //fs::path deployDirectory = frc::filesystem::GetDeployDirectory();
@@ -473,7 +554,7 @@ void Robot::TeleopPeriodic()
   }
       break;
 
-    case CONSTANTS::STATES::SCORE_FALLBACK:
+    case CONSTANTS::STATES::FALLBACK:
       if (Trajectory::follow_live_traj(m_back_trajectory))
       {
         m_robot_timer.Stop();
