@@ -633,13 +633,13 @@ void Robot::TeleopPeriodic()
       }
       break;
 
-      case CONSTANTS::STATES::ABORT:
-        m_arm.arm_moved(CONSTANTS::STATES::ABORT);
-        m_arm.force_move(m_force_pos);
-        m_grabber.close();
-        m_robot_timer.Stop();
-        m_robot_timer.Reset();
-        break;
+    case CONSTANTS::STATES::ABORT:
+      m_arm.arm_moved(CONSTANTS::STATES::ABORT);
+      m_arm.force_move(m_force_pos);
+      m_grabber.close();
+      m_robot_timer.Stop();
+      m_robot_timer.Reset();
+      break;
 
       case CONSTANTS::STATES::SCORE:
         m_candle.BounceAnim();
