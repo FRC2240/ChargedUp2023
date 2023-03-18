@@ -1,5 +1,11 @@
 {
   "NetworkTables": {
+    "Persistent Values": {
+      "open": false
+    },
+    "Retained Values": {
+      "open": false
+    },
     "transitory": {
       "LiveWindow": {
         ".status": {
@@ -8,6 +14,9 @@
         "open": true
       },
       "SmartDashboard": {
+        "Odometry Field": {
+          "open": true
+        },
         "open": true
       }
     },

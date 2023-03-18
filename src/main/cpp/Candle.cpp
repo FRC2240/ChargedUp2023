@@ -11,6 +11,7 @@ Candle::Candle(){
     m_candle.ClearAnimation(0);
 }
 
+
 void Candle::candle_logic(bool left_button, bool right_button, 
                           bool yellow_button, bool purple_button, bool grabber_status)
 {
@@ -20,8 +21,11 @@ void Candle::candle_logic(bool left_button, bool right_button,
     }
 
     m_alliance = frc::DriverStation::GetAlliance();
-    
-    m_candle.ClearAnimation(0);
+
+    if (state != RAINBOW)
+        {
+            m_candle.ClearAnimation(0);
+        }
 
     previous_state = state;
 
@@ -104,7 +108,13 @@ void Candle::candle_logic(bool left_button, bool right_button,
 
     case GRABBER_FLASH:
         m_candle.SetLEDs(0, 255, 0, 0);
-        break; 
+        break;
+    case RAINBOW:
+        RainbowAnim();
+        break;
+    case BOUNCE:
+        BounceAnim();
+        break;
     }
 
     if (state != previous_state){
@@ -115,6 +125,16 @@ void Candle::candle_logic(bool left_button, bool right_button,
         m_candle_timer.Stop();
         m_candle_timer.Reset();
     }
+}
+
+void Candle::set_anim(STATES s)
+{
+        state = s;
+}
+
+void Candle::BounceAnim()
+{
+    m_candle.Animate(bounce);
 }
 
 void Candle::RainbowAnim()

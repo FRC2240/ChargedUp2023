@@ -49,6 +49,17 @@ namespace BUTTON
     inline bool ARM_MID() {return BUTTON::m_stick.GetBButtonPressed();}
     inline bool ARM_HIGH() {return BUTTON::m_stick.GetYButtonPressed();}
     inline bool ARM_HP() {return BUTTON::m_stick.GetXButtonPressed();}
+    inline bool TRIGGER_AUTO()
+    {
+      if (BUTTON::m_stick.GetRightTriggerAxis() > 0.4)
+        {
+          return true;
+        }
+      else
+        {
+          return false;
+        }
+    }
 
     namespace OVERIDES
     {
