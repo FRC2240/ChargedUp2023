@@ -14,6 +14,7 @@ namespace Drivetrain
     void zero_yaw();
     void print_angle();
     void debug_angles();
+    bool human_player_snap();
 
     /******************************************************************/
     /*                        Public Constants                        */

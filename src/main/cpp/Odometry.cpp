@@ -91,7 +91,8 @@ void Odometry::reset_position_from_vision(const frc::Pose2d &bot_pose)
 
 void Odometry::reset_from_distance()
 {
-    units::millimeter_t dist {tof_sensor.GetRange()};
+    units::millimeter_t raw_dist {tof_sensor.GetRange()};
+    units::meter_t dist {raw_dist};
     units::meter_t x;
     units::meter_t y{Odometry::getPose().X()};
     if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kBlue)

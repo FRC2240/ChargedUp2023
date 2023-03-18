@@ -69,6 +69,8 @@ namespace Trajectory
         units::degree_t desired_rot;
     };
 
+    TrajDepends generate_humanplayer_depends();
+
     TrajDepends fall_back(units::meter_t fallback_pos = 1.0_m);
 
     units::meter_t determine_desired_y();
