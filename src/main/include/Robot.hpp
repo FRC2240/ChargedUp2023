@@ -77,7 +77,7 @@ public:
 
 private:
 
-    CONSTANTS::STATES state = CONSTANTS::STATES::STORED;
+    CONSTANTS::STATES state; //= CONSTANTS::STATES::STORED;
     CONSTANTS::STATES last_state;
 
     bool fall_back_init = false;
@@ -141,6 +141,7 @@ private:
 
     enum autoActions{
         kIntake,
+        kDelay,
         kScore,
         kScore_periodic,
         kBalance,
@@ -189,11 +190,10 @@ private:
     std::list<autoActions> m_HP_link_sequence{
         kScore,
         kHPLinkPath1,
-        kIntake,
+        kDelay,
         kHPLinkPath2,
         kScore,
         kHPLinkPath3,
-        kIntake,
         kHPLinkPath4,
         kScore
     };

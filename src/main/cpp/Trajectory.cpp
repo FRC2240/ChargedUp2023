@@ -179,7 +179,7 @@ PathPlannerTrajectory Trajectory::extract(std::string const &traj_dir,
                                 units::meters_per_second_t const &max_vel,
                                 units::meters_per_second_squared_t const &max_accl)
 {
-    return PathPlanner::loadPath(traj_dir, max_vel, max_accl, reverse_trajectory);
+    return PathPlanner::loadPath(traj_dir, max_vel/3, max_accl/3, reverse_trajectory);
 }
 PathPlannerTrajectory Trajectory::generate_live_traj(TrajDepends t)
 {
