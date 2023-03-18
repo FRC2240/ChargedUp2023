@@ -10,6 +10,7 @@
 #include "Candle.h"
 #include "Wrist.h"
 #include "Arm.h"
+#include "autoBalance.h"
 #include "Constants.h"
 #include "Drivetrain.hpp"
 #include "RobotState.hpp"
@@ -104,6 +105,8 @@ private:
 
     double m_force_pos;
 
+    double speed;
+
     
     frc::Timer m_robot_timer;
     frc::Timer m_robot_timer2;
@@ -116,6 +119,7 @@ private:
     Grippad m_grippad;
     Candle m_candle;
     Wrist m_wrist;
+    autoBalance m_auto_balance;
     pathplanner::PathPlannerTrajectory m_trajectory;
     pathplanner::PathPlannerTrajectory m_simp_trajectory;
     pathplanner::PathPlannerTrajectory m_back_trajectory;

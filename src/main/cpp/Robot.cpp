@@ -261,6 +261,11 @@ void Robot::AutonomousPeriodic()
       m_autoState = kIntaking;
       break;
 
+    case kBalance:
+      m_autoAction = kIdle;
+      m_autoState = kBalancing;
+      break;
+
     case kHPLinkPath1:
       m_path_trajectory = Trajectory::extract("link_HP_side_1");
       Trajectory::init_live_traj(m_back_trajectory);
@@ -332,6 +337,10 @@ void Robot::AutonomousPeriodic()
           }
         }
       }
+  }
+  else if (m_autoState == kBalancing) {
+    speed = m_auto_balance.autoBalanceRoutine();
+    Drivetrain::faceDirection(-speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 180_deg, false, 5.5);
   }
 
 }
