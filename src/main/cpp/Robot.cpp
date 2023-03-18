@@ -256,26 +256,34 @@ void Robot::AutonomousPeriodic()
 
 
   switch(m_autoAction) {
-    case kIntake:
-      m_autoAction = kIdle;
-      m_autoState = kIntaking;
-      break;
+  case kIntake:
+    m_autoAction = kIdle;
+    m_autoState = kIntaking;
+    break;
 
-    case kHPLinkPath1:
-      m_path_trajectory = Trajectory::extract("link_HP_side_1");
-      Trajectory::init_live_traj(m_back_trajectory);
-      if (Trajectory::follow_live_traj(m_back_trajectory))
+  case kHPLinkPath1:
+    m_path_trajectory1 = Trajectory::extract("link_HP_side_1");
+    Trajectory::init_live_traj(m_path_trajectory1);
+    m_autoAction = kHPLinkPath1_periodic;
+    break;
+
+  case kHPLinkPath1_periodic:
+    if (Trajectory::follow_live_traj(m_path_trajectory1))
       {
         m_autoSequence->pop_front();
         m_autoAction = m_autoSequence->front();
         m_autoState = kNothing;
       }
-      break;
+    break;
 
     case kHPLinkPath2:
-      m_path_trajectory = Trajectory::extract("link_HP_side_2");
-      Trajectory::init_live_traj(m_back_trajectory);
-      if (Trajectory::follow_live_traj(m_back_trajectory))
+      m_path_trajectory2 = Trajectory::extract("link_HP_side_2");
+      Trajectory::init_live_traj(m_path_trajectory2);
+    m_autoAction = kHPLinkPath2_periodic;
+      break;
+
+    case kHPLinkPath2_periodic:
+      if (Trajectory::follow_live_traj(m_path_trajectory2))
       {
         m_autoSequence->pop_front();
         m_autoAction = m_autoSequence->front();
@@ -283,10 +291,14 @@ void Robot::AutonomousPeriodic()
       }
       break;
 
-    case kHPLinkPath3:
-      m_path_trajectory = Trajectory::extract("link_HP_side_3");
-      Trajectory::init_live_traj(m_back_trajectory);
-      if (Trajectory::follow_live_traj(m_back_trajectory))
+     case kHPLinkPath3:
+      m_path_trajectory3 = Trajectory::extract("link_HP_side_3");
+      Trajectory::init_live_traj(m_path_trajectory3);
+    m_autoAction = kHPLinkPath3_periodic;
+     break;
+
+   case kHPLinkPath3_periodic:
+     if (Trajectory::follow_live_traj(m_path_trajectory3))
       {
         m_autoSequence->pop_front();
         m_autoAction = m_autoSequence->front();
@@ -295,14 +307,58 @@ void Robot::AutonomousPeriodic()
       break;
 
     case kHPLinkPath4:
-      m_path_trajectory = Trajectory::extract("link_HP_side_4");
-      Trajectory::init_live_traj(m_back_trajectory);
-      if (Trajectory::follow_live_traj(m_back_trajectory))
+      m_path_trajectory4 = Trajectory::extract("link_HP_side_4");
+      Trajectory::init_live_traj(m_path_trajectory4);
+      m_autoAction = kHPLinkPath4_periodic;
+     break;
+
+    case kHPLinkPath4_periodic:
+      if (Trajectory::follow_live_traj(m_path_trajectory4))
       {
         m_autoSequence->pop_front();
         m_autoAction = m_autoSequence->front();
         m_autoState = kNothing;
       }
+
+  case kScore:
+    if (m_camera.pose_loop())
+      {
+        if (m_arm.arm_moved(CONSTANTS::STATES::HIGH))
+          {
+            Robot::traj_init(Trajectory::HEIGHT::HIGH);
+            m_autoAction = kScore_periodic;
+            m_robot_timer.Reset();
+            m_robot_timer.Start();
+          }
+      }
+    break;
+
+  case kScore_periodic:
+    if (Trajectory::follow_live_traj(m_trajectory))
+      {
+        //std::cout << "followed path \n";
+        m_grabber.open();
+        m_robot_timer.Start();
+
+        if (m_robot_timer.Get() > units::time::second_t(0.5))
+          {
+            //std::cout << "timer expired \n";
+            m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back());
+            Trajectory::init_live_traj(m_back_trajectory);
+            m_autoAction = kAutoFallback;
+          }
+      }
+    break;
+
+    case kAutoFallback:
+      if (Trajectory::follow_live_traj(m_back_trajectory))
+        {
+          m_robot_timer.Stop();
+          m_robot_timer.Reset();
+          m_grabber.close();
+          m_arm.arm_moved(CONSTANTS::STATES::STORED);
+          state = CONSTANTS::STATES::STORED;
+        }
       break;
 
     case kIdle:
@@ -343,7 +399,6 @@ void Robot::AutonomousPeriodic()
 void Robot::TeleopInit()
 {
   //std::cout << "TeleopInit";
-  Drivetrain::flip(); //REMOVE THIS LINE
   Odometry::update();
   state = CONSTANTS::STATES::STORED;
   std::cout << "navx " << Drivetrain::getCCWHeading().Degrees().value() << std::endl;
@@ -557,8 +612,8 @@ void Robot::TeleopPeriodic()
         }
         break;
 
-    case CONSTANTS::STATES::SCORE_FALLBACK:
-        m_candle.BounceAnim();
+    case CONSTANTS::STATES::FALLBACK:
+      m_candle.BounceAnim();
       if (Trajectory::follow_live_traj(m_back_trajectory))
       {
         m_robot_timer.Stop();
@@ -568,30 +623,6 @@ void Robot::TeleopPeriodic()
         state = CONSTANTS::STATES::STORED;
       }
       break;
-
-    case CONSTANTS::STATES::ABORT:
-      m_arm.arm_moved(CONSTANTS::STATES::ABORT);
-      m_arm.force_move(m_force_pos);
-      m_grabber.close();
-      m_robot_timer.Stop();
-      m_robot_timer.Reset();
-      break;
-
-    case CONSTANTS::STATES::SCORE:
-
-      if (Trajectory::follow_live_traj(m_trajectory))
-      {
-        m_grabber.open();
-        m_robot_timer.Start();
-        if (m_robot_timer.Get() > 0.5_s)
-          {
-            m_robot_timer.Stop();
-            m_robot_timer.Reset();
-            m_grabber.close();
-            m_arm.arm_moved(CONSTANTS::STATES::STORED);
-            state = CONSTANTS::STATES::STORED;
-          }
-        break;
 
       case CONSTANTS::STATES::ABORT:
         m_arm.arm_moved(CONSTANTS::STATES::ABORT);
@@ -711,7 +742,9 @@ void Robot::TeleopPeriodic()
                         BUTTON::CANDLE::CANDLE_PURPLE(), 
                         m_grabber.grabberStatus());
       }
-}
+  }
+
+
 
 void Robot::traj_init(Trajectory::HEIGHT h)
 {

@@ -119,14 +119,25 @@ private:
     pathplanner::PathPlannerTrajectory m_trajectory;
     pathplanner::PathPlannerTrajectory m_simp_trajectory;
     pathplanner::PathPlannerTrajectory m_back_trajectory;
-    pathplanner::PathPlannerTrajectory m_path_trajectory;
+//    pathplanner::PathPlannerTrajectory m_path_trajectory;
 
+    /*
+      The reason all of these are different is because there is a concern about
+      pathplanner not erasing paths on initalization and bits of old path
+      getting mixed in with the new path, generaly being a bother.
+    */
+    pathplanner::PathPlannerTrajectory m_path_trajectory0;
+    pathplanner::PathPlannerTrajectory m_path_trajectory1;
+    pathplanner::PathPlannerTrajectory m_path_trajectory2;
+    pathplanner::PathPlannerTrajectory m_path_trajectory3;
+    pathplanner::PathPlannerTrajectory m_path_trajectory4;
     units::meter_t m_fallback_pos;
     units::meter_t m_fallback_pos2;
 
-    enum autoActions {
+    enum autoActions{
         kIntake,
         kScore,
+        kScore_periodic,
         kBalance,
         kCSPath1,
         kCSPath2,
@@ -139,15 +150,29 @@ private:
         kHPConePath2,
         kHPConePath3,
         kHPConePath4,
+
         kCableLinkPath1,
         kCableLinkPath2,
         kCableLinkPath3,
         kCableLinkPath4,
+
+        kCableLinkPath1_periodic,
+        kCableLinkPath2_periodic,
+        kCableLinkPath3_periodic,
+        kCableLinkPath4_periodic,
+
+        kHPLinkPath1_periodic,
+        kHPLinkPath2_periodic,
+        kHPLinkPath3_periodic,
+        kHPLinkPath4_periodic,
+
         kHPLinkPath1,
         kHPLinkPath2,
         kHPLinkPath3,
         kHPLinkPath4,
-        kIdle
+        kIdle,
+
+        kAutoFallback,
     };
 
     enum autoState {
