@@ -54,6 +54,11 @@ Robot::Robot()
   m_chooser.AddOption(AUTO_STATION, AUTO_STATION);
   m_chooser.AddOption(AUTO_LINE, AUTO_LINE);
   m_chooser.AddOption(AUTO_NOTHING, AUTO_NOTHING);
+  m_chooser.AddOption(HP_LINK, HP_LINK);
+  m_chooser.AddOption(HP_CONE, HP_CONE);
+  m_chooser.AddOption(CS, CS);
+  m_chooser.AddOption(CABLE_LINK, CABLE_LINK);
+  m_chooser.AddOption(CABLE_CONE, CABLE_CONE);
 
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
@@ -134,18 +139,45 @@ void Robot::AutonomousInit()
   // Get choosen autonomous mode
   m_autoSelected = m_chooser.GetSelected();
 
-  if (m_autoSelected == AUTO_STATION) {
+  if (m_autoSelected == AUTO_STATION) 
+  {
     state = CONSTANTS::STATES::AUTO_SIMP_HIGH;
-    //std::cout << "here\n";
     m_fallback_pos = 2.0_ft;
     m_fallback_pos2 = 6.0_ft;
-  } else if (m_autoSelected == AUTO_LINE) {
+  } 
+  else if (m_autoSelected == AUTO_LINE) 
+  {
     state = CONSTANTS::STATES::AUTO_SIMP_HIGH;
     m_fallback_pos = 2.0_ft;
     m_fallback_pos2 = 10.5_ft;
-  } else {
+  } 
+  else if (m_autoSelected == HP_LINK) 
+  {
+    m_autoSequence = &m_HP_link_sequence;
+  } 
+  // else if (m_autoSelected == HP_CONE) 
+  // {
+    
+  // } 
+  // else if (m_autoSelected == CS) 
+  // {
+    
+  // } 
+  // else if (m_autoSelected == CABLE_LINK) 
+  // {
+    
+  // } 
+  // else if (m_autoSelected == CABLE_CONE) 
+  // {
+    
+  // } 
+  else 
+  {
     state = CONSTANTS::STATES::STORED;
   }
+
+  m_autoAction = m_autoSequence->front();
+  m_autoState = kNothing;
 }
 
 void Robot::AutonomousPeriodic()
@@ -221,6 +253,152 @@ void Robot::AutonomousPeriodic()
     }
     break;
   }
+
+
+  switch(m_autoAction) {
+  case kIntake:
+    m_autoAction = kIdle;
+    m_autoState = kIntaking;
+    break;
+
+    case kBalance:
+      m_autoAction = kIdle;
+      m_autoState = kBalancing;
+      break;
+
+  case kHPLinkPath1:
+    m_path_trajectory1 = Trajectory::extract("link_HP_side_1");
+    Trajectory::init_live_traj(m_path_trajectory1);
+    m_autoAction = kHPLinkPath1_periodic;
+    break;
+
+  case kHPLinkPath1_periodic:
+    if (Trajectory::follow_live_traj(m_path_trajectory1))
+      {
+        m_autoSequence->pop_front();
+        m_autoAction = m_autoSequence->front();
+        m_autoState = kNothing;
+      }
+    break;
+
+    case kHPLinkPath2:
+      m_path_trajectory2 = Trajectory::extract("link_HP_side_2");
+      Trajectory::init_live_traj(m_path_trajectory2);
+    m_autoAction = kHPLinkPath2_periodic;
+      break;
+
+    case kHPLinkPath2_periodic:
+      if (Trajectory::follow_live_traj(m_path_trajectory2))
+      {
+        m_autoSequence->pop_front();
+        m_autoAction = m_autoSequence->front();
+        m_autoState = kNothing;
+      }
+      break;
+
+     case kHPLinkPath3:
+      m_path_trajectory3 = Trajectory::extract("link_HP_side_3");
+      Trajectory::init_live_traj(m_path_trajectory3);
+    m_autoAction = kHPLinkPath3_periodic;
+     break;
+
+   case kHPLinkPath3_periodic:
+     if (Trajectory::follow_live_traj(m_path_trajectory3))
+      {
+        m_autoSequence->pop_front();
+        m_autoAction = m_autoSequence->front();
+        m_autoState = kNothing;
+      }
+      break;
+
+    case kHPLinkPath4:
+      m_path_trajectory4 = Trajectory::extract("link_HP_side_4");
+      Trajectory::init_live_traj(m_path_trajectory4);
+      m_autoAction = kHPLinkPath4_periodic;
+     break;
+
+    case kHPLinkPath4_periodic:
+      if (Trajectory::follow_live_traj(m_path_trajectory4))
+      {
+        m_autoSequence->pop_front();
+        m_autoAction = m_autoSequence->front();
+        m_autoState = kNothing;
+      }
+
+  case kScore:
+    if (m_camera.pose_loop())
+      {
+        if (m_arm.arm_moved(CONSTANTS::STATES::HIGH))
+          {
+            Robot::traj_init(Trajectory::HEIGHT::HIGH);
+            m_autoAction = kScore_periodic;
+            m_robot_timer.Reset();
+            m_robot_timer.Start();
+          }
+      }
+    break;
+
+  case kScore_periodic:
+    if (Trajectory::follow_live_traj(m_trajectory))
+      {
+        //std::cout << "followed path \n";
+        m_grabber.open();
+        m_robot_timer.Start();
+
+        if (m_robot_timer.Get() > units::time::second_t(0.5))
+          {
+            //std::cout << "timer expired \n";
+            m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back());
+            Trajectory::init_live_traj(m_back_trajectory);
+            m_autoAction = kAutoFallback;
+          }
+      }
+    break;
+
+    case kAutoFallback:
+      if (Trajectory::follow_live_traj(m_back_trajectory))
+        {
+          m_robot_timer.Stop();
+          m_robot_timer.Reset();
+          m_grabber.close();
+          m_arm.arm_moved(CONSTANTS::STATES::STORED);
+          state = CONSTANTS::STATES::STORED;
+        }
+      break;
+
+    case kIdle:
+      break;
+  }
+
+  if (m_autoState == kIntaking) {
+    if (m_arm.arm_moved(state))
+      {
+        m_grabber.open();
+        m_robot_timer.Start();
+        if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))
+        {
+          m_grabber.close();
+          m_robot_timer2.Start();
+          if (m_robot_timer2.Get() > units::time::second_t(0.5))
+          {
+            m_robot_timer.Stop();
+            m_robot_timer.Reset();
+            m_robot_timer2.Stop();
+            m_robot_timer2.Reset();
+            m_arm.arm_moved(CONSTANTS::STATES::STORED);
+            state = CONSTANTS::STATES::STORED;
+            m_autoSequence->pop_front();
+            m_autoAction = m_autoSequence->front();
+            m_autoState = kNothing;
+          }
+        }
+      }
+  }
+  else if (m_autoState == kBalancing) {
+    speed = m_auto_balance.autoBalanceRoutine();
+    Drivetrain::faceDirection(-speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 180_deg, false, 5.5);
+  }
+
 }
 // File
 //fs::path deployDirectory = frc::filesystem::GetDeployDirectory();
@@ -230,7 +408,6 @@ void Robot::AutonomousPeriodic()
 void Robot::TeleopInit()
 {
   //std::cout << "TeleopInit";
-  Drivetrain::flip(); //REMOVE THIS LINE
   Odometry::update();
   state = CONSTANTS::STATES::STORED;
   std::cout << "navx " << Drivetrain::getCCWHeading().Degrees().value() << std::endl;
@@ -444,28 +621,28 @@ void Robot::TeleopPeriodic()
         }
         break;
 
-      case CONSTANTS::STATES::FALLBACK:
-    m_candle.BounceAnim();
-        if (Trajectory::follow_live_traj(m_back_trajectory))
-          {
-            m_robot_timer.Stop();
-            m_robot_timer.Reset();
-            m_grabber.close();
-            m_arm.arm_moved(CONSTANTS::STATES::STORED);
-            state = CONSTANTS::STATES::STORED;
-          }
-        break;
-
-      case CONSTANTS::STATES::ABORT:
-        m_arm.arm_moved(CONSTANTS::STATES::ABORT);
-        m_arm.force_move(m_force_pos);
-        m_grabber.close();
+    case CONSTANTS::STATES::FALLBACK:
+      m_candle.BounceAnim();
+      if (Trajectory::follow_live_traj(m_back_trajectory))
+      {
         m_robot_timer.Stop();
         m_robot_timer.Reset();
-        break;
+        m_grabber.close();
+        m_arm.arm_moved(CONSTANTS::STATES::STORED);
+        state = CONSTANTS::STATES::STORED;
+      }
+      break;
+
+    case CONSTANTS::STATES::ABORT:
+      m_arm.arm_moved(CONSTANTS::STATES::ABORT);
+      m_arm.force_move(m_force_pos);
+      m_grabber.close();
+      m_robot_timer.Stop();
+      m_robot_timer.Reset();
+      break;
 
       case CONSTANTS::STATES::SCORE:
-    m_candle.BounceAnim();
+        m_candle.BounceAnim();
         if (Trajectory::follow_live_traj(m_trajectory))
         {
           m_grabber.open();
@@ -487,7 +664,7 @@ void Robot::TeleopPeriodic()
         if (m_arm.arm_moved(CONSTANTS::STATES::HUMANPLAYER))
           {
             m_wrist.HumanPlayer();
-      m_grabber.open();
+            m_grabber.open();
             m_robot_timer.Start();
             if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(0.5))
               {
@@ -501,8 +678,8 @@ void Robot::TeleopPeriodic()
           }
         else {
         m_wrist.Follow(m_arm.position);
-      }
-    break;
+        }
+        break;
 
       case CONSTANTS::STATES::O_LOW:
         if (m_arm.arm_moved(CONSTANTS::STATES::LOW))
@@ -574,7 +751,9 @@ void Robot::TeleopPeriodic()
                         BUTTON::CANDLE::CANDLE_PURPLE(), 
                         m_grabber.grabberStatus());
       }
-}
+  }
+
+
 
 void Robot::traj_init(Trajectory::HEIGHT h)
 {
