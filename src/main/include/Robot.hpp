@@ -123,6 +123,7 @@ private:
     pathplanner::PathPlannerTrajectory m_trajectory;
     pathplanner::PathPlannerTrajectory m_simp_trajectory;
     pathplanner::PathPlannerTrajectory m_back_trajectory;
+    pathplanner::PathPlannerTrajectory m_humanplayer_traj;
 //    pathplanner::PathPlannerTrajectory m_path_trajectory;
 
     /*

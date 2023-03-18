@@ -20,6 +20,36 @@ static frc::HolonomicDriveController controller{
 
 frc::Timer m_trajTimer;
 
+Trajectory::TrajDepends Trajectory::generate_humanplayer_depends()
+{
+    frc::Pose2d current_pose = Odometry::getPose();
+    Trajectory::TrajDepends ret;
+
+    ret.desired_y = current_pose.Y();
+
+    auto heading = (frc::Translation2d(ret.desired_x, ret.desired_y) - current_pose.Translation()).Angle().Degrees();
+
+    ret.desired_head = heading;
+    ret.desired_rot = 0_deg;
+    ret.current_rot = current_pose.Rotation().Degrees();
+    ret.current_head = heading;
+    ret.current_x = current_pose.X();
+    ret.current_y = current_pose.Y();
+
+    if (current_pose.X() < 0_m)
+    {
+        ret.desired_x = CONSTANTS::TRAJECTORY::B::HUMANPLAYER;
+    }
+    else 
+    {
+        ret.desired_x = CONSTANTS::TRAJECTORY::R::HUMANPLAYER;
+    }
+
+    ret.desired_x = 2.0*ret.current_x - ret.desired_x;
+    //std::cout << "desired x: " << ret.desired_x.value() << std::endl;
+    return ret;
+}
+
 Trajectory::TrajDepends Trajectory::fall_back(units::meter_t fallback_pos)
 {
     frc::Pose2d current_pose = Odometry::getPose();

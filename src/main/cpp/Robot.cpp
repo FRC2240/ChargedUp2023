@@ -543,6 +543,10 @@ void Robot::TeleopPeriodic()
     case CONSTANTS::STATES::HUMANPLAYER:
       if (m_arm.arm_moved(state))
       {
+        if (BUTTON::ARM::TRIGGER_AUTO())
+        {
+          state = CONSTANTS::STATES::HUMANPLAYER_AUTO_INIT;
+        }
         m_grabber.open();
         m_robot_timer.Start();
         if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))
@@ -558,6 +562,34 @@ void Robot::TeleopPeriodic()
         }
       }
       break;
+    case CONSTANTS::STATES::HUMANPLAYER_AUTO_INIT:
+      if (Drivetrain::human_player_snap())
+      {
+        if (m_camera.pose_loop())
+        {
+          m_robot_timer.Reset();
+          m_robot_timer.Start();
+          m_humanplayer_traj = Trajectory::generate_live_traj(Trajectory::generate_humanplayer_depends());
+          Trajectory::init_live_traj(m_humanplayer_traj);
+          state = CONSTANTS::STATES::HUMANPLAYER_AUTO;
+        }
+      }
+    break;
+
+    case CONSTANTS::STATES::HUMANPLAYER_AUTO:
+    m_grabber.open();
+    if (Trajectory::follow_live_traj(m_humanplayer_traj) || !m_grabber.break_beam())
+    {
+     m_grabber.close();
+          if (m_robot_timer.Get() > units::time::second_t(1.5))
+          {
+            m_robot_timer.Stop();
+            m_robot_timer.Reset();
+            state = CONSTANTS::STATES::ABORT;
+          }
+
+    }
+    break;
 
     case CONSTANTS::STATES::PICKUP:
       if (m_arm.arm_moved(state))

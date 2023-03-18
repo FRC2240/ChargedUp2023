@@ -33,7 +33,9 @@ namespace CONSTANTS
             IDLE,
             O_OPEN,
             O_UP,
-            AUTO_SIMP_HIGH
+            AUTO_SIMP_HIGH,
+            HUMANPLAYER_AUTO_INIT,
+            HUMANPLAYER_AUTO,
 };
 
 namespace TRAJECTORY
@@ -68,6 +70,7 @@ namespace TRAJECTORY
       constexpr units::meter_t HIGH_X = 6.50_m;
       constexpr units::meter_t MID_X = 6.12_m;
       constexpr units::meter_t GROUND_X = 6.09_m;
+      constexpr units::meter_t HUMANPLAYER = 6.09_m;
     }
 
     namespace B
@@ -75,6 +78,7 @@ namespace TRAJECTORY
       constexpr units::meter_t HIGH_X = -6.50_m;
       constexpr units::meter_t MID_X = -6.12_m;
       constexpr units::meter_t GROUND_X = -6.06_m;
+      constexpr units::meter_t HUMANPLAYER = -6.06_m;
     }
   }
   namespace GRIPPAD

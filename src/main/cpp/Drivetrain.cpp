@@ -266,6 +266,20 @@ bool Drivetrain::snap_to_zero()
     return false;
   }
 }
+
+bool Drivetrain::human_player_snap()
+{
+   Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 5.5);
+  if ((Drivetrain::get_absolute_angle() >= -1_deg && Drivetrain::get_absolute_angle() <= 1_deg))
+  {
+    return true;
+  }
+  else 
+  {
+    std::cout << "failed threshold check: " << Drivetrain::get_absolute_angle().value() << std::endl;
+    return false;
+  } 
+}
 void Drivetrain::faceDirection(units::meters_per_second_t const &dx,
                                units::meters_per_second_t const &dy,
                                units::degree_t const &theta,
