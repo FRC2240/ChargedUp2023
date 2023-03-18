@@ -15,8 +15,15 @@
 
 static std::unique_ptr<AHRS> navx;
 
+void Drivetrain::flip()
+{
+  //navx->ZeroYaw();
+  navx->SetAngleAdjustment(180);
+}
+
 void Drivetrain::zero_yaw()
 {
+  navx->SetAngleAdjustment(0);
   navx->ZeroYaw();
 }
 
@@ -247,8 +254,9 @@ void Drivetrain::stop()
 /******************************************************************/
 bool Drivetrain::snap_to_zero()
 {
-  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 5);
-  if (Drivetrain::get_absolute_angle() >= -1_deg && Drivetrain::get_absolute_angle() <= 1_deg )
+  Drivetrain::faceDirection(0_mps, 0_mps, 180_deg, false, 5.5);
+  if ((Drivetrain::get_absolute_angle() >= 179_deg && Drivetrain::get_absolute_angle() <= 181_deg) ||
+    ((Drivetrain::get_absolute_angle() <= -179_deg && Drivetrain::get_absolute_angle() >= -181_deg)))
   {
     return true;
   }

@@ -128,6 +128,7 @@ void Robot::RobotPeriodic()
 
 void Robot::AutonomousInit()
 {
+  Drivetrain::flip();
   m_grippad.retract();
 
   // Get choosen autonomous mode
@@ -229,8 +230,11 @@ void Robot::AutonomousPeriodic()
 void Robot::TeleopInit()
 {
   //std::cout << "TeleopInit";
+  Drivetrain::flip(); //REMOVE THIS LINE
+  Odometry::update();
   state = CONSTANTS::STATES::STORED;
-
+  std::cout << "navx " << Drivetrain::getCCWHeading().Degrees().value() << std::endl;
+  std::cout << "odometry: " << Odometry::getPose().Rotation().Degrees().value() << std::endl;
 
    m_grippad.retract();
 }

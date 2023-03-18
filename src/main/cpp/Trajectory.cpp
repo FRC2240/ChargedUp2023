@@ -30,11 +30,13 @@ Trajectory::TrajDepends Trajectory::fall_back(units::meter_t fallback_pos)
 
     auto heading = (frc::Translation2d(ret.desired_x, ret.desired_y) - current_pose.Translation()).Angle().Degrees();
     ret.desired_head = heading;
-    ret.desired_rot = 0_deg;
+    ret.desired_rot = 180_deg;
     ret.current_rot = current_pose.Rotation().Degrees();
     ret.current_head = heading;
     ret.current_x = current_pose.X();
     ret.current_y = current_pose.Y();
+
+    ret.desired_x = 2.0*ret.current_x - ret.desired_x;
     //std::cout << "desired x: " << ret.desired_x.value() << std::endl;
     return ret;
 }
@@ -107,7 +109,7 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
                     break;
                 }
         }
-    ret.desired_rot = 0_deg;
+    ret.desired_rot = 180_deg;
     ret.current_rot = current_pose.Rotation().Degrees();
     ret.current_x = current_pose.X();
     ret.current_y = current_pose.Y();
@@ -121,7 +123,8 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
         ret.desired_y = -ret.desired_y;
     }
 
-    ret.desired_y = 2.0*ret.current_y - ret.desired_y;
+    //ret.desired_y = 2.0*ret.current_y - ret.desired_y;
+    ret.desired_x = 2.0*ret.current_x - ret.desired_x;
 
     std::cout << "cx: " << ret.current_x.value() << "\n cy: " << ret.current_y.value() << std::endl;
     std::cout << "dx: " << ret.desired_x.value() << "\n dy: " << ret.desired_y.value() << std::endl;
