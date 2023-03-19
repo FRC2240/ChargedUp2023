@@ -68,6 +68,7 @@ bool Vision::pose_loop()
                                                            m_left_buffer),
                                            Vision::collect(&Data::rot_x,
                                                            m_right_buffer));
+
           Vision::update_pose(pose_ret_val);
          std::fill(m_left_buffer.begin(), m_left_buffer.end(), nonsense);
          std::fill(m_right_buffer.begin(), m_right_buffer.end(), nonsense);

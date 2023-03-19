@@ -70,7 +70,7 @@ namespace TRAJECTORY
       constexpr units::meter_t HIGH_X = 6.50_m;
       constexpr units::meter_t MID_X = 6.12_m;
       constexpr units::meter_t GROUND_X = 6.09_m;
-      constexpr units::meter_t HUMANPLAYER = 6.09_m;
+      constexpr units::meter_t HUMANPLAYER = -6.6_m;
     }
 
     namespace B
@@ -78,7 +78,7 @@ namespace TRAJECTORY
       constexpr units::meter_t HIGH_X = -6.50_m;
       constexpr units::meter_t MID_X = -6.12_m;
       constexpr units::meter_t GROUND_X = -6.06_m;
-      constexpr units::meter_t HUMANPLAYER = -6.06_m;
+      constexpr units::meter_t HUMANPLAYER = 6.6_m;
     }
   }
   namespace GRIPPAD

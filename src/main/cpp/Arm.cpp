@@ -114,7 +114,6 @@ bool Arm::arm_moved(CONSTANTS::STATES state)
     else
     {
         return false;
-        
     }
 
     

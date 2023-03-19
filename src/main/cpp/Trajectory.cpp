@@ -36,7 +36,7 @@ Trajectory::TrajDepends Trajectory::generate_humanplayer_depends()
     ret.current_x = current_pose.X();
     ret.current_y = current_pose.Y();
 
-    if (current_pose.X() < 0_m)
+    if (current_pose.X() > 0_m)
     {
         ret.desired_x = CONSTANTS::TRAJECTORY::B::HUMANPLAYER;
     }
@@ -45,7 +45,7 @@ Trajectory::TrajDepends Trajectory::generate_humanplayer_depends()
         ret.desired_x = CONSTANTS::TRAJECTORY::R::HUMANPLAYER;
     }
 
-    ret.desired_x = 2.0*ret.current_x - ret.desired_x;
+    //ret.desired_x = 2.0*ret.current_x - ret.desired_x;
     //std::cout << "desired x: " << ret.desired_x.value() << std::endl;
     return ret;
 }

@@ -478,7 +478,8 @@ void Robot::TeleopPeriodic()
   else if ((state == CONSTANTS::STATES::SCORE && BUTTON::DRIVETRAIN::ABORT()) ||
     ((state == CONSTANTS::STATES::HIGH && BUTTON::DRIVETRAIN::ABORT())) ||
     ((state == CONSTANTS::STATES::MED && BUTTON::DRIVETRAIN::ABORT())) ||
-    ((state == CONSTANTS::STATES::LOW && BUTTON::DRIVETRAIN::ABORT())))
+    ((state == CONSTANTS::STATES::LOW && BUTTON::DRIVETRAIN::ABORT())) ||
+    ((state == CONSTANTS::STATES::HUMANPLAYER_AUTO && BUTTON::DRIVETRAIN::ABORT())))
 
   {
     state = CONSTANTS::STATES::ABORT;
@@ -541,13 +542,9 @@ void Robot::TeleopPeriodic()
       break;
 
     case CONSTANTS::STATES::HUMANPLAYER:
-      if (m_arm.arm_moved(state))
+     if (m_arm.arm_moved(state))
       {
-        if (BUTTON::ARM::TRIGGER_AUTO())
-        {
-          state = CONSTANTS::STATES::HUMANPLAYER_AUTO_INIT;
-        }
-        m_grabber.open();
+       m_grabber.open();
         m_robot_timer.Start();
         if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))
         {
@@ -562,33 +559,18 @@ void Robot::TeleopPeriodic()
         }
       }
       break;
-    case CONSTANTS::STATES::HUMANPLAYER_AUTO_INIT:
-      if (Drivetrain::human_player_snap())
-      {
-        if (m_camera.pose_loop())
-        {
-          m_robot_timer.Reset();
-          m_robot_timer.Start();
-          m_humanplayer_traj = Trajectory::generate_live_traj(Trajectory::generate_humanplayer_depends());
-          Trajectory::init_live_traj(m_humanplayer_traj);
-          state = CONSTANTS::STATES::HUMANPLAYER_AUTO;
-        }
-      }
-    break;
 
     case CONSTANTS::STATES::HUMANPLAYER_AUTO:
-    m_grabber.open();
-    if (Trajectory::follow_live_traj(m_humanplayer_traj) || !m_grabber.break_beam())
-    {
-     m_grabber.close();
-          if (m_robot_timer.Get() > units::time::second_t(1.5))
-          {
-            m_robot_timer.Stop();
-            m_robot_timer.Reset();
-            state = CONSTANTS::STATES::ABORT;
-          }
-
-    }
+    m_candle.BounceAnim();
+      if (m_grabber.break_beam())
+      {
+        m_grabber.open();
+        Drivetrain::faceDirection(0.75_mps, 0_mps, Odometry::getPose().Rotation().Degrees(), false, 0.0);
+      }
+      else
+      {
+        m_grabber.close();
+      }
     break;
 
     case CONSTANTS::STATES::PICKUP:
@@ -695,6 +677,11 @@ void Robot::TeleopPeriodic()
       case CONSTANTS::STATES::O_HP:
         if (m_arm.arm_moved(CONSTANTS::STATES::HUMANPLAYER))
           {
+             if (BUTTON::ARM::TRIGGER_AUTO())
+              {
+                state = CONSTANTS::STATES::HUMANPLAYER_AUTO;
+              }
+ 
             m_wrist.HumanPlayer();
             m_grabber.open();
             m_robot_timer.Start();
@@ -774,7 +761,7 @@ void Robot::TeleopPeriodic()
         state != CONSTANTS::STATES::MED &&
         state != CONSTANTS::STATES::LOW &&
         state != CONSTANTS::STATES::SCORE &&
-        state != CONSTANTS::STATES::FALLBACK
+        state != CONSTANTS::STATES::FALLBACK 
       )
       {
           m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(),
