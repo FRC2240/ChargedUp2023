@@ -24,15 +24,15 @@ Arm::Arm()
     arm_right_config.remoteFilter0.remoteSensorDeviceID = arm_cancoder.GetDeviceNumber();
     arm_right_config.remoteFilter0.remoteSensorSource = RemoteSensorSource::RemoteSensorSource_CANCoder;
     arm_right_config.primaryPID.selectedFeedbackSensor = FeedbackDevice::RemoteSensor0;
-    arm_right_config.slot0.kP = 0.4;
+    arm_right_config.slot0.kP = 1.5;
     arm_right_config.slot0.kD = 4.0;
     arm_right_config.slot0.kI = 0.0; //0.0008;
 
     arm_cancoder.ConfigAllSettings(arm_cancoder_config);
     m_arm_motor_right.ConfigAllSettings(arm_right_config);
 
-    m_arm_motor_right.ConfigMotionCruiseVelocity(800);
-    m_arm_motor_right.ConfigMotionAcceleration(800);
+    m_arm_motor_right.ConfigMotionCruiseVelocity(225);
+    m_arm_motor_right.ConfigMotionAcceleration(225);
 
     // Follower
     m_arm_motor_left.Follow(m_arm_motor_right);
