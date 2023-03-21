@@ -50,6 +50,7 @@ namespace Drivetrain
     /******************************************************************/
     void init();
     void zero_adjustment();
+    double get_offset();
 
 
     // Returns values with 0 being front and positive angles going CW

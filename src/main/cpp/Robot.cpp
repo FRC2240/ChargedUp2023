@@ -54,6 +54,7 @@ Robot::Robot()
   m_chooser.AddOption(AUTO_STATION, AUTO_STATION);
   m_chooser.AddOption(AUTO_LINE, AUTO_LINE);
   m_chooser.AddOption(AUTO_NOTHING, AUTO_NOTHING);
+  m_chooser.AddOption(AUTO_BALANCE, AUTO_BALANCE);
 
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
@@ -128,23 +129,32 @@ void Robot::RobotPeriodic()
 
 void Robot::AutonomousInit()
 {
+  std::cout << Drivetrain::getAngle().value() << std::endl;
+  std::cout << Drivetrain::get_offset() << std::endl;
+
   Odometry::update();
   Drivetrain::flip();
   m_grippad.retract();
+    std::cout << Drivetrain::getAngle().value() << std::endl;
+  std::cout << Drivetrain::get_offset() << std::endl;
 
   // Get choosen autonomous mode
   m_autoSelected = m_chooser.GetSelected();
 
   if (m_autoSelected == AUTO_STATION) 
   {
-    m_autoSequence = &m_score_and_leave_sequence;
+    m_autoSequence = &m_score_and_balance_sequence;
     m_fallback_pos = 12.5_ft;
   } 
   else if (m_autoSelected == AUTO_LINE) 
   {
-    m_autoSequence = &m_score_and_balance_sequence;
+    m_autoSequence = &m_score_and_leave_sequence;
     m_fallback_pos = 12.5_ft;
   } 
+  else if (m_autoSelected == AUTO_BALANCE)
+  {
+    m_autoSequence = &m_balance_sequence;
+  }
   else 
   {
     state = CONSTANTS::STATES::STORED;
@@ -156,14 +166,22 @@ void Robot::AutonomousInit()
 
 void Robot::AutonomousPeriodic()
 {
+    std::cout << Drivetrain::getAngle().value() << std::endl;
+  std::cout << Drivetrain::get_offset() << std::endl;
   m_wrist.Follow(m_arm.position);
   switch(m_autoAction) {
 
-    case kBalance:
+  case kBalance:
     std::cout << "balance\n";
-      m_autoAction = kIdle;
-      m_autoState = kBalancing;
-      break;
+    m_autoAction = kIdle;
+    m_autoState = kBalancing;
+    break;
+
+  case kBackwardsBalance:
+    std::cout << "backwards balance\n";
+    m_autoAction = kIdle;
+    m_autoState = kBackwardsBalancing;
+    break;
 
   case kScore:
       m_candle.BounceAnim();
@@ -244,6 +262,11 @@ void Robot::AutonomousPeriodic()
     std::cout << "balancing\n";
     speed = m_auto_balance.autoBalanceRoutine();
     Drivetrain::faceDirection(speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 180_deg, false, 5.5);
+  }
+  else if (m_autoState == kBackwardsBalancing){
+    std::cout << "backwards balancing\n";
+    speed = m_auto_balance.autoBalanceRoutine();
+    Drivetrain::faceDirection(-speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 180_deg, false, 5.5);
   }
 
 }

@@ -18,19 +18,30 @@ static std::unique_ptr<AHRS> navx;
 void Drivetrain::flip()
 {
   //navx->ZeroYaw();
-  navx->SetAngleAdjustment(180);
+  if (navx->GetAngleAdjustment() <= 0)
+  {
+    navx->SetAngleAdjustment(180);
+  }
+}
+
+double Drivetrain::get_offset()
+{
+  return navx->GetAngleAdjustment();
 }
 
 void Drivetrain::zero_adjustment()
 {
-  navx->ResetDisplacement();
-  navx->SetAngleAdjustment(0);
+  //navx->ResetDisplacement();
+  //navx->SetAngleAdjustment(0);
 }
 
 void Drivetrain::zero_yaw()
 {
-  navx->SetAngleAdjustment(0);
-  navx->ZeroYaw();
+  if (navx->GetAngleAdjustment() >= 179)
+  {
+    navx->SetAngleAdjustment(0);
+    navx->ZeroYaw();
+  }
 }
 
 void Drivetrain::print_angle()

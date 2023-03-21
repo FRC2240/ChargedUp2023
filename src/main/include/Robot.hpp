@@ -95,6 +95,7 @@ private:
     const std::string AUTO_STATION = "SCORE + STATION";
     const std::string AUTO_LINE = "SCORE + LEAVE";
     const std::string AUTO_NOTHING = "DO NOTHING";
+    const std::string AUTO_BALANCE = "BALANCE";
 
     bool arm_bool;
 
@@ -139,6 +140,7 @@ private:
         kScore_periodic,
         kAutoFallback,
         kBalance,
+        kBackwardsBalance,
         kFallbackPath,
         kFallbackPathPeriodic,
         kIdle
@@ -146,6 +148,7 @@ private:
 
     enum autoState {
         kBalancing,
+        kBackwardsBalancing,
         kNothing
     };
 
@@ -159,6 +162,12 @@ private:
         kScore,
         kFallbackPath,
         kBalance,
+        kIdle
+    };
+
+    std::list<autoActions> m_balance_sequence{
+        kScore,
+        kBackwardsBalance,
         kIdle
     };
 
