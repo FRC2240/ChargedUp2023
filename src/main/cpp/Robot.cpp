@@ -142,37 +142,14 @@ void Robot::AutonomousInit()
 
   if (m_autoSelected == AUTO_STATION) 
   {
-    state = CONSTANTS::STATES::AUTO_SIMP_HIGH;
-    m_fallback_pos = 2.0_ft;
-    m_fallback_pos2 = 6.0_ft;
+    m_autoSequence = &m_score_and_leave_sequence;
+    m_fallback_pos = 12.5_ft;
   } 
   else if (m_autoSelected == AUTO_LINE) 
   {
-    state = CONSTANTS::STATES::AUTO_SIMP_HIGH;
-    m_fallback_pos = 2.0_ft;
-    m_fallback_pos2 = 10.5_ft;
+    m_autoSequence = &m_score_and_balance_sequence;
+    m_fallback_pos = 12.5_ft;
   } 
-  else if (m_autoSelected == HP_LINK) 
-  {
-    m_autoSequence = &m_HP_link_sequence;
-    std::cout << "auto chosen\n";
-  } 
-  // else if (m_autoSelected == HP_CONE) 
-  // {
-    
-  // } 
-  // else if (m_autoSelected == CS) 
-  // {
-    
-  // } 
-  // else if (m_autoSelected == CABLE_LINK) 
-  // {
-    
-  // } 
-  // else if (m_autoSelected == CABLE_CONE) 
-  // {
-    
-  // } 
   else 
   {
     state = CONSTANTS::STATES::STORED;
@@ -185,159 +162,12 @@ void Robot::AutonomousInit()
 void Robot::AutonomousPeriodic()
 {
   m_wrist.Follow(m_arm.position);
-
-  // switch (state)
-  // {
-  // case CONSTANTS::STATES::AUTO_SIMP_HIGH:
-  //   if (m_arm.arm_moved(CONSTANTS::STATES::HIGH))
-  //   {
-  //     // std::cout << "init traj \n";
-  //     m_simp_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(CONSTANTS::TRAJECTORY::SIMPLE_FORWARDS));
-  //     Trajectory::init_live_traj(m_simp_trajectory);
-  //     state = CONSTANTS::STATES::SCORE; 
-  //   }
-  //   break;
-
-  // case CONSTANTS::STATES::STORED:
-  //   m_grabber.close();
-  //   m_arm.arm_moved(CONSTANTS::STATES::STORED);
-  //   break;
-
-  // case CONSTANTS::STATES::HIGH:
-  //   if (m_camera.pose_loop())
-  //   {
-  //     if (m_arm.arm_moved(state))
-  //     {
-  //       Robot::traj_init(Trajectory::HEIGHT::HIGH);
-  //       state = CONSTANTS::STATES::SCORE;
-  //     }
-  //   }
-  //   break;
-
-  // case CONSTANTS::STATES::SCORE:
-  // //std::cout << "scoring\n";
-  //   if (Trajectory::follow_live_traj(m_simp_trajectory))
-  //   {
-  //     //std::cout << "followed path \n";
-  //     m_grabber.open();
-  //     m_robot_timer.Start();
-
-  //     if (m_robot_timer.Get() > units::time::second_t(0.5))
-  //     {
-  //       //std::cout << "timer expired \n";
-  //       m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(m_fallback_pos));
-  //       Trajectory::init_live_traj(m_back_trajectory);
-  //       state = CONSTANTS::STATES::FALLBACK;
-  //     }
-  //   }
-  //   break;
-
-  // case CONSTANTS::STATES::FALLBACK:
-  //     //std::cout << "falling back\n";
-  //   if (Trajectory::follow_live_traj(m_back_trajectory))
-  //   {
-  //     //std::cout << "fell back\n";
-  //     m_robot_timer.Stop();
-  //     m_robot_timer.Reset();
-  //     m_grabber.close();
-  //     m_arm.arm_moved(CONSTANTS::STATES::STORED);
-  //     m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(m_fallback_pos2));
-  //     Trajectory::init_live_traj(m_back_trajectory);
-  //     state = CONSTANTS::STATES::FALLBACK2;
-  //   }
-  //   break;
-
-  // case CONSTANTS::STATES::FALLBACK2:
-  //   m_arm.arm_moved(CONSTANTS::STATES::STORED);
-  //   if (Trajectory::follow_live_traj(m_back_trajectory))
-  //   {
-  //     state = CONSTANTS::STATES::STORED;
-  //   }
-  //   break;
-  // }
-
-
   switch(m_autoAction) {
-  case kIntake:
-  std::cout << "intake\n";
-    m_autoAction = kIdle;
-    m_autoState = kIntaking;
-    break;
 
     case kBalance:
     std::cout << "balance\n";
       m_autoAction = kIdle;
       m_autoState = kBalancing;
-      break;
-
-  case kHPLinkPath1:
-    std::cout << "path 1 \n";
-    m_path_trajectory1 = Trajectory::extract("3_cone_HP_side_1");
-    Trajectory::init_live_traj(m_path_trajectory1);
-    m_autoAction = kHPLinkPath1_periodic;
-    break;
-
-  case kHPLinkPath1_periodic:
-    std::cout << "driving path 1 \n";
-    m_autoState = kIntaking;
-    if (Trajectory::follow_live_traj(m_path_trajectory1))
-      {
-        // m_autoSequence->pop_front();
-        // m_autoAction = m_autoSequence->front();
-        //m_autoState = kNothing;
-      }
-    break;
-
-    case kHPLinkPath2:
-    std::cout << "path 2 \n";
-      m_path_trajectory2 = Trajectory::extract("3_cone_HP_side_2");
-      Trajectory::init_live_traj(m_path_trajectory2);
-    m_autoAction = kHPLinkPath2_periodic;
-      break;
-
-    case kHPLinkPath2_periodic:
-    std::cout << "driving path 2 \n";
-      if (Trajectory::follow_live_traj(m_path_trajectory2))
-      {
-        m_autoSequence->pop_front();
-        m_autoAction = m_autoSequence->front();
-        m_autoState = kNothing;
-      }
-      break;
-
-     case kHPLinkPath3:
-     std::cout << "path 3 \n";
-      m_path_trajectory3 = Trajectory::extract("3_cone_HP_side_3");
-      Trajectory::init_live_traj(m_path_trajectory3);
-    m_autoAction = kHPLinkPath3_periodic;
-     break;
-
-   case kHPLinkPath3_periodic:
-   std::cout << "driving path 3 \n";
-   m_autoState = kIntaking;
-     if (Trajectory::follow_live_traj(m_path_trajectory3))
-      {
-        m_autoSequence->pop_front();
-        m_autoAction = m_autoSequence->front();
-        m_autoState = kNothing;
-      }
-      break;
-
-    case kHPLinkPath4:
-    std::cout << "path 4 \n";
-      m_path_trajectory4 = Trajectory::extract("3_cone_HP_side_4");
-      Trajectory::init_live_traj(m_path_trajectory4);
-      m_autoAction = kHPLinkPath4_periodic;
-     break;
-
-    case kHPLinkPath4_periodic:
-    std::cout << "driving path 4 \n";
-      if (Trajectory::follow_live_traj(m_path_trajectory4))
-      {
-        m_autoSequence->pop_front();
-        m_autoAction = m_autoSequence->front();
-        m_autoState = kNothing;
-      }
       break;
 
   case kScore:
@@ -395,52 +225,30 @@ void Robot::AutonomousPeriodic()
         }
       break;
 
-    case kDelay:
-      std::cout << "Delay\n";
-      m_robot_timer2.Start();
-      if (m_robot_timer2.Get() > units::time::second_t(1.0)){
-        m_autoSequence->pop_front();
-        m_autoAction = m_autoSequence->front();
-        m_robot_timer2.Stop();
-        m_robot_timer2.Reset();
-      }
+    case kFallbackPath:
+      m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(m_fallback_pos));
+      Trajectory::init_live_traj(m_back_trajectory);
+      m_autoAction = kFallbackPathPeriodic;
       break;
 
+    case kFallbackPathPeriodic:
+      if (Trajectory::follow_live_traj(m_back_trajectory))
+      {
+        m_autoSequence->pop_front();
+        m_autoAction = m_autoSequence->front();
+        m_autoState = kNothing;
+      }
+      break;
 
     case kIdle:
     std::cout << "idle\n";
       break;
   }
 
-  if (m_autoState == kIntaking) {
-    std::cout << "intaking\n";
-    m_wrist.Pickup();
-    if (m_arm.arm_moved(CONSTANTS::STATES::PICKUP))
-      {
-        m_grabber.open();
-        m_robot_timer.Start();
-        if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))
-        {
-          m_grabber.close();
-          m_robot_timer2.Start();
-          if (m_robot_timer2.Get() > units::time::second_t(0.5))
-          {
-            m_robot_timer.Stop();
-            m_robot_timer.Reset();
-            m_robot_timer2.Stop();
-            m_robot_timer2.Reset();
-            m_arm.arm_moved(CONSTANTS::STATES::STORED);
-            m_autoSequence->pop_front();
-            m_autoAction = m_autoSequence->front();
-            m_autoState = kNothing;
-          }
-        }
-      }
-  }
   if (m_autoState == kBalancing) {
     std::cout << "balancing\n";
     speed = m_auto_balance.autoBalanceRoutine();
-    Drivetrain::faceDirection(-speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 180_deg, false, 5.5);
+    Drivetrain::faceDirection(speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 180_deg, false, 5.5);
   }
 
 }

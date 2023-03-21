@@ -42,9 +42,9 @@ double autoBalance::getTilt(){
 	double pitch = getPitch();
 	double roll = getRoll();
     if((pitch + roll)>= 0){
-        return -std::sqrt(pitch*pitch + roll*roll);
-    } else {
         return std::sqrt(pitch*pitch + roll*roll);
+    } else {
+        return -std::sqrt(pitch*pitch + roll*roll);
     }
 }
 
