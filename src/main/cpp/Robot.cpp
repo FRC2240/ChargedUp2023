@@ -54,11 +54,6 @@ Robot::Robot()
   m_chooser.AddOption(AUTO_STATION, AUTO_STATION);
   m_chooser.AddOption(AUTO_LINE, AUTO_LINE);
   m_chooser.AddOption(AUTO_NOTHING, AUTO_NOTHING);
-  m_chooser.AddOption(HP_LINK, HP_LINK);
-  m_chooser.AddOption(HP_CONE, HP_CONE);
-  m_chooser.AddOption(CS, CS);
-  m_chooser.AddOption(CABLE_LINK, CABLE_LINK);
-  m_chooser.AddOption(CABLE_CONE, CABLE_CONE);
 
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
