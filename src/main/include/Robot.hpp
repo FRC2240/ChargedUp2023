@@ -193,9 +193,7 @@ private:
         kDelay,
         kHPLinkPath2,
         kScore,
-        kHPLinkPath3,
-        kHPLinkPath4,
-        kScore
+        kIdle
     };
 
     std::list<autoActions> *m_autoSequence;

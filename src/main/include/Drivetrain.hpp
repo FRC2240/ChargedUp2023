@@ -49,6 +49,8 @@ namespace Drivetrain
     /*                  Public Function Declarations                  */
     /******************************************************************/
     void init();
+    void zero_adjustment();
+
 
     // Returns values with 0 being front and positive angles going CW
     [[nodiscard]] units::degree_t getAngle();

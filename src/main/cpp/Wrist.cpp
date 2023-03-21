@@ -58,7 +58,7 @@ void Wrist::HumanPlayer()
 
 void Wrist::Pickup()
 {
-    m_wrist_PIDController.SetReference(0.75, rev::CANSparkMax::ControlType::kPosition);
+    m_wrist_PIDController.SetReference(0.77, rev::CANSparkMax::ControlType::kPosition);
 }
 
 

@@ -120,9 +120,9 @@ namespace TRAJECTORY
       // All units in degrees
       constexpr double STORED = 36.0;
       constexpr double LOW = 91.0;
-      constexpr double MED = 124.0;
-      constexpr double HP = 141.0;
-      constexpr double HIGH = 148.0;
+      constexpr double MED = 137.0;
+      constexpr double HP = 146.0;
+      constexpr double HIGH = 157.0;
       constexpr double PICKUP = 72.0;
       constexpr double UP = 160.0;
     }

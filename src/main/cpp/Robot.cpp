@@ -284,7 +284,7 @@ void Robot::AutonomousPeriodic()
       {
         // m_autoSequence->pop_front();
         // m_autoAction = m_autoSequence->front();
-        m_autoState = kNothing;
+        //m_autoState = kNothing;
       }
     break;
 
@@ -341,6 +341,7 @@ void Robot::AutonomousPeriodic()
       break;
 
   case kScore:
+      m_candle.BounceAnim();
     std::cout << "score\n";
     if (m_arm.arm_moved(CONSTANTS::STATES::HIGH))
       {
@@ -350,8 +351,7 @@ void Robot::AutonomousPeriodic()
             std::cout << "pose loop updated \n";
             Robot::traj_init(Trajectory::HEIGHT::HIGH);
             m_autoAction = kScore_periodic;
-            m_robot_timer.Reset();
-            m_robot_timer.Start();
+
           }
       }
       else 
@@ -368,7 +368,7 @@ void Robot::AutonomousPeriodic()
         m_grabber.open();
         m_robot_timer.Start();
 
-        if (m_robot_timer.Get() > units::time::second_t(0.5))
+        if (m_robot_timer.Get() > 0.5_s)
           {
             //std::cout << "timer expired \n";
             m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back());
@@ -419,7 +419,7 @@ void Robot::AutonomousPeriodic()
       {
         m_grabber.open();
         m_robot_timer.Start();
-        if (((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))||(m_robot_timer.Get() > units::time::second_t(2.5)))
+        if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))
         {
           m_grabber.close();
           m_robot_timer2.Start();
