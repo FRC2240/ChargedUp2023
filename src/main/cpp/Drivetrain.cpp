@@ -269,28 +269,31 @@ void Drivetrain::stop()
 bool Drivetrain::snap_to_zero()
 {
   Drivetrain::faceDirection(0_mps, 0_mps, 180_deg, false, 6.5);
-  if ((Drivetrain::get_absolute_angle() >= 179_deg && Drivetrain::get_absolute_angle() <= 181_deg) ||
-    ((Drivetrain::get_absolute_angle() <= -179_deg && Drivetrain::get_absolute_angle() >= -181_deg)))
+
+  auto angle = Drivetrain::get_absolute_angle();
+  if ((angle >= 179_deg && angle <= 181_deg) || (angle <= -179_deg && angle >= -181_deg))
   {
     return true;
   }
   else 
   {
-    std::cout << "failed threshold check: " << Drivetrain::get_absolute_angle().value() << std::endl;
+    //std::cout << "failed threshold check: " << Drivetrain::get_absolute_angle().value() << std::endl;
     return false;
   }
 }
 
 bool Drivetrain::human_player_snap()
 {
-   Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 5.5);
-  if ((Drivetrain::get_absolute_angle() >= -1_deg && Drivetrain::get_absolute_angle() <= 1_deg))
+  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 6.5);
+  auto angle = Drivetrain::get_absolute_angle();
+
+  if ((angle >= -1_deg) && (angle <= 1_deg))
   {
     return true;
   }
   else 
   {
-    std::cout << "failed threshold check: " << Drivetrain::get_absolute_angle().value() << std::endl;
+    //std::cout << "failed threshold check: " << Drivetrain::get_absolute_angle().value() << std::endl;
     return false;
   } 
 }

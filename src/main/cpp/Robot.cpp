@@ -129,14 +129,14 @@ void Robot::RobotPeriodic()
 
 void Robot::AutonomousInit()
 {
-  std::cout << Drivetrain::getAngle().value() << std::endl;
-  std::cout << Drivetrain::get_offset() << std::endl;
+  //std::cout << Drivetrain::getAngle().value() << std::endl;
+  //std::cout << Drivetrain::get_offset() << std::endl;
 
   Odometry::update();
   Drivetrain::flip();
   m_grippad.retract();
-    std::cout << Drivetrain::getAngle().value() << std::endl;
-  std::cout << Drivetrain::get_offset() << std::endl;
+  //  std::cout << Drivetrain::getAngle().value() << std::endl;
+  //std::cout << Drivetrain::get_offset() << std::endl;
 
   // Get choosen autonomous mode
   m_autoSelected = m_chooser.GetSelected();
@@ -281,8 +281,8 @@ void Robot::TeleopInit()
   //std::cout << "TeleopInit";
   Odometry::update();
   state = CONSTANTS::STATES::STORED;
-  std::cout << "navx " << Drivetrain::getCCWHeading().Degrees().value() << std::endl;
-  std::cout << "odometry: " << Odometry::getPose().Rotation().Degrees().value() << std::endl;
+  //std::cout << "navx " << Drivetrain::getCCWHeading().Degrees().value() << std::endl;
+  //std::cout << "odometry: " << Odometry::getPose().Rotation().Degrees().value() << std::endl;
 
    m_grippad.retract();
 }
