@@ -123,7 +123,7 @@ void swerveDrive(bool const &field_relative)
 /******************************************************************/
 void Robot::RobotPeriodic()
 {
-  Trajectory::reverse_trajectory = frc::SmartDashboard::GetBoolean("Traj Reversed", Trajectory::reverse_trajectory);
+  //Trajectory::reverse_trajectory = frc::SmartDashboard::GetBoolean("Traj Reversed", Trajectory::reverse_trajectory);
   m_arm.Read_Position();
 }
 
