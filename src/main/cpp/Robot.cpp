@@ -538,9 +538,10 @@ void Robot::TeleopPeriodic()
               //" , " <<
               //Odometry::getPose().Y().value() <<
               //std::endl;
-              m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(1.0_m));
-              Trajectory::init_live_traj(m_back_trajectory);
-              state = CONSTANTS::STATES::FALLBACK;
+              // m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(1.0_m));
+              // Trajectory::init_live_traj(m_back_trajectory);
+              m_force_pos = m_arm.Read_Position();
+              state = CONSTANTS::STATES::ABORT;
             }
         }
         break;
@@ -694,9 +695,9 @@ void Robot::TestInit()
 
 void Robot::TestPeriodic()
 {
-  std::cout << "tilt: " << m_auto_balance.getTilt() << std::endl;
-//   m_arm.test();
-//   m_wrist.test();
+  // std::cout << "tilt: " << m_auto_balance.getTilt() << std::endl;
+  m_arm.test();
+  m_wrist.test();
 //   m_grippad.retract();
 // //  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 7.5);
 //     //Trajectory::follow_live_traj(m_trajectory);
