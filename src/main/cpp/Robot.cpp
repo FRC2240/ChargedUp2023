@@ -111,9 +111,9 @@ void swerveDrive(bool const &field_relative)
 
     Drivetrain::drive(front_back, -left_right, rot, field_relative);
 
-    frc::SmartDashboard::PutNumber("Gyro: ", Drivetrain::getAngle().value());
-    frc::SmartDashboard::PutNumber("front/back: ", front_back.value());
-    frc::SmartDashboard::PutNumber("left/right: ", left_right.value());
+    // frc::SmartDashboard::PutNumber("Gyro: ", Drivetrain::getAngle().value());
+    // frc::SmartDashboard::PutNumber("front/back: ", front_back.value());
+    // frc::SmartDashboard::PutNumber("left/right: ", left_right.value());
 
 
 }
@@ -262,12 +262,12 @@ void Robot::AutonomousPeriodic()
   if (m_autoState == kBalancing) {
 //    std::cout << "balancing\n";
     speed = m_auto_balance.autoBalanceRoutine();
-    Drivetrain::faceDirection(speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 180_deg, false, 5.5);
+    Drivetrain::faceDirection(speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 180_deg, false, 0.0);
   }
   else if (m_autoState == kBackwardsBalancing){
     // std::cout << "backwards balancing\n";
     speed = m_auto_balance.autoBalanceRoutine();
-    Drivetrain::faceDirection(-speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 180_deg, false, 5.5);
+    Drivetrain::faceDirection(-speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 0_deg, false, 0.0);
   }
 
 }

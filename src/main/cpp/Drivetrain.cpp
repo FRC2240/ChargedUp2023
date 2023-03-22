@@ -132,7 +132,7 @@ void Drivetrain::debug_angles()
   auto fr_old = Module::front_right->getState();
   auto bl_old = Module::back_left->getState();
   auto br_old = Module::back_right->getState();
-
+/*
   frc::SmartDashboard::PutNumber("front left alignment", fl_old.angle.Degrees().value());
   frc::SmartDashboard::PutNumber("front right alignment", fr_old.angle.Degrees().value());
   frc::SmartDashboard::PutNumber("back left alignment", bl_old.angle.Degrees().value());
@@ -142,7 +142,7 @@ void Drivetrain::debug_angles()
   frc::SmartDashboard::PutNumber("front right pos", Module::front_right->getEncoder());
   frc::SmartDashboard::PutNumber("back left ps", Module::back_left->getEncoder());
   frc::SmartDashboard::PutNumber("back right pos", Module::back_right->getEncoder());
-
+*/
 }
 wpi::array<double, 4> Drivetrain::getTurnerTemps()
 {
@@ -207,9 +207,9 @@ void Drivetrain::drive(frc::ChassisSpeeds const &speeds)
 
   if constexpr (debugging)
   {
-    frc::SmartDashboard::PutNumber("Target VX Speed", speeds.vx.value());
-    frc::SmartDashboard::PutNumber("Target VY Speed", speeds.vy.value());
-    frc::SmartDashboard::PutNumber("Target Omega Speed (CCW is +)", units::degrees_per_second_t{speeds.omega}.value() / 720);
+    // frc::SmartDashboard::PutNumber("Target VX Speed", speeds.vx.value());
+    // frc::SmartDashboard::PutNumber("Target VY Speed", speeds.vy.value());
+    // frc::SmartDashboard::PutNumber("Target Omega Speed (CCW is +)", units::degrees_per_second_t{speeds.omega}.value() / 720);
   }
 }
 
@@ -236,6 +236,7 @@ void Drivetrain::drive(wpi::array<frc::SwerveModuleState, 4> states)
   
   if constexpr (debugging)
   {
+    /*
     frc::SmartDashboard::PutString("Target Front Left Module", fmt::format("Speed (mps): {}, Direction: {}", fl.speed.value(), fl.angle.Degrees().value()));
     frc::SmartDashboard::PutString("Target Front Right Module", fmt::format("Speed (mps): {}, Direction: {}", fr.speed.value(), fr.angle.Degrees().value()));
     frc::SmartDashboard::PutString("Target Back Left Module", fmt::format("Speed (mps): {}, Direction: {}", bl.speed.value(), bl.angle.Degrees().value()));
@@ -249,6 +250,7 @@ void Drivetrain::drive(wpi::array<frc::SwerveModuleState, 4> states)
     frc::SmartDashboard::PutString("Actual Front Right Module", fmt::format("Speed (mps): {}, Direction: {}", fr_old.speed.value(), fr_old.angle.Degrees().value()));
     frc::SmartDashboard::PutString("Actual Back Left Module", fmt::format("Speed (mps): {}, Direction: {}", bl_old.speed.value(), bl_old.angle.Degrees().value()));
     frc::SmartDashboard::PutString("Actual Back Right Module", fmt::format("Speed (mps): {}, Direction: {}", br_old.speed.value(), br_old.angle.Degrees().value()));
+    */
   }
 }
 

@@ -89,6 +89,7 @@ namespace TRAJECTORY
   namespace WRIST
   {
     constexpr int WRIST_MOTOR_ID = 1;
+    constexpr double PICKUP = 0.75;
   }
 
   namespace ARM
