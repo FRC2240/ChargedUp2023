@@ -17,7 +17,7 @@ autoBalance::autoBalance(){
     robotSpeedSlow = 0.25;
 
     //Angle where the robot knows it is on the charge station, default = 13.0
-    onChargeStationDegree = 13.0;
+    onChargeStationDegree = 9.0;
 
     //Angle where the robot can assume it is level on the charging station
     //Used for exiting the drive forward sequence as well as for auto balancing, default = 6.0
@@ -42,9 +42,9 @@ double autoBalance::getTilt(){
 	double pitch = getPitch();
 	double roll = getRoll();
     if((pitch + roll)>= 0){
-        return -std::sqrt(pitch*pitch + roll*roll);
+        return (-std::sqrt(pitch*pitch + roll*roll));
     } else {
-        return std::sqrt(pitch*pitch + roll*roll);
+        return (std::sqrt(pitch*pitch + roll*roll));
     }
 }
 
@@ -61,8 +61,8 @@ double autoBalance::autoBalanceRoutine(){
         //drive forwards to approach station, exit when tilt is detected
         
         case 0:
-            std::cout << "aproaching\n";
-            if(getTilt() > onChargeStationDegree){
+            // std::cout << "aproaching\n";
+            if(getTilt() < -onChargeStationDegree){
                 debounceCount++;
             }
             if(debounceCount > secondsToTicks(debounceTime)){
@@ -73,8 +73,8 @@ double autoBalance::autoBalanceRoutine(){
             return robotSpeedFast;
         //driving up charge station, drive slower, stopping when level
         case 1:
-        std::cout << "climbing\n";
-            if (getTilt() < levelDegree){
+        // std::cout << "climbing\n";
+            if (getTilt() > -levelDegree){
                 debounceCount++; 
             }
             if(debounceCount > secondsToTicks(debounceTime)){
@@ -85,7 +85,7 @@ double autoBalance::autoBalanceRoutine(){
             return robotSpeedSlow;
         //on charge station, stop motors and wait for end of auto
         case 2:
-        std::cout << "balancing\n";
+        // std::cout << "balancing\n";
             if(fabs(getTilt()) < levelDegree){
                 debounceCount++;
             }
@@ -102,7 +102,7 @@ double autoBalance::autoBalanceRoutine(){
             break;
 
         case 3:
-        std::cout << "balanced\n";
+        // std::cout << "balanced\n";
             if(fabs(getTilt()) >= onChargeStationDegree){
                 debounceCount++;
             }
@@ -121,7 +121,7 @@ double autoBalance::autoBalanceRoutine(){
             return 0;
 
         case 4: 
-        std::cout << "climbing other side\n";
+        // std::cout << "climbing other side\n";
             if (getTilt() > -levelDegree){
                 debounceCount++; 
             }

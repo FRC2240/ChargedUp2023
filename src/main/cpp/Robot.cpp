@@ -166,32 +166,32 @@ void Robot::AutonomousInit()
 
 void Robot::AutonomousPeriodic()
 {
-    std::cout << Drivetrain::getAngle().value() << std::endl;
-  std::cout << Drivetrain::get_offset() << std::endl;
+    // std::cout << Drivetrain::getAngle().value() << std::endl;
+  // std::cout << Drivetrain::get_offset() << std::endl;
   m_wrist.Follow(m_arm.position);
   switch(m_autoAction) {
 
   case kBalance:
-    std::cout << "balance\n";
+    // std::cout << "balance\n";
     m_autoAction = kIdle;
     m_autoState = kBalancing;
     break;
 
   case kBackwardsBalance:
-    std::cout << "backwards balance\n";
+    // std::cout << "backwards balance\n";
     m_autoAction = kIdle;
     m_autoState = kBackwardsBalancing;
     break;
 
   case kScore:
       m_candle.BounceAnim();
-    std::cout << "score\n";
+    // std::cout << "score\n";
     if (m_arm.arm_moved(CONSTANTS::STATES::HIGH))
       {
-        std::cout << "arm moved \n";
+        // std::cout << "arm moved \n";
         if (m_camera.pose_loop())
           {
-            std::cout << "pose loop updated \n";
+            // std::cout << "pose loop updated \n";
             Robot::traj_init(Trajectory::HEIGHT::HIGH);
             m_autoAction = kScore_periodic;
 
@@ -199,12 +199,12 @@ void Robot::AutonomousPeriodic()
       }
       else 
       {
-        std::cout << "arm moving \n";
+        // std::cout << "arm moving \n";
       }
     break;
 
   case kScore_periodic:
-  std::cout << "scoring\n";
+  // std::cout << "scoring\n";
     if (Trajectory::follow_live_traj(m_trajectory))
       {
         //std::cout << "followed path \n";
@@ -222,7 +222,7 @@ void Robot::AutonomousPeriodic()
     break;
 
     case kAutoFallback:
-    std::cout << "faling back\n";
+    // std::cout << "faling back\n";
       if (Trajectory::follow_live_traj(m_back_trajectory))
         {
           m_robot_timer.Stop();
@@ -230,7 +230,7 @@ void Robot::AutonomousPeriodic()
           m_grabber.close();
           m_arm.arm_moved(CONSTANTS::STATES::STORED);
           if (m_arm.position < 56.0) {
-            std::cout << "arm stored\n";
+            // std::cout << "arm stored\n";
             m_autoSequence->pop_front();
             m_autoAction = m_autoSequence->front();
             m_autoState = kNothing;
@@ -239,6 +239,7 @@ void Robot::AutonomousPeriodic()
       break;
 
     case kFallbackPath:
+    // std::cout << "kFallbackPath" << std::endl;
       m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(m_fallback_pos));
       Trajectory::init_live_traj(m_back_trajectory);
       m_autoAction = kFallbackPathPeriodic;
@@ -254,17 +255,17 @@ void Robot::AutonomousPeriodic()
       break;
 
     case kIdle:
-    std::cout << "idle\n";
+    // std::cout << "idle\n";
       break;
   }
 
   if (m_autoState == kBalancing) {
-    std::cout << "balancing\n";
+//    std::cout << "balancing\n";
     speed = m_auto_balance.autoBalanceRoutine();
     Drivetrain::faceDirection(speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 180_deg, false, 5.5);
   }
   else if (m_autoState == kBackwardsBalancing){
-    std::cout << "backwards balancing\n";
+    // std::cout << "backwards balancing\n";
     speed = m_auto_balance.autoBalanceRoutine();
     Drivetrain::faceDirection(-speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 180_deg, false, 5.5);
   }
@@ -693,14 +694,15 @@ void Robot::TestInit()
 
 void Robot::TestPeriodic()
 {
-  m_arm.test();
-  m_wrist.test();
-  m_grippad.retract();
-//  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 7.5);
-    //Trajectory::follow_live_traj(m_trajectory);
-  m_arm.test();
-  m_wrist.test();
-    //Trajectory::follow_live_traj(m_trajectory);
+  std::cout << "tilt: " << m_auto_balance.getTilt() << std::endl;
+//   m_arm.test();
+//   m_wrist.test();
+//   m_grippad.retract();
+// //  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 7.5);
+//     //Trajectory::follow_live_traj(m_trajectory);
+//   m_arm.test();
+//   m_wrist.test();
+//     //Trajectory::follow_live_traj(m_trajectory);
 }
 
 void Robot::DisabledPeriodic()

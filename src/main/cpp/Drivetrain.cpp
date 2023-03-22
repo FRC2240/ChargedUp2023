@@ -37,11 +37,8 @@ void Drivetrain::zero_adjustment()
 
 void Drivetrain::zero_yaw()
 {
-  if (navx->GetAngleAdjustment() >= 179)
-  {
     navx->SetAngleAdjustment(0);
     navx->ZeroYaw();
-  }
 }
 
 void Drivetrain::print_angle()
