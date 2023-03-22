@@ -122,7 +122,7 @@ namespace TRAJECTORY
       constexpr double LOW = 91.0;
       constexpr double MED = 130.0;
       constexpr double HP = 142.3;
-      constexpr double HIGH = 152.0;
+      constexpr double HIGH = 150.0;
       constexpr double PICKUP = 72.0;
       constexpr double UP = 160.0;
     }
