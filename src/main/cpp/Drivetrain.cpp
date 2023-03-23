@@ -18,13 +18,27 @@ static std::unique_ptr<AHRS> navx;
 void Drivetrain::flip()
 {
   //navx->ZeroYaw();
-  navx->SetAngleAdjustment(180);
+  if (navx->GetAngleAdjustment() <= 0)
+  {
+    navx->SetAngleAdjustment(180);
+  }
+}
+
+double Drivetrain::get_offset()
+{
+  return navx->GetAngleAdjustment();
+}
+
+void Drivetrain::zero_adjustment()
+{
+  //navx->ResetDisplacement();
+  //navx->SetAngleAdjustment(0);
 }
 
 void Drivetrain::zero_yaw()
 {
-  navx->SetAngleAdjustment(0);
-  navx->ZeroYaw();
+    navx->SetAngleAdjustment(0);
+    navx->ZeroYaw();
 }
 
 void Drivetrain::print_angle()
@@ -118,7 +132,7 @@ void Drivetrain::debug_angles()
   auto fr_old = Module::front_right->getState();
   auto bl_old = Module::back_left->getState();
   auto br_old = Module::back_right->getState();
-
+/*
   frc::SmartDashboard::PutNumber("front left alignment", fl_old.angle.Degrees().value());
   frc::SmartDashboard::PutNumber("front right alignment", fr_old.angle.Degrees().value());
   frc::SmartDashboard::PutNumber("back left alignment", bl_old.angle.Degrees().value());
@@ -128,7 +142,7 @@ void Drivetrain::debug_angles()
   frc::SmartDashboard::PutNumber("front right pos", Module::front_right->getEncoder());
   frc::SmartDashboard::PutNumber("back left ps", Module::back_left->getEncoder());
   frc::SmartDashboard::PutNumber("back right pos", Module::back_right->getEncoder());
-
+*/
 }
 wpi::array<double, 4> Drivetrain::getTurnerTemps()
 {
@@ -193,9 +207,9 @@ void Drivetrain::drive(frc::ChassisSpeeds const &speeds)
 
   if constexpr (debugging)
   {
-    frc::SmartDashboard::PutNumber("Target VX Speed", speeds.vx.value());
-    frc::SmartDashboard::PutNumber("Target VY Speed", speeds.vy.value());
-    frc::SmartDashboard::PutNumber("Target Omega Speed (CCW is +)", units::degrees_per_second_t{speeds.omega}.value() / 720);
+    // frc::SmartDashboard::PutNumber("Target VX Speed", speeds.vx.value());
+    // frc::SmartDashboard::PutNumber("Target VY Speed", speeds.vy.value());
+    // frc::SmartDashboard::PutNumber("Target Omega Speed (CCW is +)", units::degrees_per_second_t{speeds.omega}.value() / 720);
   }
 }
 
@@ -222,6 +236,7 @@ void Drivetrain::drive(wpi::array<frc::SwerveModuleState, 4> states)
   
   if constexpr (debugging)
   {
+    /*
     frc::SmartDashboard::PutString("Target Front Left Module", fmt::format("Speed (mps): {}, Direction: {}", fl.speed.value(), fl.angle.Degrees().value()));
     frc::SmartDashboard::PutString("Target Front Right Module", fmt::format("Speed (mps): {}, Direction: {}", fr.speed.value(), fr.angle.Degrees().value()));
     frc::SmartDashboard::PutString("Target Back Left Module", fmt::format("Speed (mps): {}, Direction: {}", bl.speed.value(), bl.angle.Degrees().value()));
@@ -235,6 +250,7 @@ void Drivetrain::drive(wpi::array<frc::SwerveModuleState, 4> states)
     frc::SmartDashboard::PutString("Actual Front Right Module", fmt::format("Speed (mps): {}, Direction: {}", fr_old.speed.value(), fr_old.angle.Degrees().value()));
     frc::SmartDashboard::PutString("Actual Back Left Module", fmt::format("Speed (mps): {}, Direction: {}", bl_old.speed.value(), bl_old.angle.Degrees().value()));
     frc::SmartDashboard::PutString("Actual Back Right Module", fmt::format("Speed (mps): {}, Direction: {}", br_old.speed.value(), br_old.angle.Degrees().value()));
+    */
   }
 }
 
@@ -254,29 +270,32 @@ void Drivetrain::stop()
 /******************************************************************/
 bool Drivetrain::snap_to_zero()
 {
-  Drivetrain::faceDirection(0_mps, 0_mps, 180_deg, false, 5.5);
-  if ((Drivetrain::get_absolute_angle() >= 179_deg && Drivetrain::get_absolute_angle() <= 181_deg) ||
-    ((Drivetrain::get_absolute_angle() <= -179_deg && Drivetrain::get_absolute_angle() >= -181_deg)))
+  Drivetrain::faceDirection(0_mps, 0_mps, 180_deg, false, 6.5);
+
+  auto angle = Drivetrain::get_absolute_angle();
+  if ((angle >= 179_deg && angle <= 181_deg) || (angle <= -179_deg && angle >= -181_deg))
   {
     return true;
   }
   else 
   {
-    std::cout << "failed threshold check: " << Drivetrain::get_absolute_angle().value() << std::endl;
+    //std::cout << "failed threshold check: " << Drivetrain::get_absolute_angle().value() << std::endl;
     return false;
   }
 }
 
 bool Drivetrain::human_player_snap()
 {
-   Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 5.5);
-  if ((Drivetrain::get_absolute_angle() >= -1_deg && Drivetrain::get_absolute_angle() <= 1_deg))
+  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 6.5);
+  auto angle = Drivetrain::get_absolute_angle();
+
+  if ((angle >= -1_deg) && (angle <= 1_deg))
   {
     return true;
   }
   else 
   {
-    std::cout << "failed threshold check: " << Drivetrain::get_absolute_angle().value() << std::endl;
+    //std::cout << "failed threshold check: " << Drivetrain::get_absolute_angle().value() << std::endl;
     return false;
   } 
 }

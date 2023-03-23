@@ -77,7 +77,7 @@ public:
 
 private:
 
-    CONSTANTS::STATES state = CONSTANTS::STATES::STORED;
+    CONSTANTS::STATES state; //= CONSTANTS::STATES::STORED;
     CONSTANTS::STATES last_state;
 
     bool fall_back_init = false;
@@ -95,11 +95,7 @@ private:
     const std::string AUTO_STATION = "SCORE + STATION";
     const std::string AUTO_LINE = "SCORE + LEAVE";
     const std::string AUTO_NOTHING = "DO NOTHING";
-    const std::string HP_LINK = "HUMANPLAYER LINK";
-    const std::string HP_CONE = "HUMANPLAYER CONES ONLY";
-    const std::string CS = "CHARGE STATION 2 PIECES";
-    const std::string CABLE_LINK = "CABLE BUMP LINK";
-    const std::string CABLE_CONE = "CABLE BUMP CONES ONLY";
+    const std::string AUTO_BALANCE = "BALANCE";
 
     bool arm_bool;
 
@@ -140,62 +136,39 @@ private:
     units::meter_t m_fallback_pos2;
 
     enum autoActions{
-        kIntake,
         kScore,
         kScore_periodic,
-        kBalance,
-        kCSPath1,
-        kCSPath2,
-        kCSPath3,
-        kCableConePath1,
-        kCableConePath2,
-        kCableConePath3,
-        kCableConePath4,
-        kHPConePath1,
-        kHPConePath2,
-        kHPConePath3,
-        kHPConePath4,
-
-        kCableLinkPath1,
-        kCableLinkPath2,
-        kCableLinkPath3,
-        kCableLinkPath4,
-
-        kCableLinkPath1_periodic,
-        kCableLinkPath2_periodic,
-        kCableLinkPath3_periodic,
-        kCableLinkPath4_periodic,
-
-        kHPLinkPath1_periodic,
-        kHPLinkPath2_periodic,
-        kHPLinkPath3_periodic,
-        kHPLinkPath4_periodic,
-
-        kHPLinkPath1,
-        kHPLinkPath2,
-        kHPLinkPath3,
-        kHPLinkPath4,
-        kIdle,
-
         kAutoFallback,
+        kBalance,
+        kBackwardsBalance,
+        kFallbackPath,
+        kFallbackPathPeriodic,
+        kIdle
     };
 
     enum autoState {
-        kIntaking,
         kBalancing,
+        kBackwardsBalancing,
         kNothing
     };
 
-    std::list<autoActions> m_HP_link_sequence{
+    std::list<autoActions> m_score_and_leave_sequence{
         kScore,
-        kHPLinkPath1,
-        kIntake,
-        kHPLinkPath2,
+        kFallbackPath,
+        kIdle
+    };
+
+    std::list<autoActions> m_score_and_balance_sequence{
         kScore,
-        kHPLinkPath3,
-        kIntake,
-        kHPLinkPath4,
-        kScore
+        kFallbackPath,
+        kBalance,
+        kIdle
+    };
+
+    std::list<autoActions> m_balance_sequence{
+        kScore,
+        kBackwardsBalance,
+        kIdle
     };
 
     std::list<autoActions> *m_autoSequence;

@@ -36,7 +36,7 @@ Trajectory::TrajDepends Trajectory::generate_humanplayer_depends()
     ret.current_x = current_pose.X();
     ret.current_y = current_pose.Y();
 
-    if (current_pose.X() < 0_m)
+    if (current_pose.X() > 0_m)
     {
         ret.desired_x = CONSTANTS::TRAJECTORY::B::HUMANPLAYER;
     }
@@ -45,7 +45,7 @@ Trajectory::TrajDepends Trajectory::generate_humanplayer_depends()
         ret.desired_x = CONSTANTS::TRAJECTORY::R::HUMANPLAYER;
     }
 
-    ret.desired_x = 2.0*ret.current_x - ret.desired_x;
+    //ret.desired_x = 2.0*ret.current_x - ret.desired_x;
     //std::cout << "desired x: " << ret.desired_x.value() << std::endl;
     return ret;
 }
@@ -156,8 +156,8 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
     //ret.desired_y = 2.0*ret.current_y - ret.desired_y;
     ret.desired_x = 2.0*ret.current_x - ret.desired_x;
 
-    std::cout << "cx: " << ret.current_x.value() << "\n cy: " << ret.current_y.value() << std::endl;
-    std::cout << "dx: " << ret.desired_x.value() << "\n dy: " << ret.desired_y.value() << std::endl;
+    // std::cout << "cx: " << ret.current_x.value() << "\n cy: " << ret.current_y.value() << std::endl;
+    // std::cout << "dx: " << ret.desired_x.value() << "\n dy: " << ret.desired_y.value() << std::endl;
     auto heading = (frc::Translation2d(ret.desired_x, ret.desired_y) - current_pose.Translation()).Angle().Degrees();
     //std::cout << "heading: " <<  heading.value() << std::endl;
     ret.current_head = heading;
@@ -170,24 +170,24 @@ void Trajectory::printRobotRelativeSpeeds()
 {
     frc::ChassisSpeeds const robot_relative = Drivetrain::getRobotRelativeSpeeds();
 
-    frc::SmartDashboard::PutNumber("Estimated VX Speed", robot_relative.vx.value());
-    frc::SmartDashboard::PutNumber("Estimated VY Speed", robot_relative.vy.value());
-    frc::SmartDashboard::PutNumber("Estimated Omega Speed", units::degrees_per_second_t{robot_relative.omega}.value() / 720);
+    // frc::SmartDashboard::PutNumber("Estimated VX Speed", robot_relative.vx.value());
+    // frc::SmartDashboard::PutNumber("Estimated VY Speed", robot_relative.vy.value());
+    // frc::SmartDashboard::PutNumber("Estimated Omega Speed", units::degrees_per_second_t{robot_relative.omega}.value() / 720);
 }
 
 PathPlannerTrajectory Trajectory::extract(std::string const &traj_dir,
                                 units::meters_per_second_t const &max_vel,
                                 units::meters_per_second_squared_t const &max_accl)
 {
-    return PathPlanner::loadPath(traj_dir, max_vel, max_accl, reverse_trajectory);
+    return PathPlanner::loadPath(traj_dir, max_vel/3, max_accl/3, reverse_trajectory);
 }
 PathPlannerTrajectory Trajectory::generate_live_traj(TrajDepends t)
 {
     return
         PathPlanner::generatePath(
 
-                                  PathConstraints(Drivetrain::TRAJ_MAX_SPEED/2,
-                                                  Drivetrain::TRAJ_MAX_ACCELERATION/2),
+                                  PathConstraints(Drivetrain::TRAJ_MAX_SPEED/4,
+                                                  Drivetrain::TRAJ_MAX_ACCELERATION/4),
 
                                   PathPoint(frc::Translation2d(t.current_x,
                                                                t.current_y),
@@ -283,7 +283,7 @@ void Trajectory::init_live_traj(PathPlannerTrajectory traj, units::second_t offs
             // If needed, we can disable the "error correction" for x & y
             controller.SetEnabled(true);
 
-            frc::SmartDashboard::PutString("Inital State: ", fmt::format("X: {}, Y: {}, Z: {}, Holonomic: {}\n", inital_pose.X().value(), inital_pose.Y().value(), inital_pose.Rotation().Degrees().value(), inital_state.holonomicRotation.Degrees().value()));
+            // frc::SmartDashboard::PutString("Inital State: ", fmt::format("X: {}, Y: {}, Z: {}, Holonomic: {}\n", inital_pose.X().value(), inital_pose.Y().value(), inital_pose.Rotation().Degrees().value(), inital_state.holonomicRotation.Degrees().value()));
         }
 }
 
@@ -346,9 +346,9 @@ void Trajectory::printFieldRelativeSpeeds()
 {
     frc::ChassisSpeeds const real_speeds = Odometry::getFieldRelativeSpeeds();
 
-    frc::SmartDashboard::PutNumber("Real VX Speed", real_speeds.vx.value());
-    frc::SmartDashboard::PutNumber("Real VY Speed", real_speeds.vy.value());
-    frc::SmartDashboard::PutNumber("Real Omega Speed", units::degrees_per_second_t{real_speeds.omega}.value() / 720);
+    // frc::SmartDashboard::PutNumber("Real VX Speed", real_speeds.vx.value());
+    // frc::SmartDashboard::PutNumber("Real VY Speed", real_speeds.vy.value());
+    // frc::SmartDashboard::PutNumber("Real Omega Speed", units::degrees_per_second_t{real_speeds.omega}.value() / 720);
 }
 
 /******************************************************************/
@@ -365,13 +365,14 @@ void Trajectory::driveToState(PathPlannerTrajectory::PathPlannerState const &sta
     {
         auto const real_pose = Odometry::getPose();
         frc::Transform2d const holonomic_error = {real_pose, state.pose};
-
+/*
         frc::SmartDashboard::PutNumber("Holonomic x error", holonomic_error.X().value());
         frc::SmartDashboard::PutNumber("Holonomic y error", holonomic_error.Y().value());
         frc::SmartDashboard::PutNumber("Holonomic z error", holonomic_error.Rotation().Radians().value());
 
         frc::SmartDashboard::PutNumber("Target Rotation", state.holonomicRotation.Radians().value());
         frc::SmartDashboard::PutNumber("Real Rotation", real_pose.Rotation().Radians().value());
+        */
     }
 }
 

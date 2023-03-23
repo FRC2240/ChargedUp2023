@@ -68,6 +68,7 @@ bool Vision::pose_loop()
                                                            m_left_buffer),
                                            Vision::collect(&Data::rot_x,
                                                            m_right_buffer));
+
           Vision::update_pose(pose_ret_val);
          std::fill(m_left_buffer.begin(), m_left_buffer.end(), nonsense);
          std::fill(m_right_buffer.begin(), m_right_buffer.end(), nonsense);
@@ -247,12 +248,12 @@ void Vision::update_pose(Data bot_pose)
   frc::Rotation2d rot{units::degree_t(bot_pose.rot_x)};
   // units::meter_t x, y, Rotation::2d theta
   frc::Pose2d pose{trans_x, trans_y, Drivetrain::getCCWHeading()};
-  std::cout << "VISION RESET: " << trans_x.value() << 
-  ", " <<
-   trans_y.value() <<
-   ", " <<
-   rot.Degrees().value() <<
-   std::endl;
+  // std::cout << "VISION RESET: " << trans_x.value() << 
+  // ", " <<
+  //  trans_y.value() <<
+  //  ", " <<
+  //  rot.Degrees().value() <<
+  //  std::endl;
 
   Odometry::reset_position_from_vision(pose);
 }

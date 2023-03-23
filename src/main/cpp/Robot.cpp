@@ -54,11 +54,7 @@ Robot::Robot()
   m_chooser.AddOption(AUTO_STATION, AUTO_STATION);
   m_chooser.AddOption(AUTO_LINE, AUTO_LINE);
   m_chooser.AddOption(AUTO_NOTHING, AUTO_NOTHING);
-  m_chooser.AddOption(HP_LINK, HP_LINK);
-  m_chooser.AddOption(HP_CONE, HP_CONE);
-  m_chooser.AddOption(CS, CS);
-  m_chooser.AddOption(CABLE_LINK, CABLE_LINK);
-  m_chooser.AddOption(CABLE_CONE, CABLE_CONE);
+  m_chooser.AddOption(AUTO_BALANCE, AUTO_BALANCE);
 
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
@@ -115,9 +111,9 @@ void swerveDrive(bool const &field_relative)
 
     Drivetrain::drive(front_back, -left_right, rot, field_relative);
 
-    frc::SmartDashboard::PutNumber("Gyro: ", Drivetrain::getAngle().value());
-    frc::SmartDashboard::PutNumber("front/back: ", front_back.value());
-    frc::SmartDashboard::PutNumber("left/right: ", left_right.value());
+    // frc::SmartDashboard::PutNumber("Gyro: ", Drivetrain::getAngle().value());
+    // frc::SmartDashboard::PutNumber("front/back: ", front_back.value());
+    // frc::SmartDashboard::PutNumber("left/right: ", left_right.value());
 
 
 }
@@ -127,50 +123,38 @@ void swerveDrive(bool const &field_relative)
 /******************************************************************/
 void Robot::RobotPeriodic()
 {
-  Trajectory::reverse_trajectory = frc::SmartDashboard::GetBoolean("Traj Reversed", Trajectory::reverse_trajectory);
+  //Trajectory::reverse_trajectory = frc::SmartDashboard::GetBoolean("Traj Reversed", Trajectory::reverse_trajectory);
   m_arm.Read_Position();
 }
 
 void Robot::AutonomousInit()
 {
+  //std::cout << Drivetrain::getAngle().value() << std::endl;
+  //std::cout << Drivetrain::get_offset() << std::endl;
+
+  Odometry::update();
   Drivetrain::flip();
   m_grippad.retract();
+  //  std::cout << Drivetrain::getAngle().value() << std::endl;
+  //std::cout << Drivetrain::get_offset() << std::endl;
 
   // Get choosen autonomous mode
   m_autoSelected = m_chooser.GetSelected();
 
   if (m_autoSelected == AUTO_STATION) 
   {
-    state = CONSTANTS::STATES::AUTO_SIMP_HIGH;
-    m_fallback_pos = 2.0_ft;
-    m_fallback_pos2 = 6.0_ft;
+    m_autoSequence = &m_score_and_balance_sequence;
+    m_fallback_pos = 12.5_ft;
   } 
   else if (m_autoSelected == AUTO_LINE) 
   {
-    state = CONSTANTS::STATES::AUTO_SIMP_HIGH;
-    m_fallback_pos = 2.0_ft;
-    m_fallback_pos2 = 10.5_ft;
+    m_autoSequence = &m_score_and_leave_sequence;
+    m_fallback_pos = 12.5_ft;
   } 
-  else if (m_autoSelected == HP_LINK) 
+  else if (m_autoSelected == AUTO_BALANCE)
   {
-    m_autoSequence = &m_HP_link_sequence;
-  } 
-  // else if (m_autoSelected == HP_CONE) 
-  // {
-    
-  // } 
-  // else if (m_autoSelected == CS) 
-  // {
-    
-  // } 
-  // else if (m_autoSelected == CABLE_LINK) 
-  // {
-    
-  // } 
-  // else if (m_autoSelected == CABLE_CONE) 
-  // {
-    
-  // } 
+    m_autoSequence = &m_balance_sequence;
+  }
   else 
   {
     state = CONSTANTS::STATES::STORED;
@@ -182,170 +166,52 @@ void Robot::AutonomousInit()
 
 void Robot::AutonomousPeriodic()
 {
+    // std::cout << Drivetrain::getAngle().value() << std::endl;
+  // std::cout << Drivetrain::get_offset() << std::endl;
   m_wrist.Follow(m_arm.position);
-
-  switch (state)
-  {
-  case CONSTANTS::STATES::AUTO_SIMP_HIGH:
-    if (m_arm.arm_moved(CONSTANTS::STATES::HIGH))
-    {
-      // std::cout << "init traj \n";
-      m_simp_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(CONSTANTS::TRAJECTORY::SIMPLE_FORWARDS));
-      Trajectory::init_live_traj(m_simp_trajectory);
-      state = CONSTANTS::STATES::SCORE; 
-    }
-    break;
-
-  case CONSTANTS::STATES::STORED:
-    m_grabber.close();
-    m_arm.arm_moved(CONSTANTS::STATES::STORED);
-    break;
-
-  case CONSTANTS::STATES::HIGH:
-    if (m_camera.pose_loop())
-    {
-      if (m_arm.arm_moved(state))
-      {
-        Robot::traj_init(Trajectory::HEIGHT::HIGH);
-        state = CONSTANTS::STATES::SCORE;
-      }
-    }
-    break;
-
-  case CONSTANTS::STATES::SCORE:
-  //std::cout << "scoring\n";
-    if (Trajectory::follow_live_traj(m_simp_trajectory))
-    {
-      //std::cout << "followed path \n";
-      m_grabber.open();
-      m_robot_timer.Start();
-
-      if (m_robot_timer.Get() > units::time::second_t(0.5))
-      {
-        //std::cout << "timer expired \n";
-        m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(m_fallback_pos));
-        Trajectory::init_live_traj(m_back_trajectory);
-        state = CONSTANTS::STATES::FALLBACK;
-      }
-    }
-    break;
-
-  case CONSTANTS::STATES::FALLBACK:
-      //std::cout << "falling back\n";
-    if (Trajectory::follow_live_traj(m_back_trajectory))
-    {
-      //std::cout << "fell back\n";
-      m_robot_timer.Stop();
-      m_robot_timer.Reset();
-      m_grabber.close();
-      m_arm.arm_moved(CONSTANTS::STATES::STORED);
-      m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(m_fallback_pos2));
-      Trajectory::init_live_traj(m_back_trajectory);
-      state = CONSTANTS::STATES::FALLBACK2;
-    }
-    break;
-
-  case CONSTANTS::STATES::FALLBACK2:
-    m_arm.arm_moved(CONSTANTS::STATES::STORED);
-    if (Trajectory::follow_live_traj(m_back_trajectory))
-    {
-      state = CONSTANTS::STATES::STORED;
-    }
-    break;
-  }
-
-
   switch(m_autoAction) {
-  case kIntake:
+
+  case kBalance:
+    // std::cout << "balance\n";
     m_autoAction = kIdle;
-    m_autoState = kIntaking;
+    m_autoState = kBalancing;
     break;
 
-    case kBalance:
-      m_autoAction = kIdle;
-      m_autoState = kBalancing;
-      break;
-
-  case kHPLinkPath1:
-    m_path_trajectory1 = Trajectory::extract("link_HP_side_1");
-    Trajectory::init_live_traj(m_path_trajectory1);
-    m_autoAction = kHPLinkPath1_periodic;
+  case kBackwardsBalance:
+    // std::cout << "backwards balance\n";
+    m_autoAction = kIdle;
+    m_autoState = kBackwardsBalancing;
     break;
-
-  case kHPLinkPath1_periodic:
-    if (Trajectory::follow_live_traj(m_path_trajectory1))
-      {
-        m_autoSequence->pop_front();
-        m_autoAction = m_autoSequence->front();
-        m_autoState = kNothing;
-      }
-    break;
-
-    case kHPLinkPath2:
-      m_path_trajectory2 = Trajectory::extract("link_HP_side_2");
-      Trajectory::init_live_traj(m_path_trajectory2);
-    m_autoAction = kHPLinkPath2_periodic;
-      break;
-
-    case kHPLinkPath2_periodic:
-      if (Trajectory::follow_live_traj(m_path_trajectory2))
-      {
-        m_autoSequence->pop_front();
-        m_autoAction = m_autoSequence->front();
-        m_autoState = kNothing;
-      }
-      break;
-
-     case kHPLinkPath3:
-      m_path_trajectory3 = Trajectory::extract("link_HP_side_3");
-      Trajectory::init_live_traj(m_path_trajectory3);
-    m_autoAction = kHPLinkPath3_periodic;
-     break;
-
-   case kHPLinkPath3_periodic:
-     if (Trajectory::follow_live_traj(m_path_trajectory3))
-      {
-        m_autoSequence->pop_front();
-        m_autoAction = m_autoSequence->front();
-        m_autoState = kNothing;
-      }
-      break;
-
-    case kHPLinkPath4:
-      m_path_trajectory4 = Trajectory::extract("link_HP_side_4");
-      Trajectory::init_live_traj(m_path_trajectory4);
-      m_autoAction = kHPLinkPath4_periodic;
-     break;
-
-    case kHPLinkPath4_periodic:
-      if (Trajectory::follow_live_traj(m_path_trajectory4))
-      {
-        m_autoSequence->pop_front();
-        m_autoAction = m_autoSequence->front();
-        m_autoState = kNothing;
-      }
 
   case kScore:
-    if (m_camera.pose_loop())
+      m_candle.BounceAnim();
+    // std::cout << "score\n";
+    if (m_arm.arm_moved(CONSTANTS::STATES::HIGH))
       {
-        if (m_arm.arm_moved(CONSTANTS::STATES::HIGH))
+        // std::cout << "arm moved \n";
+        if (m_camera.pose_loop())
           {
+            // std::cout << "pose loop updated \n";
             Robot::traj_init(Trajectory::HEIGHT::HIGH);
             m_autoAction = kScore_periodic;
-            m_robot_timer.Reset();
-            m_robot_timer.Start();
+
           }
+      }
+      else 
+      {
+        // std::cout << "arm moving \n";
       }
     break;
 
   case kScore_periodic:
+  // std::cout << "scoring\n";
     if (Trajectory::follow_live_traj(m_trajectory))
       {
         //std::cout << "followed path \n";
         m_grabber.open();
         m_robot_timer.Start();
 
-        if (m_robot_timer.Get() > units::time::second_t(0.5))
+        if (m_robot_timer.Get() > 0.5_s)
           {
             //std::cout << "timer expired \n";
             m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back());
@@ -356,47 +222,52 @@ void Robot::AutonomousPeriodic()
     break;
 
     case kAutoFallback:
+    // std::cout << "faling back\n";
       if (Trajectory::follow_live_traj(m_back_trajectory))
         {
           m_robot_timer.Stop();
           m_robot_timer.Reset();
           m_grabber.close();
           m_arm.arm_moved(CONSTANTS::STATES::STORED);
-          state = CONSTANTS::STATES::STORED;
-        }
-      break;
-
-    case kIdle:
-      break;
-  }
-
-  if (m_autoState == kIntaking) {
-    if (m_arm.arm_moved(state))
-      {
-        m_grabber.open();
-        m_robot_timer.Start();
-        if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))
-        {
-          m_grabber.close();
-          m_robot_timer2.Start();
-          if (m_robot_timer2.Get() > units::time::second_t(0.5))
-          {
-            m_robot_timer.Stop();
-            m_robot_timer.Reset();
-            m_robot_timer2.Stop();
-            m_robot_timer2.Reset();
-            m_arm.arm_moved(CONSTANTS::STATES::STORED);
-            state = CONSTANTS::STATES::STORED;
+          if (m_arm.position < 56.0) {
+            // std::cout << "arm stored\n";
             m_autoSequence->pop_front();
             m_autoAction = m_autoSequence->front();
             m_autoState = kNothing;
           }
         }
+      break;
+
+    case kFallbackPath:
+    // std::cout << "kFallbackPath" << std::endl;
+      m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(m_fallback_pos));
+      Trajectory::init_live_traj(m_back_trajectory);
+      m_autoAction = kFallbackPathPeriodic;
+      break;
+
+    case kFallbackPathPeriodic:
+      if (Trajectory::follow_live_traj(m_back_trajectory))
+      {
+        m_autoSequence->pop_front();
+        m_autoAction = m_autoSequence->front();
+        m_autoState = kNothing;
       }
+      break;
+
+    case kIdle:
+    // std::cout << "idle\n";
+      break;
   }
-  else if (m_autoState == kBalancing) {
+
+  if (m_autoState == kBalancing) {
+//    std::cout << "balancing\n";
     speed = m_auto_balance.autoBalanceRoutine();
-    Drivetrain::faceDirection(-speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 180_deg, false, 5.5);
+    Drivetrain::faceDirection(speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 180_deg, false, 0.0);
+  }
+  else if (m_autoState == kBackwardsBalancing){
+    // std::cout << "backwards balancing\n";
+    speed = m_auto_balance.autoBalanceRoutine();
+    Drivetrain::faceDirection(-speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 0_deg, false, 0.0);
   }
 
 }
@@ -410,8 +281,8 @@ void Robot::TeleopInit()
   //std::cout << "TeleopInit";
   Odometry::update();
   state = CONSTANTS::STATES::STORED;
-  std::cout << "navx " << Drivetrain::getCCWHeading().Degrees().value() << std::endl;
-  std::cout << "odometry: " << Odometry::getPose().Rotation().Degrees().value() << std::endl;
+  //std::cout << "navx " << Drivetrain::getCCWHeading().Degrees().value() << std::endl;
+  //std::cout << "odometry: " << Odometry::getPose().Rotation().Degrees().value() << std::endl;
 
    m_grippad.retract();
 }
@@ -478,7 +349,8 @@ void Robot::TeleopPeriodic()
   else if ((state == CONSTANTS::STATES::SCORE && BUTTON::DRIVETRAIN::ABORT()) ||
     ((state == CONSTANTS::STATES::HIGH && BUTTON::DRIVETRAIN::ABORT())) ||
     ((state == CONSTANTS::STATES::MED && BUTTON::DRIVETRAIN::ABORT())) ||
-    ((state == CONSTANTS::STATES::LOW && BUTTON::DRIVETRAIN::ABORT())))
+    ((state == CONSTANTS::STATES::LOW && BUTTON::DRIVETRAIN::ABORT())) ||
+    ((state == CONSTANTS::STATES::HUMANPLAYER_AUTO && BUTTON::DRIVETRAIN::ABORT())))
 
   {
     state = CONSTANTS::STATES::ABORT;
@@ -541,13 +413,9 @@ void Robot::TeleopPeriodic()
       break;
 
     case CONSTANTS::STATES::HUMANPLAYER:
-      if (m_arm.arm_moved(state))
+     if (m_arm.arm_moved(state))
       {
-        if (BUTTON::ARM::TRIGGER_AUTO())
-        {
-          state = CONSTANTS::STATES::HUMANPLAYER_AUTO_INIT;
-        }
-        m_grabber.open();
+       m_grabber.open();
         m_robot_timer.Start();
         if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))
         {
@@ -562,33 +430,18 @@ void Robot::TeleopPeriodic()
         }
       }
       break;
-    case CONSTANTS::STATES::HUMANPLAYER_AUTO_INIT:
-      if (Drivetrain::human_player_snap())
-      {
-        if (m_camera.pose_loop())
-        {
-          m_robot_timer.Reset();
-          m_robot_timer.Start();
-          m_humanplayer_traj = Trajectory::generate_live_traj(Trajectory::generate_humanplayer_depends());
-          Trajectory::init_live_traj(m_humanplayer_traj);
-          state = CONSTANTS::STATES::HUMANPLAYER_AUTO;
-        }
-      }
-    break;
 
     case CONSTANTS::STATES::HUMANPLAYER_AUTO:
-    m_grabber.open();
-    if (Trajectory::follow_live_traj(m_humanplayer_traj) || !m_grabber.break_beam())
-    {
-     m_grabber.close();
-          if (m_robot_timer.Get() > units::time::second_t(1.5))
-          {
-            m_robot_timer.Stop();
-            m_robot_timer.Reset();
-            state = CONSTANTS::STATES::ABORT;
-          }
-
-    }
+    m_candle.BounceAnim();
+      if (m_grabber.break_beam())
+      {
+        m_grabber.open();
+        Drivetrain::faceDirection(0.75_mps, 0_mps, Odometry::getPose().Rotation().Degrees(), false, 0.0);
+      }
+      else
+      {
+        m_grabber.close();
+      }
     break;
 
     case CONSTANTS::STATES::PICKUP:
@@ -685,9 +538,10 @@ void Robot::TeleopPeriodic()
               //" , " <<
               //Odometry::getPose().Y().value() <<
               //std::endl;
-              m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(1.0_m));
-              Trajectory::init_live_traj(m_back_trajectory);
-              state = CONSTANTS::STATES::FALLBACK;
+              // m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(1.0_m));
+              // Trajectory::init_live_traj(m_back_trajectory);
+              m_force_pos = m_arm.Read_Position();
+              state = CONSTANTS::STATES::ABORT;
             }
         }
         break;
@@ -695,6 +549,11 @@ void Robot::TeleopPeriodic()
       case CONSTANTS::STATES::O_HP:
         if (m_arm.arm_moved(CONSTANTS::STATES::HUMANPLAYER))
           {
+             if (BUTTON::ARM::TRIGGER_AUTO())
+              {
+                state = CONSTANTS::STATES::HUMANPLAYER_AUTO;
+              }
+ 
             m_wrist.HumanPlayer();
             m_grabber.open();
             m_robot_timer.Start();
@@ -774,7 +633,7 @@ void Robot::TeleopPeriodic()
         state != CONSTANTS::STATES::MED &&
         state != CONSTANTS::STATES::LOW &&
         state != CONSTANTS::STATES::SCORE &&
-        state != CONSTANTS::STATES::FALLBACK
+        state != CONSTANTS::STATES::FALLBACK 
       )
       {
           m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(),
@@ -836,14 +695,15 @@ void Robot::TestInit()
 
 void Robot::TestPeriodic()
 {
+  // std::cout << "tilt: " << m_auto_balance.getTilt() << std::endl;
   m_arm.test();
   m_wrist.test();
-  m_grippad.retract();
-//  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 7.5);
-    //Trajectory::follow_live_traj(m_trajectory);
-  m_arm.test();
-  m_wrist.test();
-    //Trajectory::follow_live_traj(m_trajectory);
+//   m_grippad.retract();
+// //  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 7.5);
+//     //Trajectory::follow_live_traj(m_trajectory);
+//   m_arm.test();
+//   m_wrist.test();
+//     //Trajectory::follow_live_traj(m_trajectory);
 }
 
 void Robot::DisabledPeriodic()

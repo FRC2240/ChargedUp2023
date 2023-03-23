@@ -70,7 +70,7 @@ namespace TRAJECTORY
       constexpr units::meter_t HIGH_X = 6.50_m;
       constexpr units::meter_t MID_X = 6.12_m;
       constexpr units::meter_t GROUND_X = 6.09_m;
-      constexpr units::meter_t HUMANPLAYER = 6.09_m;
+      constexpr units::meter_t HUMANPLAYER = -6.6_m;
     }
 
     namespace B
@@ -78,7 +78,7 @@ namespace TRAJECTORY
       constexpr units::meter_t HIGH_X = -6.50_m;
       constexpr units::meter_t MID_X = -6.12_m;
       constexpr units::meter_t GROUND_X = -6.06_m;
-      constexpr units::meter_t HUMANPLAYER = -6.06_m;
+      constexpr units::meter_t HUMANPLAYER = 6.6_m;
     }
   }
   namespace GRIPPAD
@@ -89,6 +89,7 @@ namespace TRAJECTORY
   namespace WRIST
   {
     constexpr int WRIST_MOTOR_ID = 1;
+    constexpr double PICKUP = 0.75;
   }
 
   namespace ARM
@@ -120,9 +121,9 @@ namespace TRAJECTORY
       // All units in degrees
       constexpr double STORED = 36.0;
       constexpr double LOW = 91.0;
-      constexpr double MED = 124.0;
-      constexpr double HP = 141.0;
-      constexpr double HIGH = 148.0;
+      constexpr double MED = 130.0;
+      constexpr double HP = 142.3;
+      constexpr double HIGH = 150.0;
       constexpr double PICKUP = 72.0;
       constexpr double UP = 160.0;
     }

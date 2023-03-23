@@ -39,15 +39,15 @@ frc::Field2d field2d;
 
 void Odometry::putField2d()
 {
-    frc::SmartDashboard::PutData("Odometry Field", &field2d);
+    // frc::SmartDashboard::PutData("Odometry Field", &field2d);
 }
 
 void Odometry::update()
 {
     frc::Pose2d const pose = odometry.Update(Drivetrain::getCCWHeading(),
                                              Drivetrain::getModulePositions());
-    if constexpr (CONSTANTS::DEBUGGING)
-        frc::SmartDashboard::PutString("Odometry: ", fmt::format("Pose X: {}, Y: {}, Z (Degrees): {}\n", pose.X().value(), pose.Y().value(), pose.Rotation().Degrees().value()));
+    // if constexpr (CONSTANTS::DEBUGGING)
+        // frc::SmartDashboard::PutString("Odometry: ", fmt::format("Pose X: {}, Y: {}, Z (Degrees): {}\n", pose.X().value(), pose.Y().value(), pose.Rotation().Degrees().value()));
 }
 
 frc::Pose2d Odometry::getPose() { return odometry.GetPose(); }

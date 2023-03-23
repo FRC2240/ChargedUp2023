@@ -20,7 +20,7 @@ namespace BUTTON
     inline double LY() {return BUTTON::m_stick.GetLeftY();}
     inline double RX() {return BUTTON::m_stick.GetRightX();}
     inline double RY() {return BUTTON::m_stick.GetRightY();}
-    inline double FIELD_CENTRIC(){return BUTTON::m_stick.GetRightStickButtonPressed();}
+    inline double FIELD_CENTRIC(){return 0;}
 
    inline bool ABORT()
     {
