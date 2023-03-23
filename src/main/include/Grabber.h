@@ -24,7 +24,7 @@ public:
 
   bool grabberStatusBool = false;
 
-  frc::DigitalInput  m_beam{0};
+  frc::DigitalInput  m_limit_switch{0};
 private:
 
   bool toggle = false;

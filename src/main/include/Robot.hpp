@@ -96,6 +96,7 @@ private:
     const std::string AUTO_LINE = "SCORE + LEAVE";
     const std::string AUTO_NOTHING = "DO NOTHING";
     const std::string AUTO_BALANCE = "BALANCE";
+    const std::string SCORE_IDLE = "SCORE NO LEAVE";
 
     bool arm_bool;
 
@@ -168,6 +169,11 @@ private:
     std::list<autoActions> m_balance_sequence{
         kScore,
         kBackwardsBalance,
+        kIdle
+    };
+
+    std::list<autoActions> m_score_and_idle_sequence{
+        kScore,
         kIdle
     };
 

@@ -55,6 +55,7 @@ Robot::Robot()
   m_chooser.AddOption(AUTO_LINE, AUTO_LINE);
   m_chooser.AddOption(AUTO_NOTHING, AUTO_NOTHING);
   m_chooser.AddOption(AUTO_BALANCE, AUTO_BALANCE);
+  m_chooser.AddOption(SCORE_IDLE, SCORE_IDLE);
 
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
@@ -155,6 +156,10 @@ void Robot::AutonomousInit()
   {
     m_autoSequence = &m_balance_sequence;
   }
+  else if (m_autoSelected == SCORE_IDLE)
+  {
+    m_autoSequence = &m_score_and_idle_sequence;
+  }
   else 
   {
     state = CONSTANTS::STATES::STORED;
@@ -214,7 +219,7 @@ void Robot::AutonomousPeriodic()
         if (m_robot_timer.Get() > 0.5_s)
           {
             //std::cout << "timer expired \n";
-            m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back());
+            m_back_trajectory = Trajectory::generate_live_traj(Trajectory::fall_back(0.6_m));
             Trajectory::init_live_traj(m_back_trajectory);
             m_autoAction = kAutoFallback;
           }
@@ -698,6 +703,7 @@ void Robot::TestPeriodic()
   // std::cout << "tilt: " << m_auto_balance.getTilt() << std::endl;
   m_arm.test();
   m_wrist.test();
+  std::cout << m_grabber.break_beam() << std::endl;
 //   m_grippad.retract();
 // //  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 7.5);
 //     //Trajectory::follow_live_traj(m_trajectory);

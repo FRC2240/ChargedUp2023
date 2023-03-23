@@ -21,5 +21,8 @@ bool Grabber::grabberStatus()
   return grabberStatusBool;
 }
 
-bool Grabber::break_beam(){return m_beam.Get();}
+bool Grabber::break_beam()
+{
+  return m_limit_switch.Get();
+}
 
