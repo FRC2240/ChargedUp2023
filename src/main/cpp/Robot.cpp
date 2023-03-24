@@ -361,6 +361,14 @@ void Robot::TeleopPeriodic()
     state = CONSTANTS::STATES::ABORT;
     m_force_pos = m_arm.Read_Position();
   }
+  else if (BUTTON::ARM::OVERIDES::PICKUP_OVERIDE())
+  {
+    state = CONSTANTS::STATES::O_PICKUP;
+  }
+  else if (BUTTON::ARM::OVERIDES::HP_OVERIDE())
+  {
+    state = CONSTANTS::STATES::O_HP_PICKUP;
+  }
   /*else if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_HP())
   {
     state = CONSTANTS::STATES::O_HP;
@@ -441,7 +449,7 @@ void Robot::TeleopPeriodic()
       if (m_grabber.break_beam())
       {
         m_grabber.open();
-        Drivetrain::faceDirection(0.75_mps, 0_mps, Odometry::getPose().Rotation().Degrees(), false, 0.0);
+        Drivetrain::faceDirection(0.5_mps, 0_mps, Odometry::getPose().Rotation().Degrees(), false, 0.0);
       }
       else
       {
@@ -632,7 +640,60 @@ void Robot::TeleopPeriodic()
         m_arm.arm_moved(state);
         break;
 
+      case CONSTANTS::STATES::O_PICKUP:
+        if (m_arm.arm_moved(CONSTANTS::STATES::PICKUP))
+        {
+          m_wrist.Pickup();
+          m_grabber.open();
+          m_robot_timer.Start();
+          if (BUTTON::GRABBER::TOGGLE())
+          {
+            m_grabber.close();
+            m_robot_timer2.Start();
+            if (m_robot_timer2.Get() > units::time::second_t(0.5))
+            {
+              m_robot_timer.Stop();
+              m_robot_timer.Reset();
+              m_robot_timer2.Stop();
+              m_robot_timer2.Reset();
+              m_arm.arm_moved(CONSTANTS::STATES::STORED);
+              state = CONSTANTS::STATES::STORED;
+            }
+          }
+        }
+        else {
+          m_wrist.Follow(m_arm.position);
+        }
+        break;
+
+      case CONSTANTS::STATES::O_HP_PICKUP:
+        if (m_arm.arm_moved(CONSTANTS::STATES::HUMANPLAYER))
+        {
+          m_wrist.HumanPlayer();
+          m_grabber.open();
+          m_robot_timer.Start();
+          if (BUTTON::GRABBER::TOGGLE())
+          {
+            m_grabber.close();
+            m_robot_timer2.Start();
+            if (m_robot_timer2.Get() > units::time::second_t(0.5))
+            {
+              m_robot_timer.Stop();
+              m_robot_timer.Reset();
+              m_robot_timer2.Stop();
+              m_robot_timer2.Reset();
+              m_arm.arm_moved(CONSTANTS::STATES::STORED);
+              state = CONSTANTS::STATES::STORED;
+            }
+          }
+        }
+        else {
+          m_wrist.Follow(m_arm.position);
+        }
+        break;
+
       }
+      
       if (
         state != CONSTANTS::STATES::HIGH &&
         state != CONSTANTS::STATES::MED &&

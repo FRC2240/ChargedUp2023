@@ -13,7 +13,7 @@ autoBalance::autoBalance(){
     
     //Speed the robot drives while balancing itself on the charge station.
     //Should be roughly half the fast speed, to make the robot more accurate, default = 0.2
-    robotSpeedSlow = 0.17;
+    robotSpeedSlow = 0.2;
 
     //Angle where the robot knows it is on the charge station, default = 13.0
     onChargeStationDegree = 13.0;
