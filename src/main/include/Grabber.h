@@ -4,6 +4,7 @@
 #include "frc/smartdashboard/SmartDashboard.h"
 #include <Constants.h>
 #include <frc/DoubleSolenoid.h>
+#include "rev/ColorSensorV3.h"
 
 class Grabber {
 private:  enum STATES {STOWED, INTAKING, EXTAKING};
@@ -25,6 +26,11 @@ public:
   bool grabberStatusBool = false;
 
   frc::DigitalInput  m_beam{0};
+
+  // Read Color Sensors
+  bool ReadSensors();
+  bool Color(frc::Color color);
+
 private:
 
   bool toggle = false;
@@ -32,7 +38,7 @@ private:
 
   frc::DoubleSolenoid m_grabberPiston{frc::PneumaticsModuleType::REVPH,CONSTANTS::GRABBER::GRABBER_PISTON_ID1,CONSTANTS::GRABBER::GRABBER_PISTON_ID2};
 
-  
-
-  
+  // Sensors
+  rev::ColorSensorV3 m_leftSensor {frc::I2C::Port::kOnboard};
+  rev::ColorSensorV3 m_rightSensor {frc::I2C::Port::kMXP};
 };

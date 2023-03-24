@@ -695,9 +695,11 @@ void Robot::TestInit()
 
 void Robot::TestPeriodic()
 {
+  m_grabber.ReadSensors();
+
   // std::cout << "tilt: " << m_auto_balance.getTilt() << std::endl;
-  m_arm.test();
-  m_wrist.test();
+// m_arm.test();
+//  m_wrist.test();
 //   m_grippad.retract();
 // //  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 7.5);
 //     //Trajectory::follow_live_traj(m_trajectory);
