@@ -12,6 +12,7 @@ public:
 
   Grabber();
 
+  bool limit_switch();
   bool break_beam();
   void open();
   void close();
@@ -25,6 +26,7 @@ public:
   bool grabberStatusBool = false;
 
   frc::DigitalInput  m_limit_switch{0};
+  frc::DigitalInput m_beam{1};
 private:
 
   bool toggle = false;

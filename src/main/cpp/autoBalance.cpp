@@ -13,14 +13,14 @@ autoBalance::autoBalance(){
     
     //Speed the robot drives while balancing itself on the charge station.
     //Should be roughly half the fast speed, to make the robot more accurate, default = 0.2
-    robotSpeedSlow = 0.2;
+    robotSpeedSlow = 0.25;
 
     //Angle where the robot knows it is on the charge station, default = 13.0
     onChargeStationDegree = 13.0;
 
     //Angle where the robot can assume it is level on the charging station
     //Used for exiting the drive forward sequence as well as for auto balancing, default = 6.0
-    levelDegree = 8.0;
+    levelDegree = 6.0;
 
     //Amount of time a sensor condition needs to be met before changing states in seconds
     //Reduces the impact of sensor noice, but too high can make the auto run slower, default = 0.2
@@ -89,9 +89,9 @@ double autoBalance::autoBalanceRoutine(){
                 return 0;
             }
             if(getTilt() >= levelDegree) {
-                return 0.075;
+                return 0.07;
             } else if(getTilt() <= -levelDegree) {
-                return -0.075;
+                return -0.07;
             }
         case 3:
             return 0;

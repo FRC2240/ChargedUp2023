@@ -430,7 +430,7 @@ void Robot::TeleopPeriodic()
       {
        m_grabber.open();
         m_robot_timer.Start();
-        if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))
+        if ((!m_grabber.limit_switch() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))
         {
           m_grabber.close();
           if (m_robot_timer.Get() > units::time::second_t(1.5))
@@ -446,7 +446,7 @@ void Robot::TeleopPeriodic()
 
     case CONSTANTS::STATES::HUMANPLAYER_AUTO:
     m_candle.BounceAnim();
-      if (m_grabber.break_beam())
+      if (m_grabber.limit_switch())
       {
         m_grabber.open();
         Drivetrain::faceDirection(0.5_mps, 0_mps, Odometry::getPose().Rotation().Degrees(), false, 0.0);
@@ -463,7 +463,7 @@ void Robot::TeleopPeriodic()
         m_wrist.Pickup();
         m_grabber.open();
         m_robot_timer.Start();
-        if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))
+        if ((!m_grabber.limit_switch() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))
         {
           m_grabber.close();
           m_robot_timer2.Start();
@@ -570,7 +570,7 @@ void Robot::TeleopPeriodic()
             m_wrist.HumanPlayer();
             m_grabber.open();
             m_robot_timer.Start();
-            if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(0.5))
+            if ((!m_grabber.limit_switch() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(0.5))
               {
                 m_grabber.close();
                 m_robot_timer.Stop();
@@ -708,6 +708,8 @@ void Robot::TeleopPeriodic()
                         BUTTON::CANDLE::CANDLE_PURPLE(), 
                         m_grabber.grabberStatus());
       }
+
+      frc::SmartDashboard::PutNumber("Break beam", m_grabber.break_beam());
   }
 
 
@@ -764,7 +766,7 @@ void Robot::TestPeriodic()
   // std::cout << "tilt: " << m_auto_balance.getTilt() << std::endl;
   m_arm.test();
   m_wrist.test();
-  std::cout << m_grabber.break_beam() << std::endl;
+  //std::cout << m_grabber.break_beam() << std::endl;
 //   m_grippad.retract();
 // //  Drivetrain::faceDirection(0_mps, 0_mps, 0_deg, false, 7.5);
 //     //Trajectory::follow_live_traj(m_trajectory);
