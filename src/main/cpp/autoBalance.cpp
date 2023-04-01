@@ -47,6 +47,16 @@ double autoBalance::getTilt(){
     }
 }
 
+double autoBalance::getTiltBackwards(){
+	double pitch = getPitch();
+	double roll = getRoll();
+    if((pitch + roll)>= 0){
+        return std::sqrt(pitch*pitch + roll*roll);
+    } else {
+        return -std::sqrt(pitch*pitch + roll*roll);
+    }
+}
+
 int autoBalance::secondsToTicks(double time){
     return (int)(time*50);
 }
@@ -89,6 +99,51 @@ double autoBalance::autoBalanceRoutine(){
                 return 0;
             }
             if(getTilt() >= levelDegree) {
+                return 0.07;
+            } else if(getTilt() <= -levelDegree) {
+                return -0.07;
+            }
+        case 3:
+            return 0;
+    }
+    return 0;
+}
+
+double autoBalance::autoBalanceRoutineBackwards(){
+    switch (state){
+        //drive forwards to approach station, exit when tilt is detected
+        case 0:
+            if(getTiltBackwards() < -onChargeStationDegree){
+                debounceCount++;
+            }
+            if(debounceCount > secondsToTicks(debounceTime)){
+                state = 1;
+                debounceCount = 0;
+                return robotSpeedSlow;
+            }
+            return robotSpeedFast;
+        //driving up charge station, drive slower, stopping when level
+        case 1:
+            if (getTiltBackwards() > -levelDegree){
+                debounceCount++; 
+            }
+            if(debounceCount > secondsToTicks(debounceTime)){
+                state = 2;
+                debounceCount = 0;
+                return 0;
+            }
+            return robotSpeedSlow;
+        //on charge station, stop motors and wait for end of auto
+        case 2:
+            if(fabs(getTiltBackwards()) <= levelDegree/2){
+                debounceCount++;
+            }
+            if(debounceCount>secondsToTicks(debounceTime)){
+                state = 4;
+                debounceCount = 0;
+                return 0;
+            }
+            if(getTiltBackwards() >= levelDegree) {
                 return 0.07;
             } else if(getTilt() <= -levelDegree) {
                 return -0.07;

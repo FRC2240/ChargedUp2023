@@ -271,7 +271,7 @@ void Robot::AutonomousPeriodic()
   }
   else if (m_autoState == kBackwardsBalancing){
     // std::cout << "backwards balancing\n";
-    speed = m_auto_balance.autoBalanceRoutine();
+    speed = m_auto_balance.autoBalanceRoutineBackwards();
     Drivetrain::faceDirection(-speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 0_deg, false, 0.0);
   }
 
