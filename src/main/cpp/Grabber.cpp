@@ -6,28 +6,22 @@ Grabber::Grabber(){}
 
 void Grabber::close()
 {
-  grabberStatusBool = false;
-  m_grabberPiston.Set(frc::DoubleSolenoid::Value::kReverse);
+  grabber_status_bool = false;
+  m_grabber_piston.Set(frc::DoubleSolenoid::Value::kReverse);
 }
 
 void Grabber::open()
 {
-  m_grabberPiston.Set(frc::DoubleSolenoid::Value::kForward);
-  grabberStatusBool = true;
+  grabber_status_bool = true;
+  m_grabber_piston.Set(frc::DoubleSolenoid::Value::kForward);
 }
 
-bool Grabber::grabberStatus()
+bool Grabber::grabber_status()
 {
-  return grabberStatusBool;
+  return grabber_status_bool;
 }
 
 bool Grabber::limit_switch()
 {
   return m_limit_switch.Get();
 }
-
-bool Grabber::break_beam()
-{
-  return m_beam.Get();
-}
-

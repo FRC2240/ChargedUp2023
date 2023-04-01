@@ -63,14 +63,9 @@ namespace BUTTON
 
     namespace OVERIDES
     {
-    //   inline bool ARM_OVERIDE_HP() {return BUTTON::m_stick.GetXButtonPressed();}
-    //   inline bool ARM_OVERIDE_LOW() {return BUTTON::m_stick.GetAButtonPressed();}
-    //   inline bool ARM_OVERIDE_MID() {return BUTTON::m_stick.GetBButtonPressed();}
-    //   inline bool ARM_OVERIDE_HIGH() {return BUTTON::m_stick.GetYButtonPressed();}
-    //   inline bool ARM_OVERIDE_PICKUP() {return BUTTON::m_stick.GetRightBumperPressed();}
-    inline bool ARM_OVERIDE_UP() {return BUTTON::m_aux_stick.GetPOV() == 0;}
-    inline bool ARM_OVERIDE_OPEN() {return BUTTON::m_aux_stick.GetLeftBumperPressed();}
-    inline bool PICKUP_OVERIDE() {
+      inline bool ARM_OVERIDE_UP() {return BUTTON::m_aux_stick.GetPOV() == 0;}
+      inline bool ARM_OVERIDE_OPEN() {return BUTTON::m_aux_stick.GetLeftBumperPressed();}
+      inline bool PICKUP_OVERIDE() {
       if (BUTTON::m_aux_stick.GetRightTriggerAxis() > 0.4)
         {
           return true;

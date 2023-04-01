@@ -5,24 +5,24 @@
 class autoBalance{
     public:
         autoBalance();
-        double getPitch();
-        double getRoll();
-        double getTilt();
-        double getTiltBackwards();
-        double autoBalanceRoutine();
-        double autoBalanceRoutineBackwards();
-        int secondsToTicks(double time);
+        double get_pitch();
+        double get_roll();
+        double get_tilt();
+        double get_tilt_backwards();
+        double auto_balance_routine();
+        double auto_balance_routine_backwards();
+        int seconds_to_ticks(double time);
         
     private:
-        frc::BuiltInAccelerometer mAccel{};
+        frc::BuiltInAccelerometer m_accel{};
         int state;
-        int debounceCount;
-        double robotSpeedSlow;
-        double robotSpeedFast;
-        double onChargeStationDegree;
-        double levelDegree;
-        double debounceTime;
-        double singleTapTime;
-        double scoringBackUpTime;
-        double doubleTapTime;
+        int time_counter;
+        double robot_speed_slow;
+        double robot_speed_fast;
+        double on_charge_station_degree;
+        double level_degree;
+        double max_time;
+        double single_tap_time;
+        double scoring_back_up_time;
+        double double_tap_time;
 };

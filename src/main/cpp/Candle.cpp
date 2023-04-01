@@ -16,7 +16,8 @@ void Candle::candle_logic(bool left_button, bool right_button,
                           bool yellow_button, bool purple_button, bool grabber_status)
 {
 
-    if (grabber_status == false){
+    if (grabber_status == false)
+    {
         m_candle_timer.Start();
     }
 
@@ -57,7 +58,8 @@ void Candle::candle_logic(bool left_button, bool right_button,
         color = false;
     } 
 
-    if (grabber_status == false && m_candle_timer.Get() < units::time::second_t(0.5)){
+    if (grabber_status == false && m_candle_timer.Get() < units::time::second_t(0.5))
+    {
         state = GRABBER_FLASH;
     }
     else if (side && color)
@@ -110,18 +112,20 @@ void Candle::candle_logic(bool left_button, bool right_button,
         m_candle.SetLEDs(0, 255, 0, 0);
         break;
     case RAINBOW:
-        RainbowAnim();
+        rainbow_anim();
         break;
     case BOUNCE:
-        BounceAnim();
+        bounce_anim();
         break;
     }
 
-    if (state != previous_state){
+    if (state != previous_state)
+    {
         m_candle.SetLEDs(0, 0, 0, 0);
     }
 
-    if (grabber_status == true){
+    if (grabber_status == true)
+    {
         m_candle_timer.Stop();
         m_candle_timer.Reset();
     }
@@ -129,15 +133,15 @@ void Candle::candle_logic(bool left_button, bool right_button,
 
 void Candle::set_anim(STATES s)
 {
-        state = s;
+    state = s;
 }
 
-void Candle::BounceAnim()
+void Candle::bounce_anim()
 {
     m_candle.Animate(bounce);
 }
 
-void Candle::RainbowAnim()
+void Candle::rainbow_anim()
 {
     m_candle.Animate(rainbow);
 }

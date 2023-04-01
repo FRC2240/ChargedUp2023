@@ -26,8 +26,8 @@ class Candle{
 
     Candle();
 
-    void RainbowAnim();
-    void BounceAnim();
+    void rainbow_anim();
+    void bounce_anim();
 
     void set_anim(STATES s);
 
