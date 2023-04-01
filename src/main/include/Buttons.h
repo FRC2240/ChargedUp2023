@@ -70,6 +70,26 @@ namespace BUTTON
     //   inline bool ARM_OVERIDE_PICKUP() {return BUTTON::m_stick.GetRightBumperPressed();}
     inline bool ARM_OVERIDE_UP() {return BUTTON::m_aux_stick.GetPOV() == 0;}
     inline bool ARM_OVERIDE_OPEN() {return BUTTON::m_aux_stick.GetLeftBumperPressed();}
+    inline bool PICKUP_OVERIDE() {
+      if (BUTTON::m_aux_stick.GetRightTriggerAxis() > 0.4)
+        {
+          return true;
+        }
+      else
+        {
+          return false;
+        }
+    }
+    inline bool HP_OVERIDE() {
+      if (BUTTON::m_aux_stick.GetLeftTriggerAxis() > 0.4)
+        {
+          return true;
+        }
+      else
+        {
+          return false;
+        }
+    }
     }
   }
 

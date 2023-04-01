@@ -8,7 +8,9 @@ class autoBalance{
         double getPitch();
         double getRoll();
         double getTilt();
+        double getTiltBackwards();
         double autoBalanceRoutine();
+        double autoBalanceRoutineBackwards();
         int secondsToTicks(double time);
         
     private:

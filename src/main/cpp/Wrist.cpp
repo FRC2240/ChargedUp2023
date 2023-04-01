@@ -53,7 +53,7 @@ void Wrist::Follow(double arm_pos)
 
 void Wrist::HumanPlayer()
 {
-    m_wrist_PIDController.SetReference(0.53, rev::CANSparkMax::ControlType::kPosition);
+    m_wrist_PIDController.SetReference(0.51, rev::CANSparkMax::ControlType::kPosition);
 }
 
 void Wrist::Pickup()
