@@ -18,8 +18,8 @@ namespace CONSTANTS
   {
             STORED,
             LOW,
-            MED, 
-            HUMANPLAYER,
+            MID, 
+            HP,
             HIGH,
             PICKUP,
             SCORE,
@@ -27,7 +27,7 @@ namespace CONSTANTS
             FALLBACK2,
             ABORT,
             O_LOW,
-            O_MED,
+            O_MID,
             O_HP,
             O_HIGH,
             IDLE,
@@ -36,8 +36,8 @@ namespace CONSTANTS
             O_PICKUP,
             O_HP_PICKUP,
             AUTO_SIMP_HIGH,
-            HUMANPLAYER_AUTO_INIT,
-            HUMANPLAYER_AUTO
+            HP_AUTO_INIT,
+            HP_AUTO
 };
 
 namespace TRAJECTORY
@@ -71,16 +71,16 @@ namespace TRAJECTORY
 
       constexpr units::meter_t HIGH_X = 6.50_m;
       constexpr units::meter_t MID_X = 6.12_m;
-      constexpr units::meter_t GROUND_X = 6.09_m;
-      constexpr units::meter_t HUMANPLAYER = -6.6_m;
+      constexpr units::meter_t LOW_X = 6.09_m;
+      constexpr units::meter_t HP = -6.6_m;
     }
 
     namespace B
     {
       constexpr units::meter_t HIGH_X = -6.50_m;
       constexpr units::meter_t MID_X = -6.12_m;
-      constexpr units::meter_t GROUND_X = -6.06_m;
-      constexpr units::meter_t HUMANPLAYER = 6.6_m;
+      constexpr units::meter_t LOW_X = -6.06_m;
+      constexpr units::meter_t HP = 6.6_m;
     }
   }
   namespace GRIPPAD
@@ -92,6 +92,7 @@ namespace TRAJECTORY
   {
     constexpr int WRIST_MOTOR_ID = 1;
     constexpr double PICKUP = 0.75;
+    constexpr double HP = 0.51;
   }
 
   namespace ARM
@@ -103,6 +104,9 @@ namespace TRAJECTORY
     constexpr int ARM_CANCODER_ID = 1;
     constexpr double MIN_THRESHOLD = 0.90;
     constexpr double MAX_THRESHOLD = 1.10;
+    constexpr int HORIZONTAL_POINT = 143;
+    constexpr int MAX_AFF = 143;
+
     
     namespace PID
     {
@@ -123,7 +127,7 @@ namespace TRAJECTORY
       // All units in degrees
       constexpr double STORED = 36.0;
       constexpr double LOW = 91.0;
-      constexpr double MED = 130.0;
+      constexpr double MID = 130.0;
       constexpr double HP = 143.3;
       constexpr double HIGH = 148.0;
       constexpr double PICKUP = 72.0;

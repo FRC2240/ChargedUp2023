@@ -38,11 +38,11 @@ Trajectory::TrajDepends Trajectory::generate_humanplayer_depends()
 
     if (current_pose.X() > 0_m)
     {
-        ret.desired_x = CONSTANTS::TRAJECTORY::B::HUMANPLAYER;
+        ret.desired_x = CONSTANTS::TRAJECTORY::B::HP;
     }
     else 
     {
-        ret.desired_x = CONSTANTS::TRAJECTORY::R::HUMANPLAYER;
+        ret.desired_x = CONSTANTS::TRAJECTORY::R::HP;
     }
 
     //ret.desired_x = 2.0*ret.current_x - ret.desired_x;
@@ -120,7 +120,7 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
                     ret.desired_x = CONSTANTS::TRAJECTORY::B::MID_X;
                     break;
                 case Trajectory::HEIGHT::GROUND:
-                    ret.desired_x = CONSTANTS::TRAJECTORY::B::GROUND_X;
+                    ret.desired_x = CONSTANTS::TRAJECTORY::B::LOW_X;
                     break;
                 }
         }
@@ -135,7 +135,7 @@ Trajectory::TrajDepends Trajectory::determine_desired_traj(Trajectory::HEIGHT h)
                     ret.desired_x = CONSTANTS::TRAJECTORY::R::MID_X;
                     break;
                 case Trajectory::HEIGHT::GROUND:
-                    ret.desired_x = CONSTANTS::TRAJECTORY::R::GROUND_X;
+                    ret.desired_x = CONSTANTS::TRAJECTORY::R::LOW_X;
                     break;
                 }
         }
