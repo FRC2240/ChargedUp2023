@@ -28,6 +28,9 @@ private:
   bool toggle = false;
   STATES state = STOWED;
 
-  frc::TimeOfFlight m_tof_sensor{1};
-  frc::DoubleSolenoid m_grabber_piston{frc::PneumaticsModuleType::REVPH,CONSTANTS::GRABBER::GRABBER_PISTON_ID1,CONSTANTS::GRABBER::GRABBER_PISTON_ID2};
+  frc::TimeOfFlight m_tof_sensor{CONSTANTS::GRABBER::TOF_CAN};
+  frc::DoubleSolenoid m_grabber_piston{
+    frc::PneumaticsModuleType::REVPH,CONSTANTS::GRABBER::GRABBER_PISTON_ID1,
+    CONSTANTS::GRABBER::GRABBER_PISTON_ID2
+    };
 };

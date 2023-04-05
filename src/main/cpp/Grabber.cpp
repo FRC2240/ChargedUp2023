@@ -29,7 +29,7 @@ bool Grabber::limit_switch()
   frc::SmartDashboard::PutNumber("Time of flight:", m_tof_sensor.GetRange());
   if (m_tof_sensor.IsRangeValid())
   {
-  return (m_tof_sensor.GetRange() < 400);
+  return (m_tof_sensor.GetRange() < CONSTANTS::GRABBER::TOF_MAX);
   }
 
   else 

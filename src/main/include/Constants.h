@@ -152,6 +152,8 @@ namespace TRAJECTORY
   }
 
   namespace GRABBER{
+    constexpr int TOF_CAN = 88;
+    constexpr double TOF_MAX = 400.0;
     constexpr int GRABBER_PISTON_ID1 = 1;
     constexpr int GRABBER_PISTON_ID2 = 2;
 
