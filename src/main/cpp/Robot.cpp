@@ -536,7 +536,7 @@ void Robot::TeleopPeriodic()
           }
         else 
         {
-        m_wrist.follow(m_arm.position);
+          m_wrist.follow(m_arm.position);
         }
         break;
 
@@ -665,6 +665,7 @@ void Robot::TeleopPeriodic()
                         BUTTON::CANDLE::CANDLE_PURPLE(), 
                         m_grabber.grabber_status());
       }
+      std::cout << "Arm positiom: " << m_arm.arm_cancoder.GetAbsolutePosition() << std::endl;
   }
 
 

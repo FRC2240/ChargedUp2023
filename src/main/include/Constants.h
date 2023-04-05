@@ -124,13 +124,13 @@ namespace TRAJECTORY
     namespace MOTORPOSITIONS
     {
       // All units in degrees
-      constexpr double STORED = 36.0;
-      constexpr double LOW = 91.0;
-      constexpr double MID = 130.0;
-      constexpr double HP = 143.3;
-      constexpr double HIGH = 148.0;
-      constexpr double PICKUP = 72.0;
-      constexpr double UP = 160.0;
+      constexpr double STORED = 315.0;
+      constexpr double LOW = 359.0;
+      constexpr double MID = 38.0;
+      constexpr double HP = 51.3;
+      constexpr double HIGH = 56.0;
+      constexpr double PICKUP = 340.0;
+      constexpr double UP = 68.0;
     }
   }
 

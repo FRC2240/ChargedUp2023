@@ -23,14 +23,14 @@ class Arm
 
   double position;
 
+  WPI_CANCoder arm_cancoder{CONSTANTS::ARM::ARM_CANCODER_ID};
+
+  double AFF;
+
  private:
   double translate_pos(double raw);
     WPI_TalonFX m_arm_motor_right {CONSTANTS::ARM::RIGHT_ARM_MOTOR_ID};
     WPI_TalonFX m_arm_motor_left {CONSTANTS::ARM::LEFT_ARM_MOTOR_ID};
 
-    WPI_CANCoder arm_cancoder{CONSTANTS::ARM::ARM_CANCODER_ID};
-
     frc::Timer m_timer;
-
-    TalonFXSensorCollection m_arm_right_encoder = m_arm_motor_right.GetSensorCollection();
 };

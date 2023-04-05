@@ -41,7 +41,7 @@ Arm::Arm()
 void Arm::move()
 {
     double AFF = sin((3.1415/180)*(desired_position- CONSTANTS::ARM::HORIZONTAL_POINT + 90)) * CONSTANTS::ARM::MAX_AFF;
-    m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, translate_pos(desired_position)* TICKS_PER_CANCODER_DEGREE,
+    m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, desired_position * TICKS_PER_CANCODER_DEGREE,
     ctre::phoenix::motorcontrol::DemandType::DemandType_ArbitraryFeedForward, AFF);
     frc::SmartDashboard::PutNumber("arm/adjusted_desired", translate_pos(desired_position));
     frc::SmartDashboard::PutNumber("arm/raw_desired", desired_position);
