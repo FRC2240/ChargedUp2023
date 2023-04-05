@@ -8,7 +8,6 @@
 #include <frc/kinematics/SwerveDriveKinematics.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 
-frc::TimeOfFlight tof_sensor{1};
 /******************************************************************/
 /*                        Private Variables                       */
 /******************************************************************/
@@ -89,27 +88,6 @@ void Odometry::reset_position_from_vision(const frc::Pose2d &bot_pose)
         }
 }
 
-void Odometry::reset_from_distance()
-{
-    units::millimeter_t raw_dist {tof_sensor.GetRange()};
-    units::meter_t dist {raw_dist};
-    units::meter_t x;
-    units::meter_t y{Odometry::getPose().X()};
-    if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kBlue)
-    {
-        x = 7.94_m - dist;
-    }
-    else 
-    {
-        x = -7.94_m + dist;
-    }
-    frc::Pose2d pose{x, y, Drivetrain::getCCWHeading()};
-
-    odometry.ResetPosition(Drivetrain::getCCWHeading(),
-                           Drivetrain::getModulePositions(),
-                           pose
-                           );
-}
 
 void Odometry::resetPosition(const frc::Pose2d &bot_pose, const frc::Rotation2d &gyro_angle)
 {

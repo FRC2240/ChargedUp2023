@@ -2,7 +2,10 @@
 #include "Grabber.h"
 
 
-Grabber::Grabber(){}
+Grabber::Grabber()
+{
+  m_tof_sensor.SetRangingMode(frc::TimeOfFlight::RangingMode::kShort, 33.0);
+}
 
 void Grabber::close()
 {
@@ -23,5 +26,14 @@ bool Grabber::grabber_status()
 
 bool Grabber::limit_switch()
 {
-  return m_limit_switch.Get();
+  frc::SmartDashboard::PutNumber("Time of flight:", m_tof_sensor.GetRange());
+  if (m_tof_sensor.IsRangeValid())
+  {
+  return (m_tof_sensor.GetRange() < 400);
+  }
+
+  else 
+  {
+    return 0;
+  }
 }
