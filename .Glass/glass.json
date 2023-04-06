@@ -17,6 +17,9 @@
         "Odometry Field": {
           "open": true
         },
+        "arm": {
+          "open": true
+        },
         "open": true
       }
     },

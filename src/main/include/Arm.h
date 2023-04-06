@@ -24,6 +24,7 @@ class Arm
   double position;
 
  private:
+  double translate_pos(double raw);
     WPI_TalonFX m_arm_motor_right {CONSTANTS::ARM::RIGHT_ARM_MOTOR_ID};
     WPI_TalonFX m_arm_motor_left {CONSTANTS::ARM::LEFT_ARM_MOTOR_ID};
 

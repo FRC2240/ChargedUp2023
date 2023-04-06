@@ -100,7 +100,7 @@ namespace TRAJECTORY
     constexpr units::second_t DELAY = 2_s;
     constexpr int RIGHT_ARM_MOTOR_ID = 3;
     constexpr int LEFT_ARM_MOTOR_ID = 2;
-    constexpr double ARM_ENCODER_OFFSET = 279.0; // tracks the difference from original calibration to current
+    constexpr double ARM_ENCODER_OFFSET = 284.0; // tracks the difference from original calibration to current
     constexpr int ARM_CANCODER_ID = 1;
     constexpr double MIN_THRESHOLD = 0.90;
     constexpr double MAX_THRESHOLD = 1.10;
