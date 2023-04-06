@@ -665,7 +665,7 @@ void Robot::TeleopPeriodic()
                         BUTTON::CANDLE::CANDLE_PURPLE(), 
                         m_grabber.grabber_status());
       }
-      //std::cout << "Arm positiom: " << m_arm.arm_cancoder.GetAbsolutePosition() << std::endl;
+      // std::cout << "Arm positiom: " << m_arm.arm_cancoder.GetAbsolutePosition() << std::endl;
   }
 
 
@@ -715,8 +715,9 @@ void Robot::TestInit()
 
 void Robot::TestPeriodic()
 {
-  m_arm.test();
-  m_wrist.test();
+  frc::SmartDashboard::PutBoolean("grabber/func status", m_grabber.limit_switch());
+//  m_arm.test();
+//  m_wrist.test();
 }
 
 void Robot::DisabledPeriodic()
