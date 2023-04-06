@@ -40,6 +40,7 @@ Arm::Arm()
 
 void Arm::move()
 {
+<<<<<<< HEAD
     double AFF = sin((3.1415/180)*(desired_position- CONSTANTS::ARM::HORIZONTAL_POINT + 90)) * CONSTANTS::ARM::MAX_AFF;
     m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, desired_position * TICKS_PER_CANCODER_DEGREE,
     ctre::phoenix::motorcontrol::DemandType::DemandType_ArbitraryFeedForward, AFF);
@@ -54,8 +55,6 @@ double Arm::read_position()
     position = arm_cancoder.GetAbsolutePosition() - CONSTANTS::ARM::ARM_ENCODER_OFFSET;
     if (position < 0.0) {
         position += 360.0;
-    }
-    return position;
 }
 
 double Arm::translate_pos(double raw)
