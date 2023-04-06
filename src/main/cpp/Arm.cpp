@@ -40,7 +40,7 @@ Arm::Arm()
 
 void Arm::move()
 {
-    double AFF = sin((3.1415/180)*(translate_pos(desired_position)- CONSTANTS::ARM::HORIZONTAL_POINT + 90)) * CONSTANTS::ARM::MAX_AFF;
+    double AFF = sin((3.1415/180)*(desired_position- CONSTANTS::ARM::HORIZONTAL_POINT + 90)) * CONSTANTS::ARM::MAX_AFF;
     m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, translate_pos(desired_position)* TICKS_PER_CANCODER_DEGREE,
     ctre::phoenix::motorcontrol::DemandType::DemandType_ArbitraryFeedForward, AFF);
     frc::SmartDashboard::PutNumber("arm/adjusted_desired", translate_pos(desired_position));
@@ -141,6 +141,7 @@ void Arm::test()
 {
     frc::SmartDashboard::PutNumber("arm/absolute", arm_cancoder.GetAbsolutePosition());
     frc::SmartDashboard::PutNumber("arm/real", position);
+    //m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::PercentOutput, 0.0075);
 }
 
 Arm::~Arm(){}

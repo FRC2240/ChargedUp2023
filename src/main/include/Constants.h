@@ -105,9 +105,8 @@ namespace TRAJECTORY
     constexpr double MIN_THRESHOLD = 0.90;
     constexpr double MAX_THRESHOLD = 1.10;
     constexpr int HORIZONTAL_POINT = 143;
-    constexpr double MAX_AFF = 0.0075;
+    constexpr double MAX_AFF = 0.075;
 
-    
     namespace PID
     {
       constexpr double kP = 0.1;
