@@ -47,7 +47,11 @@ void Arm::move()
 
 double Arm::read_position()
 {
-    position = arm_cancoder.GetAbsolutePosition();
+    // re-map arm position to expected range
+    position = arm_cancoder.GetAbsolutePosition() - CONSTANTS::ARM::ARM_ENCODER_OFFSET;
+    if (position < 0.0) {
+        position += 360.0;
+    }
     return position;
 }
 
@@ -64,7 +68,7 @@ bool Arm::arm_moved(CONSTANTS::STATES state)
     switch (state)
     {
         case CONSTANTS::STATES::ABORT:
-            desired_position = arm_cancoder.GetAbsolutePosition();
+            desired_position = position;
             move();
             break;
             
@@ -106,8 +110,8 @@ bool Arm::arm_moved(CONSTANTS::STATES state)
         
     }
 
-    if (arm_cancoder.GetAbsolutePosition()/desired_position > CONSTANTS::ARM::MIN_THRESHOLD &&
-        arm_cancoder.GetAbsolutePosition()/desired_position < CONSTANTS::ARM::MAX_THRESHOLD)
+    if (position/desired_position > CONSTANTS::ARM::MIN_THRESHOLD &&
+        position/desired_position < CONSTANTS::ARM::MAX_THRESHOLD)
     {
         return true;
     } 
@@ -121,9 +125,7 @@ bool Arm::arm_moved(CONSTANTS::STATES state)
 
 void Arm::test()
 {
-    std::cout << "arm: " << arm_cancoder.GetAbsolutePosition() << "\n";
+    std::cout << "arm (abs):" << arm_cancoder.GetAbsolutePosition() << " (rel): " << position << "\n";
 }
-
-
 
 Arm::~Arm(){}
