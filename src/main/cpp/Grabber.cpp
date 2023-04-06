@@ -30,13 +30,12 @@ bool Grabber::limit_switch()
   frc::SmartDashboard::PutNumber("grabber/dist", m_tof_sensor.GetRange());
   frc::SmartDashboard::PutNumber("grabber/noise", m_tof_sensor.GetAmbientLightLevel());
   frc::SmartDashboard::PutNumber("grabber/sigma", m_tof_sensor.GetRangeSigma());
-  if (m_tof_sensor.IsRangeValid())
+  if (m_tof_sensor.IsRangeValid() && (m_tof_sensor.GetRange() < CONSTANTS::GRABBER::TOF_MAX))
   {
-  return (m_tof_sensor.GetRange() < CONSTANTS::GRABBER::TOF_MAX);
+    return false;
   }
-
-  else 
+else 
   {
-    return 0;
+    return true;
   }
 }
