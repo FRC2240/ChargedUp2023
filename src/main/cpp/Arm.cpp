@@ -41,14 +41,14 @@ Arm::Arm()
 void Arm::move()
 {
     if (arm_cancoder.GetAbsolutePosition() > 200){
-        std::cout << "greater than 200\n";
+        //std::cout << "greater than 200\n";
         AFF = sin((3.1415/180)*(desired_position - CONSTANTS::ARM::HORIZONTAL_POINT + 90)) * CONSTANTS::ARM::MAX_AFF;
     }
     else {
-        std::cout << "less than 200\n";
+        //std::cout << "less than 200\n";
         AFF = sin((3.1415/180)*(desired_position - CONSTANTS::ARM::HORIZONTAL_POINT - 270)) * CONSTANTS::ARM::MAX_AFF;
     }
-    std::cout << AFF << std::endl;
+    //std::cout << AFF << std::endl;
     m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, desired_position * TICKS_PER_CANCODER_DEGREE,
     ctre::phoenix::motorcontrol::DemandType::DemandType_ArbitraryFeedForward, AFF);
 }
@@ -56,10 +56,10 @@ void Arm::move()
 double Arm::read_position()
 {
     if (arm_cancoder.GetAbsolutePosition() > 200) {
-        position = arm_cancoder.GetAbsolutePosition() - 263;
+        position = arm_cancoder.GetAbsolutePosition() - 279; //263;
     }
     else if (arm_cancoder.GetAbsolutePosition() < 200){
-        position = arm_cancoder.GetAbsolutePosition() + 97;
+        position = arm_cancoder.GetAbsolutePosition() + 81; // 97;
     }
     return position;
 }
