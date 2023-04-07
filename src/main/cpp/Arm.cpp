@@ -40,31 +40,49 @@ Arm::Arm()
 
 void Arm::move()
 {
-    double AFF = sin((3.1415/180)*(desired_position - CONSTANTS::ARM::HORIZONTAL_POINT + 90)) * CONSTANTS::ARM::MAX_AFF;
-    m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, desired_position * TICKS_PER_CANCODER_DEGREE,
+    double AFF = sin((3.1415/180)*(desired_position- CONSTANTS::ARM::HORIZONTAL_POINT + 90)) * CONSTANTS::ARM::MAX_AFF;
+    m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, translate_pos(desired_position)* TICKS_PER_CANCODER_DEGREE,
     ctre::phoenix::motorcontrol::DemandType::DemandType_ArbitraryFeedForward, AFF);
+    frc::SmartDashboard::PutNumber("arm/adjusted_desired", translate_pos(desired_position));
+    frc::SmartDashboard::PutNumber("arm/raw_desired", desired_position);
+    frc::SmartDashboard::PutNumber("arm/aff", AFF);
 }
 
 double Arm::read_position()
 {
-    position = arm_cancoder.GetAbsolutePosition();
+    // re-map arm position to expected range
+    position = arm_cancoder.GetAbsolutePosition() - CONSTANTS::ARM::ARM_ENCODER_OFFSET;
+    if (position < 0.0) {
+        position += 360.0;
+    }
     return position;
 }
+
+double Arm::translate_pos(double raw)
+{
+     // re-map arm position to expected range
+    double adjusted = raw + CONSTANTS::ARM::ARM_ENCODER_OFFSET;
+    if (adjusted < 0.0) {
+        adjusted -= 360.0;
+    }
+    return adjusted;   
+}
+
 
 void Arm::force_move(double pos)
 {
     double AFF = sin((3.1415/180)*(pos - CONSTANTS::ARM::HORIZONTAL_POINT + 90)) * CONSTANTS::ARM::MAX_AFF;
     m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, pos * TICKS_PER_CANCODER_DEGREE,
-    ctre::phoenix::motorcontrol::DemandType::DemandType_ArbitraryFeedForward, AFF);
-   
+    ctre::phoenix::motorcontrol::DemandType::DemandType_ArbitraryFeedForward, AFF);  
 }
 bool Arm::arm_moved(CONSTANTS::STATES state)
 {
+    Arm::test();
 
     switch (state)
     {
         case CONSTANTS::STATES::ABORT:
-            desired_position = arm_cancoder.GetAbsolutePosition();
+            desired_position = position;
             move();
             break;
             
@@ -106,8 +124,8 @@ bool Arm::arm_moved(CONSTANTS::STATES state)
         
     }
 
-    if (arm_cancoder.GetAbsolutePosition()/desired_position > CONSTANTS::ARM::MIN_THRESHOLD &&
-        arm_cancoder.GetAbsolutePosition()/desired_position < CONSTANTS::ARM::MAX_THRESHOLD)
+    if (position/desired_position > CONSTANTS::ARM::MIN_THRESHOLD &&
+        position/desired_position < CONSTANTS::ARM::MAX_THRESHOLD)
     {
         return true;
     } 
@@ -121,9 +139,9 @@ bool Arm::arm_moved(CONSTANTS::STATES state)
 
 void Arm::test()
 {
-    std::cout << "arm: " << arm_cancoder.GetAbsolutePosition() << "\n";
+    frc::SmartDashboard::PutNumber("arm/absolute", arm_cancoder.GetAbsolutePosition());
+    frc::SmartDashboard::PutNumber("arm/real", position);
+    //m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::PercentOutput, 0.0075);
 }
-
-
 
 Arm::~Arm(){}
