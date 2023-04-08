@@ -5,11 +5,11 @@
 
 void Grippad::deploy()
 {
-   m_grippad_pistons.Set(false);
+   m_grippad_pistons.Set(frc::DoubleSolenoid::Value::kReverse);
 }
 
 void Grippad::retract()
 {
-   m_grippad_pistons.Set(true);
+   m_grippad_pistons.Set(frc::DoubleSolenoid::Value::kForward);
 }
 

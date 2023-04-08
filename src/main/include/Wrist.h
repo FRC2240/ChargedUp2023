@@ -32,6 +32,6 @@ private:
         double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
         };
 
-        pidCoeff m_wrist_coeff{1.5, 0.0, 8.0, 0.0, 0.0, 1.0, -1.0};
+        pidCoeff m_wrist_coeff{2.5, 0.0, 8.0, 0.0, 0.0, 1.0, -1.0};
         rev::SparkMaxAbsoluteEncoder m_wrist_encoder = m_wrist_motor.GetAbsoluteEncoder(rev::SparkMaxAbsoluteEncoder::Type::kDutyCycle);
 };
