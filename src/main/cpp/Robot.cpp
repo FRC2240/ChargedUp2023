@@ -403,7 +403,7 @@ void Robot::TeleopPeriodic()
       if (m_grabber.limit_switch())
       {
         m_grabber.open();
-        Drivetrain::faceDirection(0.5_mps, 0_mps, Odometry::getPose().Rotation().Degrees(), false, 0.0);
+        Drivetrain::faceDirection(CONSTANTS::TRAJECTORY::HP_VEL, 0_mps, Odometry::getPose().Rotation().Degrees(), false, 0.0);
       }
       else
       {
