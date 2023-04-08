@@ -30,6 +30,7 @@
 #include <wpi/fs.h>
 #include "Vision.h"
 #include <iostream>
+#include <frc/PowerDistribution.h>
 
 // more libraries more better
 #include <frc/smartdashboard/SendableChooser.h>
@@ -76,6 +77,8 @@ public:
     double getDistance();
 
 private:
+
+    frc::PowerDistribution m_pdh = {1, frc::PowerDistribution::ModuleType::kRev};
 
     CONSTANTS::STATES state; //= CONSTANTS::STATES::STORED;
     CONSTANTS::STATES last_state;

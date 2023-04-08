@@ -4,6 +4,7 @@
 #include "frc/smartdashboard/SmartDashboard.h"
 #include <Constants.h>
 #include <frc/DoubleSolenoid.h>
+#include <TimeOfFlight.h>
 
 class Grabber {
 private:  enum STATES {STOWED, INTAKING, EXTAKING};
@@ -27,9 +28,9 @@ private:
   bool toggle = false;
   STATES state = STOWED;
 
-  frc::DoubleSolenoid m_grabber_piston{frc::PneumaticsModuleType::REVPH,CONSTANTS::GRABBER::GRABBER_PISTON_ID1,CONSTANTS::GRABBER::GRABBER_PISTON_ID2};
-
-  
-
-  
+  frc::TimeOfFlight m_tof_sensor{CONSTANTS::GRABBER::TOF_CAN};
+  frc::DoubleSolenoid m_grabber_piston{
+    frc::PneumaticsModuleType::REVPH,CONSTANTS::GRABBER::GRABBER_PISTON_ID1,
+    CONSTANTS::GRABBER::GRABBER_PISTON_ID2
+    };
 };
