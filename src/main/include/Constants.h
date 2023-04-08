@@ -91,14 +91,15 @@ namespace TRAJECTORY
   }
   namespace GRIPPAD
   {
-    constexpr int GRIPPAD_CHANNEL = 0;
+    constexpr int GRIPPAD_PISTON_ID1 = 0;
+    constexpr int GRIPPAD_PISTON_ID2 = 3;
   }
 
   namespace WRIST
   {
     constexpr int WRIST_MOTOR_ID = 1;
-    constexpr double PICKUP = 0.75;
-    constexpr double HP = 0.51;
+    constexpr double PICKUP = 0.71;
+    constexpr double HP = 0.48;
   }
 
   namespace ARM
@@ -108,8 +109,7 @@ namespace TRAJECTORY
     constexpr int LEFT_ARM_MOTOR_ID = 2;
     constexpr double ARM_ENCODER_OFFSET = 284.0; // tracks the difference from original calibration to current
     constexpr int ARM_CANCODER_ID = 1;
-    constexpr double MIN_THRESHOLD = 0.90;
-    constexpr double MAX_THRESHOLD = 1.10;
+    constexpr double THRESHOLD = 15.0;
     constexpr int HORIZONTAL_POINT = 143;
     constexpr double MAX_AFF = 0.075;
 
@@ -131,12 +131,12 @@ namespace TRAJECTORY
     {
       // All units in degrees
       constexpr double STORED = 36.0;
-      constexpr double LOW = 91.0;
-      constexpr double MID = 130.0;
-      constexpr double HP = 143.3;
-      constexpr double HIGH = 148.0;
-      constexpr double PICKUP = 72.0;
-      constexpr double UP = 160.0;
+      constexpr double LOW = 65.7;
+      constexpr double MID = 136.1;
+      constexpr double HP = 151.3;
+      constexpr double HIGH = 155.0;
+      constexpr double PICKUP = 65.8;
+      constexpr double UP = 155.0;
     }
   }
 

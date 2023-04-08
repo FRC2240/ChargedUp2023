@@ -26,14 +26,7 @@ void Wrist::wrist_PID_init()
 
 void Wrist::follow(double arm_pos)
 {
-    if (arm_pos < 72.0) 
-    {
-        position = -2.99 + (0.269 * arm_pos) + (-5.77e-3 * pow(arm_pos, 2)) + (3.87e-5 * pow(arm_pos, 3));
-    }
-     else 
-    {
-        position = -3.1e-3 * arm_pos + 1.07;
-    }
+    position = 1.03 - (4.3e-3 * arm_pos) + 8.38e-6*pow(arm_pos,2);
     m_wrist_PID_controller.SetReference(position, rev::CANSparkMax::ControlType::kPosition);
 }
 
@@ -50,5 +43,6 @@ void Wrist::pickup()
 
 void Wrist::test()
 {
-    std::cout << "wrist encoder: " << m_wrist_encoder.GetPosition() << "\n";
+    frc::SmartDashboard::PutNumber("Wrist encoder", m_wrist_encoder.GetPosition());
+    frc::SmartDashboard::PutNumber("wanted wrist position", position);
 }
