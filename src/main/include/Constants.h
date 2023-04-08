@@ -7,6 +7,7 @@
 #include <vector>
 #include <units/time.h>
 #include <units/velocity.h>
+#include <ctre/Phoenix.h>
 
 namespace CONSTANTS 
 {
@@ -39,6 +40,11 @@ namespace CONSTANTS
             HP_AUTO_INIT,
             HP_AUTO
 };
+
+namespace DRIVE 
+{
+
+ }
 
 namespace TRAJECTORY
   {
@@ -154,6 +160,8 @@ namespace TRAJECTORY
   namespace GRABBER{
     constexpr int GRABBER_PISTON_ID1 = 1;
     constexpr int GRABBER_PISTON_ID2 = 2;
+    constexpr int TOF_CAN = 88;
+    constexpr double TOF_MAX = 350.0;
 
   }
 }

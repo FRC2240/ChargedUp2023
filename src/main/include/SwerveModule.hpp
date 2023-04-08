@@ -5,6 +5,7 @@
 #include <frc/geometry/Translation2d.h>
 
 #include <ctre/Phoenix.h>
+#include "Constants.h"
 
 class SwerveModule
 {
@@ -24,6 +25,8 @@ public:
     [[nodiscard]] double getDriverTemp();
 
     [[nodiscard]] double getTurnerTemp();
+
+    double get_current();
 
     void setDesiredState(const frc::SwerveModuleState &state);
 

@@ -24,7 +24,7 @@ Arm::Arm()
     arm_right_config.remoteFilter0.remoteSensorDeviceID = arm_cancoder.GetDeviceNumber();
     arm_right_config.remoteFilter0.remoteSensorSource = RemoteSensorSource::RemoteSensorSource_CANCoder;
     arm_right_config.primaryPID.selectedFeedbackSensor = FeedbackDevice::RemoteSensor0;
-    arm_right_config.slot0.kP = 0.4;
+    arm_right_config.slot0.kP = 0.5;
     arm_right_config.slot0.kD = 4.0;
     arm_right_config.slot0.kI = 0.0;
 
