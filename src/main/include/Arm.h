@@ -17,9 +17,10 @@ class Arm
   void move();
   void test();
   double read_position();
+  double get_absolute_pos();
   void force_move(double pos);
   bool arm_moved(CONSTANTS::STATES state);
-  double desired_position;
+  double desired_position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
 
   double position;
 

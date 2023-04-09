@@ -70,11 +70,14 @@ double Arm::translate_pos(double raw)
     return adjusted;   
 }
 
-
+double Arm::get_absolute_pos()
+{
+    return arm_cancoder.GetAbsolutePosition();
+}
 void Arm::force_move(double pos)
 {
     double AFF = sin((3.1415/180)*(pos - CONSTANTS::ARM::HORIZONTAL_POINT + 90)) * CONSTANTS::ARM::MAX_AFF;
-    m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, pos * TICKS_PER_CANCODER_DEGREE,
+    m_arm_motor_right.Set(ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic, translate_pos(pos) * TICKS_PER_CANCODER_DEGREE,
     ctre::phoenix::motorcontrol::DemandType::DemandType_ArbitraryFeedForward, AFF);  
 }
 bool Arm::arm_moved(CONSTANTS::STATES state)
