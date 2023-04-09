@@ -48,7 +48,7 @@ namespace DRIVE
 
 namespace TRAJECTORY
   {
-    constexpr auto HP_VEL = 1.5_mps;
+    constexpr auto HP_VEL = 0.6_mps;
    constexpr units::meter_t SIMPLE_FORWARDS = -22_in; //CHANGEME
    const std::vector<units::meter_t> Y_POS =
       {
@@ -162,7 +162,7 @@ namespace TRAJECTORY
     constexpr int GRABBER_PISTON_ID1 = 1;
     constexpr int GRABBER_PISTON_ID2 = 2;
     constexpr int TOF_CAN = 88;
-    constexpr double TOF_MAX = 400.0;
+    constexpr double TOF_MAX = 250.0;
 
   }
 }

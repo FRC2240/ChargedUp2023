@@ -17,6 +17,8 @@ public:
   void open();
   void close();
 
+  void set_sensor(bool triggered);
+
   bool grabber_status();
 
   bool grabber_status_bool = false;
@@ -25,6 +27,7 @@ public:
   frc::DigitalInput m_beam{1};
 private:
 
+  bool m_sensor_overide = true;
   bool toggle = false;
   STATES state = STOWED;
 

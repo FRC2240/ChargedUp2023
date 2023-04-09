@@ -308,10 +308,12 @@ void Robot::TeleopPeriodic()
   else if (BUTTON::ARM::ARM_HP())
   {
     state = CONSTANTS::STATES::O_HP;
+    m_grabber.set_sensor(true);
   }
   else if (BUTTON::ARM::ARM_PICKUP())
   {
     state = CONSTANTS::STATES::PICKUP;
+    m_grabber.set_sensor(true);
   }
   else if (BUTTON::ARM::ARM_LOW())
   {
@@ -333,15 +335,18 @@ void Robot::TeleopPeriodic()
 
   {
     state = CONSTANTS::STATES::ABORT;
-    m_force_pos = m_arm.read_position();
+    m_force_pos = m_arm.desired_position;
   }
+  
   else if (BUTTON::ARM::OVERIDES::PICKUP_OVERIDE())
   {
     state = CONSTANTS::STATES::O_PICKUP;
+    m_grabber.set_sensor(true);
   }
   else if (BUTTON::ARM::OVERIDES::HP_OVERIDE())
   {
     state = CONSTANTS::STATES::O_HP_PICKUP;
+    m_grabber.set_sensor(true);
   }
 
   if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_OPEN())
@@ -351,6 +356,7 @@ void Robot::TeleopPeriodic()
   if (BUTTON::ARM::OVERIDES::ARM_OVERIDE_UP())
   {
     state = CONSTANTS::STATES::O_UP;
+    m_grabber.set_sensor(true);
   }
 
   if (state == CONSTANTS::STATES::O_HIGH || 
@@ -382,6 +388,7 @@ void Robot::TeleopPeriodic()
     case CONSTANTS::STATES::HP:
      if (m_arm.arm_moved(state))
       {
+        m_grabber.set_sensor(false);
        m_grabber.open();
         m_robot_timer.Start();
         if ((!m_grabber.limit_switch() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))
@@ -408,6 +415,7 @@ void Robot::TeleopPeriodic()
       else
       {
         m_grabber.close();
+        m_grabber.set_sensor(false);
       }
     break;
 
@@ -417,6 +425,10 @@ void Robot::TeleopPeriodic()
         m_wrist.pickup();
         m_grabber.open();
         m_robot_timer.Start();
+        if (!m_grabber.limit_switch())
+        {
+          m_grabber.set_sensor(false);
+        }
         if ((!m_grabber.limit_switch() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))
         {
           m_grabber.close();
@@ -657,7 +669,8 @@ void Robot::TeleopPeriodic()
         state != CONSTANTS::STATES::MID &&
         state != CONSTANTS::STATES::LOW &&
         state != CONSTANTS::STATES::SCORE &&
-        state != CONSTANTS::STATES::FALLBACK 
+        state != CONSTANTS::STATES::FALLBACK &&
+        state != CONSTANTS::STATES::HP_AUTO
       )
       {
           m_candle.candle_logic(BUTTON::CANDLE::CANDLE_LEFT(),
