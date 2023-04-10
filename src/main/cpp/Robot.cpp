@@ -299,22 +299,25 @@ void Robot::AutonomousPeriodic()
   if (m_autoState == kBalancing) 
   {
     speed = m_auto_balance.auto_balance_routine();
-    Drivetrain::faceDirection(speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 180_deg, false, 0.0);
+    Drivetrain::faceDirection(-speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 180_deg, false, 0.0);
   }
   else if (m_autoState == kBackwardsBalancing)
   {
     speed = m_auto_balance.auto_balance_routine_backwards();
-    Drivetrain::faceDirection(-speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 0_deg, false, 0.0);
+    Drivetrain::faceDirection(speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 0_deg, false, 0.0);
   }
 
   if (m_autoState == kIntaking) {
-    std::cout << "intaking\n";
-    m_wrist.Pickup();
     if (m_arm.arm_moved(CONSTANTS::STATES::PICKUP))
       {
+        m_wrist.pickup();
         m_grabber.open();
         m_robot_timer.Start();
-        if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))
+        if (!m_grabber.limit_switch())
+        {
+          m_grabber.set_sensor(false);
+        }
+        if ((!m_grabber.limit_switch() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))
         {
           m_grabber.close();
           m_robot_timer2.Start();
@@ -325,11 +328,16 @@ void Robot::AutonomousPeriodic()
             m_robot_timer2.Stop();
             m_robot_timer2.Reset();
             m_arm.arm_moved(CONSTANTS::STATES::STORED);
+            state = CONSTANTS::STATES::STORED;
             m_autoSequence->pop_front();
             m_autoAction = m_autoSequence->front();
             m_autoState = kNothing;
           }
         }
+      }
+      else 
+      {
+        m_wrist.follow(m_arm.position);
       }
   }
 

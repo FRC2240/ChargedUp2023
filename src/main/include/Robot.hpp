@@ -175,13 +175,13 @@ private:
     std::list<autoActions> m_score_and_balance_sequence{
         kScore,
         kFallbackPath,
-        kBalance,
+        kBackwardsBalance,
         kIdle
     };
 
     std::list<autoActions> m_balance_sequence{
         kScore,
-        kBackwardsBalance,
+        kBalance,
         kIdle
     };
 

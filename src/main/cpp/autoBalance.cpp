@@ -13,7 +13,7 @@ autoBalance::autoBalance(){
     
     //Speed the robot drives while balancing itself on the charge station.
     //Should be roughly half the fast speed, to make the robot more accurate, default = 0.2
-    robot_speed_slow = 0.25;
+    robot_speed_slow = 0.3;
 
     //Angle where the robot knows it is on the charge station, default = 13.0
     on_charge_station_degree = 13.0;
@@ -132,6 +132,7 @@ double autoBalance::auto_balance_routine_backwards(){
     switch (state){
         //drive forwards to approach station, exit when tilt is detected
         case 0:
+            std::cout << "aproaching charge station\n";
             if(get_tilt_backwards() < -on_charge_station_degree)
             {
                 time_counter++;
@@ -145,6 +146,7 @@ double autoBalance::auto_balance_routine_backwards(){
             return robot_speed_fast;
         //driving up charge station, drive slower, stopping when level
         case 1:
+            std::cout << "on charge station\n";
             if (get_tilt_backwards() > -level_degree)
             {
                 time_counter++; 
@@ -158,12 +160,14 @@ double autoBalance::auto_balance_routine_backwards(){
             return robot_speed_slow;
         //on charge station, stop motors and wait for end of auto
         case 2:
+            std::cout << "balencing\n";
             if(fabs(get_tilt_backwards()) <= level_degree/2)
             {
                 time_counter++;
             }
             if(time_counter > seconds_to_ticks(max_time))
             {
+                std::cout << "balenced\n";
                 state = 4;
                 time_counter = 0;
                 return 0;
