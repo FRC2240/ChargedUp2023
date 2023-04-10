@@ -341,6 +341,32 @@ void Robot::AutonomousPeriodic()
       }
   }
 
+  if (m_autoState == kIntaking) {
+    std::cout << "intaking\n";
+    m_wrist.Pickup();
+    if (m_arm.arm_moved(CONSTANTS::STATES::PICKUP))
+      {
+        m_grabber.open();
+        m_robot_timer.Start();
+        if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))
+        {
+          m_grabber.close();
+          m_robot_timer2.Start();
+          if (m_robot_timer2.Get() > units::time::second_t(0.5))
+          {
+            m_robot_timer.Stop();
+            m_robot_timer.Reset();
+            m_robot_timer2.Stop();
+            m_robot_timer2.Reset();
+            m_arm.arm_moved(CONSTANTS::STATES::STORED);
+            m_autoSequence->pop_front();
+            m_autoAction = m_autoSequence->front();
+            m_autoState = kNothing;
+          }
+        }
+      }
+  }
+
 }
 
 void Robot::TeleopInit()
