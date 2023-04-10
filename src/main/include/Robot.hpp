@@ -100,6 +100,7 @@ private:
     const std::string AUTO_NOTHING = "DO NOTHING";
     const std::string AUTO_BALANCE = "BALANCE";
     const std::string SCORE_IDLE = "SCORE NO LEAVE";
+    const std::string HP_CONE = "HUMANPLAYER CONES ONLY";
 
     bool arm_bool;
 
@@ -129,7 +130,7 @@ private:
     /*
       The reason all of these are different is because there is a concern about
       pathplanner not erasing paths on initalization and bits of old path
-      getting mixed in with the new path, generaly being a bother.
+      getting mixed in with the new path, generaly being a bother.follow
     */
     pathplanner::PathPlannerTrajectory m_path_trajectory0;
     pathplanner::PathPlannerTrajectory m_path_trajectory1;
@@ -142,18 +143,27 @@ private:
     enum autoActions{
         kScore,
         kScore_periodic,
+        kScoreLow,
         kAutoFallback,
         kBalance,
         kBackwardsBalance,
         kFallbackPath,
         kFallbackPathPeriodic,
-        kIdle
+        kIdle,
+        kDelay,
+
+        kHPConePath1,
+        kHPConePath2,
+
+        kHPConePath1_periodic,
+        kHPConePath2_periodic
     };
 
     enum autoState {
         kBalancing,
         kBackwardsBalancing,
-        kNothing
+        kNothing,
+        kIntaking
     };
 
     std::list<autoActions> m_score_and_leave_sequence{
@@ -178,6 +188,15 @@ private:
     std::list<autoActions> m_score_and_idle_sequence{
         kScore,
         kIdle
+    };
+
+     std::list<autoActions> m_HP_cone_sequence{
+        kScore,
+        kHPConePath1
+        // kDelay,
+        // kHPConePath2,
+        // kScore,
+        // kIdle
     };
 
     std::list<autoActions> *m_autoSequence;
