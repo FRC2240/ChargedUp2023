@@ -56,6 +56,7 @@ Robot::Robot()
   m_chooser.AddOption(AUTO_NOTHING, AUTO_NOTHING);
   m_chooser.AddOption(AUTO_BALANCE, AUTO_BALANCE);
   m_chooser.AddOption(SCORE_IDLE, SCORE_IDLE);
+  m_chooser.AddOption(HP_CONE,HP_CONE);
 
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 }
@@ -154,6 +155,10 @@ void Robot::AutonomousInit()
   {
     m_autoSequence = &m_score_and_idle_sequence;
   }
+  else if (m_autoSelected == HP_CONE) 
+  {
+    m_autoSequence = &m_HP_cone_sequence;
+  } 
   else 
   {
     state = CONSTANTS::STATES::STORED;
@@ -191,6 +196,20 @@ void Robot::AutonomousPeriodic()
 
           }
       }
+    break;
+
+  case kScoreLow:
+    if (m_arm.arm_moved(CONSTANTS::STATES::LOW))
+    {
+      m_grabber.open();
+      m_arm.arm_moved(CONSTANTS::STATES::STORED);
+      if (m_arm.position < 56.0) 
+      {
+            m_autoSequence->pop_front();
+            m_autoAction = m_autoSequence->front();
+            m_autoState = kNothing;
+      }
+    }
     break;
 
   case kScore_periodic:
@@ -240,6 +259,41 @@ void Robot::AutonomousPeriodic()
 
     case kIdle:
       break;
+
+    case kHPConePath1:
+      std::cout << "path 1 \n";
+      m_path_trajectory1 = Trajectory::extract("3_cone_HP_side_1");
+      Trajectory::init_live_traj(m_path_trajectory1);
+      m_autoAction = kHPConePath1_periodic;
+      break;
+
+    case kHPConePath1_periodic:
+      std::cout << "driving path 1 \n";
+      m_autoState = kIntaking;
+      if (Trajectory::follow_live_traj(m_path_trajectory1))
+        {
+          // m_autoSequence->pop_front();
+          // m_autoAction = m_autoSequence->front();
+          //m_autoState = kNothing;
+        }
+      break;
+
+      case kHPConePath2:
+        std::cout << "path 2 \n";
+        m_path_trajectory2 = Trajectory::extract("3_cone_HP_side_2");
+        Trajectory::init_live_traj(m_path_trajectory2);
+        m_autoAction = kHPConePath2_periodic;
+        break;
+
+    case kHPConePath2_periodic:
+    std::cout << "driving path 2 \n";
+      if (Trajectory::follow_live_traj(m_path_trajectory2))
+      {
+        m_autoSequence->pop_front();
+        m_autoAction = m_autoSequence->front();
+        m_autoState = kNothing;
+      }
+      break;
   }
 
   if (m_autoState == kBalancing) 
@@ -251,6 +305,32 @@ void Robot::AutonomousPeriodic()
   {
     speed = m_auto_balance.auto_balance_routine_backwards();
     Drivetrain::faceDirection(-speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 0_deg, false, 0.0);
+  }
+
+  if (m_autoState == kIntaking) {
+    std::cout << "intaking\n";
+    m_wrist.Pickup();
+    if (m_arm.arm_moved(CONSTANTS::STATES::PICKUP))
+      {
+        m_grabber.open();
+        m_robot_timer.Start();
+        if ((!m_grabber.break_beam() || BUTTON::GRABBER::TOGGLE()) && m_robot_timer.Get() > units::time::second_t(1.0))
+        {
+          m_grabber.close();
+          m_robot_timer2.Start();
+          if (m_robot_timer2.Get() > units::time::second_t(0.5))
+          {
+            m_robot_timer.Stop();
+            m_robot_timer.Reset();
+            m_robot_timer2.Stop();
+            m_robot_timer2.Reset();
+            m_arm.arm_moved(CONSTANTS::STATES::STORED);
+            m_autoSequence->pop_front();
+            m_autoAction = m_autoSequence->front();
+            m_autoState = kNothing;
+          }
+        }
+      }
   }
 
 }
