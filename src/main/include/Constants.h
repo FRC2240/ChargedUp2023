@@ -99,7 +99,7 @@ namespace TRAJECTORY
   namespace WRIST
   {
     constexpr int WRIST_MOTOR_ID = 1;
-    constexpr double PICKUP = 0.71;
+    constexpr double PICKUP = 0.66;
     constexpr double HP = 0.48;
   }
 
@@ -110,7 +110,7 @@ namespace TRAJECTORY
     constexpr int LEFT_ARM_MOTOR_ID = 2;
     constexpr double ARM_ENCODER_OFFSET = 284.0; // tracks the difference from original calibration to current
     constexpr int ARM_CANCODER_ID = 1;
-    constexpr double THRESHOLD = 15.0;
+    constexpr double THRESHOLD = 17.0;
     constexpr int HORIZONTAL_POINT = 143;
     constexpr double MAX_AFF = 0.075;
 
