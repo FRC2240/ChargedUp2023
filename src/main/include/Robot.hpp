@@ -192,11 +192,11 @@ private:
 
      std::list<autoActions> m_HP_cone_sequence{
         kScore,
-        kHPConePath1
-        // kDelay,
-        // kHPConePath2,
-        // kScore,
-        // kIdle
+        kHPConePath1,
+        //kDelay,
+        kHPConePath2,
+        kScore,
+        kIdle
     };
 
     std::list<autoActions> *m_autoSequence;
