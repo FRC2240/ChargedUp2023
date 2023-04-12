@@ -197,6 +197,17 @@ void Robot::AutonomousPeriodic()
           }
       }
     break;
+  case kMidScore:
+      m_candle.bounce_anim();
+    if (m_arm.arm_moved(CONSTANTS::STATES::MID))
+      {
+        if (m_camera.pose_loop())
+          {
+            Robot::traj_init(Trajectory::HEIGHT::MED);
+            m_autoAction = kScore_periodic;
+          }
+      }
+    break;
 
   case kScoreLow:
     if (m_arm.arm_moved(CONSTANTS::STATES::LOW))
@@ -280,7 +291,7 @@ void Robot::AutonomousPeriodic()
 
       case kHPConePath2:
         std::cout << "path 2 \n";
-        m_path_trajectory2 = Trajectory::extract("3_cone_HP_side_2");
+        m_path_trajectory2 = Trajectory::extract("3_cone_HP_side_2b");
         Trajectory::init_live_traj(m_path_trajectory2);
         m_autoAction = kHPConePath2_periodic;
         break;
