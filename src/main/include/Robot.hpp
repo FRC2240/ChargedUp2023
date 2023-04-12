@@ -144,6 +144,7 @@ private:
         kScore,
         kScore_periodic,
         kScoreLow,
+        kMidScore,
         kAutoFallback,
         kBalance,
         kBackwardsBalance,
@@ -195,7 +196,7 @@ private:
         kHPConePath1,
         //kDelay,
         kHPConePath2,
-        kScore,
+        kMidScore,
         kIdle
     };
 
