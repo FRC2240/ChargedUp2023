@@ -158,6 +158,7 @@ void Robot::AutonomousInit()
   else if (m_autoSelected == HP_CONE) 
   {
     m_autoSequence = &m_HP_cone_sequence;
+    m_fallback_pos = 15.0_ft;
   } 
   else 
   {
@@ -198,28 +199,28 @@ void Robot::AutonomousPeriodic()
       }
     break;
   case kMidScore:
-      m_candle.bounce_anim();
-    if (m_arm.arm_moved(CONSTANTS::STATES::MID))
+    m_candle.bounce_anim();
+    m_arm.arm_moved(CONSTANTS::STATES::MID);
+    if(m_camera.pose_loop()) {
+      std::cout << "here0 \n";
+      std::cout << "here1\n";
+      if (Drivetrain::snap_to_zero())
       {
-        if (m_camera.pose_loop())
-          {
-            Robot::traj_init(Trajectory::HEIGHT::MED);
-            m_autoAction = kScore_periodic;
-          }
+        std::cout << "here2 \n";
+        Robot::traj_init(Trajectory::HEIGHT::MED);
+        m_autoAction = kScore_periodic;
       }
+    }
+  
     break;
 
   case kScoreLow:
     if (m_arm.arm_moved(CONSTANTS::STATES::LOW))
     {
       m_grabber.open();
-      m_arm.arm_moved(CONSTANTS::STATES::STORED);
-      if (m_arm.position < 56.0) 
-      {
-            m_autoSequence->pop_front();
-            m_autoAction = m_autoSequence->front();
-            m_autoState = kNothing;
-      }
+      m_autoSequence->pop_front();
+      m_autoAction = m_autoSequence->front();
+      m_autoState = kNothing;
     }
     break;
 
@@ -273,7 +274,7 @@ void Robot::AutonomousPeriodic()
 
     case kHPConePath1:
       std::cout << "path 1 \n";
-      m_path_trajectory1 = Trajectory::extract("3_cone_HP_side_1");
+      m_path_trajectory1 = Trajectory::extract("3_cone_HP_side_1", units::meters_per_second_t {1.77186}, units::meters_per_second_squared_t {3.54373});
       Trajectory::init_live_traj(m_path_trajectory1);
       m_autoAction = kHPConePath1_periodic;
       break;
@@ -291,7 +292,7 @@ void Robot::AutonomousPeriodic()
 
       case kHPConePath2:
         std::cout << "path 2 \n";
-        m_path_trajectory2 = Trajectory::extract("3_cone_HP_side_2b");
+        m_path_trajectory2 = Trajectory::extract("3_cone_HP_side_2b", units::meters_per_second_t{2.95311}, units::meters_per_second_squared_t{ 5.90621});
         Trajectory::init_live_traj(m_path_trajectory2);
         m_autoAction = kHPConePath2_periodic;
         break;

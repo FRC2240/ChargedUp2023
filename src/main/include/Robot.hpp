@@ -196,7 +196,8 @@ private:
         kHPConePath1,
         //kDelay,
         kHPConePath2,
-        kMidScore,
+        kScoreLow,
+        kFallbackPath,
         kIdle
     };
 
