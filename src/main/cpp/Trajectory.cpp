@@ -179,15 +179,15 @@ PathPlannerTrajectory Trajectory::extract(std::string const &traj_dir,
                                 units::meters_per_second_t const &max_vel,
                                 units::meters_per_second_squared_t const &max_accl)
 {
-    return PathPlanner::loadPath(traj_dir, max_vel/2.5, max_accl/2.5, reverse_trajectory);
+    return PathPlanner::loadPath(traj_dir, max_vel, max_accl, reverse_trajectory);
 }
 PathPlannerTrajectory Trajectory::generate_live_traj(TrajDepends t)
 {
     return
         PathPlanner::generatePath(
 
-                                  PathConstraints(Drivetrain::TRAJ_MAX_SPEED/3,
-                                                  Drivetrain::TRAJ_MAX_ACCELERATION/3),
+                                  PathConstraints(Drivetrain::TRAJ_MAX_SPEED/2.5,
+                                                  Drivetrain::TRAJ_MAX_ACCELERATION/2.5),
 
                                   PathPoint(frc::Translation2d(t.current_x,
                                                                t.current_y),
