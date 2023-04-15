@@ -135,13 +135,16 @@ void Robot::AutonomousInit()
   //std::cout << Drivetrain::get_offset() << std::endl;
 
   // Get choosen autonomous mode
+  std::cout << "here0 \n";
+  m_autoSequence = &m_score_and_idle_sequence;
+  std::cout << "here1 \n";
   m_autoSelected = m_chooser.GetSelected();
-
+  std::cout << "here2 \n";
   if (m_autoSelected == AUTO_STATION) 
-  {
-    m_autoSequence = &m_score_and_balance_sequence;
-    m_fallback_pos = 12.5_ft;
-  } 
+    {
+      m_autoSequence = &m_score_and_balance_sequence;
+      m_fallback_pos = 12.5_ft;
+    }
   else if (m_autoSelected == AUTO_LINE) 
   {
     m_autoSequence = &m_score_and_leave_sequence;
@@ -165,8 +168,10 @@ void Robot::AutonomousInit()
     state = CONSTANTS::STATES::STORED;
   }
 
+  std::cout << "here3 \n";
   m_autoAction = m_autoSequence->front();
   m_autoState = kNothing;
+  std::cout << "here4 \n";
 }
 
 void Robot::AutonomousPeriodic()
@@ -202,11 +207,11 @@ void Robot::AutonomousPeriodic()
     m_candle.bounce_anim();
     m_arm.arm_moved(CONSTANTS::STATES::MID);
     if(m_camera.pose_loop()) {
-      std::cout << "here0 \n";
-      std::cout << "here1\n";
+      //std::cout << "here0 \n";
+      //std::cout << "here1\n";
       if (Drivetrain::snap_to_zero())
       {
-        std::cout << "here2 \n";
+        //std::cout << "here2 \n";
         Robot::traj_init(Trajectory::HEIGHT::MED);
         m_autoAction = kScore_periodic;
       }
@@ -273,14 +278,14 @@ void Robot::AutonomousPeriodic()
       break;
 
     case kHPConePath1:
-      std::cout << "path 1 \n";
+      //std::cout << "path 1 \n";
       m_path_trajectory1 = Trajectory::extract("3_cone_HP_side_1", units::meters_per_second_t {1.77186}, units::meters_per_second_squared_t {3.54373});
       Trajectory::init_live_traj(m_path_trajectory1);
       m_autoAction = kHPConePath1_periodic;
       break;
 
     case kHPConePath1_periodic:
-      std::cout << "driving path 1 \n";
+      //std::cout << "driving path 1 \n";
       m_autoState = kIntaking;
       if (Trajectory::follow_live_traj(m_path_trajectory1))
         {
@@ -291,14 +296,14 @@ void Robot::AutonomousPeriodic()
       break;
 
       case kHPConePath2:
-        std::cout << "path 2 \n";
+        //std::cout << "path 2 \n";
         m_path_trajectory2 = Trajectory::extract("3_cone_HP_side_2b", units::meters_per_second_t{2.95311}, units::meters_per_second_squared_t{ 5.90621});
         Trajectory::init_live_traj(m_path_trajectory2);
         m_autoAction = kHPConePath2_periodic;
         break;
 
     case kHPConePath2_periodic:
-      std::cout << "driving path 2 \n";
+      //std::cout << "driving path 2 \n";
       m_autoState = kNothing;
       if (Trajectory::follow_live_traj(m_path_trajectory2))
       {
@@ -309,7 +314,7 @@ void Robot::AutonomousPeriodic()
       break;
 
     case kDelay:
-      std::cout << "Delay\n";
+      //std::cout << "Delay\n";
       m_robot_timer2.Start();
       if (m_robot_timer2.Get() > units::time::second_t(1.0)){
         m_autoSequence->pop_front();
@@ -368,6 +373,7 @@ void Robot::TeleopInit()
 {
   Odometry::update();
   state = CONSTANTS::STATES::STORED;
+  m_grabber.close();
   //std::cout << "navx " << Drivetrain::getCCWHeading().Degrees().value() << std::endl;
   //std::cout << "odometry: " << Odometry::getPose().Rotation().Degrees().value() << std::endl;
 

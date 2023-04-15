@@ -48,9 +48,9 @@ namespace DRIVE
 
 namespace TRAJECTORY
   {
-    constexpr auto HP_VEL = 0.6_mps;
-   constexpr units::meter_t SIMPLE_FORWARDS = -22_in; //CHANGEME
-   const std::vector<units::meter_t> Y_POS =
+    constexpr auto HP_VEL = 0.4_mps;
+    constexpr units::meter_t SIMPLE_FORWARDS = -22_in; //CHANGEME
+    const std::vector<units::meter_t> Y_POS =
       {
         /*
          * A list of all Y positions to score at.
@@ -71,7 +71,7 @@ namespace TRAJECTORY
         -93.614_in,
         //-115.614_in, //cube
         -137.614_in
-     };
+      };
     namespace R
     {
       //Red Team and blue team will use seperate data.
