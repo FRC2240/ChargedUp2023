@@ -9,6 +9,7 @@ class autoBalance{
         double get_roll();
         double get_tilt();
         double get_tilt_backwards();
+        double get_tilt_navx();
         double auto_balance_routine();
         double auto_balance_routine_backwards();
         int seconds_to_ticks(double time);

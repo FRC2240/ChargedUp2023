@@ -135,15 +135,12 @@ void Robot::AutonomousInit()
   //std::cout << Drivetrain::get_offset() << std::endl;
 
   // Get choosen autonomous mode
-  std::cout << "here0 \n";
   m_autoSequence = &m_score_and_idle_sequence;
-  std::cout << "here1 \n";
   m_autoSelected = m_chooser.GetSelected();
-  std::cout << "here2 \n";
   if (m_autoSelected == AUTO_STATION) 
     {
       m_autoSequence = &m_score_and_balance_sequence;
-      m_fallback_pos = 12.5_ft;
+      m_fallback_pos = 15.5_ft;
     }
   else if (m_autoSelected == AUTO_LINE) 
   {
@@ -168,10 +165,8 @@ void Robot::AutonomousInit()
     state = CONSTANTS::STATES::STORED;
   }
 
-  std::cout << "here3 \n";
   m_autoAction = m_autoSequence->front();
   m_autoState = kNothing;
-  std::cout << "here4 \n";
 }
 
 void Robot::AutonomousPeriodic()
@@ -332,7 +327,7 @@ void Robot::AutonomousPeriodic()
   }
   else if (m_autoState == kBackwardsBalancing)
   {
-    speed = m_auto_balance.auto_balance_routine_backwards();
+    speed = m_auto_balance.auto_balance_routine();
     Drivetrain::faceDirection(speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 0_deg, false, 0.0);
   }
 
