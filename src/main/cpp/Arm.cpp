@@ -7,7 +7,6 @@ constexpr auto TICKS_PER_CANCODER_DEGREE = CANCODER_TICKS_PER_ROTATION / 360;
 
 Arm::Arm()
 {
-
     m_arm_motor_left.ConfigFactoryDefault();
     m_arm_motor_right.ConfigFactoryDefault();
 

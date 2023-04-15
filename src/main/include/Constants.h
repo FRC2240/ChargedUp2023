@@ -48,9 +48,9 @@ namespace DRIVE
 
 namespace TRAJECTORY
   {
-    constexpr auto HP_VEL = 0.6_mps;
-   constexpr units::meter_t SIMPLE_FORWARDS = -22_in; //CHANGEME
-   const std::vector<units::meter_t> Y_POS =
+    constexpr auto HP_VEL = 0.4_mps;
+    constexpr units::meter_t SIMPLE_FORWARDS = -22_in; //CHANGEME
+    const std::vector<units::meter_t> Y_POS =
       {
         /*
          * A list of all Y positions to score at.
@@ -71,7 +71,7 @@ namespace TRAJECTORY
         -93.614_in,
         //-115.614_in, //cube
         -137.614_in
-     };
+      };
     namespace R
     {
       //Red Team and blue team will use seperate data.
@@ -99,7 +99,7 @@ namespace TRAJECTORY
   namespace WRIST
   {
     constexpr int WRIST_MOTOR_ID = 1;
-    constexpr double PICKUP = 0.71;
+    constexpr double PICKUP = 0.66;
     constexpr double HP = 0.48;
   }
 
@@ -110,7 +110,7 @@ namespace TRAJECTORY
     constexpr int LEFT_ARM_MOTOR_ID = 2;
     constexpr double ARM_ENCODER_OFFSET = 284.0; // tracks the difference from original calibration to current
     constexpr int ARM_CANCODER_ID = 1;
-    constexpr double THRESHOLD = 15.0;
+    constexpr double THRESHOLD = 17.0;
     constexpr int HORIZONTAL_POINT = 143;
     constexpr double MAX_AFF = 0.075;
 
@@ -145,8 +145,8 @@ namespace TRAJECTORY
     //Remove above warning when values found
     constexpr int APRILTAG_PIPE = 1; 
     //Remove above warning when values found
-    constexpr int BUFFER_SIZE = 15;
-    constexpr int MIN_GOOD_FRAMES = 10;
+    constexpr int BUFFER_SIZE = 14;
+    constexpr int MIN_GOOD_FRAMES = 9;
     constexpr double MAX_STD_DEV = 0.02;
     constexpr double MIN_STD_DEV = 1.0e-10;
     constexpr double MAX_STD_DEV_ROT = 10; //CHANGEME

@@ -64,9 +64,9 @@ SwerveModule::SwerveModule(int const &driver_adr, int const &turner_adr, int con
     driver_config.slot0.kD = 10;
     driver_config.slot0.kF = 0.04857549857549857;
     driver_config.closedloopRamp = .2;
-    driver_config.statorCurrLimit = ctre::phoenix::motorcontrol::StatorCurrentLimitConfiguration {true, 60, 60, 0.5};
-    driver_config.supplyCurrLimit = ctre::phoenix::motorcontrol::SupplyCurrentLimitConfiguration {true, 60, 60, 0.5};
-;
+    driver_config.statorCurrLimit = ctre::phoenix::motorcontrol::StatorCurrentLimitConfiguration {true, 80, 80, 0.5};
+    driver_config.supplyCurrLimit = ctre::phoenix::motorcontrol::SupplyCurrentLimitConfiguration {true, 80, 80, 0.5};
+    ;
     // driver_config.voltageCompSaturation = 12;
     driver.ConfigAllSettings(driver_config);
     driver.SetNeutralMode(NeutralMode::Brake);
