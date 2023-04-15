@@ -95,12 +95,12 @@ private:
     //frc::Trajectory m_trajectory;
 
     frc::SendableChooser<std::string> m_chooser;
-    const std::string AUTO_STATION = "SCORE + STATION";
-    const std::string AUTO_LINE = "SCORE + LEAVE";
+    const std::string AUTO_STATION = "CHARGE STATION :\)";
+    const std::string AUTO_LINE = "SCORE + LEAVE :\)";
     const std::string AUTO_NOTHING = "DO NOTHING";
     const std::string AUTO_BALANCE = "BALANCE";
     const std::string SCORE_IDLE = "SCORE NO LEAVE";
-    const std::string HP_CONE = "HUMANPLAYER CONES ONLY";
+    const std::string HP_CONE = "THE GOOD ONE :\)";
 
     bool arm_bool;
 
