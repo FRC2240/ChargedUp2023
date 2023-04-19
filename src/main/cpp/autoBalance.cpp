@@ -23,7 +23,7 @@ autoBalance::autoBalance(){
 
     //Angle where the robot can assume it is level on the charging station
     //Used for exiting the drive forward sequence as well as for auto balancing, default = 6.0
-    level_degree = 6.0;
+    level_degree = 7.0;
 
     //Amount of time a sensor condition needs to be met before changing states in seconds
     //Reduces the impact of sensor noice, but too high can make the auto run slower, default = 0.2
@@ -43,9 +43,11 @@ double autoBalance::get_pitch()
 }
 
 double autoBalance::auto_balance_routine(){
+    std::cout << get_pitch() << std::endl;
     switch (state){
         //drive forwards to approach station, exit when tilt is detected
         case 0:
+            std::cout << "aproaching\n";
             if(fabs(get_pitch()) > on_charge_station_degree)
             {
                 time_counter++;
@@ -59,6 +61,7 @@ double autoBalance::auto_balance_routine(){
             return robot_speed_fast;
         //driving up charge station, drive slower, stopping when level
         case 1:
+            std::cout << "on charge station\n";
             if (fabs(get_pitch()) < level_degree)
             {
                 time_counter++; 
@@ -72,12 +75,14 @@ double autoBalance::auto_balance_routine(){
             return robot_speed_slow;
         //on charge station, stop motors and wait for end of auto
         case 2:
+        std::cout << "balancing\n";
             if(fabs(get_pitch()) <= level_degree/2)
             {
                 time_counter++;
             }
             if(time_counter > seconds_to_ticks(max_time))
             {
+                std::cout << "balanced\n";
                 state = 4;
                 time_counter = 0;
                 return 0;
