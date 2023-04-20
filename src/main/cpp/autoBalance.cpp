@@ -16,18 +16,18 @@ autoBalance::autoBalance(){
     
     //Speed the robot drives while balancing itself on the charge station.
     //Should be roughly half the fast speed, to make the robot more accurate, default = 0.2
-    robot_speed_slow = 0.07;
+    robot_speed_slow = 0.06;
 
     //Angle where the robot knows it is on the charge station, default = 13.0
     on_charge_station_degree = 9.0;
 
     //Angle where the robot can assume it is level on the charging station
     //Used for exiting the drive forward sequence as well as for auto balancing, default = 6.0
-    level_degree = 6.0;
+    level_degree = 6;
 
     //Amount of time a sensor condition needs to be met before changing states in seconds
     //Reduces the impact of sensor noice, but too high can make the auto run slower, default = 0.2
-    max_time = 0.1;
+    max_time = 0.2;
 
     navx = std::make_unique<AHRS>(frc::SPI::Port::kMXP);
 }
@@ -90,10 +90,10 @@ double autoBalance::auto_balance_routine(){
             }
             if(get_pitch() >= level_degree) 
             {
-                return -0.065;
+                return -0.045;
             } else if(get_pitch() <= -level_degree) 
             {
-                return 0.065;
+                return 0.045;
             }
             
         case 3:
