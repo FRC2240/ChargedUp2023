@@ -16,7 +16,7 @@ autoBalance::autoBalance(){
     
     //Speed the robot drives while balancing itself on the charge station.
     //Should be roughly half the fast speed, to make the robot more accurate, default = 0.2
-    robot_speed_slow = 0.06;
+    robot_speed_slow = 0.07;
 
     //Angle where the robot knows it is on the charge station, default = 13.0
     on_charge_station_degree = 9.0;
@@ -81,7 +81,7 @@ double autoBalance::auto_balance_routine(){
                 time_counter++;
                 std::cout << "time counter: " << time_counter << std::endl;
             }
-            if(time_counter > seconds_to_ticks(max_time))
+            if(time_counter > (1.5 * seconds_to_ticks(max_time)))
             {
                 std::cout << "balanced\n";
                 state = 4;
@@ -90,10 +90,10 @@ double autoBalance::auto_balance_routine(){
             }
             if(get_pitch() >= level_degree) 
             {
-                return -0.045;
+                return -0.05;
             } else if(get_pitch() <= -level_degree) 
             {
-                return 0.045;
+                return 0.05;
             }
             
         case 3:
