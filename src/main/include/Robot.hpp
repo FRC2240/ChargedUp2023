@@ -178,7 +178,7 @@ private:
         kScore,
         kFallbackPath,
         kBackwardsBalance,
-        kDeployFeet,
+        // kDeployFeet,
         kIdle
     };
 

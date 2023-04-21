@@ -333,11 +333,11 @@ void Robot::AutonomousPeriodic()
   {
     speed = m_auto_balance.auto_balance_routine();
     Drivetrain::faceDirection(speed * Drivetrain::ROBOT_MAX_SPEED, 0_mps, 0_deg, false, 0.0);
-    if (speed == 0) {
-      m_autoSequence->pop_front();
-        m_autoAction = m_autoSequence->front();
-        m_autoState = kNothing;
-    }
+    //if (speed == 0) {
+      //m_autoSequence->pop_front();
+        //m_autoAction = m_autoSequence->front();
+        //m_autoState = kNothing;
+    //}
   }
 
   if (m_autoState == kIntaking) {
