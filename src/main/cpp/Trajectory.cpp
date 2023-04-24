@@ -267,7 +267,11 @@ PathPlannerTrajectory Trajectory::generate_live_traj(units::meter_t current_x,
 */
 void Trajectory::init_live_traj(PathPlannerTrajectory traj, units::second_t offset)
 {
-    auto const inital_state = traj.getInitialState();
+    auto inital_state = traj.getInitialState();
+    if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kBlue)
+    {
+        inital_state = pathplanner::PathPlannerTrajectory::transformStateForAlliance(inital_state, frc::DriverStation::Alliance::kRed);
+    }
     auto const inital_pose = inital_state.pose;
 
     // It is necessary to take the frc::Pose2d object from the state, extract its X & Y components, and then take the holonomicRotation
@@ -297,6 +301,10 @@ bool Trajectory::follow_live_traj(PathPlannerTrajectory traj)
 
         auto sample = traj.sample(current_time);
 
+        if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kBlue)
+        {
+            sample = pathplanner::PathPlannerTrajectory::transformStateForAlliance(sample, frc::DriverStation::Alliance::kRed);
+        }
         //std::cout << sample.pose.X().value() << " " <<  sample.pose.Y().value() << " " << sample.holonomicRotation.Degrees().value() << "\n";
 
         Odometry::getField2dObject("Traj")->SetPose({sample.pose.X(), sample.pose.Y(), sample.holonomicRotation});

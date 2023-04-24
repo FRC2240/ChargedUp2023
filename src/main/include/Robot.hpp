@@ -152,6 +152,7 @@ private:
         kFallbackPathPeriodic,
         kIdle,
         kDelay,
+        kDeployFeet,
 
         kHPConePath1,
         kHPConePath2,
@@ -177,6 +178,7 @@ private:
         kScore,
         kFallbackPath,
         kBackwardsBalance,
+        // kDeployFeet,
         kIdle
     };
 

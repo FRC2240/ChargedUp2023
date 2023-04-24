@@ -274,13 +274,13 @@ bool Drivetrain::snap_to_zero()
   auto angle = Drivetrain::get_absolute_angle();
   if ((angle >= 179_deg && angle <= 181_deg) || (angle <= -179_deg && angle >= -181_deg))
   {
-    std::cout << "passed check\n";
+    //std::cout << "passed check\n";
     return true;
   }
   else 
   {
     Drivetrain::faceDirection(0_mps, 0_mps, 180_deg, false, 4.5);
-    std::cout << "failed threshold check: " << Drivetrain::get_absolute_angle().value() << std::endl;
+    //std::cout << "failed threshold check: " << Drivetrain::get_absolute_angle().value() << std::endl;
     return false;
   }
 }

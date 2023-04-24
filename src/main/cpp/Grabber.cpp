@@ -32,8 +32,8 @@ bool Grabber::limit_switch()
   {
     return false;
   }
-  frc::SmartDashboard::GetBoolean("grabber/valid", m_tof_sensor.IsRangeValid());
-  frc::SmartDashboard::PutNumber("grabber/dist", m_tof_sensor.GetRange());
+  //frc::SmartDashboard::GetBoolean("grabber/valid", m_tof_sensor.IsRangeValid());
+  //frc::SmartDashboard::PutNumber("grabber/dist", m_tof_sensor.GetRange());
   if (m_tof_sensor.IsRangeValid() && (m_tof_sensor.GetRange() < CONSTANTS::GRABBER::TOF_MAX))
   {
     return false;
