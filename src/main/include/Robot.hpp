@@ -168,6 +168,10 @@ private:
         kIntaking
     };
 
+    std::list<autoActions> m_do_nothing_sequence {
+        kIdle
+    };
+
     std::list<autoActions> m_score_and_leave_sequence{
         kScore,
         kFallbackPath,

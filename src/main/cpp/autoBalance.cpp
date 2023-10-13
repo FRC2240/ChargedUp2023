@@ -39,7 +39,7 @@ int autoBalance::seconds_to_ticks(double time)
 
 double autoBalance::get_pitch()
 {
-    return navx->GetPitch();
+    return navx->GetRoll();
 }
 
 double autoBalance::auto_balance_routine(){
