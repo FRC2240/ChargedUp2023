@@ -160,9 +160,16 @@ void Robot::AutonomousInit()
     m_autoSequence = &m_HP_cone_sequence;
     m_fallback_pos = 15.0_ft;
   } 
-  else 
-  {
+  else if (m_autoSelected == AUTO_NOTHING ){
+    std::cout << "here\n";
+    m_autoSequence = &m_do_nothing_sequence;
     state = CONSTANTS::STATES::STORED;
+    m_arm.position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
+  }  
+  else
+  {
+    m_autoAction = kIdle;
+    m_autoState = kNothing;
   }
 
   m_autoAction = m_autoSequence->front();
