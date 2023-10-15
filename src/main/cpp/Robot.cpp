@@ -136,32 +136,47 @@ void Robot::AutonomousInit()
 
   // Get choosen autonomous mode
   m_autoSequence = &m_score_and_idle_sequence;
+  std::cout <<"Auto 1\n";
   m_autoSelected = m_chooser.GetSelected();
+
   if (m_autoSelected == AUTO_STATION) 
     {
       m_autoSequence = &m_score_and_balance_sequence;
       m_fallback_pos = 15.5_ft;
+      //OG Value = 15.5
+        std::cout <<"Auto 2\n";
+
     }
   else if (m_autoSelected == AUTO_LINE) 
   {
     m_autoSequence = &m_score_and_leave_sequence;
     m_fallback_pos = 12.5_ft;
+    //OG Value = 12.5
+      std::cout <<"Auto 3\n";
+
   } 
   else if (m_autoSelected == AUTO_BALANCE)
   {
     m_autoSequence = &m_balance_sequence;
+      std::cout <<"Auto 4\n";
+
   }
   else if (m_autoSelected == SCORE_IDLE)
   {
     m_autoSequence = &m_score_and_idle_sequence;
+      std::cout <<"Auto 5\n";
+
   }
   else if (m_autoSelected == HP_CONE) 
   {
     m_autoSequence = &m_HP_cone_sequence;
     m_fallback_pos = 15.0_ft;
+    //OG Value = 15.0
+      std::cout <<"Auto 6\n";
+
   } 
   else if (m_autoSelected == AUTO_NOTHING ){
-    std::cout << "here\n";
+    std::cout << "Auto 7\n";
     m_autoSequence = &m_do_nothing_sequence;
     state = CONSTANTS::STATES::STORED;
     m_arm.position = CONSTANTS::ARM::MOTORPOSITIONS::STORED;
@@ -170,6 +185,8 @@ void Robot::AutonomousInit()
   {
     m_autoAction = kIdle;
     m_autoState = kNothing;
+      std::cout <<"Auto 8\n";
+
   }
 
   m_autoAction = m_autoSequence->front();

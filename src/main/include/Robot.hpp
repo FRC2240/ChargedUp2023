@@ -95,7 +95,7 @@ private:
     //frc::Trajectory m_trajectory;
 
     frc::SendableChooser<std::string> m_chooser;
-    const std::string AUTO_STATION = "score, cross line, and balance";
+    const std::string AUTO_STATION = "score, and balance test";
     const std::string AUTO_LINE = "score, cross line";
     const std::string AUTO_NOTHING = "do nothing";
     const std::string AUTO_BALANCE = "score and balance";
